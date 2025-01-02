@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import MainPage from '@components/MainPage.vue';
 </script>
 
 <template>
-    Hello
+    <MainPage/>
 </template>
 
 <style scoped lang="scss">
