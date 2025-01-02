@@ -3,13 +3,13 @@ import NavBar from '@components/NavBar.vue';
 </script>
 
 <template>
-    <div class="border border-danger my-container">
+    <div class="my-container">
         <NavBar />
-        <div>
+        <div id="home">
             <section>
-                Welcome! I'm Jhom.
+                Hello! I'm Jhom.
                 <br>
-                I'm a software developer. (typing)
+                I'm a software developer. (typing animation)
             </section>
         </div>
         <div id="about-me">
@@ -40,9 +40,12 @@ import NavBar from '@components/NavBar.vue';
 
 <style scoped lang="scss">
 section {
-    border: 1px solid yellow;
+    border: 1px solid blue;
     width: 100vw;
     height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .my-container {
