@@ -1,10 +1,51 @@
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue';
 import NavBar from '@components/NavBar.vue';
+
+const sections = ref([
+    { id: 'home', label: 'Home' },
+    { id: 'about-me', label: 'About Me' },
+    { id: 'tech-stack', label: 'Tech Stack' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'contact', label: 'Contact' },
+]);
+const activeSection = ref('home');
+let observer: IntersectionObserver;
+
+onMounted(() => {
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5,
+    };
+
+    observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                activeSection.value = entry.target.id;
+            }
+        });
+    }, options);
+
+    sections.value.forEach(section => {
+        const element = document.getElementById(section.id);
+        if(element) observer.observe(element);
+    });
+});
+
+onUnmounted(() => {
+    if (observer) {
+        sections.value.forEach(section => {
+            const element = document.getElementById(section.id);
+            if(element) observer.unobserve(element);
+        });
+    }
+})
 </script>
 
 <template>
     <div class="my-container">
-        <NavBar />
+        <NavBar :active-section="activeSection"/>
         <div id="home">
             <section>
                 Hello! I'm Jhom.
