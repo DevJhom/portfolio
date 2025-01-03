@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import MainPage from '@components/MainPage.vue';
+import Loading from '@components/Loading.vue';
 </script>
 
 <template>
-    <MainPage/>
+    <div>
+        <Loading/>
+        <MainPage/>
+    </div>
 </template>
 
 <style scoped lang="scss">
