@@ -5,7 +5,7 @@ const props = defineProps({
   activeSection: String
 });
 
-const activeSection = computed(() => props.activeSection)
+const activeSection = computed(() => props.activeSection);
 
 const setActive = (sectionId: string) => {
     // activeSection.value = sectionId;
