@@ -1,10 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed } from 'vue';
 
-const activeSection = ref('home');
+const props = defineProps({
+  activeSection: String
+});
+
+const activeSection = computed(() => props.activeSection)
 
 const setActive = (sectionId: string) => {
-    activeSection.value = sectionId;
+    // activeSection.value = sectionId;
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' }); // Smooth scrolling
 };
 </script>
