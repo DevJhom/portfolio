@@ -12,13 +12,19 @@ setTimeout(() => {
 <template>
     <div v-if="displayLoading" class="loading-container">
         <span class="loading"></span>
+        <span class="mt-2">
+            DevJhom
+        </span>
     </div>
 </template>
 
 <style scoped>
 .loading-container {
+    z-index: 100;
+    background-color: #242424;
     position: fixed;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center; 
     top: 0;
