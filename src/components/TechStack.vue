@@ -41,9 +41,9 @@
                 <div class="tech-stack-grid-item grid-13">Docker</div>
                 <div class="tech-stack-grid-item grid-14">Google Cloud</div>
             </div>
-            <h5 class="d-flex justify-content-center mt-4">
+            <h6 class="d-flex justify-content-center mt-4">
                 Technologies I'm familiar with.
-            </h5>
+            </h6>
         </div>
     </div>
 </template>
