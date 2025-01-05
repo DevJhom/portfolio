@@ -18,10 +18,10 @@ setTimeout(() => {
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .loading-container {
     z-index: 100;
-    background-color: #242424;
+    background-color: $black;
     position: fixed;
     display: flex;
     flex-direction: column;

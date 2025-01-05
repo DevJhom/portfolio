@@ -3,7 +3,7 @@
 
 <template>
     <div class="grid-container">
-        <div class="grid-item my-location">
+        <div class="grid-item">
             <span>
                 I'm Yangon, Myanmar (Burma)
             </span>
@@ -17,9 +17,17 @@
             I have 3 years of hands-on experience in web application development.
         </div>
         <div class="grid-item">
+            Social Media
+            < > 
+            <!-- 
+                Click left/right to alternate between
+                1. Facebook
+                2. Instagram
+                3. LINKEDIN
+             -->
         </div>
         <div class="grid-item">
-            I'm a software developer passionate about coding and problem-solving. I approach each project with a creative mindset, a strong dedication and an emphasis on writing clean and maintainable codes.
+            I'm passionate about coding and problem-solving. I approach each project with a creative mindset, a strong dedication and an emphasis on writing clean, maintainable codes.
         </div>
         <div class="grid-item">
         </div>
@@ -33,11 +41,11 @@
     grid-template-rows: auto auto auto auto;
     gap: 2rem;
     width: 75%;
-    height: 100%;
+    height: 90%;
 }
 
 .grid-item {
-    border: 1px solid gray;
+    border: 1px solid $gray;
     border-radius: 12px;
     padding: 2rem;
     transition: transform 0.3s ease;
@@ -56,6 +64,7 @@
 .grid-item:nth-child(2) {
     grid-column: 2 / span 2;
     grid-row: 1 / span 1;
+    background-color: $gray;
 }
 
 .grid-item:nth-child(3) {
@@ -70,12 +79,13 @@
 
 .grid-item:nth-child(5) {
     grid-column: 3 / span 2;
-    grid-row: 2 / span 2;
+    grid-row: 2 / span 3;
 }
 
 .grid-item:nth-child(6) {
     grid-column: 1 / span 2;
-    grid-row: 3 / span 1;
+    grid-row: 3 / span 2;
+    background-color: $gray;
 }
 
 @media (max-width: 768px) {

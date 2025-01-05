@@ -11,38 +11,39 @@
             <div class="history-tl-container">
                 <ul class="tl">
                     <li class="tl-item" ng-repeat="item in retailer_history">
-                        <div class="item-title">Intern</div>
-                        <div class="item-detail">Don't forget the ring</div>
+                        <div class="item-title">Web Developer (Internship)</div>
+                        <div class="item-detail">Innovative Village Co., Ltd.</div>
                     </li>
                     <li class="tl-item" ng-repeat="item in retailer_history">
-                        <div class="item-title">HatYai</div>
-                        <div class="item-detail">Don't enter the caves!!</div>
+                        <div class="item-title">System Analyst</div>
+                        <div class="item-detail">Omni Star Co., Ltd.</div>
                     </li>
                     <li class="tl-item" ng-repeat="item in retailer_history">
-                        <div class="item-title">Bangkok</div>
-                        <div class="item-detail">Also, throw that Gollum too</div>
+                        <div class="item-title">Software Developer</div>
+                        <div class="item-detail">ClickNext Co., Ltd.</div>
                     </li>
                 </ul>
             </div>
         </div>
         <div class="tech-stack-right">
-            Tech Stack
             <div class="tech-stack-grid">
-                <div class="tech-stack-grid-item grid-2">2</div>
-                <div class="tech-stack-grid-item grid-3">3</div>
-                <div class="tech-stack-grid-item grid-4">4</div>
-                <div class="tech-stack-grid-item grid-5">5</div>
-                <div class="tech-stack-grid-item grid-6">6</div>
-                <div class="tech-stack-grid-item grid-7">7</div>
-                <div class="tech-stack-grid-item grid-8">8</div>
-                <div class="tech-stack-grid-item grid-9">9</div>
-                <div class="tech-stack-grid-item grid-10">10</div>
-                <div class="tech-stack-grid-item grid-11">11</div>
-                <div class="tech-stack-grid-item grid-12">12</div>
-                <div class="tech-stack-grid-item grid-13">13</div>
-                <div class="tech-stack-grid-item grid-14">14</div>
+                <div class="tech-stack-grid-item grid-2">Vue</div>
+                <div class="tech-stack-grid-item grid-3">React</div>
+                <div class="tech-stack-grid-item grid-4">Typescript</div>
+                <div class="tech-stack-grid-item grid-5">CSS3</div>
+                <div class="tech-stack-grid-item grid-6">C#</div>
+                <div class="tech-stack-grid-item grid-7">SQL</div>
+                <div class="tech-stack-grid-item grid-8">Cloud Firestore</div>
+                <div class="tech-stack-grid-item grid-9">Node.js</div>
+                <div class="tech-stack-grid-item grid-10">SQL Server</div>
+                <div class="tech-stack-grid-item grid-11">Git</div>
+                <div class="tech-stack-grid-item grid-12">Vim</div>
+                <div class="tech-stack-grid-item grid-13">Docker</div>
+                <div class="tech-stack-grid-item grid-14">Google Cloud</div>
             </div>
-
+            <div class="d-flex justify-content-center mt-3">
+                Technologies I'm familiar with.
+            </div>
         </div>
     </div>
 </template>

@@ -81,6 +81,9 @@ onUnmounted(() => {
         <h5 class="logo animate-on-hover">
             <a href="#home"> DevJhom </a>
         </h5>
+        <div class="something">
+            Something
+        </div>
         <!-- HOME -->
         <div id="home">
             <section>
@@ -106,7 +109,7 @@ onUnmounted(() => {
         <!-- TECH STACK -->
         <div id="tech-stack">
             <section>
-                <div class="keep-calm border border-danger">
+                <div class="keep-calm">
                     <div v-if="typeKeepCalm.isTyping || typeKeepCalm.isAlreadyTyped" :class="{typewriter: typeKeepCalm.isTyping}" class="animate-on-hover">
                         <h2>Keep Calm and Code On.</h2>
                     </div>
@@ -130,6 +133,10 @@ onUnmounted(() => {
 </template>
 
 <style scoped lang="scss">
+.my-container {
+    position: relative;
+}
+
 section {
     position: relative;
     border: 1px solid blue;
@@ -141,8 +148,8 @@ section {
     justify-content: center;
 }
 
-.my-container {
-    position: relative;
+#tech-stack section {
+    height: 150vh;
 }
 
 .logo {
@@ -151,6 +158,22 @@ section {
     margin-top: 2rem;
     z-index: 99;
     cursor: pointer;
+}
+
+.something {
+    position: fixed;
+    right: 2rem;
+    margin-top: 2rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid blue;
+    border-radius: 24px;
+    z-index: 99;
+    cursor: pointer;
+}
+
+.something:hover {
+    background-color: blue;
+    color: $white;
 }
 
 .scroll-to-explore {
