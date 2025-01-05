@@ -4,9 +4,9 @@
 <template>
     <div class="tech-stack">
         <div class="tech-stack-left">
-            <span>
+            <h5>
                 My Work Experience
-            </span>
+            </h5>
 
             <div class="history-tl-container">
                 <ul class="tl">
@@ -15,11 +15,11 @@
                         <div class="item-detail">Innovative Village Co., Ltd.</div>
                     </li>
                     <li class="tl-item" ng-repeat="item in retailer_history">
-                        <div class="item-title">System Analyst</div>
+                        <div class="item-title">System Analyst (2021-2022)</div>
                         <div class="item-detail">Omni Star Co., Ltd.</div>
                     </li>
                     <li class="tl-item" ng-repeat="item in retailer_history">
-                        <div class="item-title">Software Developer</div>
+                        <div class="item-title">Software Developer (2022-present)</div>
                         <div class="item-detail">ClickNext Co., Ltd.</div>
                     </li>
                 </ul>
@@ -41,9 +41,9 @@
                 <div class="tech-stack-grid-item grid-13">Docker</div>
                 <div class="tech-stack-grid-item grid-14">Google Cloud</div>
             </div>
-            <div class="d-flex justify-content-center mt-3">
+            <h5 class="d-flex justify-content-center mt-4">
                 Technologies I'm familiar with.
-            </div>
+            </h5>
         </div>
     </div>
 </template>
@@ -58,19 +58,16 @@
     width: 75%;
     margin: auto;
     padding: 2rem 0;
-    border: 1px solid red;
 }
 
 .tech-stack-left {
     width: 30%;
     height: 100%;
-    border: 1px solid red;
 }
 
 .tech-stack-right {
     width: 70%;
     height: 100%;
-    border: 1px solid red;
 }
 
 // Tech Stack Left
@@ -97,19 +94,19 @@
     left: -18px;
     top: -5px;
     border: 8px solid rgba(36, 36, 36, 0.7);
-    border-radius: 500%;
-    background: gray;
+    border-radius: 100%;
+    background: $light-gray;
     height: 35px;
     width: 35px;
     transition: all 500ms ease-in;
 }
 
-.history-tl-container ul.tl li:hover::before{
-    border-color:  gray;
+.history-tl-container ul.tl li:hover::before {
+    border-color: $light-black;
     transition: all 500ms ease-in;
 }
 
-ul.tl li .item-detail{
+ul.tl li .item-detail {
     color: gray;
     font-size:12px;
 }
@@ -119,7 +116,7 @@ ul.tl li .item-detail{
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(6, 1fr);
-    gap: 10px;
+    gap: 1rem;
     height: 70%;
 }
 
@@ -129,6 +126,12 @@ ul.tl li .item-detail{
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.tech-stack-grid-item:hover {
+    border: 1px solid blue;
+    transform: scale(1.04);
 }
     
 .grid-2 {
