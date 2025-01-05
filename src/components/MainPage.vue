@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed, watch, reactive } from 'vue';
 import NavBar from '@components/NavBar.vue';
+import AboutMe from './AboutMe.vue';
+import TechStack from './TechStack.vue';
 
 const sections = ref([
     { id: 'home', label: 'Home' },
@@ -31,7 +33,7 @@ const typeKeepCalm = reactive({
 });
 
 watch(activeSection, (newSection) => {
-    if (newSection == 'projects' && !typeKeepCalm.isAlreadyTyped) {
+    if (newSection == 'tech-stack' && !typeKeepCalm.isAlreadyTyped) {
         typeKeepCalm.isTyping = true;
         setTimeout(() => {
             typeKeepCalm.isTyping = false;
@@ -98,44 +100,23 @@ onUnmounted(() => {
         <!-- ABOUT ME -->
         <div id="about-me">
             <section>
-                <div class="grid-container">
-                    <div class="grid-item my-location">
-                        <span>
-                            I'm Yangon, Myanmar (Burma)
-                        </span>
-                        <span>
-                            Based in Bangkok, Thailand
-                        </span>
-                    </div>
-                    <div class="grid-item">
-                    </div>
-                    <div class="grid-item">
-                        I have 3 years of hands-on experience in web application development.
-                    </div>
-                    <div class="grid-item">
-                    </div>
-                    <div class="grid-item">
-                        I'm a software developer passionate about coding and problem-solving. I approach each project with a creative mindset, a strong dedication and an emphasis on writing clean and maintainable codes.
-                    </div>
-                    <div class="grid-item">
-                    </div>
-                </div>
+                <AboutMe/>
             </section>
         </div>
         <!-- TECH STACK -->
         <div id="tech-stack">
             <section>
-                Tech Stack
+                <div class="keep-calm border border-danger">
+                    <div v-if="typeKeepCalm.isTyping || typeKeepCalm.isAlreadyTyped" :class="{typewriter: typeKeepCalm.isTyping}" class="animate-on-hover">
+                        <h2>Keep Calm and Code On.</h2>
+                    </div>
+                </div>
+                <TechStack/>
             </section>
         </div>
         <!-- PROJECTS -->
         <div id="projects">
             <section>
-                <div class="keep-calm">
-                    <div v-if="typeKeepCalm.isTyping || typeKeepCalm.isAlreadyTyped" :class="{typewriter: typeKeepCalm.isTyping}" class="animate-on-hover">
-                        <h2>Keep Calm and Code On.</h2>
-                    </div>
-                </div>
                 Projects
             </section>
         </div>
@@ -164,15 +145,6 @@ section {
     position: relative;
 }
 
-.animate-on-hover {
-    transition: transform 0.3s ease;
-}
-
-.animate-on-hover:hover {
-    color: blue;
-    transform: scale(1.1);
-}
-
 .logo {
     position: fixed;
     margin-left: 2rem;
@@ -193,11 +165,6 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.my-location {
-    display: flex;
-    flex-direction: column;
 }
 
 // Transition
@@ -230,69 +197,6 @@ section {
     from { border-color: transparent }
     50% { border-color: blue; }
     to { border-color: transparent }
-}
-
-// About Me 
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto auto auto auto;
-    gap: 2rem;
-    width: 75%;
-    height: 100%;
-}
-
-.grid-item {
-    border: 1px solid gray;
-    border-radius: 12px;
-    padding: 2rem;
-    transition: transform 0.3s ease;
-}
-
-.grid-item:hover {
-    border: 1px solid blue;
-    transform: scale(1.04);
-}
-
-.grid-item:nth-child(1) {
-    grid-column: 1 / span 1;
-    grid-row: 1 / span 2;
-}
-
-.grid-item:nth-child(2) {
-    grid-column: 2 / span 2;
-    grid-row: 1 / span 1;
-}
-
-.grid-item:nth-child(3) {
-    grid-column: 4 / span 1;
-    grid-row: 1 / span 1;
-}
-
-.grid-item:nth-child(4) {
-    grid-column: 2 / span 1;
-    grid-row: 2 / span 1;
-}
-
-.grid-item:nth-child(5) {
-    grid-column: 3 / span 2;
-    grid-row: 2 / span 2;
-}
-
-.grid-item:nth-child(6) {
-    grid-column: 1 / span 2;
-    grid-row: 3 / span 1;
-}
-
-@media (max-width: 768px) {
-    .grid-container {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-    }
-    .grid-item {
-        grid-column: 1 / span 1 !important;
-        grid-row: auto !important;
-    }
 }
 
 </style>
