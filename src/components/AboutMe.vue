@@ -31,7 +31,8 @@
              -->
         </div>
         <div class="grid-item">
-            I'm passionate about coding and problem-solving. I approach each project with a creative mindset, a strong dedication and an emphasis on writing clean, maintainable codes.
+            <h5>Coding with Passion</h5>
+            I'm passionate about coding and problem-solving, approaching each project with a creative mindset, a strong dedication and a commitment to writing clean, maintainable codes.
         </div>
         <div class="grid-item">
         </div>

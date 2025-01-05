@@ -3,6 +3,8 @@ import { ref, onMounted, onUnmounted, computed, watch, reactive } from 'vue';
 import NavBar from '@components/NavBar.vue';
 import AboutMe from './AboutMe.vue';
 import TechStack from './TechStack.vue';
+import Projects from './Projects.vue';
+import Contact from './Contact.vue';
 
 const sections = ref([
     { id: 'home', label: 'Home' },
@@ -79,6 +81,7 @@ onUnmounted(() => {
     <div class="my-container">
         <NavBar :active-section="activeSection"/>
         <h5 class="logo animate-on-hover">
+            <img src="../../public/letter-j.png" alt="DevJhom Logo" class="logo-img" height="35" width="35">
             <a href="#home"> DevJhom </a>
         </h5>
         <div class="something">
@@ -120,13 +123,13 @@ onUnmounted(() => {
         <!-- PROJECTS -->
         <div id="projects">
             <section>
-                Projects
+                <Projects/>
             </section>
         </div>
         <!-- CONTACT -->
         <div id="contact">
             <section>
-                Contact
+                <Contact/>
             </section>
         </div>
     </div>
@@ -158,6 +161,10 @@ section {
     margin-top: 2rem;
     z-index: 99;
     cursor: pointer;
+}
+
+.logo-img {
+    border-radius: 10px;
 }
 
 .something {
