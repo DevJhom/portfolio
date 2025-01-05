@@ -1,0 +1,91 @@
+<script setup lang="ts">
+</script>
+
+<template>
+    <div class="grid-container">
+        <div class="grid-item my-location">
+            <span>
+                I'm Yangon, Myanmar (Burma)
+            </span>
+            <span>
+                Based in Bangkok, Thailand
+            </span>
+        </div>
+        <div class="grid-item">
+        </div>
+        <div class="grid-item">
+            I have 3 years of hands-on experience in web application development.
+        </div>
+        <div class="grid-item">
+        </div>
+        <div class="grid-item">
+            I'm a software developer passionate about coding and problem-solving. I approach each project with a creative mindset, a strong dedication and an emphasis on writing clean and maintainable codes.
+        </div>
+        <div class="grid-item">
+        </div>
+    </div>
+</template>
+
+<style scoped lang="scss">
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto auto auto;
+    gap: 2rem;
+    width: 75%;
+    height: 100%;
+}
+
+.grid-item {
+    border: 1px solid gray;
+    border-radius: 12px;
+    padding: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.grid-item:hover {
+    border: 1px solid blue;
+    transform: scale(1.04);
+}
+
+.grid-item:nth-child(1) {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 2;
+}
+
+.grid-item:nth-child(2) {
+    grid-column: 2 / span 2;
+    grid-row: 1 / span 1;
+}
+
+.grid-item:nth-child(3) {
+    grid-column: 4 / span 1;
+    grid-row: 1 / span 1;
+}
+
+.grid-item:nth-child(4) {
+    grid-column: 2 / span 1;
+    grid-row: 2 / span 1;
+}
+
+.grid-item:nth-child(5) {
+    grid-column: 3 / span 2;
+    grid-row: 2 / span 2;
+}
+
+.grid-item:nth-child(6) {
+    grid-column: 1 / span 2;
+    grid-row: 3 / span 1;
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+    .grid-item {
+        grid-column: 1 / span 1 !important;
+        grid-row: auto !important;
+    }
+}
+</style>
