@@ -3,12 +3,16 @@
 
 <template>
     <div class="grid-container">
-        <div class="grid-item">
+        <div class="grid-item my-location">
             <span>
-                I'm Yangon, Myanmar (Burma)
+                I'm from 
+                <br>
+                Yangon, Myanmar (Burma)
             </span>
             <span>
-                Based in Bangkok, Thailand
+                I'm currently based in
+                <br>
+                Bangkok, Thailand
             </span>
         </div>
         <div class="grid-item">
@@ -35,6 +39,12 @@
 </template>
 
 <style scoped lang="scss">
+.my-location {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
