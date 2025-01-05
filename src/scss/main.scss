@@ -13,13 +13,13 @@ body {
   display: flex;
   place-items: center;
   min-height: 100vh;
-  background-color: #242424;
-  color: white;
+  background-color: $black;
+  color: $white;
 }
 
 a {
   text-decoration: none;
-  color: white;
+  color: $white;
 }
 
 #app {

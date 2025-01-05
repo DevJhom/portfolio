@@ -46,7 +46,7 @@ const setActive = (sectionId: string) => {
     bottom: 5%;
     left: 50%;
     z-index: 98;
-    background-color: #242424;
+    background-color: $black;
     transform: translateX(-50%);
 }
 </style>
