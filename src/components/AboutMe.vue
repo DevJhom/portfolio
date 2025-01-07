@@ -63,7 +63,7 @@
 }
 
 .grid-item:hover {
-    border: 1px solid blue;
+    border: 1px solid $blue;
     transform: scale(1.04);
 }
 
