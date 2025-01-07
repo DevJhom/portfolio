@@ -84,8 +84,8 @@ onUnmounted(() => {
             <img src="../../public/letter-j.png" alt="DevJhom Logo" class="logo-img" height="35" width="35">
             <a href="#home"> DevJhom </a>
         </h5>
-        <div class="something">
-            Something
+        <div class="my-resume">
+            Download Resume
         </div>
         <!-- HOME -->
         <div id="home">
@@ -142,7 +142,7 @@ onUnmounted(() => {
 
 section {
     position: relative;
-    border: 1px solid blue;
+    border: 1px solid $blue;
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -167,19 +167,19 @@ section {
     border-radius: 10px;
 }
 
-.something {
+.my-resume {
     position: fixed;
     right: 2rem;
     margin-top: 2rem;
     padding: 0.5rem 1rem;
-    border: 1px solid blue;
+    border: 1px solid $blue;
     border-radius: 24px;
     z-index: 99;
     cursor: pointer;
 }
 
-.something:hover {
-    background-color: blue;
+.my-resume:hover {
+    background-color: $blue;
     color: $white;
 }
 
@@ -211,7 +211,7 @@ section {
 // Typing animation
 .typewriter h2 {
     overflow: hidden;
-    border-right: .15em solid blue;
+    border-right: .15em solid $blue;
     white-space: nowrap;
     animation: 
         typing 2s steps(20, end),
@@ -225,7 +225,7 @@ section {
 
 @keyframes blink-caret {
     from { border-color: transparent }
-    50% { border-color: blue; }
+    50% { border-color: $blue; }
     to { border-color: transparent }
 }
 

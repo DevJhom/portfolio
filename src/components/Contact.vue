@@ -22,7 +22,7 @@ const copyToClipboard = async (text: string) => {
 <template>
     <div class="contact">
         <h2>"Let's Get In Touch!"</h2>
-        <div>
+        <div class="mt-3">
             <div class="input-group">
             <input type="text" class="form-control" placeholder="jhomwan238@gmail.com" aria-label="jhomwan238@gmail.com" readonly>
             <div class="input-group-append">
@@ -33,7 +33,7 @@ const copyToClipboard = async (text: string) => {
             </div>
             </div>
         </div>
-        <div class="copyright">Copyright &copy; 2025 DevJhom</div>
+        <small class="copyright">Copyright &copy; 2025 DevJhom</small>
     </div>
 </template>
 
