@@ -20,7 +20,7 @@ setTimeout(() => {
 
 <style scoped lang="scss">
 .loading-container {
-    z-index: 100;
+    z-index: $loading-layer;
     background-color: $black;
     position: fixed;
     display: flex;

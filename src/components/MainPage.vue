@@ -75,9 +75,24 @@ onUnmounted(() => {
         });
     }
 })
+
+// Spotlight effect
+window.addEventListener("DOMContentLoaded", () => {
+    const spotlight = document.querySelector('.spotlight') as HTMLElement;
+    let spotlightSize: string = 'transparent 50px, #0c0c0c 150px)';
+
+    window.addEventListener('mousemove', (e: MouseEvent) => updateSpotlight(e));
+
+    function updateSpotlight(e: MouseEvent): void {
+        if (spotlight) {
+            spotlight.style.backgroundImage = `radial-gradient(circle at ${e.pageX / window.innerWidth * 100}% ${e.pageY / window.innerHeight * 100}%, ${spotlightSize}`;
+        }
+    }
+});
 </script>
 
 <template>
+    <div class="spotlight"></div>
     <div class="my-container">
         <NavBar :active-section="activeSection"/>
         <h5 class="logo animate-on-hover">
@@ -159,7 +174,7 @@ section {
     position: fixed;
     margin-left: 2rem;
     margin-top: 2rem;
-    z-index: 99;
+    z-index: $top-layer;
     cursor: pointer;
 }
 
@@ -174,7 +189,7 @@ section {
     padding: 0.5rem 1rem;
     border: 1px solid $blue;
     border-radius: 24px;
-    z-index: 99;
+    z-index: $top-layer;
     cursor: pointer;
 }
 
@@ -229,4 +244,23 @@ section {
     to { border-color: transparent }
 }
 
+//Spotlight Effect
+.spotlight {
+    z-index: $bottom-layer;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: radial-gradient($black, $black, $black);
+}
+
+#home {
+    background: url('./../images/sourcecodes.png') no-repeat center;
+    background-size: contain;
+    height: 100vh;
+    z-index: $bottom-layer;
+}
+
+#home section {
+    z-index: $middle-layer;
+}
 </style>
