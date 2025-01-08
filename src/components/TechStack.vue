@@ -134,12 +134,12 @@
 
 .tech-stack-left {
     width: 30%;
-    height: 80%;
+    height: 100%;
 }
 
 .tech-stack-right {
     width: 70%;
-    height: 80%;
+    height: 100%;
     padding: 0 4rem;
 }
 
@@ -152,7 +152,7 @@
     position: relative;
     list-style: none;
     margin: auto;
-    min-height: 200px;
+    min-height: 150px;
     border-left: 1px dashed gray;
     padding-left: 30px;
 }
