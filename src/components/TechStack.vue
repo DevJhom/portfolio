@@ -130,7 +130,6 @@
     align-items: center;
     width: 75%;
     margin: auto;
-    padding: 2rem 0;
 }
 
 .tech-stack-left {
@@ -177,6 +176,7 @@
 
 .history-tl-container ul.tl li:hover::before {
     border-color: $light-black;
+    background-color: $blue;
     transition: all 500ms ease-in;
 }
 

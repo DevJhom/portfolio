@@ -166,10 +166,6 @@ section {
     justify-content: center;
 }
 
-#tech-stack section {
-    height: 150vh;
-}
-
 .logo {
     position: fixed;
     margin-left: 2rem;
@@ -205,8 +201,13 @@ section {
     cursor: pointer;
 }
 
+#tech-stack section {
+    height: 175vh;
+    justify-content: space-between;
+}
+
 .keep-calm {
-    height: 50vh;
+    height: 33%;
     display: flex;
     justify-content: center;
     align-items: center;
