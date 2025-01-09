@@ -133,12 +133,12 @@
 }
 
 .tech-stack-left {
-    width: 30%;
+    width: 40%;
     height: 100%;
 }
 
 .tech-stack-right {
-    width: 70%;
+    width: 60%;
     height: 100%;
     padding: 0 4rem;
 }
@@ -191,7 +191,6 @@ ul.tl li .item-detail {
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(6, 1fr);
     gap: 1rem;
-    height: 70%;
 }
 
 .tech-stack-grid-item {
@@ -201,6 +200,7 @@ ul.tl li .item-detail {
     justify-content: center;
     align-items: center;
     transition: transform 0.3s ease;
+    aspect-ratio: 1 / 1.1;
 }
 
 .tech-stack-grid-item:hover {

@@ -3,17 +3,26 @@
 
 <template>
     <div class="grid-container">
-        <div class="grid-item my-location">
-            <span class="text-light-gray">
-                I'm from 
-                <br>
-                Yangon, Myanmar (Burma)
-            </span>
-            <span class="text-light-gray">
-                I'm currently based in
-                <br>
-                Bangkok, Thailand
-            </span>
+        <div class="grid-item location-card">
+            <div class="location-card-top">
+                <span class="text-light-gray">
+                    I'm from 
+                    <br>
+                    Yangon, Myanmar (Burma)
+                </span>
+            </div>
+            <div class="location-card-bottom">
+                <div class="location-card-bottom-svg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                        <path fill="#3d5a98" fill-opacity="1" d="M0,32L48,37.3C96,43,192,53,288,69.3C384,85,480,107,576,128C672,149,768,171,864,192C960,213,1056,235,1152,218.7C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                    </svg>
+                </div>
+                <div class="location-card-bottom-text">
+                    I'm currently based in
+                    <!-- <br> -->
+                    Bangkok, Thailand
+                </div>
+            </div>
         </div>
         <div class="grid-item">
         </div>
@@ -62,10 +71,10 @@
     transition: transform 0.3s ease;
 }
 
-.grid-item:hover {
-    border: 1px solid $blue;
-    transform: scale(1.04);
-}
+// .grid-item:hover {
+//     border: 1px solid $blue;
+//     transform: scale(1.04);
+// }
 
 .grid-item:nth-child(1) {
     grid-column: 1 / span 1;
@@ -112,14 +121,33 @@
     }
 }
 
-.my-location {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.social-media-card, .location-card {
+    padding: 0;
 }
 
-.social-media-card {
-    padding: 0;
+.location-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.location-card-top {
+    height: 30%;
+}
+
+.location-card-bottom {
+    height: 70%;
+}
+
+.location-card-bottom-svg {
+    height: 20%;
+}
+
+.location-card-bottom-text {
+    display: flex;
+    align-items: end;
+    height: 80%;
+    background-color: $facebook-blue;
 }
 
 .social-media {
