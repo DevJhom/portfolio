@@ -43,12 +43,12 @@ const setActive = (sectionId: string) => {
 <style scoped lang="scss">
 .nav-bar {
     position: fixed;
-    bottom: 5%;
+    bottom: 0;
     left: 50%;
     z-index: $top-layer;
     background-color: $black;
     transform: translateX(-50%);
-    border-radius: 6px;
+    border-radius: 6px 6px 0 0;
 }
 
 .nav-item a {
