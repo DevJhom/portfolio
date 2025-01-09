@@ -79,7 +79,7 @@ onUnmounted(() => {
 // Spotlight effect
 window.addEventListener("DOMContentLoaded", () => {
     const spotlight = document.querySelector('.spotlight') as HTMLElement;
-    let spotlightSize: string = 'transparent 50px, #0c0c0c 150px)';
+    let spotlightSize: string = 'transparent 50px, #0c0c0c 200px)';
 
     window.addEventListener('mousemove', (e: MouseEvent) => updateSpotlight(e));
 
@@ -105,10 +105,10 @@ window.addEventListener("DOMContentLoaded", () => {
         <!-- HOME -->
         <div id="home">
             <section>
-                <h1 class="animate-on-hover">
+                <h1 class="introduction-text animate-on-hover">
                     Hello! I'm Jhom.
                 </h1>
-                <div :class="{typewriter: isTyping}" class="animate-on-hover">
+                <div :class="{typewriter: isTyping}" class="introduction-text animate-on-hover">
                     <h2>I'm a Software Developer.</h2>
                 </div>
                 <Transition name="fade">
@@ -116,6 +116,8 @@ window.addEventListener("DOMContentLoaded", () => {
                         <a href="#about-me"> Scroll to Explore </a>
                     </small>
                 </Transition>
+                <div class="cursor-area-1"></div>
+                <div class="cursor-area-2"></div>
             </section>
         </div>
         <!-- ABOUT ME -->
@@ -157,15 +159,16 @@ window.addEventListener("DOMContentLoaded", () => {
 
 section {
     position: relative;
-    border: 1px solid $blue;
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    // border: 1px solid $blue;
 }
 
+// HOME section
 .logo {
     position: fixed;
     margin-left: 2rem;
@@ -194,23 +197,61 @@ section {
     color: $white;
 }
 
+.introduction-text {
+    background-color: $black;
+    border-radius: 6px;
+    padding: 0 1rem;
+}
+
 .scroll-to-explore {
     position: absolute;
     bottom: 5%;
-    left: 2rem;
+    right: 5%;
+    z-index: $top-layer;
     cursor: pointer;
 }
 
-#tech-stack section {
-    height: 175vh;
-    justify-content: space-between;
+.scroll-to-explore a:hover {
+    color: $blue;
 }
 
-.keep-calm {
-    height: 33%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+//Spotlight Effect
+#home {
+    background: url('./../images/sourcecodes.png') no-repeat center;
+    background-size: contain;
+    height: 100vh;
+    z-index: $bottom-layer;
+    cursor: none;
+}
+
+#home section {
+    z-index: $middle-layer;
+}
+
+.spotlight {
+    z-index: $bottom-layer;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: radial-gradient($black, $black, $black);
+}
+
+.cursor-area-1 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 30%;
+    cursor: initial;
+}
+
+.cursor-area-2 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 20%;
+    width: 70%;
+    cursor: initial;
 }
 
 // Transition
@@ -245,23 +286,16 @@ section {
     to { border-color: transparent }
 }
 
-//Spotlight Effect
-.spotlight {
-    z-index: $bottom-layer;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-image: radial-gradient($black, $black, $black);
+// TECH-STACK section
+#tech-stack section {
+    height: 175vh;
+    justify-content: space-between;
 }
 
-#home {
-    background: url('./../images/sourcecodes.png') no-repeat center;
-    background-size: contain;
-    height: 100vh;
-    z-index: $bottom-layer;
-}
-
-#home section {
-    z-index: $middle-layer;
+.keep-calm {
+    height: 33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>
