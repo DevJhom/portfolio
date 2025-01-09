@@ -11,21 +11,7 @@
         </div>
         <div class="projects-right">
             <div class="card">
-                <h3 class="title">Project 1</h3>
-                <div class="bar">
-                <div class="emptybar"></div>
-                <div class="filledbar"></div>
-                </div>
-            </div>
-            <div class="card">
-                <h3 class="title">Project 2</h3>
-                <div class="bar">
-                <div class="emptybar"></div>
-                <div class="filledbar"></div>
-                </div>
-            </div>
-            <div class="card">
-                <h3 class="title">Project 3</h3>
+                <h3 class="title">FretWizard</h3>
                 <div class="bar">
                 <div class="emptybar"></div>
                 <div class="filledbar"></div>
@@ -63,6 +49,7 @@
 .projects-right {
     width: 70%;
     height: 100%;
+    padding: 0 10%;
     display: flex;
     justify-content: space-around;
     border: 1px solid red;
@@ -71,8 +58,10 @@
 // Stacked Card
 .card {
   display: flex;
-  height: 280px;
-  width: 200px;
+  height: 100%;
+  width: 50%;
+  min-height: 420px; 
+  min-width: 300px;
   background-color: #17141d;
   border-radius: 10px;
   box-shadow: -1rem 0 3rem #000;
@@ -106,10 +95,10 @@
 
 .bar {
   position: absolute;
-  top: 100px;
-  left: 20px;
+  top: 70px;
   height: 5px;
-  width: 150px;
+  width: 75%;
+  margin-left: -1px;
 }
 
 .emptybar {
