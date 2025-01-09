@@ -48,5 +48,22 @@ const setActive = (sectionId: string) => {
     z-index: $top-layer;
     background-color: $black;
     transform: translateX(-50%);
+    border-radius: 6px;
+}
+
+.nav-item a {
+    color: $blue;
+}
+
+.nav-item a:hover {
+    color: $white;
+}
+
+.nav-item a.active {
+    background-color: $blue;
+}
+
+.nav-item a.active:hover {
+    color: $black;
 }
 </style>
