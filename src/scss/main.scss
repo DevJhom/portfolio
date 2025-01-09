@@ -27,6 +27,7 @@ a {
   margin: 0 auto;
 }
 
+//GLOBAL classes
 .animate-on-hover {
   transition: transform 0.3s ease;
 }
@@ -34,4 +35,8 @@ a {
 .animate-on-hover:hover {
   color: $blue;
   transform: scale(1.1);
+}
+
+.text-light-gray {
+  color: $light-gray;
 }
