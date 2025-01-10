@@ -186,6 +186,7 @@ section {
     right: 2rem;
     margin-top: 2rem;
     padding: 0.5rem 1rem;
+    background-color: $black;
     border: 1px solid $blue;
     border-radius: 24px;
     z-index: $top-layer;
