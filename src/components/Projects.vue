@@ -62,7 +62,7 @@
   width: 50%;
   min-height: 420px; 
   min-width: 300px;
-  background-color: #17141d;
+  background-color: $light-black;
   border-radius: 10px;
   box-shadow: -1rem 0 3rem #000;
   transition: 0.4s ease-out;
@@ -102,7 +102,7 @@
 }
 
 .emptybar {
-  background-color: #2e3033;
+  background-color: $gray;
   width: 100%;
   height: 100%;
 }
