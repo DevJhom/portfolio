@@ -21,7 +21,7 @@ const setActive = (sectionId: string) => {
                     @click.prevent="setActive('home')">Home</a>
             </li>
             <li class="nav-item">
-                <a href="#about-me" class="nav-link" :class="{ active: activeSection == 'about-me' }"
+                <a href="#about-me" class="nav-link" :class="{ active: activeSection == 'about-me' || activeSection == 'keep-calm' }"
                     @click.prevent="setActive('about-me')">About Me</a>
             </li>
             <li class="nav-item">
@@ -46,7 +46,7 @@ const setActive = (sectionId: string) => {
     bottom: 0;
     left: 50%;
     z-index: $top-layer;
-    background-color: $light-black;
+    background-color: $black;
     transform: translateX(-50%);
     border-radius: 6px 6px 0 0;
 }
@@ -61,7 +61,7 @@ const setActive = (sectionId: string) => {
 }
 
 .nav-item a.active {
-    background-color: $blue;
+    background-color: $light-gray;
 }
 
 .nav-item a.active:hover {

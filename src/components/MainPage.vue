@@ -9,6 +9,7 @@ import Contact from './Contact.vue';
 const sections = ref([
     { id: 'home', label: 'Home' },
     { id: 'about-me', label: 'About Me' },
+    { id: 'keep-calm', label: 'Keep Calm' },
     { id: 'tech-stack', label: 'Tech Stack' },
     { id: 'projects', label: 'Projects' },
     { id: 'contact', label: 'Contact' },
@@ -35,7 +36,7 @@ const typeKeepCalm = reactive({
 });
 
 watch(activeSection, (newSection) => {
-    if (newSection == 'tech-stack' && !typeKeepCalm.isAlreadyTyped) {
+    if (newSection == 'keep-calm' && !typeKeepCalm.isAlreadyTyped) {
         typeKeepCalm.isTyping = true;
         setTimeout(() => {
             typeKeepCalm.isTyping = false;
@@ -127,13 +128,13 @@ window.addEventListener("DOMContentLoaded", () => {
             </section>
         </div>
         <!-- TECH STACK -->
+        <div id="keep-calm">
+            <div v-if="typeKeepCalm.isTyping || typeKeepCalm.isAlreadyTyped" :class="{typewriter: typeKeepCalm.isTyping}" class="animate-on-hover">
+                <h2>Keep Calm and Code On.</h2>
+            </div>
+        </div>
         <div id="tech-stack">
             <section>
-                <div class="keep-calm">
-                    <div v-if="typeKeepCalm.isTyping || typeKeepCalm.isAlreadyTyped" :class="{typewriter: typeKeepCalm.isTyping}" class="animate-on-hover">
-                        <h2>Keep Calm and Code On.</h2>
-                    </div>
-                </div>
                 <TechStack/>
             </section>
         </div>
@@ -165,7 +166,6 @@ section {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    // border: 1px solid $blue;
 }
 
 // HOME section
@@ -280,14 +280,8 @@ section {
     to { border-color: transparent }
 }
 
-// TECH-STACK section
-#tech-stack section {
-    height: 175vh;
-    justify-content: space-between;
-}
-
-.keep-calm {
-    height: 33%;
+#keep-calm {
+    min-height: 150vh;
     display: flex;
     justify-content: center;
     align-items: center;
