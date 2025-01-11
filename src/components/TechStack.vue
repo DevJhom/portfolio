@@ -53,12 +53,10 @@ const mouseLeave = (key: string) => {
             <div class="tech-stack-grid">
                 <div class="tech-stack-grid-item grid-2" @mouseenter="mouseEnter('vue')" @mouseleave="mouseLeave('vue')">
                     <!-- Vue -->
-                    <Transition name="fade">
-                        <span v-if="isHover.vue">Vue</span>
-                        <svg v-else viewBox="0 0 128 128" width="30" height="30">
-                            <path d="M0 8.934l49.854.158 14.167 24.47 14.432-24.47L128 8.935l-63.834 110.14zm126.98.637l-24.36.02-38.476 66.053L25.691 9.592.942 9.572l63.211 107.89zm-25.149-.008l-22.745.168-15.053 24.647L49.216 9.73l-22.794-.168 37.731 64.476zm-75.834-.17l23.002.009m-23.002-.01l23.002.01" fill="none"></path><path d="M25.997 9.393l23.002.009L64.035 34.36 79.018 9.404 102 9.398 64.15 75.053z" fill="#35495e"></path><path d="M.91 9.569l25.067-.172 38.15 65.659L101.98 9.401l25.11.026-62.966 108.06z" fill="#41b883"></path>
-                        </svg>
-                    </Transition>
+                    <span v-if="isHover.vue">Vue</span>
+                    <svg v-else viewBox="0 0 128 128" width="30" height="30">
+                        <path d="M0 8.934l49.854.158 14.167 24.47 14.432-24.47L128 8.935l-63.834 110.14zm126.98.637l-24.36.02-38.476 66.053L25.691 9.592.942 9.572l63.211 107.89zm-25.149-.008l-22.745.168-15.053 24.647L49.216 9.73l-22.794-.168 37.731 64.476zm-75.834-.17l23.002.009m-23.002-.01l23.002.01" fill="none"></path><path d="M25.997 9.393l23.002.009L64.035 34.36 79.018 9.404 102 9.398 64.15 75.053z" fill="#35495e"></path><path d="M.91 9.569l25.067-.172 38.15 65.659L101.98 9.401l25.11.026-62.966 108.06z" fill="#41b883"></path>
+                    </svg>
                 </div>
                 <div class="tech-stack-grid-item grid-3" @mouseenter="mouseEnter('react')" @mouseleave="mouseLeave('react')">
                     <!-- React -->
@@ -69,7 +67,7 @@ const mouseLeave = (key: string) => {
                 </div>
                 <div class="tech-stack-grid-item grid-4" @mouseenter="mouseEnter('typescript')" @mouseleave="mouseLeave('typescript')">
                     <!-- Typescript -->
-                    <span v-if="isHover.typescript">Typescript</span>
+                    <span v-if="isHover.typescript" class="text-center text-break">Type<wbr>script</span>
                     <svg v-else viewBox="0 0 128 128" width="30" height="30">
                         <path fill="#fff" d="M22.67 47h99.67v73.67H22.67z"></path><path data-name="original" fill="#007acc" d="M1.5 63.91v62.5h125v-125H1.5zm100.73-5a15.56 15.56 0 017.82 4.5 20.58 20.58 0 013 4c0 .16-5.4 3.81-8.69 5.85-.12.08-.6-.44-1.13-1.23a7.09 7.09 0 00-5.87-3.53c-3.79-.26-6.23 1.73-6.21 5a4.58 4.58 0 00.54 2.34c.83 1.73 2.38 2.76 7.24 4.86 8.95 3.85 12.78 6.39 15.16 10 2.66 4 3.25 10.46 1.45 15.24-2 5.2-6.9 8.73-13.83 9.9a38.32 38.32 0 01-9.52-.1 23 23 0 01-12.72-6.63c-1.15-1.27-3.39-4.58-3.25-4.82a9.34 9.34 0 011.15-.73L82 101l3.59-2.08.75 1.11a16.78 16.78 0 004.74 4.54c4 2.1 9.46 1.81 12.16-.62a5.43 5.43 0 00.69-6.92c-1-1.39-3-2.56-8.59-5-6.45-2.78-9.23-4.5-11.77-7.24a16.48 16.48 0 01-3.43-6.25 25 25 0 01-.22-8c1.33-6.23 6-10.58 12.82-11.87a31.66 31.66 0 019.49.26zm-29.34 5.24v5.12H56.66v46.23H45.15V69.26H28.88v-5a49.19 49.19 0 01.12-5.17C29.08 59 39 59 51 59h21.83z"></path>
                     </svg>
@@ -140,7 +138,7 @@ const mouseLeave = (key: string) => {
                 </div>
                 <div class="tech-stack-grid-item grid-13" @mouseenter="mouseEnter('googlecloud')" @mouseleave="mouseLeave('googlecloud')">
                     <!-- Google Cloud -->
-                    <span v-if="isHover.googlecloud">Google Cloud</span>
+                    <span v-if="isHover.googlecloud" class="text-center">Google Cloud</span>
                     <svg v-else viewBox="0 0 128 128" width="40" height="30">
                         <path fill="#ea4535" d="M80.6 40.3h.4l-.2-.2 14-14v-.3c-11.8-10.4-28.1-14-43.2-9.5C36.5 20.8 24.9 32.8 20.7 48c.2-.1.5-.2.8-.2 5.2-3.4 11.4-5.4 17.9-5.4 2.2 0 4.3.2 6.4.6.1-.1.2-.1.3-.1 9-9.9 24.2-11.1 34.6-2.6h-.1z"></path><path fill="#557ebf" d="M108.1 47.8c-2.3-8.5-7.1-16.2-13.8-22.1L80 39.9c6 4.9 9.5 12.3 9.3 20v2.5c16.9 0 16.9 25.2 0 25.2H63.9v20h-.1l.1.2h25.4c14.6.1 27.5-9.3 31.8-23.1 4.3-13.8-1-28.8-13-36.9z"></path><path fill="#36a852" d="M39 107.9h26.3V87.7H39c-1.9 0-3.7-.4-5.4-1.1l-15.2 14.6v.2c6 4.3 13.2 6.6 20.7 6.6z"></path><path fill="#f9bc15" d="M40.2 41.9c-14.9.1-28.1 9.3-32.9 22.8-4.8 13.6 0 28.5 11.8 37.3l15.6-14.9c-8.6-3.7-10.6-14.5-4-20.8 6.6-6.4 17.8-4.4 21.7 3.8L68 55.2C61.4 46.9 51.1 42 40.2 42.1z"></path>
                     </svg>
@@ -244,7 +242,6 @@ ul.tl li .item-detail {
 }
 
 .tech-stack-grid-item:hover {
-    border: 1px solid $blue;
     transform: scale(1.04);
 }
     
@@ -333,4 +330,65 @@ ul.tl li .item-detail {
     grid-column-start: 8;
     grid-row-start: 5;
 }
+
+.grid-2:hover {
+    color: $vue-green;
+    border: 2px solid $vue-green;
+}
+
+.grid-3:hover {
+    color: $react-blue;
+    border: 2px solid $react-blue;
+}
+
+.grid-4:hover {
+    color: $typescript-blue;
+    border: 2px solid $typescript-blue;
+}
+
+.grid-5:hover {
+    color: $scss-pink;
+    border: 2px solid $scss-pink;
+}
+
+.grid-6:hover {
+    color: $csharp-pink;
+    border: 2px solid $csharp-pink;
+}
+
+.grid-7:hover {
+    color: $cplusplus-blue;
+    border: 2px solid $cplusplus-blue;
+}
+
+.grid-8:hover {
+    color: $nodejs-green;
+    border: 2px solid $nodejs-green;
+}
+
+.grid-9:hover {
+    color: $firebase-yellow;
+    border: 2px solid $firebase-yellow;
+}
+
+.grid-10:hover {
+    color: $sql-gray;
+    border: 2px solid $sql-gray;
+}
+
+.grid-11:hover {
+    color: $git-orange;
+    border: 2px solid $git-orange;
+}
+
+.grid-12:hover {
+    color: $docker-blue;
+    border: 2px solid $docker-blue;
+}
+
+.grid-14:hover {
+    color: $neovim-green;
+    border: 2px solid $neovim-green;
+}
+
 </style>
