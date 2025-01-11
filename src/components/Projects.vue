@@ -95,7 +95,7 @@
   position: absolute;
   top: 70px;
   height: 5px;
-  width: 75%;
+  width: 100%;
   margin-left: -1px;
 }
 
@@ -110,7 +110,7 @@
   top: 0px;
   width: 0px;
   height: 100%;
-  background: $blue;
+  background-color: $light-gray;
   transition: 0.6s ease-out;
 }
 

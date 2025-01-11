@@ -61,7 +61,7 @@ const setActive = (sectionId: string) => {
 }
 
 .nav-item a.active {
-    background-color: $light-gray;
+    background-color: $gray2    ;
     border-radius: 6px 6px 0 0;
 }
 

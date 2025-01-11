@@ -45,6 +45,27 @@ watch(activeSection, (newSection) => {
     }
 });
 
+// Spotlight effect
+window.addEventListener("DOMContentLoaded", () => {
+    const spotlight = document.querySelector('.spotlight') as HTMLElement;
+    let spotlightSize: string = 'transparent 50px, #0c0c0c 200px)';
+
+    window.addEventListener('mousemove', (e: MouseEvent) => updateSpotlight(e));
+
+    function updateSpotlight(e: MouseEvent): void {
+        if (spotlight) {
+            spotlight.style.backgroundImage = `radial-gradient(circle at ${e.pageX / window.innerWidth * 100}% ${e.pageY / window.innerHeight * 100}%, ${spotlightSize}`;
+        }
+    }
+});
+
+const downloadResume = () => {
+    const link = document.createElement("a");
+    link.href = "./Resume_Sai_Swan_Wan.pdf"; 
+    link.download = "Resume_Sai_Swan_Wan.pdf";
+    link.click();
+}
+
 let observer: IntersectionObserver;
 
 onMounted(() => {
@@ -76,20 +97,6 @@ onUnmounted(() => {
         });
     }
 })
-
-// Spotlight effect
-window.addEventListener("DOMContentLoaded", () => {
-    const spotlight = document.querySelector('.spotlight') as HTMLElement;
-    let spotlightSize: string = 'transparent 50px, #0c0c0c 200px)';
-
-    window.addEventListener('mousemove', (e: MouseEvent) => updateSpotlight(e));
-
-    function updateSpotlight(e: MouseEvent): void {
-        if (spotlight) {
-            spotlight.style.backgroundImage = `radial-gradient(circle at ${e.pageX / window.innerWidth * 100}% ${e.pageY / window.innerHeight * 100}%, ${spotlightSize}`;
-        }
-    }
-});
 </script>
 
 <template>
@@ -97,10 +104,10 @@ window.addEventListener("DOMContentLoaded", () => {
     <div class="my-container">
         <NavBar :active-section="activeSection"/>
         <h5 class="logo animate-on-hover">
-            <img src="../../public/letter-j.png" alt="DevJhom Logo" class="logo-img" height="35" width="35">
+            <img src="/letter-j.png" alt="DevJhom Logo" class="logo-img" height="35" width="35">
             <a href="#home"> DevJhom </a>
         </h5>
-        <div class="my-resume">
+        <div class="my-resume" @click="downloadResume()">
             Download Resume
         </div>
         <!-- HOME -->
@@ -218,7 +225,7 @@ section {
 
 //Spotlight Effect
 #home {
-    background: url('./../images/sourcecodes.png') no-repeat center;
+    background: url('/sourcecodes.png') no-repeat center;
     background-size: contain;
     height: 100vh;
     z-index: $bottom-layer;
@@ -226,7 +233,7 @@ section {
 }
 
 #contact {
-    background: url('./../images/world.svg') no-repeat center;
+    background: url('/world.svg') no-repeat center;
     z-index: $bottom-layer;
 }
 
