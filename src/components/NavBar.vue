@@ -46,13 +46,14 @@ const setActive = (sectionId: string) => {
     bottom: 0;
     left: 50%;
     z-index: $top-layer;
-    background-color: $black;
+    background-color: $light-black;
     transform: translateX(-50%);
     border-radius: 6px 6px 0 0;
 }
 
 .nav-item a {
-    color: $blue;
+    font-weight: bold;
+    color: $light-gray;
 }
 
 .nav-item a:hover {
