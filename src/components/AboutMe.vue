@@ -5,11 +5,11 @@
     <div class="grid-container">
         <div class="grid-item location-card">
             <div class="location-card-top">
-                <span class="text-light-gray">
+                <small class="text-light-gray">
                     I'm from 
                     <br>
                     Yangon, Myanmar (Burma)
-                </span>
+                </small>
             </div>
             <div class="location-card-bottom">
                 <!-- <div class="location-card-bottom-svg">
@@ -17,17 +17,19 @@
                         <path fill="#3d5a98" fill-opacity="1" d="M0,32L48,37.3C96,43,192,53,288,69.3C384,85,480,107,576,128C672,149,768,171,864,192C960,213,1056,235,1152,218.7C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
                     </svg>
                 </div> -->
-                <div class="location-card-bottom-text">
+                <small class="location-card-bottom-text">
                     I'm currently based in
                     <br>
                     Bangkok, Thailand
-                </div>
+                </small>
             </div>
         </div>
         <div class="grid-item">
         </div>
-        <div class="grid-item">
-            I have 3 years of hands-on experience in web application development.
+        <div class="grid-item experience-card">
+            <span>
+                <h3> 3+ </h3> years experience <br> in Web Application Development.
+            </span>
         </div>
         <div class="grid-item social-media-card">
             <!-- <div class="social-media"> -->
@@ -71,7 +73,6 @@
 }
 
 .grid-item {
-    overflow: auto;
     border: 1px solid $gray;
     border-radius: 12px;
     padding: 2rem;
@@ -79,8 +80,8 @@
 }
 
 .grid-item:hover {
-    border: 1px solid $blue;
-    // transform: scale(1.04);
+    border: 2px solid $blue;
+    transform: scale(1.04);
 }
 
 .grid-item:nth-child(1) {
@@ -112,9 +113,10 @@
 .grid-item:nth-child(6) {
     grid-column: 1 / span 2;
     grid-row: 5 / span 2;
-    background-color: $gray;
+    background-color: $black;
     background-image: url("../images/sourcecodes-css.PNG");
-    background-size: cover;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
 }
 
 @media (max-width: 768px) {
@@ -128,8 +130,13 @@
     }
 }
 
-.social-media-card, .location-card {
+.social-media-card, .location-card, .experience-card {
     padding: 0;
+}
+
+// Experience Card 
+.experience-card {
+    padding: 1rem;
 }
 
 // Location Card
@@ -141,10 +148,14 @@
 
 .location-card-top {
     height: 30%;
+    padding: 1rem;
+    border: 1px solid $facebook-blue;
 }
 
 .location-card-bottom {
     height: 70%;
+    padding: 1rem;
+    border: 1px solid $facebook-blue;
 }
 
 .location-card-bottom-svg {
@@ -154,8 +165,8 @@
 .location-card-bottom-text {
     display: flex;
     align-items: end;
-    height: 80%;
-    // background-color: $facebook-blue;
+    height: 100%;
+    background-color: $facebook-blue;
 }
 
 // Social Media Card
@@ -163,7 +174,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80%;
+    height: 100%;
+}
+
+.social-media svg {
+    // width: 100%;
+    // height: 100%;
 }
 
 .add-social-media {
