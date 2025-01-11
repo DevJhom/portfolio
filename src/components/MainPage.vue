@@ -225,6 +225,11 @@ section {
     cursor: none;
 }
 
+#contact {
+    background: url('./../images/world.svg') no-repeat center;
+    z-index: $bottom-layer;
+}
+
 #home section {
     z-index: $middle-layer;
 }
@@ -287,7 +292,4 @@ section {
     align-items: center;
 }
 
-#contact {
-    background: url('./../images/world.svg') no-repeat center;
-}
 </style>

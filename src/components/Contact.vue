@@ -17,9 +17,25 @@ const copyToClipboard = async (text: string) => {
         console.error('Failed to copy email: ', err);
     }
 };
+
+// Spotlight effect
+window.addEventListener("DOMContentLoaded", () => {
+    const spotlight = document.querySelector('.contact-spotlight') as HTMLElement;
+    let spotlightSize: string = 'transparent 100px, #0c0c0c 250px)';
+    const scrolledViewHeight = 550; //adjust according to number of sections
+
+    window.addEventListener('mousemove', (e: MouseEvent) => updateSpotlight(e));
+
+    function updateSpotlight(e: MouseEvent): void {
+        if (spotlight) {
+            spotlight.style.backgroundImage = `radial-gradient(circle at ${e.pageX / window.innerWidth * 100}% ${(e.pageY / window.innerHeight * 100) - scrolledViewHeight}%, ${spotlightSize}`;
+        }
+    }
+});
 </script>
 
 <template>
+    <div class="contact-spotlight"></div>
     <div class="contact">
         <h2>"Let's Get In Touch!"</h2>
         <div class="mt-3">
@@ -49,11 +65,6 @@ const copyToClipboard = async (text: string) => {
 </template>
 
 <style scoped lang="scss">
-button {
-    border-radius: 0 6px 6px 0;
-    min-width: 90px;
-}
-
 .contact {
     position: relative;
     display: flex;
@@ -62,6 +73,15 @@ button {
     align-items: center;
     height: 100%;
     width: 100%;
+    z-index: $middle-layer;
+}
+
+.contact-spotlight {
+    z-index: $bottom-layer;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: radial-gradient($black, $black, $black);
 }
 
 .copyright {
@@ -74,5 +94,10 @@ button {
     position: absolute;
     bottom: 2rem;
     right: 2rem;
+}
+
+button {
+    border-radius: 0 6px 6px 0;
+    min-width: 90px;
 }
 </style>
