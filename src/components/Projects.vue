@@ -7,7 +7,7 @@
             <h2>
                 My Personal Projects
             </h2>
-            <div>These are some of my favorite personal projects.</div>
+            <div class="text-light-gray">These are some of my favorite personal projects.</div>
         </div>
         <div class="projects-right">
             <div class="card">
@@ -31,28 +31,26 @@
 <style scoped lang="scss">
 // Tech Stack
 .projects {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 75%;
-    margin: auto;
-    padding: 2rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 75%;
+  margin: auto;
+  padding: 2rem 0;
 }
 
 .projects-left {
-    width: 30%;
-    height: 100%;
-    border: 1px solid red;
+  width: 30%;
+  height: 100%;
 }
 
 .projects-right {
-    width: 70%;
-    height: 100%;
-    padding: 0 10%;
-    display: flex;
-    justify-content: space-around;
-    border: 1px solid red;
+  width: 70%;
+  height: 100%;
+  padding: 0 10%;
+  display: flex;
+  justify-content: space-around;
 }
 
 // Stacked Card
