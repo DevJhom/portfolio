@@ -62,6 +62,7 @@ const setActive = (sectionId: string) => {
 
 .nav-item a.active {
     background-color: $light-gray;
+    border-radius: 6px 6px 0 0;
 }
 
 .nav-item a.active:hover {

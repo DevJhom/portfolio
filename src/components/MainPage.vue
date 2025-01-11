@@ -286,4 +286,8 @@ section {
     justify-content: center;
     align-items: center;
 }
+
+#contact {
+    background: url('./../images/world.svg') no-repeat center;
+}
 </style>

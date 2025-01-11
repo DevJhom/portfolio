@@ -178,6 +178,9 @@ const mouseLeave = (key: string) => {
     width: 60%;
     height: 100%;
     padding: 0 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 // Tech Stack Left
@@ -196,6 +199,7 @@ const mouseLeave = (key: string) => {
 
 .history-tl-container ul.tl li:last-child { 
     border-left: 0; 
+    min-height: 0;
 }
 
 .history-tl-container ul.tl li::before {
@@ -208,13 +212,13 @@ const mouseLeave = (key: string) => {
     background: $light-gray;
     height: 35px;
     width: 35px;
-    transition: all 500ms ease-in;
+    transition: all 250ms ease-in;
 }
 
 .history-tl-container ul.tl li:hover::before {
     border-color: $light-black;
     background-color: $blue;
-    transition: all 500ms ease-in;
+    transition: all 250ms ease-in;
 }
 
 ul.tl li .item-detail {
