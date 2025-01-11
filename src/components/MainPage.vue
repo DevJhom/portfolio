@@ -234,7 +234,11 @@ section {
     position: absolute;
     height: 100%;
     width: 100%;
-    background-image: radial-gradient($black, $black, $black);
+    background-image: radial-gradient(
+        circle at 15% 5%,
+        transparent 50px,
+        #0c0c0c 200px
+    );
 }
 
 .cursor-area-1 {
