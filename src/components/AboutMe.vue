@@ -114,7 +114,7 @@
     grid-column: 1 / span 2;
     grid-row: 5 / span 2;
     background-color: $black;
-    background-image: url("../images/sourcecodes-css.PNG");
+    background-image: url("/sourcecodes-css.PNG");
     background-size: auto 100%;
     background-repeat: no-repeat;
 }
