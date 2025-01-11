@@ -27,6 +27,24 @@ a {
   margin: 0 auto;
 }
 
+html::-webkit-scrollbar {
+  width: 6px;
+  height: 12px;
+}
+
+html::-webkit-scrollbar-track {
+  background-color: $light-black;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: $gray2;
+  border-radius: 10px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background-color: $light-gray;
+}
+
 //GLOBAL classes
 .animate-on-hover {
   transition: transform 0.3s ease;
