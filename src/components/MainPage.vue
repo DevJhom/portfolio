@@ -113,11 +113,11 @@ onUnmounted(() => {
         <!-- HOME -->
         <div id="home">
             <section>
-                <h1 class="introduction-text animate-on-hover">
+                <h1 class="introduction-text">
                     Hello! I'm Jhom.
                 </h1>
-                <div :class="{typewriter: isTyping}" class="introduction-text animate-on-hover">
-                    <h2>I'm a Software Developer.</h2>
+                <div :class="{typewriter: isTyping}" class="introduction-text">
+                    <h2>I'm a <span class="text-animation">Software Developer.</span></h2>
                 </div>
                 <Transition name="fade">
                     <small v-if="hideScrollToExplore" class="scroll-to-explore animate-on-hover">
@@ -209,6 +209,22 @@ section {
     background-color: $black;
     border-radius: 6px;
     padding: 0 1rem;
+}
+
+.text-animation {
+    background: linear-gradient(to left, $light-gray 10%, $blue 30%, $blue 60%, $light-gray 90%);
+    background-size: 200% auto;
+  
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: background-gradient 6s linear infinite;
+
+    @keyframes background-gradient {
+        to {
+            background-position: -200% center;
+        }
+    }
 }
 
 .scroll-to-explore {
