@@ -5,17 +5,26 @@
     <div class="grid-container">
         <div class="grid-item location-card">
             <div class="location-card-top">
-                <small class="text-light-gray">
+                <small>
                     I'm from 
                     <br>
                     Yangon, Myanmar (Burma)
                 </small>
+                <br>
+                <small class="text-light-gray location-description-top">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                </small>
             </div>
             <div class="location-card-bottom">
-                <small class="location-card-bottom-text">
+                <small class="location-card-bottom-title">
                     I'm currently based in
                     <br>
                     Bangkok, Thailand
+                </small>
+                <small class="text-light-gray location-description-bottom">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                 </small>
             </div>
         </div>
@@ -143,27 +152,30 @@
 }
 
 .location-card-top {
+    position: relative;
     height: 30%;
     padding: 1rem;
     transition: all 0.5s ease;
 }
 
 .location-card-bottom {
+    position: relative;
     height: 70%;
     padding: 1rem;
-    background-color: $facebook-blue;
     transition: all 0.5s ease;
+    background-color: $gray;
+    z-index: $top-layer;
 }
 
+// Location Card - on hover
 .location-card-top:hover {
-    position: relative;
     background: url('/myanmar.svg') no-repeat center;
     background-size: contain;
-    height: 95%;
+    height: 90%;
 }
 
 .location-card-bottom:hover {
-    height: 95%;
+    height: 90%;
 }
 
 .location-card-bottom::after {
@@ -176,6 +188,7 @@
     background: url('/thailand.svg') no-repeat center;
     background-size: contain;
     transition: all 0.5s ease; 
+    z-index: $middle-layer;
 }
 
 .location-card-bottom:hover::after {
@@ -183,18 +196,41 @@
     height: 90%;
 }
 
-.location-card-top:hover ~ .location-card-bottom {
-    height: 5%;
+.location-card:has(.location-card-top:hover) .location-card-bottom {
+    height: 10%;
 }
 
 .location-card:has(.location-card-bottom:hover) .location-card-top {
-    height: 5%;
+    height: 10%;
 }
 
-.location-card-bottom-text {
+// Location Card - description
+.location-description-top, .location-description-bottom {
+    position: relative;
+    display: none;
+    margin-top: 10%;
+    z-index: $top-layer;
+}
+
+.location-card-bottom-title {
+    position: relative;
     display: flex;
     align-items: end;
     height: 100%;
+    z-index: $top-layer;
+}
+
+.location-card:has(.location-card-top:hover) .location-description-top {
+    display: block;
+}
+
+.location-card:has(.location-card-bottom:hover) .location-description-bottom {
+    display: block;
+}
+
+.location-card:has(.location-card-bottom:hover) .location-card-bottom-title {
+    align-items: start;
+    height: auto;
 }
 
 // Social Media Card
