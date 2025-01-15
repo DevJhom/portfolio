@@ -12,11 +12,6 @@
                 </small>
             </div>
             <div class="location-card-bottom">
-                <!-- <div class="location-card-bottom-svg">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                        <path fill="#3d5a98" fill-opacity="1" d="M0,32L48,37.3C96,43,192,53,288,69.3C384,85,480,107,576,128C672,149,768,171,864,192C960,213,1056,235,1152,218.7C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-                    </svg>
-                </div> -->
                 <small class="location-card-bottom-text">
                     I'm currently based in
                     <br>
@@ -114,7 +109,7 @@
     grid-column: 1 / span 2;
     grid-row: 5 / span 2;
     background-color: $black;
-    background-image: url("/sourcecodes-css.PNG");
+    background-image: url("/sourcecodes-css.png");
     background-size: auto 100%;
     background-repeat: no-repeat;
 }
@@ -144,29 +139,62 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    overflow: hidden;
 }
 
 .location-card-top {
     height: 30%;
     padding: 1rem;
-    border: 1px solid $facebook-blue;
+    transition: all 0.5s ease;
 }
 
 .location-card-bottom {
     height: 70%;
     padding: 1rem;
-    border: 1px solid $facebook-blue;
+    background-color: $facebook-blue;
+    transition: all 0.5s ease;
 }
 
-.location-card-bottom-svg {
-    height: 20%;
+.location-card-top:hover {
+    position: relative;
+    background: url('/myanmar.svg') no-repeat center;
+    background-size: contain;
+    height: 95%;
+}
+
+.location-card-bottom:hover {
+    height: 95%;
+}
+
+.location-card-bottom::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 0%;
+    height: 0%;
+    background: url('/thailand.svg') no-repeat center;
+    background-size: contain;
+    transition: all 0.5s ease; 
+}
+
+.location-card-bottom:hover::after {
+    width: 100%;
+    height: 90%;
+}
+
+.location-card-top:hover ~ .location-card-bottom {
+    height: 5%;
+}
+
+.location-card:has(.location-card-bottom:hover) .location-card-top {
+    height: 5%;
 }
 
 .location-card-bottom-text {
     display: flex;
     align-items: end;
     height: 100%;
-    background-color: $facebook-blue;
 }
 
 // Social Media Card
