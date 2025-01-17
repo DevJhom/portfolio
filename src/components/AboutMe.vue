@@ -153,14 +153,14 @@
 
 .location-card-top {
     position: relative;
-    height: 30%;
+    height: 35%;
     padding: 1rem;
     transition: all 0.5s ease;
 }
 
 .location-card-bottom {
     position: relative;
-    height: 70%;
+    height: 65%;
     padding: 1rem;
     transition: all 0.5s ease;
     background-color: $gray;
@@ -171,11 +171,11 @@
 .location-card-top:hover {
     background: url('/myanmar.svg') no-repeat center;
     background-size: contain;
-    height: 90%;
+    height: 100%;
 }
 
 .location-card-bottom:hover {
-    height: 90%;
+    height: 100%;
 }
 
 .location-card-bottom::after {
@@ -193,15 +193,19 @@
 
 .location-card-bottom:hover::after {
     width: 100%;
-    height: 90%;
+    height: 100%;
 }
 
 .location-card:has(.location-card-top:hover) .location-card-bottom {
-    height: 10%;
+    height: 0;
+    opacity: 0;
+    padding: 0;
 }
 
 .location-card:has(.location-card-bottom:hover) .location-card-top {
-    height: 10%;
+    padding: 0;
+    height: 0;
+    opacity: 0;
 }
 
 // Location Card - description
