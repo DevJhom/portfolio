@@ -209,22 +209,27 @@ section {
     background-color: $black;
     border-radius: 6px;
     padding: 0 1rem;
+    transition: transform 0.3s ease;
+}
+
+.introduction-text:hover {
+    transform: scale(1.1);
 }
 
 .text-animation {
-    background: linear-gradient(to left, $light-gray 10%, $blue 30%, $blue 60%, $light-gray 90%);
+    background: linear-gradient(to right, $light-gray 0, white 10%, $light-gray 20%);
     background-size: 200% auto;
-  
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: background-gradient 6s linear infinite;
+    
+    animation-fill-mode: forwards;
+    animation: background-gradient 4s infinite linear;
+}
 
-    @keyframes background-gradient {
-        to {
-            background-position: -200% center;
-        }
-    }
+@keyframes background-gradient {
+    0% { background-position: 0; }
+    100% { background-position: -200%; }
 }
 
 .scroll-to-explore {
