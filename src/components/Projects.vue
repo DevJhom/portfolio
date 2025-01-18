@@ -1,31 +1,36 @@
 <script setup lang="ts">
+const props = defineProps<{
+    activeSection: string
+}>();
 </script>
 
 <template>
-    <div class="projects">
-        <div class="projects-left">
-            <h2>
-                My Personal Projects
-            </h2>
-            <div class="text-light-gray">These are some of my favorite personal projects.</div>
-        </div>
-        <div class="projects-right">
-            <div class="card">
-                <h3 class="title">FretWizard</h3>
-                <div class="bar">
-                <div class="emptybar"></div>
-                <div class="filledbar"></div>
-                </div>
-            </div>
-            <div class="card">
-                <h3 class="title">Github</h3>
-                <div class="bar">
-                <div class="emptybar"></div>
-                <div class="filledbar"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <Transition name="slide-fade">
+      <div v-if="props.activeSection == 'projects'" class="projects">
+          <div class="projects-left">
+              <h2>
+                  My Personal Projects
+              </h2>
+              <div class="text-light-gray">These are some of my favorite personal projects.</div>
+          </div>
+          <div class="projects-right">
+              <div class="card">
+                  <h3 class="title">FretWizard</h3>
+                  <div class="bar">
+                  <div class="emptybar"></div>
+                  <div class="filledbar"></div>
+                  </div>
+              </div>
+              <div class="card">
+                  <h3 class="title">Github</h3>
+                  <div class="bar">
+                  <div class="emptybar"></div>
+                  <div class="filledbar"></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </Transition>
 </template>
 
 <style scoped lang="scss">
