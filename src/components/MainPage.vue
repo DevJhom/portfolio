@@ -142,13 +142,13 @@ onUnmounted(() => {
         </div>
         <div id="tech-stack">
             <section>
-                <TechStack/>
+                <TechStack :active-section="activeSection"/>
             </section>
         </div>
         <!-- PROJECTS -->
         <div id="projects">
             <section>
-                <Projects/>
+                <Projects :active-section="activeSection"/>
             </section>
         </div>
         <!-- CONTACT -->
