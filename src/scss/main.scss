@@ -50,26 +50,6 @@ html::-webkit-scrollbar-thumb:hover {
 }
 
 //GLOBAL classes
-.animate-on-hover {
-  transition: transform 0.3s ease;
-}
-
-.animate-on-hover:hover {
-  color: $blue;
-  transform: scale(1.1);
-}
-
 .text-light-gray {
   color: $light-gray;
-}
-
-// Transition
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
 }

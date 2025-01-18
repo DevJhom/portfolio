@@ -131,7 +131,7 @@ onUnmounted(() => {
         <!-- ABOUT ME -->
         <div id="about-me">
             <section>
-                <AboutMe/>
+                <AboutMe :active-section="activeSection"/>
             </section>
         </div>
         <!-- TECH STACK -->

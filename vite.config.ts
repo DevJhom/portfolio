@@ -18,6 +18,7 @@ export default defineConfig({
         additionalData: `
           @import "/src/scss/colors.scss";
           @import "/src/scss/layers.scss";
+          @import "/src/scss/animate.scss";
         `
       }
     }
