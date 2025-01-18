@@ -134,12 +134,17 @@ onUnmounted(() => {
                 <AboutMe :active-section="activeSection"/>
             </section>
         </div>
-        <!-- TECH STACK -->
+        <!-- KEEP CALM -->
         <div id="keep-calm">
-            <div v-if="typeKeepCalm.isTyping || typeKeepCalm.isAlreadyTyped" :class="{typewriter: typeKeepCalm.isTyping}" class="animate-on-hover">
-                <h2>Keep Calm and Code On.</h2>
+            <div class="parallax-1"></div>
+            <div class="parallax-2">
+                <!-- <div v-if="typeKeepCalm.isTyping || typeKeepCalm.isAlreadyTyped" :class="{typewriter: typeKeepCalm.isTyping}" class="animate-on-hover"> -->
+                    <h2>Keep Calm and Code On.</h2>
+                <!-- </div> -->
             </div>
+            <div class="parallax-3"></div>
         </div>
+        <!-- TECH STACK -->
         <div id="tech-stack">
             <section>
                 <TechStack :active-section="activeSection"/>
@@ -314,10 +319,31 @@ section {
 }
 
 #keep-calm {
-    min-height: 150vh;
+    min-height: 300vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    width: 100%;
+    position: relative;
 }
 
+.parallax-1, .parallax-2, .parallax-3 {
+    height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-1 {
+    background-image: url('/world.svg');
+}
+
+.parallax-2 {
+    background-color: $light-black;
+}
+
+.parallax-3 {
+    background-color: $gray;
+}
 </style>
