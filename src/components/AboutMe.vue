@@ -183,7 +183,7 @@ CARDS
 
 .location-card-top {
     position: relative;
-    height: 30%;
+    height: 25%;
     padding: 1rem;
     color: $light-gray;
     transition: all 0.5s ease;
@@ -194,7 +194,7 @@ CARDS
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 70%;
+    height: 75%;
     padding: 1rem;
     transition: all 0.5s ease;
     color: $light-gray;
@@ -258,7 +258,7 @@ CARDS
     position: relative;
     display: flex;
     align-items: end;
-    height: 100%;
+    margin-top: 10%;
     z-index: $top-layer;
 }
 
