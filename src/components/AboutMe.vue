@@ -16,23 +16,26 @@ const sectionIsActive = computed(() => {
             <div v-show="sectionIsActive" class="grid-item location-card">
                 <div class="location-card-top">
                     <small>
-                        I'm from  {{ props.activeSection }}
+                        I'm from
                         <br>
                         Yangon, Myanmar (Burma)
                     </small>
                     <br>
-                    <small class="text-light-gray location-description-top">
+                    <small class="location-description-top">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
                         incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                     </small>
                 </div>
                 <div class="location-card-bottom">
+                    <div class="street-view-map">
+
+                    </div>
                     <small class="location-card-bottom-title">
                         I'm currently based in
                         <br>
                         Bangkok, Thailand
                     </small>
-                    <small class="text-light-gray location-description-bottom">
+                    <small class="location-description-bottom">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
                         incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                     </small>
@@ -175,22 +178,27 @@ CARDS
     flex-direction: column;
     height: 100%;
     overflow: hidden;
+    cursor: crosshair;
 }
 
 .location-card-top {
     position: relative;
     height: 30%;
     padding: 1rem;
+    color: $light-gray;
     transition: all 0.5s ease;
-    background-color: $light-black;
 }
 
 .location-card-bottom {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     height: 70%;
     padding: 1rem;
     transition: all 0.5s ease;
-    background-color: $gray2;
+    color: $light-gray;
+    background-color: $light-black;
     z-index: $top-layer;
 }
 
@@ -199,10 +207,12 @@ CARDS
     background: url('/myanmar.svg') no-repeat center;
     background-size: contain;
     height: 100%;
+    color: $white;
 }
 
 .location-card-bottom:hover {
     height: 100%;
+    color: $white;
 }
 
 .location-card-bottom::after {
@@ -241,6 +251,7 @@ CARDS
     display: none;
     margin-top: 10%;
     z-index: $top-layer;
+    color: $light-gray;
 }
 
 .location-card-bottom-title {
@@ -262,6 +273,18 @@ CARDS
 .location-card:has(.location-card-bottom:hover) .location-card-bottom-title {
     align-items: start;
     height: auto;
+}
+
+.location-card:has(.location-card-bottom:hover) .street-view-map {
+    display: none;
+}
+
+.street-view-map {
+    border: 1px solid gray;
+    width: 100%;
+    height: 100%;
+    background: url('/street-map.svg') no-repeat center;
+    background-size: cover;
 }
 
 // 2. description-card
