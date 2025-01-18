@@ -120,7 +120,7 @@ const mouseLeaveOnExp = (experience: string) => {
                 <ul class="tl">
                     <li class="tl-item" ng-repeat="item in retailer_history" @mouseenter="mouseEnterOnExp('internship')" @mouseleave="mouseLeaveOnExp('internship')">
                         <div class="item-title">Web Developer (Internship)</div>
-                        <div class="item-detail">Innovative Village Co., Ltd.</div>
+                        <div class="item-detail">@ Innovative Village Co., Ltd.</div>
                         <small v-if="hasUsed.hoverInternship" class="item-detail">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
                             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
@@ -128,7 +128,7 @@ const mouseLeaveOnExp = (experience: string) => {
                     </li>
                     <li class="tl-item" ng-repeat="item in retailer_history" @mouseenter="mouseEnterOnExp('omnistar')" @mouseleave="mouseLeaveOnExp('omnistar')">
                         <div class="item-title">System Analyst (2021-2022)</div>
-                        <div class="item-detail">Omni Star Co., Ltd.</div>
+                        <div class="item-detail">@ Omni Star Co., Ltd.</div>
                         <small v-if="hasUsed.hoverOmnistar" class="item-detail">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
                             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
@@ -136,7 +136,7 @@ const mouseLeaveOnExp = (experience: string) => {
                     </li>
                     <li class="tl-item" ng-repeat="item in retailer_history" @mouseenter="mouseEnterOnExp('clicknext')" @mouseleave="mouseLeaveOnExp('clicknext')">
                         <div class="item-title">Software Developer (2022-present)</div>
-                        <div class="item-detail">ClickNext Co., Ltd.</div>
+                        <div class="item-detail">@ ClickNext Co., Ltd.</div>
                         <small v-if="hasUsed.hoverClicknext" class="item-detail">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
                             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
