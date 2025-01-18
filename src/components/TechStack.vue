@@ -124,27 +124,25 @@ const mouseLeaveOnExp = (experience: string) => {
                 <div class="history-tl-container">
                     <ul class="tl">
                         <li class="tl-item" ng-repeat="item in retailer_history" @mouseenter="mouseEnterOnExp('internship')" @mouseleave="mouseLeaveOnExp('internship')">
-                            <div class="item-title">Web Developer (Internship)</div>
+                            <div class="item-title">Frontend Developer (Internship)</div>
                             <div class="item-detail">@ Innovative Village Co., Ltd.</div>
-                            <small v-if="hasUsed.hoverInternship" class="item-detail">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                            <small v-show="hasUsed.hoverInternship" class="item-detail">
+                                I used Wordpress, HTML, CSS, Javascript, PHP, MySQL.
                             </small>
                         </li>
                         <li class="tl-item" ng-repeat="item in retailer_history" @mouseenter="mouseEnterOnExp('omnistar')" @mouseleave="mouseLeaveOnExp('omnistar')">
                             <div class="item-title">System Analyst (2021-2022)</div>
                             <div class="item-detail">@ Omni Star Co., Ltd.</div>
-                            <small v-if="hasUsed.hoverOmnistar" class="item-detail">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                            <small v-show="hasUsed.hoverOmnistar" class="item-detail">
+                                SQL Server, Database, Query 
+                                Docker, Cloud
                             </small>
                         </li>
                         <li class="tl-item" ng-repeat="item in retailer_history" @mouseenter="mouseEnterOnExp('clicknext')" @mouseleave="mouseLeaveOnExp('clicknext')">
                             <div class="item-title">Software Developer (2022-present)</div>
                             <div class="item-detail">@ ClickNext Co., Ltd.</div>
-                            <small v-if="hasUsed.hoverClicknext" class="item-detail">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                            <small v-show="hasUsed.hoverClicknext" class="item-detail">
+                                Typescript, Vue, C#, Microsoft SQL Server
                             </small>
                         </li>
                     </ul>
@@ -254,7 +252,12 @@ const mouseLeaveOnExp = (experience: string) => {
                 </div>
                 <h6 class="d-flex justify-content-center mt-4 animate-on-hover">
                     <template v-if="hasUsed.hoverStart">
-                        Technologies used.
+                        <template v-if="hasUsed.hoverClicknext">
+                            Technologies I'm using.
+                        </template>
+                        <template v-else>
+                            Technologies I've used.
+                        </template>
                     </template>
                     <template v-else>
                         Technologies I'm familiar with.
