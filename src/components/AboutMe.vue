@@ -1,13 +1,19 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+
 const props = defineProps<{
     activeSection: string
 }>();
+
+const sectionIsActive = computed(() => {
+    return props.activeSection == "about-me";
+});
 </script>
 
 <template>
-    <Transition name="slide-fade">
-        <div v-if="props.activeSection == 'about-me'" class="grid-container">
-            <div class="grid-item location-card">
+    <div class="grid-container">
+        <Transition name="slide-fade-left">
+            <div v-show="sectionIsActive" class="grid-item location-card">
                 <div class="location-card-top">
                     <small>
                         I'm from  {{ props.activeSection }}
@@ -32,29 +38,39 @@ const props = defineProps<{
                     </small>
                 </div>
             </div>
-            <div class="grid-item">
+        </Transition>
+
+        <Transition name="slide-fade-top">
+            <div v-show="sectionIsActive" class="grid-item description-card">
             </div>
-            <div class="grid-item experience-card">
+        </Transition>
+
+        <Transition name="slide-fade-right">
+            <div v-show="sectionIsActive" class="grid-item experience-card">
                 <span>
                     <h3> 3+ </h3> years experience <br> in Web Application Development.
                 </span>
             </div>
-            <div class="grid-item social-media-card">
-                <!-- <div class="social-media"> -->
-                    <!-- Facebook -->
-                    <!-- <svg viewBox="0 0 128 128">
-                        <rect fill="#3d5a98" x="4.83" y="4.83" width="118.35" height="118.35" rx="6.53" ry="6.53"></rect><path fill="#fff" d="M86.48 123.17V77.34h15.38l2.3-17.86H86.48v-11.4c0-5.17 1.44-8.7 8.85-8.7h9.46v-16A126.56 126.56 0 0091 22.7c-13.62 0-23 8.3-23 23.61v13.17H52.62v17.86H68v45.83z"></path>
-                    </svg> -->
-                <!-- </div> -->
-                <!-- <div class="add-social-media">
-                    Add Friend
-                </div> -->
-                <!-- LinkedIn -->
+        </Transition>
+
+        <div class="grid-item social-media-card">
+            <!-- <div class="social-media"> -->
+                <!-- Facebook -->
                 <!-- <svg viewBox="0 0 128 128">
-                    <path fill="#0076b2" d="M116 3H12a8.91 8.91 0 00-9 8.8v104.42a8.91 8.91 0 009 8.78h104a8.93 8.93 0 009-8.81V11.77A8.93 8.93 0 00116 3z"></path><path fill="#fff" d="M21.06 48.73h18.11V107H21.06zm9.06-29a10.5 10.5 0 11-10.5 10.49 10.5 10.5 0 0110.5-10.49M50.53 48.73h17.36v8h.24c2.42-4.58 8.32-9.41 17.13-9.41C103.6 47.28 107 59.35 107 75v32H88.89V78.65c0-6.75-.12-15.44-9.41-15.44s-10.87 7.36-10.87 15V107H50.53z"></path>
+                    <rect fill="#3d5a98" x="4.83" y="4.83" width="118.35" height="118.35" rx="6.53" ry="6.53"></rect><path fill="#fff" d="M86.48 123.17V77.34h15.38l2.3-17.86H86.48v-11.4c0-5.17 1.44-8.7 8.85-8.7h9.46v-16A126.56 126.56 0 0091 22.7c-13.62 0-23 8.3-23 23.61v13.17H52.62v17.86H68v45.83z"></path>
                 </svg> -->
-            </div>
-            <div class="grid-item passion-card">
+            <!-- </div> -->
+            <!-- <div class="add-social-media">
+                Add Friend
+            </div> -->
+            <!-- LinkedIn -->
+            <!-- <svg viewBox="0 0 128 128">
+                <path fill="#0076b2" d="M116 3H12a8.91 8.91 0 00-9 8.8v104.42a8.91 8.91 0 009 8.78h104a8.93 8.93 0 009-8.81V11.77A8.93 8.93 0 00116 3z"></path><path fill="#fff" d="M21.06 48.73h18.11V107H21.06zm9.06-29a10.5 10.5 0 11-10.5 10.49 10.5 10.5 0 0110.5-10.49M50.53 48.73h17.36v8h.24c2.42-4.58 8.32-9.41 17.13-9.41C103.6 47.28 107 59.35 107 75v32H88.89V78.65c0-6.75-.12-15.44-9.41-15.44s-10.87 7.36-10.87 15V107H50.53z"></path>
+            </svg> -->
+        </div>
+
+        <Transition name="slide-fade-right">
+            <div v-show="sectionIsActive" class="grid-item passion-card">
                 <div class="animate-box" id="animate-box-1"></div>
                 <div class="animate-box" id="animate-box-2"></div>
                 <div class="animate-box" id="animate-box-3"></div>
@@ -66,9 +82,12 @@ const props = defineProps<{
                     I'm passionate about coding and problem-solving, approaching each project with a creative mindset, a strong dedication and a commitment to writing clean, maintainable codes.
                 </span>
             </div>
-            <div class="grid-item"></div>
-        </div>
-    </Transition>
+        </Transition>
+
+        <Transition name="slide-fade-left">
+            <div class="grid-item style-card"></div>
+        </Transition>
+    </div>
 </template>
 
 <style scoped lang="scss">
@@ -101,7 +120,6 @@ const props = defineProps<{
 .grid-item:nth-child(2) {
     grid-column: 2 / span 2;
     grid-row: 1 / span 2;
-    background-color: $gray;
 }
 
 .grid-item:nth-child(3) {
@@ -122,10 +140,6 @@ const props = defineProps<{
 .grid-item:nth-child(6) {
     grid-column: 1 / span 2;
     grid-row: 5 / span 2;
-    background-color: $black;
-    background-image: url("/sourcecodes-css.png");
-    background-size: auto 100%;
-    background-repeat: no-repeat;
 }
 
 @media (max-width: 768px) {
@@ -139,16 +153,23 @@ const props = defineProps<{
     }
 }
 
-.social-media-card, .location-card, .experience-card {
+/* 
+CARDS
+
+1. location-card
+2. description-card
+3. experience-card
+4. social-media-card
+5. passion-card
+6. style-card
+
+*/
+
+.location-card, .description-card, .experience-card, .social-media-card, .style-card {
     padding: 0;
 }
 
-// Experience Card 
-.experience-card {
-    padding: 1rem;
-}
-
-// Location Card
+// 1. location-card
 .location-card {
     display: flex;
     flex-direction: column;
@@ -158,21 +179,22 @@ const props = defineProps<{
 
 .location-card-top {
     position: relative;
-    height: 35%;
+    height: 30%;
     padding: 1rem;
     transition: all 0.5s ease;
+    background-color: $light-black;
 }
 
 .location-card-bottom {
     position: relative;
-    height: 65%;
+    height: 70%;
     padding: 1rem;
     transition: all 0.5s ease;
-    background-color: $gray;
+    background-color: $gray2;
     z-index: $top-layer;
 }
 
-// Location Card - on hover
+// 1. location-card - on hover
 .location-card-top:hover {
     background: url('/myanmar.svg') no-repeat center;
     background-size: contain;
@@ -213,7 +235,7 @@ const props = defineProps<{
     opacity: 0;
 }
 
-// Location Card - description
+// 1. location-card - description
 .location-description-top, .location-description-bottom {
     position: relative;
     display: none;
@@ -242,17 +264,29 @@ const props = defineProps<{
     height: auto;
 }
 
-// Social Media Card
+// 2. description-card
+.description-card {
+    background-color: $light-black;
+}
+
+// 3. experience-card
+.experience-card {
+    padding: 1rem;
+    background-color: $gray2;
+}
+
+// 4. social-media-card
+.social-media-card {
+    background: url('/letter-j.png') no-repeat center;
+    background-size: calc(100% + 10px);
+    border: 0;
+}
+
 .social-media {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
-}
-
-.social-media svg {
-    // width: 100%;
-    // height: 100%;
 }
 
 .add-social-media {
@@ -267,7 +301,7 @@ const props = defineProps<{
     cursor: pointer;
 }
 
-// Passion Card
+// 5. passion-card
 @keyframes animate {
     0%{
         transform: translateY(0) rotate(0deg);
@@ -285,7 +319,7 @@ const props = defineProps<{
     position: relative;
     width: 100%;
     height: 100%;
-    background: #191a1b;
+    background: $light-black;
     overflow: hidden;
 }
 
@@ -337,5 +371,13 @@ const props = defineProps<{
     height: 20px;
     bottom: -20px;
     animation-delay: 16s;
+}
+
+// 6. style-card
+.style-card {
+    background-color: $black;
+    background-image: url("/sourcecodes-css.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
 }
 </style>
