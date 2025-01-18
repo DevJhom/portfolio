@@ -10,6 +10,9 @@ const sections = ref([
     { id: 'home', label: 'Home' },
     { id: 'about-me', label: 'About Me' },
     { id: 'keep-calm', label: 'Keep Calm' },
+    { id: 'keep-calm-1', label: 'Keep Calm 1' },
+    { id: 'keep-calm-2', label: 'Keep Calm 2' },
+    { id: 'keep-calm-3', label: 'Keep Calm 3' },
     { id: 'tech-stack', label: 'Tech Stack' },
     { id: 'projects', label: 'Projects' },
     { id: 'contact', label: 'Contact' },
@@ -36,7 +39,7 @@ const typeKeepCalm = reactive({
 });
 
 watch(activeSection, (newSection) => {
-    if (newSection == 'keep-calm' && !typeKeepCalm.isAlreadyTyped) {
+    if (newSection == 'keep-calm-2' && !typeKeepCalm.isAlreadyTyped) {
         typeKeepCalm.isTyping = true;
         setTimeout(() => {
             typeKeepCalm.isTyping = false;
@@ -136,13 +139,13 @@ onUnmounted(() => {
         </div>
         <!-- KEEP CALM -->
         <div id="keep-calm">
-            <div class="parallax-1"></div>
-            <div class="parallax-2">
-                <!-- <div v-if="typeKeepCalm.isTyping || typeKeepCalm.isAlreadyTyped" :class="{typewriter: typeKeepCalm.isTyping}" class="animate-on-hover"> -->
+            <div id="keep-calm-1" class="parallax-1"></div>
+            <div id="keep-calm-2" class="parallax-2">
+                <div v-if="typeKeepCalm.isTyping || typeKeepCalm.isAlreadyTyped" :class="{typewriter: typeKeepCalm.isTyping}" class="animate-on-hover">
                     <h2>Keep Calm and Code On.</h2>
-                <!-- </div> -->
+                </div>
             </div>
-            <div class="parallax-3"></div>
+            <div id="keep-calm-3" class="parallax-3"></div>
         </div>
         <!-- TECH STACK -->
         <div id="tech-stack">
@@ -341,6 +344,9 @@ section {
 
 .parallax-2 {
     background-color: $light-black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .parallax-3 {
