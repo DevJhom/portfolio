@@ -21,7 +21,7 @@ const setActive = (sectionId: string) => {
                     @click.prevent="setActive('home')">Home</a>
             </li>
             <li class="nav-item">
-                <a href="#about-me" class="nav-link" :class="{ active: activeSection == 'about-me' || activeSection == 'keep-calm' }"
+                <a href="#about-me" class="nav-link" :class="{ active: activeSection == 'about-me' || activeSection?.includes('keep-calm') }"
                     @click.prevent="setActive('about-me')">About Me</a>
             </li>
             <li class="nav-item">
