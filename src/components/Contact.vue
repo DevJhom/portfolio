@@ -21,7 +21,7 @@ const copyToClipboard = async (text: string) => {
 // Spotlight effect
 window.addEventListener("DOMContentLoaded", () => {
     const spotlight = document.querySelector('.contact-spotlight') as HTMLElement;
-    let spotlightSize: string = 'transparent 100px, #0c0c0c 250px)';
+    let spotlightSize: string = 'transparent 150px, #0c0c0c 250px)';
     const scrolledViewHeight = 700; //adjust according to number of sections
 
     window.addEventListener('mousemove', (e: MouseEvent) => updateSpotlight(e));

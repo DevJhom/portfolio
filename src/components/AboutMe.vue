@@ -57,7 +57,7 @@ const sectionIsActive = computed(() => {
         </Transition>
 
         <div class="grid-item social-media-card">
-            <img src="/letter-j.png" alt="DevJhom Logo" height="100" width="100">
+            <img src="/letter-j.png" alt="DevJhom Logo">
             <h5 class="mt-1">DevJhom</h5>
             <!-- <div class="social-media"> -->
                 <!-- Facebook -->
@@ -297,7 +297,21 @@ CARDS
 // 3. experience-card
 .experience-card {
     padding: 1rem;
-    background-color: $gray2;
+    // background-color: $light-black;
+
+    background: linear-gradient(to right, $light-gray 0, white 10%, $light-gray 20%);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    animation-fill-mode: forwards;
+    animation: background-gradient 4s infinite linear;
+}
+
+@keyframes background-gradient {
+    0% { background-position: 0; }
+    100% { background-position: -200%; }
 }
 
 // 4. social-media-card
@@ -307,6 +321,11 @@ CARDS
     justify-content: center;
     align-items: center;
     border: 0;
+}
+
+.social-media-card img {
+    height: 70%;
+    aspect-ratio: 1;
 }
 
 .social-media {
