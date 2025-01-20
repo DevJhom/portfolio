@@ -5,7 +5,7 @@ const props = defineProps<{
 </script>
 
 <template>
-    <Transition name="slide-fade">
+    <Transition name="fade">
       <div v-if="props.activeSection == 'projects'" class="projects">
           <div class="projects-left">
               <h2>
