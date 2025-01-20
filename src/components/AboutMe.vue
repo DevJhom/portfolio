@@ -88,7 +88,7 @@ const sectionIsActive = computed(() => {
         </Transition>
 
         <Transition name="slide-fade-left">
-            <div class="grid-item style-card"></div>
+            <div v-show="sectionIsActive" class="grid-item style-card"></div>
         </Transition>
     </div>
 </template>
