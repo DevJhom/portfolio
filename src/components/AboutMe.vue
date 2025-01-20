@@ -57,6 +57,8 @@ const sectionIsActive = computed(() => {
         </Transition>
 
         <div class="grid-item social-media-card">
+            <img src="/letter-j.png" alt="DevJhom Logo" height="100" width="100">
+            <h5 class="mt-1">DevJhom</h5>
             <!-- <div class="social-media"> -->
                 <!-- Facebook -->
                 <!-- <svg viewBox="0 0 128 128">
@@ -300,8 +302,10 @@ CARDS
 
 // 4. social-media-card
 .social-media-card {
-    background: url('/letter-j.png') no-repeat center;
-    background-size: calc(100% + 10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border: 0;
 }
 
