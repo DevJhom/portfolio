@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 const props = defineProps<{
     activeSection: string
@@ -8,6 +8,45 @@ const props = defineProps<{
 const sectionIsActive = computed(() => {
     return props.activeSection == "about-me";
 });
+
+const randomParagraph = ref("n8laig5ym1gemy1m1et2i6uld5wbjsw59cdoukul1jvzmfg3vmg1z6r7nd29xblm0sfyqxxr24uvj4ugkofnic578si5685h8ggu5ocl7wns3esq7u0ujpxewc2oqyejjtd17b2xtsdr24uvj4ugkofnic578si5685h8ggu5ocl7wns3esq7u0ujpxewc2oqyejjtd17b2xtsderu24jxpdpmvne24hd3rd4rs");
+
+const getRandomLetter = () => {
+    var random = "abcdefghijklmnopqrstuvwxyz0123456789";
+    return random.charAt(Math.floor(Math.random() * random.length));
+}
+
+const matrixEffect = () => {
+    var rand = Math.floor(Math.random() * 100) + 50;
+    var location = new Array(rand);
+
+    for (var i = 0; i < rand; i++) {
+        location[i] = Math.floor(Math.random() * randomParagraph.value.length);
+    }
+
+    let newText = ""; 
+    for (var i = 0; i < randomParagraph.value.length; i++) {
+        if (location.includes(i)) {
+            newText += getRandomLetter();
+        } else {
+            newText += randomParagraph.value[i];
+        }
+    }
+
+    randomParagraph.value = newText;
+}
+
+let intervalId = setInterval(matrixEffect, 500);
+
+const mouseEnter = () => {
+    clearInterval(intervalId); 
+    intervalId = setInterval(matrixEffect, 100);
+}
+
+const mouseLeave = () => {
+    clearInterval(intervalId); 
+    intervalId = setInterval(matrixEffect, 500);
+}
 </script>
 
 <template>
@@ -44,7 +83,18 @@ const sectionIsActive = computed(() => {
         </Transition>
 
         <Transition name="slide-fade-top">
-            <div v-show="sectionIsActive" class="grid-item description-card">
+            <div v-show="sectionIsActive" class="grid-item description-card"  @mouseenter="mouseEnter()" @mouseleave="mouseLeave()">
+                <div class="matrix-effect">
+                    {{ randomParagraph }}
+                </div>
+                <pre class="text-light-gray">
+  _____                    _  _                       
+ |  __ \                  | || |                      
+ | |  | |  ___ __   __    | || |__    ___   _ __ ___  
+ | |  | | / _ \\ \ / /_   | || '_ \  / _ \ | '_ ` _ \ 
+ | |__| ||  __/ \ V /| |__| || | | || (_) || | | | | |
+ |_____/  \___|  \_/  \____/ |_| |_| \___/ |_| |_| |_|
+                </pre>
             </div>
         </Transition>
 
@@ -292,6 +342,16 @@ CARDS
 // 2. description-card
 .description-card {
     background-color: $light-black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.description-card .matrix-effect {
+    text-wrap: wrap;
+    word-break: break-all;
+    color: $gray;
 }
 
 // 3. experience-card
