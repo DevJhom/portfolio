@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 
 const props = defineProps<{
     activeSection: string
@@ -8,45 +8,6 @@ const props = defineProps<{
 const sectionIsActive = computed(() => {
     return props.activeSection == "about-me";
 });
-
-const randomParagraph = ref("n8laig5ym1gemy1m1et2i6uld5wbjsw59cdoukul1jvzmfg3vmg1z6r7nd29xblm0sfyqxxr24uvj4ugkofnic578si5685h8ggu5ocl7wns3esq7u0ujpxewc2oqyejjtd17b2xtsdr24uvj4ugkofnic578si5685h8ggu5ocl7wns3esq7u0ujpxewc2oqyejjtd17b2xtsderu24jxpdpmvne24hd3rd4rs");
-
-const getRandomLetter = () => {
-    var random = "abcdefghijklmnopqrstuvwxyz0123456789";
-    return random.charAt(Math.floor(Math.random() * random.length));
-}
-
-const matrixEffect = () => {
-    var rand = Math.floor(Math.random() * 100) + 50;
-    var location = new Array(rand);
-
-    for (var i = 0; i < rand; i++) {
-        location[i] = Math.floor(Math.random() * randomParagraph.value.length);
-    }
-
-    let newText = ""; 
-    for (var i = 0; i < randomParagraph.value.length; i++) {
-        if (location.includes(i)) {
-            newText += getRandomLetter();
-        } else {
-            newText += randomParagraph.value[i];
-        }
-    }
-
-    randomParagraph.value = newText;
-}
-
-let intervalId = setInterval(matrixEffect, 500);
-
-const mouseEnter = () => {
-    clearInterval(intervalId); 
-    intervalId = setInterval(matrixEffect, 100);
-}
-
-const mouseLeave = () => {
-    clearInterval(intervalId); 
-    intervalId = setInterval(matrixEffect, 500);
-}
 </script>
 
 <template>
@@ -66,9 +27,7 @@ const mouseLeave = () => {
                     </small>
                 </div>
                 <div class="location-card-bottom">
-                    <div class="street-view-map">
-
-                    </div>
+                    <div class="street-view-map"></div>
                     <small class="location-card-bottom-title">
                         I'm currently based in
                         <br>
@@ -83,18 +42,15 @@ const mouseLeave = () => {
         </Transition>
 
         <Transition name="slide-fade-top">
-            <div v-show="sectionIsActive" class="grid-item description-card"  @mouseenter="mouseEnter()" @mouseleave="mouseLeave()">
-                <div class="matrix-effect">
-                    {{ randomParagraph }}
-                </div>
-                <pre class="text-light-gray">
+            <div v-show="sectionIsActive" class="grid-item description-card">
+                <!-- <pre class="text-light-gray overflow-hidden">
   _____                    _  _                       
  |  __ \                  | || |                      
  | |  | |  ___ __   __    | || |__    ___   _ __ ___  
  | |  | | / _ \\ \ / /_   | || '_ \  / _ \ | '_ ` _ \ 
  | |__| ||  __/ \ V /| |__| || | | || (_) || | | | | |
  |_____/  \___|  \_/  \____/ |_| |_| \___/ |_| |_| |_|
-                </pre>
+                </pre> -->
             </div>
         </Transition>
 
@@ -348,12 +304,6 @@ CARDS
     padding: 10px;
 }
 
-.description-card .matrix-effect {
-    text-wrap: wrap;
-    word-break: break-all;
-    color: $gray;
-}
-
 // 3. experience-card
 .experience-card {
     padding: 1rem;
@@ -381,6 +331,12 @@ CARDS
     justify-content: center;
     align-items: center;
     border: 0;
+}
+
+.social-media-card:hover {
+    border: 0;
+    color: $blue;
+    transform: scale(1.04);
 }
 
 .social-media-card img {
@@ -481,9 +437,9 @@ CARDS
 
 // 6. style-card
 .style-card {
-    background-color: $black;
-    background-image: url("/sourcecodes-css.png");
-    background-size: auto 100%;
-    background-repeat: no-repeat;
+    background-color: $light-black;
+    // background-image: url("/sourcecodes-css.png");
+    // background-size: auto 100%;
+    // background-repeat: no-repeat;
 }
 </style>
