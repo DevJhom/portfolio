@@ -83,3 +83,24 @@
 .slide-fade-bottom-leave-to {
   transform: translateY(80px); 
 }
+
+/* Typing animation */
+.typewriter h2 {
+    overflow: hidden;
+    border-right: .15em solid $blue;
+    white-space: nowrap;
+    animation: 
+        typing 2s steps(20, end),
+        blink-caret .5s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from { border-color: transparent }
+    50% { border-color: $blue; }
+    to { border-color: transparent }
+}
