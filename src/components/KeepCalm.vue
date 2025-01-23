@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { watch, reactive, ref } from 'vue';
+import { ref, reactive, computed, watch, onMounted, onUnmounted } from 'vue';
+import type { Ref } from 'vue';
 
 const props = defineProps<{
     activeSection: string
@@ -76,6 +77,36 @@ const mouseLeave = () => {
     clearInterval(intervalId); 
     intervalId = setInterval(updateRandomTexts, 500);
 }
+
+// Scroll Text Reveal Effect
+const paragraph: Ref<string> = ref("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation");
+const characters: Ref<string[]> = ref([]);
+
+const spanStyles = computed(() => (index: number) => {
+    const spanElement: HTMLSpanElement = document.querySelectorAll('span')[index];
+
+    if (spanElement && spanElement.parentElement) {
+        if (spanElement.parentElement.getBoundingClientRect().top < window.innerHeight / 2) {
+            let { left, top } = spanElement.getBoundingClientRect();
+            top = top - (window.innerHeight * .2);
+
+            return { color: 'white' };
+        } 
+    }
+});
+
+const handleScroll = () => {
+    characters.value = [...characters.value];
+}
+
+onMounted(() => {
+    characters.value = paragraph.value.split('');
+    window.addEventListener('scroll', handleScroll);
+});
+
+onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll);
+})
 </script>
 
 <template>
@@ -102,7 +133,13 @@ const mouseLeave = () => {
                 {{ randomText5 }}
             </div>
         </div>
-        <div id="keep-calm-3" class="parallax-3"></div>
+        <div id="keep-calm-3" class="parallax-3">
+            <div class="description-text">
+                <p>
+                    <span v-for="(char, index) in characters" :key="index" :style="spanStyles(index)">{{ char }}</span>
+                </p>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -152,5 +189,18 @@ const mouseLeave = () => {
 
 .parallax-3 {
     background-color: $gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.parallax-3 .description-text {
+    width: 35%;
+    font-size: 1.5rem;
+}
+
+.description-text p {
+    color: $black;
 }
 </style>
