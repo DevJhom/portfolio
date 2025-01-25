@@ -43,14 +43,6 @@ const sectionIsActive = computed(() => {
 
         <Transition name="slide-fade-top">
             <div v-show="sectionIsActive" class="grid-item description-card">
-                <!-- <pre class="text-light-gray overflow-hidden">
-  _____                    _  _                       
- |  __ \                  | || |                      
- | |  | |  ___ __   __    | || |__    ___   _ __ ___  
- | |  | | / _ \\ \ / /_   | || '_ \  / _ \ | '_ ` _ \ 
- | |__| ||  __/ \ V /| |__| || | | || (_) || | | | | |
- |_____/  \___|  \_/  \____/ |_| |_| \___/ |_| |_| |_|
-                </pre> -->
             </div>
         </Transition>
 
@@ -335,7 +327,6 @@ CARDS
 
 .social-media-card:hover {
     border: 0;
-    color: $blue;
     transform: scale(1.04);
 }
 
