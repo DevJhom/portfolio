@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive, computed, watch, onMounted, onUnmounted } from 'vue';
+import { ref, reactive, watch, onMounted, onUnmounted } from 'vue';
 import type { Ref } from 'vue';
 
 const props = defineProps<{
@@ -82,21 +82,26 @@ const mouseLeave = () => {
 const paragraph: Ref<string> = ref("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation");
 const characters: Ref<string[]> = ref([]);
 
-const spanStyles = computed(() => (index: number) => {
-    const spanElement: HTMLSpanElement = document.querySelectorAll('span')[index];
-
-    if (spanElement && spanElement.parentElement) {
-        if (spanElement.parentElement.getBoundingClientRect().top < window.innerHeight / 2) {
-            let { left, top } = spanElement.getBoundingClientRect();
-            top = top - (window.innerHeight * .2);
-
-            return { color: 'white' };
-        } 
-    }
-});
-
 const handleScroll = () => {
-    characters.value = [...characters.value];
+    const spanElements = document.querySelectorAll<HTMLSpanElement>('span.scroll-reveal');
+
+    spanElements.forEach((spanElement) => {
+        const rect = spanElement.getBoundingClientRect();
+
+        if (rect.top < window.innerHeight / 2) {
+            let { left, top } = rect;
+            top = top - (window.innerHeight * 0.5);
+
+            // let opacityValue = 1 - ((top * 0.01) + (left * 0.001)) < 0.1 ? 0.1 : 1 - ((top * 0.01) + (left * 0.001)).toFixed(3);
+            // opacityValue = opacityValue > 1 ? 1 : opacityValue;
+            // spanElement.style.opacity = opacityValue;
+
+            spanElement.style.color = 'white';
+        } 
+        else {
+            spanElement.style.color = '';
+        }
+    })
 }
 
 onMounted(() => {
@@ -136,7 +141,9 @@ onUnmounted(() => {
         <div id="keep-calm-3" class="parallax-3">
             <div class="description-text">
                 <p>
-                    <span v-for="(char, index) in characters" :key="index" :style="spanStyles(index)">{{ char }}</span>
+                    <span v-for="(char, index) in characters" :key="index" class="scroll-reveal">
+                        {{ char }}
+                    </span>
                 </p>
             </div>
         </div>
@@ -201,6 +208,6 @@ onUnmounted(() => {
 }
 
 .description-text p {
-    color: $black;
+    color: $light-black;
 }
 </style>
