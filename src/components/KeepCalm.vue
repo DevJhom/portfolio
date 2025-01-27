@@ -79,26 +79,25 @@ const mouseLeave = () => {
 }
 
 // Scroll Text Reveal Effect
-const paragraph: Ref<string> = ref("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation");
+const paragraph: Ref<string> = ref("I am a passionate developer who thrives on blending creativity with technology to craft innovative solutions. Whether it’s writing clean, efficient code or tackling complex problems, I enjoy transforming ideas into impactful digital experiences. With a strong foundation in full-stack development, I aim to deliver work that is both functional and engaging.");
 const characters: Ref<string[]> = ref([]);
 
 const handleScroll = () => {
     const spanElements = document.querySelectorAll<HTMLSpanElement>('span.scroll-reveal');
 
-    spanElements.forEach((spanElement) => {
+    spanElements.forEach((spanElement, index) => {
         const rect = spanElement.getBoundingClientRect();
 
-        if (rect.top < window.innerHeight / 2) {
-            let { left, top } = rect;
-            top = top - (window.innerHeight * 0.5);
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+            const scrollProgress = (window.innerHeight - rect.top) / window.innerHeight;
+            const wordThreshold = (index + 1) / spanElements.length;
 
-            // let opacityValue = 1 - ((top * 0.01) + (left * 0.001)) < 0.1 ? 0.1 : 1 - ((top * 0.01) + (left * 0.001)).toFixed(3);
-            // opacityValue = opacityValue > 1 ? 1 : opacityValue;
-            // spanElement.style.opacity = opacityValue;
-
-            spanElement.style.color = 'white';
-        } 
-        else {
+            if (scrollProgress >= wordThreshold) {
+                spanElement.style.color = 'white';
+            } else {
+                spanElement.style.color = '';
+            }
+        } else {
             spanElement.style.color = '';
         }
     })

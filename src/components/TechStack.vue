@@ -127,21 +127,21 @@ const mouseLeaveOnExp = (experience: string) => {
 
                 <div class="history-tl-container">
                     <ul class="tl">
-                        <li class="tl-item" ng-repeat="item in retailer_history" @mouseenter="mouseEnterOnExp('internship')" @mouseleave="mouseLeaveOnExp('internship')">
+                        <li class="tl-item" @mouseenter="mouseEnterOnExp('internship')" @mouseleave="mouseLeaveOnExp('internship')">
                             <div class="item-title">Frontend Developer (Internship)</div>
                             <div class="item-detail">@ Innovative Village Co., Ltd.</div>
                             <small v-show="hasUsed.hoverInternship" class="item-detail">
                                 I used Wordpress, HTML, CSS, Javascript, MySQL and Google Cloud.
                             </small>
                         </li>
-                        <li class="tl-item" ng-repeat="item in retailer_history" @mouseenter="mouseEnterOnExp('omnistar')" @mouseleave="mouseLeaveOnExp('omnistar')">
+                        <li class="tl-item" @mouseenter="mouseEnterOnExp('omnistar')" @mouseleave="mouseLeaveOnExp('omnistar')">
                             <div class="item-title">System Analyst (2021-2022)</div>
                             <div class="item-detail">@ Omni Star Co., Ltd.</div>
                             <small v-show="hasUsed.hoverOmnistar" class="item-detail">
                                 I worked on the infrastructure side, configuring SQL databases and managing deployments.
                             </small>
                         </li>
-                        <li class="tl-item" ng-repeat="item in retailer_history" @mouseenter="mouseEnterOnExp('clicknext')" @mouseleave="mouseLeaveOnExp('clicknext')">
+                        <li class="tl-item" @mouseenter="mouseEnterOnExp('clicknext')" @mouseleave="mouseLeaveOnExp('clicknext')">
                             <div class="item-title">Software Developer (2022-present)</div>
                             <div class="item-detail">@ ClickNext Co., Ltd.</div>
                             <small v-show="hasUsed.hoverClicknext" class="item-detail">
