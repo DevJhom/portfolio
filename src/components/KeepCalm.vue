@@ -141,7 +141,7 @@ onUnmounted(() => {
             <div class="description-text">
                 <p>
                     <span v-for="(char, index) in characters" :key="index" class="scroll-reveal">
-                        {{ char }}
+                        {{ char }}<br v-if="char == '.'"><br v-if="char == '.'">
                     </span>
                 </p>
             </div>
@@ -203,7 +203,8 @@ onUnmounted(() => {
 
 .parallax-3 .description-text {
     width: 35%;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+    text-align: center;
 }
 
 .description-text p {
