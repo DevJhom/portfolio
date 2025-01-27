@@ -12,6 +12,8 @@ const typeKeepCalm = reactive({
     isAlreadyTyped: false
 });
 
+const dynamicBackgroundColor = ref('black');
+
 watch(() => props.activeSection, (newSection) => {
     if (newSection == 'keep-calm-2' && !typeKeepCalm.isAlreadyTyped) {
         typeKeepCalm.isTyping = true;
@@ -19,6 +21,12 @@ watch(() => props.activeSection, (newSection) => {
             typeKeepCalm.isTyping = false;
             typeKeepCalm.isAlreadyTyped = true;
         }, 2000)
+    }
+
+    if (newSection == 'keep-calm-3') {
+        dynamicBackgroundColor.value = 'blue';
+    } else {
+        dynamicBackgroundColor.value = 'black';
     }
 });
 
@@ -137,7 +145,7 @@ onUnmounted(() => {
                 {{ randomText5 }}
             </div>
         </div>
-        <div id="keep-calm-3" class="parallax-3">
+        <div id="keep-calm-3" class="parallax-3" :style="{ backgroundColor: dynamicBackgroundColor }">
             <div class="description-text">
                 <p>
                     <span v-for="(char, index) in characters" :key="index" class="scroll-reveal">
