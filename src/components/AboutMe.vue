@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import RightArrow from '@/assets/Icons/RightArrow.vue';
 import { computed } from 'vue';
 
 const props = defineProps<{
@@ -15,14 +16,15 @@ const sectionIsActive = computed(() => {
         <Transition name="slide-fade-left">
             <div v-show="sectionIsActive" class="grid-item location-card">
                 <div class="location-card-top">
-                    <small>
-                        Where am I from? >
+                    <small class="d-flex align-items-center">
+                        <span class="flex-grow-1">Where am I from?</span>
+                        <RightArrow />
                     </small>
                     <br>
                     <small class="location-description-top">
-                        Hi there! <br><br>
-                        I'm <i>Sai Swan Wan</i>, but I also go by <i>Jhom</i>. <br><br> 
-                        I'm a software developer from Myanmar (Burma).
+                        Hi there! 👋<br><br>
+                        I'm Jhom, a software developer from Myanmar (Burma). <br><br>
+                        I enjoy coding and problem-solving.
                     </small>
                 </div>
                 <div class="location-card-bottom">
@@ -31,7 +33,7 @@ const sectionIsActive = computed(() => {
                         I'm currently based in Bangkok, Thailand.
                     </small>
                     <small class="location-description-bottom">
-                        I specialize in Web Application Development. <br><br>My expertise includes C#, Javascript and Typescript.
+                        I specialize in Web Application Development. <br><br>My current tech stack includes C#, Javascript and Typescript.
                     </small>
                 </div>
             </div>
