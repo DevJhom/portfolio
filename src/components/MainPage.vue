@@ -111,7 +111,7 @@ onUnmounted(() => {
                 </div>
                 <Transition name="fade">
                     <small v-if="hideScrollToExplore" class="scroll-to-explore animate-on-hover">
-                        <a href="#about-me"> Scroll to Explore <DownArrow/> </a>
+                        <a href="#about-me"> Scroll to Explore <DownArrow/></a>
                     </small>
                 </Transition>
                 <div class="cursor-area-1"></div>
