@@ -21,7 +21,7 @@ const sectionIsActive = computed(() => {
                     <br>
                     <small class="location-description-top">
                         Hi there! <br><br>
-                        I'm <i>Sai Swan Wan</i>, but please call me <i>Jhom</i>. <br><br> 
+                        I'm <i>Sai Swan Wan</i>, but I also go by <i>Jhom</i>. <br><br> 
                         I'm a software developer from Myanmar (Burma).
                     </small>
                 </div>

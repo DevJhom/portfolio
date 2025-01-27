@@ -28,6 +28,7 @@ a {
 }
 
 html {
+  font-size: clamp(12px, 1rem, 20px);
   scroll-behavior: smooth;
 }
 
