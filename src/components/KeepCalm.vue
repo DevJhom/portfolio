@@ -12,7 +12,7 @@ const typeKeepCalm = reactive({
     isAlreadyTyped: false
 });
 
-const dynamicBackgroundColor = ref('black');
+const dynamicBackgroundColor = ref('#0c0c0c');
 
 watch(() => props.activeSection, (newSection) => {
     if (newSection == 'keep-calm-2' && !typeKeepCalm.isAlreadyTyped) {
@@ -24,9 +24,9 @@ watch(() => props.activeSection, (newSection) => {
     }
 
     if (newSection == 'keep-calm-3') {
-        dynamicBackgroundColor.value = 'blue';
+        dynamicBackgroundColor.value = '#1F51FF';
     } else {
-        dynamicBackgroundColor.value = 'black';
+        dynamicBackgroundColor.value = '#0c0c0c';
     }
 });
 
@@ -203,7 +203,6 @@ onUnmounted(() => {
 }
 
 .parallax-3 {
-    background-color: $gray;
     display: flex;
     flex-direction: column;
     justify-content: center;
