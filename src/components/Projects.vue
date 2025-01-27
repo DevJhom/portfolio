@@ -1,36 +1,36 @@
 <script setup lang="ts">
 const props = defineProps<{
-    activeSection: string
+  activeSection: string
 }>();
 </script>
 
 <template>
-    <Transition name="fade">
-      <div v-if="props.activeSection == 'projects'" class="projects">
-          <div class="projects-left">
-              <h2>
-                  My Personal Projects
-              </h2>
-              <div class="text-light-gray">These are some of my favorite personal projects.</div>
-          </div>
-          <div class="projects-right">
-              <div class="card">
-                  <h3 class="title">FretWizard</h3>
-                  <div class="bar">
-                  <div class="emptybar"></div>
-                  <div class="filledbar"></div>
-                  </div>
-              </div>
-              <div class="card">
-                  <h3 class="title">Working On</h3>
-                  <div class="bar">
-                  <div class="emptybar"></div>
-                  <div class="filledbar"></div>
-                  </div>
-              </div>
-          </div>
+  <Transition name="fade">
+    <div v-if="props.activeSection == 'projects'" class="projects">
+      <div class="projects-left">
+        <h2>
+          My Personal Projects
+        </h2>
+        <div class="text-light-gray">These are some of my favorite personal projects.</div>
       </div>
-    </Transition>
+      <div class="projects-right">
+        <div class="card">
+          <h3 class="title">FretWizard</h3>
+          <div class="bar">
+            <div class="emptybar"></div>
+            <div class="filledbar"></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="title">Working On</h3>
+          <div class="bar">
+            <div class="emptybar"></div>
+            <div class="filledbar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Transition>
 </template>
 
 <style scoped lang="scss">
@@ -63,7 +63,7 @@ const props = defineProps<{
   display: flex;
   height: 100%;
   width: 50%;
-  min-height: 420px; 
+  min-height: 420px;
   min-width: 300px;
   background-color: $light-black;
   border-radius: 10px;
@@ -74,7 +74,7 @@ const props = defineProps<{
 }
 
 .card:not(:first-child) {
-    margin-left: -50px;
+  margin-left: -50px;
 }
 
 .card:hover {
@@ -82,7 +82,7 @@ const props = defineProps<{
   transition: 0.4s ease-out;
 }
 
-.card:hover ~ .card {
+.card:hover~.card {
   position: relative;
   left: 50px;
   transition: 0.4s ease-out;
@@ -123,5 +123,4 @@ const props = defineProps<{
   width: 100%;
   transition: 0.4s ease-out;
 }
-
 </style>

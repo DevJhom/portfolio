@@ -189,6 +189,7 @@ onUnmounted(() => {
 .parallax-2 .matrix-effect {
     position: absolute;
     overflow: hidden;
+    width: 100vw;
     z-index: $middle-layer;
     color: $gray;
 }

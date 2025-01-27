@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 import NavBar from '@components/NavBar.vue';
-import AboutMe from './AboutMe.vue';
-import TechStack from './TechStack.vue';
-import Projects from './Projects.vue';
-import Contact from './Contact.vue';
-import KeepCalm from './KeepCalm.vue';
+import AboutMe from '@components/AboutMe.vue';
+import TechStack from '@components/TechStack.vue';
+import Projects from '@components/Projects.vue';
+import Contact from '@components/Contact.vue';
+import KeepCalm from '@components/KeepCalm.vue';
+
+import DownArrow from '@/assets/Icons/DownArrow.vue';
 
 const sections = ref([
     { id: 'home', label: 'Home' },
@@ -109,7 +111,7 @@ onUnmounted(() => {
                 </div>
                 <Transition name="fade">
                     <small v-if="hideScrollToExplore" class="scroll-to-explore animate-on-hover">
-                        <a href="#about-me"> Scroll to Explore v </a>
+                        <a href="#about-me"> Scroll to Explore <DownArrow/> </a>
                     </small>
                 </Transition>
                 <div class="cursor-area-1"></div>
