@@ -16,20 +16,22 @@ const sectionIsActive = computed(() => {
             <div v-show="sectionIsActive" class="grid-item location-card">
                 <div class="location-card-top">
                     <small>
-                        About me
+                        Where am I from? >
                     </small>
                     <br>
                     <small class="location-description-top">
-                        I'm Sai Swan Wan, but please call me Jhom. <br><br> I'm a software developer from Myanmar (Burma).
+                        Hi there! <br><br>
+                        I'm <i>Sai Swan Wan</i>, but please call me <i>Jhom</i>. <br><br> 
+                        I'm a software developer from Myanmar (Burma).
                     </small>
                 </div>
                 <div class="location-card-bottom">
                     <div class="street-view-map"></div>
                     <small class="location-card-bottom-title">
-                        What am I up to?
+                        I'm currently based in Bangkok, Thailand.
                     </small>
                     <small class="location-description-bottom">
-                        Currently based in Bangkok, Thailand, I specialize in web application development. <br><br>My expertise lies in C#, Javascript and Typescript.
+                        I specialize in Web Application Development. <br><br>My expertise includes C#, Javascript and Typescript.
                     </small>
                 </div>
             </div>
