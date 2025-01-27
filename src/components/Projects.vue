@@ -22,7 +22,7 @@ const props = defineProps<{
                   </div>
               </div>
               <div class="card">
-                  <h3 class="title">Github</h3>
+                  <h3 class="title">Working On</h3>
                   <div class="bar">
                   <div class="emptybar"></div>
                   <div class="filledbar"></div>
