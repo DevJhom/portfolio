@@ -207,6 +207,7 @@ onUnmounted(() => {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    transition: background-color 1s ease;
 }
 
 .parallax-3 .description-text {
