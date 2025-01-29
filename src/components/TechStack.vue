@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { reactive, onMounted, onUnmounted } from 'vue';
 
 const props = defineProps<{
     activeSection: string
@@ -48,73 +48,114 @@ const hasUsed = reactive<{ [key: string]: boolean }>({
     neovim: false,
 });
 
-const mouseEnterOnExp = (experience: string) => {
-    hasUsed.hoverStart = true;
+const mouseOnExp = (experience: string, value: boolean) => {
+    hasUsed.hoverStart = value;
 
     if (experience == 'internship') {
-        hasUsed.hoverInternship = true;
+        hasUsed.hoverInternship = value;
 
-        hasUsed.scss = true;
-        hasUsed.sql = true;
-        hasUsed.git = true;
-        hasUsed.googlecloud = true;
+        hasUsed.scss = value;
+        hasUsed.sql = value;
+        hasUsed.git = value;
+        hasUsed.googlecloud = value;
     } 
     
     else if (experience == 'omnistar') {
-        hasUsed.hoverOmnistar = true;
+        hasUsed.hoverOmnistar = value;
 
-        hasUsed.sql = true;
-        hasUsed.docker = true;
-        hasUsed.googlecloud = true;
-        hasUsed.git = true;
+        hasUsed.sql = value;
+        hasUsed.docker = value;
+        hasUsed.googlecloud = value;
+        hasUsed.git = value;
     }
 
     else if (experience == 'clicknext') {
-        hasUsed.hoverClicknext = true;
+        hasUsed.hoverClicknext = value;
 
-        hasUsed.vue = true;
-        hasUsed.typescript = true;
-        hasUsed.scss = true;
-        hasUsed.csharp = true;
-        hasUsed.git = true;
-        hasUsed.sql = true;
-        hasUsed.neovim = true;
+        hasUsed.vue = value;
+        hasUsed.typescript = value;
+        hasUsed.scss = value;
+        hasUsed.csharp = value;
+        hasUsed.git = value;
+        hasUsed.sql = value;
+        hasUsed.neovim = value;
     }
 }
 
-const mouseLeaveOnExp = (experience: string) => {
-    hasUsed.hoverStart = false;
+const triggerHover = (experience: string) => {
 
+    const listItems = document.querySelectorAll('.history-tl-container ul.tl li');
+    const firstItem = listItems[0];
+    const secondItem = listItems[1];
+    const thirdItem = listItems[2];
+    
     if (experience == 'internship') {
-        hasUsed.hoverInternship = false;
+        mouseOnExp('omnistar', false);
+        mouseOnExp('clicknext', false);
+        mouseOnExp('internship', true);
 
-        hasUsed.scss = false;
-        hasUsed.sql = false;
-        hasUsed.git = false;
-        hasUsed.googlecloud = false;
+        firstItem.classList.add('my-hover');
+        secondItem.classList.remove('my-hover');
+        thirdItem.classList.remove('my-hover');
     }
 
-    else if (experience == 'omnistar') {
-        hasUsed.hoverOmnistar = false;
+    else if (experience == 'internship') {
+        mouseOnExp('internship', false);
+        mouseOnExp('clicknext', false);
+        mouseOnExp('omnistar', true);
 
-        hasUsed.sql = false;
-        hasUsed.docker = false;
-        hasUsed.googlecloud = false;
-        hasUsed.git = false;
+        firstItem.classList.remove('my-hover');
+        secondItem.classList.add('my-hover');
+        thirdItem.classList.remove('my-hover');
     }
-
+    
     else if (experience == 'clicknext') {
-        hasUsed.hoverClicknext = false;
+        mouseOnExp('internship', false);
+        mouseOnExp('omnistar', false);
+        mouseOnExp('clicknext', true);
 
-        hasUsed.vue = false;
-        hasUsed.typescript = false;
-        hasUsed.scss = false;
-        hasUsed.csharp = false;
-        hasUsed.git = false;
-        hasUsed.sql = false;
-        hasUsed.neovim = false;
+        firstItem.classList.remove('my-hover');
+        secondItem.classList.remove('my-hover');
+        thirdItem.classList.add('my-hover');
     }
 }
+
+function vhToPixels(vhValue: number) {
+    const windowHeight = window.innerHeight; 
+    return vhValue * (windowHeight / 100);
+}
+
+const handleScroll = () => {
+    if (props.activeSection == 'tech-stack') {
+        const techStackElement = document.getElementById('tech-stack');
+        if (techStackElement) {
+            const rect = techStackElement.getBoundingClientRect();
+            const sectionHeight = rect.height;
+            const scrollPosition = (window.scrollY - rect.top + window.innerHeight) - vhToPixels(500);
+            const partHeight = sectionHeight / 3;
+
+            
+            if (scrollPosition < partHeight) {
+                console.log("Section 1");
+                triggerHover('internship');
+            } else if (scrollPosition < 2 * partHeight) {
+                console.log("Section 2");
+                triggerHover('omnistar');
+            } else {
+                console.log("Section 3");
+                triggerHover('clicknext');
+            }
+        }
+    }
+};
+
+onMounted(() => {
+    window.addEventListener('scroll', handleScroll);
+});
+
+onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll);
+})
 </script>
 
 <template>
@@ -127,21 +168,21 @@ const mouseLeaveOnExp = (experience: string) => {
 
                 <div class="history-tl-container">
                     <ul class="tl">
-                        <li class="tl-item" @mouseenter="mouseEnterOnExp('internship')" @mouseleave="mouseLeaveOnExp('internship')">
+                        <li class="tl-item" @mouseenter="mouseOnExp('internship', true)" @mouseleave="mouseOnExp('internship', false)">
                             <div class="item-title">Frontend Developer (Internship)</div>
                             <div class="item-detail">@ Innovative Village Co., Ltd.</div>
                             <small v-show="hasUsed.hoverInternship" class="item-detail">
                                 I used Wordpress, HTML, CSS, Javascript, MySQL and Google Cloud.
                             </small>
                         </li>
-                        <li class="tl-item" @mouseenter="mouseEnterOnExp('omnistar')" @mouseleave="mouseLeaveOnExp('omnistar')">
+                        <li class="tl-item" @mouseenter="mouseOnExp('omnistar', true)" @mouseleave="mouseOnExp('omnistar', false)">
                             <div class="item-title">System Analyst (2021-2022)</div>
                             <div class="item-detail">@ Omni Star Co., Ltd.</div>
                             <small v-show="hasUsed.hoverOmnistar" class="item-detail">
                                 I worked on the infrastructure side, configuring SQL databases and managing deployments.
                             </small>
                         </li>
-                        <li class="tl-item" @mouseenter="mouseEnterOnExp('clicknext')" @mouseleave="mouseLeaveOnExp('clicknext')">
+                        <li class="tl-item" @mouseenter="mouseOnExp('clicknext', true)" @mouseleave="mouseOnExp('clicknext', false)">
                             <div class="item-title">Software Developer (2022-present)</div>
                             <div class="item-detail">@ ClickNext Co., Ltd.</div>
                             <small v-show="hasUsed.hoverClicknext" class="item-detail">
@@ -328,7 +369,8 @@ const mouseLeaveOnExp = (experience: string) => {
     transition: all 250ms ease-in;
 }
 
-.history-tl-container ul.tl li:hover::before {
+.history-tl-container ul.tl li:hover::before,
+.history-tl-container ul.tl li.my-hover::before {
     border-color: $light-black;
     background-color: $blue;
     transition: all 250ms ease-in;
