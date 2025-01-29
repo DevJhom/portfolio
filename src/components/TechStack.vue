@@ -5,6 +5,12 @@ const props = defineProps<{
     activeSection: string
 }>();
 
+enum Experience {
+    internship,
+    omnistar,
+    clicknext
+}
+
 const isHover = reactive<{ [key: string]: boolean }>({
     vue: false,
     react: false,
@@ -48,10 +54,10 @@ const hasUsed = reactive<{ [key: string]: boolean }>({
     neovim: false,
 });
 
-const mouseOnExp = (experience: string, value: boolean) => {
+const mouseOnExp = (experience: Experience, value: boolean) => {
     hasUsed.hoverStart = value;
 
-    if (experience == 'internship') {
+    if (experience == Experience.internship) {
         hasUsed.hoverInternship = value;
 
         hasUsed.scss = value;
@@ -60,7 +66,7 @@ const mouseOnExp = (experience: string, value: boolean) => {
         hasUsed.googlecloud = value;
     } 
     
-    else if (experience == 'omnistar') {
+    else if (experience == Experience.omnistar) {
         hasUsed.hoverOmnistar = value;
 
         hasUsed.sql = value;
@@ -69,7 +75,7 @@ const mouseOnExp = (experience: string, value: boolean) => {
         hasUsed.git = value;
     }
 
-    else if (experience == 'clicknext') {
+    else if (experience == Experience.clicknext) {
         hasUsed.hoverClicknext = value;
 
         hasUsed.vue = value;
@@ -82,37 +88,36 @@ const mouseOnExp = (experience: string, value: boolean) => {
     }
 }
 
-const triggerHover = (experience: string) => {
-
+const triggerHover = (experience: Experience) => {
     const listItems = document.querySelectorAll('.history-tl-container ul.tl li');
     const firstItem = listItems[0];
     const secondItem = listItems[1];
     const thirdItem = listItems[2];
     
-    if (experience == 'internship') {
-        mouseOnExp('omnistar', false);
-        mouseOnExp('clicknext', false);
-        mouseOnExp('internship', true);
+    if (experience == Experience.internship) {
+        mouseOnExp(Experience.omnistar, false);
+        mouseOnExp(Experience.clicknext, false);
+        mouseOnExp(Experience.internship, true);
 
         firstItem.classList.add('my-hover');
         secondItem.classList.remove('my-hover');
         thirdItem.classList.remove('my-hover');
     }
 
-    else if (experience == 'internship') {
-        mouseOnExp('internship', false);
-        mouseOnExp('clicknext', false);
-        mouseOnExp('omnistar', true);
+    else if (experience == Experience.omnistar) {
+        mouseOnExp(Experience.internship, false);
+        mouseOnExp(Experience.clicknext, false);
+        mouseOnExp(Experience.omnistar, true);
 
         firstItem.classList.remove('my-hover');
         secondItem.classList.add('my-hover');
         thirdItem.classList.remove('my-hover');
     }
     
-    else if (experience == 'clicknext') {
-        mouseOnExp('internship', false);
-        mouseOnExp('omnistar', false);
-        mouseOnExp('clicknext', true);
+    else if (experience == Experience.clicknext) {
+        mouseOnExp(Experience.internship, false);
+        mouseOnExp(Experience.omnistar, false);
+        mouseOnExp(Experience.clicknext, true);
 
         firstItem.classList.remove('my-hover');
         secondItem.classList.remove('my-hover');
@@ -126,6 +131,7 @@ function vhToPixels(vhValue: number) {
 }
 
 const handleScroll = () => {
+    //need to improve performance by adding debounce
     if (props.activeSection == 'tech-stack') {
         const techStackElement = document.getElementById('tech-stack');
         if (techStackElement) {
@@ -134,16 +140,15 @@ const handleScroll = () => {
             const scrollPosition = (window.scrollY - rect.top + window.innerHeight) - vhToPixels(500);
             const partHeight = sectionHeight / 3;
 
-            
             if (scrollPosition < partHeight) {
                 console.log("Section 1");
-                triggerHover('internship');
+                triggerHover(Experience.internship);
             } else if (scrollPosition < 2 * partHeight) {
                 console.log("Section 2");
-                triggerHover('omnistar');
+                triggerHover(Experience.omnistar);
             } else {
                 console.log("Section 3");
-                triggerHover('clicknext');
+                triggerHover(Experience.clicknext);
             }
         }
     }
@@ -168,21 +173,21 @@ onUnmounted(() => {
 
                 <div class="history-tl-container">
                     <ul class="tl">
-                        <li class="tl-item" @mouseenter="mouseOnExp('internship', true)" @mouseleave="mouseOnExp('internship', false)">
+                        <li class="tl-item" @mouseenter="mouseOnExp(Experience.internship, true)" @mouseleave="mouseOnExp(Experience.internship, false)">
                             <div class="item-title">Frontend Developer (Internship)</div>
                             <div class="item-detail">@ Innovative Village Co., Ltd.</div>
                             <small v-show="hasUsed.hoverInternship" class="item-detail">
                                 I used Wordpress, HTML, CSS, Javascript, MySQL and Google Cloud.
                             </small>
                         </li>
-                        <li class="tl-item" @mouseenter="mouseOnExp('omnistar', true)" @mouseleave="mouseOnExp('omnistar', false)">
+                        <li class="tl-item" @mouseenter="mouseOnExp(Experience.omnistar, true)" @mouseleave="mouseOnExp(Experience.omnistar, false)">
                             <div class="item-title">System Analyst (2021-2022)</div>
                             <div class="item-detail">@ Omni Star Co., Ltd.</div>
                             <small v-show="hasUsed.hoverOmnistar" class="item-detail">
                                 I worked on the infrastructure side, configuring SQL databases and managing deployments.
                             </small>
                         </li>
-                        <li class="tl-item" @mouseenter="mouseOnExp('clicknext', true)" @mouseleave="mouseOnExp('clicknext', false)">
+                        <li class="tl-item" @mouseenter="mouseOnExp(Experience.clicknext, true)" @mouseleave="mouseOnExp(Experience.clicknext, false)">
                             <div class="item-title">Software Developer (2022-present)</div>
                             <div class="item-detail">@ ClickNext Co., Ltd.</div>
                             <small v-show="hasUsed.hoverClicknext" class="item-detail">
