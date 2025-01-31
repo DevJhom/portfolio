@@ -137,22 +137,19 @@ const handleScroll = debounce(() => {
         if (techStackElement) {
             const rect = techStackElement.getBoundingClientRect();
             const sectionHeight = rect.height;
-            const scrollPosition = (window.scrollY - rect.top + window.innerHeight) - vhToPixels(500);
+            const scrollPosition = (window.scrollY - rect.top + window.innerHeight) - vhToPixels(550);
             const partHeight = sectionHeight / 3;
 
             if (scrollPosition < partHeight) {
-                console.log("Section 1");
                 triggerHover(Experience.internship);
             } else if (scrollPosition < 2 * partHeight) {
-                console.log("Section 2");
                 triggerHover(Experience.omnistar);
             } else {
-                console.log("Section 3");
                 triggerHover(Experience.clicknext);
             }
         }
     }
-}, 100, { leading: true, trailing: true });
+}, 10, { leading: true, trailing: false });
 
 onMounted(() => {
     window.addEventListener('scroll', handleScroll);
