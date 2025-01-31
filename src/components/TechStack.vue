@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { reactive, onMounted, onUnmounted } from 'vue';
+import debounce from 'lodash.debounce';
 
 const props = defineProps<{
     activeSection: string
@@ -130,8 +131,7 @@ function vhToPixels(vhValue: number) {
     return vhValue * (windowHeight / 100);
 }
 
-const handleScroll = () => {
-    //need to improve performance by adding debounce
+const handleScroll = debounce(() => {
     if (props.activeSection == 'tech-stack') {
         const techStackElement = document.getElementById('tech-stack');
         if (techStackElement) {
@@ -152,7 +152,7 @@ const handleScroll = () => {
             }
         }
     }
-};
+}, 100, { leading: true, trailing: true });
 
 onMounted(() => {
     window.addEventListener('scroll', handleScroll);
@@ -173,22 +173,22 @@ onUnmounted(() => {
 
                 <div class="history-tl-container">
                     <ul class="tl">
-                        <li class="tl-item" @mouseenter="mouseOnExp(Experience.internship, true)" @mouseleave="mouseOnExp(Experience.internship, false)">
-                            <div class="item-title">Frontend Developer (Internship)</div>
+                        <li class="tl-item" @mouseenter="triggerHover(Experience.internship)" @mouseleave="mouseOnExp(Experience.internship, false)">
+                            <div class="item-title">Frontend Developer <span class="text-light-gray">(Internship)</span></div>
                             <div class="item-detail">@ Innovative Village Co., Ltd.</div>
                             <small v-show="hasUsed.hoverInternship" class="item-detail">
                                 I used Wordpress, HTML, CSS, Javascript, MySQL and Google Cloud.
                             </small>
                         </li>
-                        <li class="tl-item" @mouseenter="mouseOnExp(Experience.omnistar, true)" @mouseleave="mouseOnExp(Experience.omnistar, false)">
-                            <div class="item-title">System Analyst (2021-2022)</div>
+                        <li class="tl-item" @mouseenter="triggerHover(Experience.omnistar)" @mouseleave="mouseOnExp(Experience.omnistar, false)">
+                            <div class="item-title">System Analyst <span class="text-light-gray"> (2021-2022)</span></div>
                             <div class="item-detail">@ Omni Star Co., Ltd.</div>
                             <small v-show="hasUsed.hoverOmnistar" class="item-detail">
                                 I worked on the infrastructure side, configuring SQL databases and managing deployments.
                             </small>
                         </li>
-                        <li class="tl-item" @mouseenter="mouseOnExp(Experience.clicknext, true)" @mouseleave="mouseOnExp(Experience.clicknext, false)">
-                            <div class="item-title">Software Developer (2022-present)</div>
+                        <li class="tl-item" @mouseenter="triggerHover(Experience.clicknext)" @mouseleave="mouseOnExp(Experience.clicknext, false)">
+                            <div class="item-title">Software Developer <span class="text-light-gray"> (2022-present)</span></div>
                             <div class="item-detail">@ ClickNext Co., Ltd.</div>
                             <small v-show="hasUsed.hoverClicknext" class="item-detail">
                                 My current tech stack includes Vue, Typescript, SCSS, C# and Microsoft SQL Server, as well as Git and Vim as development tools.
@@ -358,7 +358,6 @@ onUnmounted(() => {
 
 .history-tl-container ul.tl li:last-child { 
     border-left: 0; 
-    min-height: 0;
 }
 
 .history-tl-container ul.tl li::before {
@@ -383,7 +382,6 @@ onUnmounted(() => {
 
 ul.tl li .item-detail {
     color: gray;
-    font-size:12px;
 }
 
 // Tech Stack Right

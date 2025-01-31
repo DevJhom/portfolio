@@ -127,7 +127,8 @@ onUnmounted(() => {
         <div id="keep-calm-2" class="parallax-2" @mouseenter="mouseEnter()" @mouseleave="mouseLeave()">
             <div v-if="typeKeepCalm.isTyping || typeKeepCalm.isAlreadyTyped" 
                 :class="{typewriter: typeKeepCalm.isTyping}" class="keep-calm-text">
-                <h2>Keep Calm and Code On.</h2>
+                <!-- <h2>Keep Calm and Code On.</h2> -->
+                <h2>Programming is learned by writing programs.</h2>
             </div>
             <div class="matrix-effect">
                 {{ randomText1 }}
