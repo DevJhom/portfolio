@@ -197,9 +197,9 @@ section {
 }
 
 .introduction-text {
-    background-color: $black;
+    background: linear-gradient(to right, transparent, #0c0c0c, #0c0c0c, #0c0c0c, #0c0c0c, transparent);
     border-radius: 6px;
-    padding: 0 1rem;
+    padding: 0 2rem;
     transition: transform 0.3s ease;
 }
 
