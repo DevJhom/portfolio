@@ -138,13 +138,13 @@ const handleScroll = debounce(() => {
             const rect = techStackElement.getBoundingClientRect();
             const sectionHeight = rect.height;
             const scrollPosition = (window.scrollY - rect.top + window.innerHeight) - vhToPixels(550);
-            const partHeight = sectionHeight / 3;
+            const partHeight = sectionHeight / 4;
 
-            if (scrollPosition < partHeight) {
+            if (scrollPosition >= partHeight && scrollPosition < partHeight * 2) {
                 triggerHover(Experience.internship);
-            } else if (scrollPosition < 2 * partHeight) {
+            } else if (scrollPosition >= partHeight * 2 && scrollPosition < partHeight * 3) {
                 triggerHover(Experience.omnistar);
-            } else {
+            } else if (scrollPosition >= partHeight * 3 && scrollPosition < partHeight * 4) {
                 triggerHover(Experience.clicknext);
             }
         }
@@ -310,6 +310,11 @@ onUnmounted(() => {
                     </template>
                 </h6>
             </div>
+            <div class="mini-nav">
+                <div :class="{active: hasUsed.hoverInternship}"></div>
+                <div :class="{active: hasUsed.hoverOmnistar}"></div>
+                <div :class="{active: hasUsed.hoverClicknext}"></div>
+            </div>
         </div>
     </Transition>
 </template>
@@ -337,6 +342,33 @@ onUnmounted(() => {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.mini-nav {
+    position: absolute;
+    left: 0;
+    height: 30%;
+    width: 0.5%;
+    display: flex;
+    flex-direction: column;
+}
+
+.mini-nav div {
+    flex: 1;
+    background-color: $black;
+    border: 1px solid $gray2;
+}
+
+.mini-nav div.active {
+    background-color: $blue;
+}
+
+.mini-nav div:first-child {
+    border-radius: 0 12px 0 0;
+}
+
+.mini-nav div:last-child {
+    border-radius: 0 0 12px 0;
 }
 
 // Tech Stack Left
