@@ -61,7 +61,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 <LinkedInIcon/>
             </a>
             <a href="https://github.com/DevJhom" target="_blank">
-                <GithubIcon :width="24" :height="24"/>
+                <GithubIcon/>
             </a>
         </div>
     </div>

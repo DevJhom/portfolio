@@ -31,6 +31,7 @@ const onMouseLeave = () => {
         <div class="text-light-gray">These are some of my favorite personal projects.</div>
       </div>
       <div class="projects-right">
+        <!-- FRETWIZARD -->
         <div class="card card-fretwizard" :class="{expand: isHover}">
           <div class="card-content" @mouseenter="onMouseEnter()" @mouseleave="onMouseLeave()">
             <a :href="fretwizardUrl" target="_blank">
@@ -44,11 +45,15 @@ const onMouseLeave = () => {
             <small class="text-light-gray">
               FretWizard is an interactive fretboard for visualizing different scales, chords, and patterns across the guitar neck.
             </small>
+            <a v-if="isHover" :href="fretwizardUrl" target="_blank">
+              <OpenWindow class="open-window"/>
+            </a>
           </div>
-          <a :href="fretwizardUrl" target="_blank">
+          <a v-if="!isHover" :href="fretwizardUrl" target="_blank">
             <OpenWindow class="open-window"/>
           </a>
         </div>
+        <!-- GITHUB -->
         <div class="card card-github ms-3" :class="{shrink: isHover}">
           <div v-if="!isHover" class="card-content">
             <a :href="githubUrl" target="_blank">
@@ -61,7 +66,7 @@ const onMouseLeave = () => {
               Please visit my GitHub for more projects.
             </small>
             <a :href="githubUrl" target="_blank">
-              <OpenWindow class="open-window"/>
+              <OpenWindow class="open-window" color="#7e7e7e"/>
             </a>
           </div>
         </div>
@@ -115,11 +120,11 @@ const onMouseLeave = () => {
 }
 
 .card.expand {
-  width: 100% !important;
+  width: 100%;
 }
 
 .card.shrink {
-  width: 1% !important;
+  width: 5%;
   min-width: 0;
 }
 
@@ -128,6 +133,11 @@ const onMouseLeave = () => {
   justify-content: center;
   align-items: center;
   background-color: $light-black;
+}
+
+.card-github:hover {
+  border: 2px solid $blue;
+  transform: scale(1.04);
 }
 
 .card-content {
