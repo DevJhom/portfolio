@@ -1,9 +1,24 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+import GithubIcon from '@/assets/Icons/GithubIcon.vue';
 import OpenWindow from '@/assets/Icons/OpenWindow.vue';
 
 const props = defineProps<{
   activeSection: string
 }>();
+
+const fretwizardUrl = "https://devjhom.github.io/fret-wizard/";
+const githubUrl = "https://github.com/DevJhom";
+
+const isHover = ref(false);
+
+const onMouseEnter = () => {
+  isHover.value = true;
+}
+
+const onMouseLeave = () => {
+  isHover.value = false;
+}
 </script>
 
 <template>
@@ -16,18 +31,41 @@ const props = defineProps<{
         <div class="text-light-gray">These are some of my favorite personal projects.</div>
       </div>
       <div class="projects-right">
-        <div class="card">
-          <img src="/fretwizard.png" alt="FretWizard">
-          <div class="d-flex mt-3">
-            <small class="card-badge">Tools</small>
-            <small class="card-badge">Guitar</small>
+        <div class="card card-fretwizard" :class="{expand: isHover}">
+          <div class="card-content" @mouseenter="onMouseEnter()" @mouseleave="onMouseLeave()">
+            <a :href="fretwizardUrl" target="_blank">
+              <img src="/fretwizard.png" alt="FretWizard" width="100%" height="100%">
+            </a>
+            <div class="d-flex mt-3">
+              <small class="card-badge">Tools</small>
+              <small class="card-badge">Guitar</small>
+            </div>
+            <h4 class="title text-black">FretWizard</h4>
+            <small class="text-light-gray">
+              FretWizard is an interactive fretboard for visualizing different scales, chords, and patterns across the guitar neck.
+            </small>
           </div>
-          <h4 class="title mt-3">FretWizard</h4>
-          <small class="description">FretWizard is an interactive fretboard for visualizing different scales, chords, and patterns across the guitar neck.</small>
-          <OpenWindow class="open-window"/>
+          <a :href="fretwizardUrl" target="_blank">
+            <OpenWindow class="open-window"/>
+          </a>
+        </div>
+        <div class="card card-github ms-3" :class="{shrink: isHover}">
+          <div v-if="!isHover" class="card-content">
+            <a :href="githubUrl" target="_blank">
+              <GithubIcon :width="100" :height="100"/>
+            </a>
+            <a :href="githubUrl" target="_blank">
+              <h4 class="title text-white">DevJhom</h4>
+            </a>
+            <small class="text-light-gray text-center w-75">
+              Please visit my GitHub for more projects.
+            </small>
+            <a :href="githubUrl" target="_blank">
+              <OpenWindow class="open-window"/>
+            </a>
+          </div>
         </div>
         <!-- <div class="card">
-          <h3 class="title">Working On</h3>
           <div class="bar">
             <div class="emptybar"></div>
             <div class="filledbar"></div>
@@ -56,14 +94,13 @@ const props = defineProps<{
 }
 
 .projects-right {
+  display: flex;
+  justify-content: space-around;
   width: 70%;
   height: 100%;
   padding: 0 5%;
-  display: flex;
-  justify-content: space-around;
 }
 
-// Stacked Card
 .card {
   position: relative;
   display: flex;
@@ -74,24 +111,35 @@ const props = defineProps<{
   min-width: 300px;
   padding: 1rem;
   border-radius: 12px;
-  box-shadow: -1rem 0 3rem #000;
   transition: 0.4s ease-out;
 }
 
-.card:not(:first-child) {
-  margin-left: -25px;
+.card.expand {
+  width: 100% !important;
 }
 
-.card:hover {
-  width: 100%;
+.card.shrink {
+  width: 1% !important;
+  min-width: 0;
 }
 
-// .card:hover~.card {
-//   display: none;
-//   position: relative;
-//   left: 50px;
-//   transition: 0.4s ease-out;
-// }
+.card-github {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $light-black;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+}
+
+.card-github .card-content {
+  justify-content: center;
+  align-items: center;
+}
 
 .card img {
   border-radius: 6px;
@@ -100,10 +148,7 @@ const props = defineProps<{
 
 .card .title {
   font-weight: bold;
-}
-
-.card .description {
-  color: $light-gray;
+  margin-top: 1.5rem;
 }
 
 .card .card-badge {
