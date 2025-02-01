@@ -23,8 +23,8 @@ const sectionIsActive = computed(() => {
                     <br>
                     <small class="location-description-top">
                         Hi there! 👋<br><br>
-                        I'm Jhom, a software developer from Myanmar (Burma). <br><br>
-                        I enjoy coding and problem-solving.
+                        I'm Sai Swan Wan, a software developer from Myanmar (Burma). <br><br>
+                        My passion is in coding and I find deep satisfaction in tackling challenging problems.
                     </small>
                 </div>
                 <div class="location-card-bottom">
@@ -33,7 +33,7 @@ const sectionIsActive = computed(() => {
                         I'm currently based in Bangkok, Thailand.
                     </small>
                     <small class="location-description-bottom">
-                        I specialize in Web Application Development. <br><br>My current tech stack includes C#, Javascript and Typescript.
+                        I currently specialize in Web Application Development. <br><br>My main tech stack includes C#, Javascript and Typescript.
                     </small>
                 </div>
             </div>

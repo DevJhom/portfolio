@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import OpenWindow from '@/assets/Icons/OpenWindow.vue';
+
 const props = defineProps<{
   activeSection: string
 }>();
@@ -15,19 +17,22 @@ const props = defineProps<{
       </div>
       <div class="projects-right">
         <div class="card">
-          <h3 class="title">FretWizard</h3>
-          <div class="bar">
-            <div class="emptybar"></div>
-            <div class="filledbar"></div>
+          <img src="/fretwizard.png" alt="FretWizard">
+          <div class="d-flex mt-3">
+            <small class="card-badge">Tools</small>
+            <small class="card-badge">Guitar</small>
           </div>
+          <h4 class="title mt-3">FretWizard</h4>
+          <small class="description">FretWizard is an interactive fretboard for visualizing different scales, chords, and patterns across the guitar neck.</small>
+          <OpenWindow class="open-window"/>
         </div>
-        <div class="card">
+        <!-- <div class="card">
           <h3 class="title">Working On</h3>
           <div class="bar">
             <div class="emptybar"></div>
             <div class="filledbar"></div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </Transition>
@@ -53,47 +58,67 @@ const props = defineProps<{
 .projects-right {
   width: 70%;
   height: 100%;
-  padding: 0 10%;
+  padding: 0 5%;
   display: flex;
   justify-content: space-around;
 }
 
 // Stacked Card
 .card {
+  position: relative;
   display: flex;
+  left: 0px;
   height: 100%;
   width: 50%;
   min-height: 420px;
   min-width: 300px;
-  background-color: $light-black;
-  border-radius: 10px;
+  padding: 1rem;
+  border-radius: 12px;
   box-shadow: -1rem 0 3rem #000;
   transition: 0.4s ease-out;
-  position: relative;
-  left: 0px;
 }
 
 .card:not(:first-child) {
-  margin-left: -50px;
+  margin-left: -25px;
 }
 
 .card:hover {
-  transform: translateY(-20px);
-  transition: 0.4s ease-out;
+  width: 100%;
 }
 
-.card:hover~.card {
-  position: relative;
-  left: 50px;
-  transition: 0.4s ease-out;
+// .card:hover~.card {
+//   display: none;
+//   position: relative;
+//   left: 50px;
+//   transition: 0.4s ease-out;
+// }
+
+.card img {
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-.title {
-  color: white;
-  font-weight: 300;
+.card .title {
+  font-weight: bold;
+}
+
+.card .description {
+  color: $light-gray;
+}
+
+.card .card-badge {
+  color: $white;
+  background-color: $fretwizard-yellow;
+  border-radius: 6px;
+  padding: 0 0.25rem;
+  margin-right: 0.25rem;
+}
+
+.card .open-window {
   position: absolute;
-  left: 20px;
-  top: 15px;
+  right: 1rem;
+  bottom: 1rem;
+  cursor: pointer;
 }
 
 .bar {

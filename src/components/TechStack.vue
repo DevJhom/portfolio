@@ -318,7 +318,7 @@ onUnmounted(() => {
                             Technologies I'm currently using.
                         </template>
                         <template v-else>
-                            Technologies I've used.
+                            Technologies I've used and familiar with.
                         </template>
                     </template>
                     <template v-else>
@@ -327,9 +327,9 @@ onUnmounted(() => {
                 </h6>
             </div>
             <div class="mini-nav">
-                <div :class="{active: hoverOnExp.internship}"></div>
-                <div :class="{active: hoverOnExp.omnistar}"></div>
-                <div :class="{active: hoverOnExp.clicknext}"></div>
+                <div :class="{active: hoverOnExp.internship}" @mouseenter="triggerHover(Experience.internship)" @mouseleave="triggerHover(Experience.reset)"></div>
+                <div :class="{active: hoverOnExp.omnistar}" @mouseenter="triggerHover(Experience.omnistar)" @mouseleave="triggerHover(Experience.reset)"></div>
+                <div :class="{active: hoverOnExp.clicknext}" @mouseenter="triggerHover(Experience.internship)" @mouseleave="triggerHover(Experience.reset)"></div>
             </div>
         </div>
     </Transition>
