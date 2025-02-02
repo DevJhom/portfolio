@@ -69,4 +69,10 @@ const setActive = (sectionId: string) => {
 .nav-item a.active:hover {
     color: $black;
 }
+
+@media (max-width: 768px) { 
+  .nav-bar {
+    display: none; 
+  }
+}
 </style>
