@@ -54,7 +54,7 @@ const onMouseLeave = () => {
           </a>
         </div>
         <!-- GITHUB -->
-        <div class="card card-github ms-3" :class="{shrink: isHover}">
+        <div class="card card-github" :class="{shrink: isHover}">
           <div v-if="!isHover" class="card-content">
             <a :href="githubUrl" target="_blank">
               <GithubIcon :width="100" :height="100"/>
@@ -133,6 +133,7 @@ const onMouseLeave = () => {
   justify-content: center;
   align-items: center;
   background-color: $light-black;
+  margin-left: 2rem;
 }
 
 .card-github:hover {
@@ -202,5 +203,30 @@ const onMouseLeave = () => {
 .card:hover .filledbar {
   width: 100%;
   transition: 0.4s ease-out;
+}
+
+@media (max-width: 768px) { 
+  .projects {
+    flex-direction: column;
+  }
+
+  .projects-left {
+    width: 100%;
+  }
+
+  .projects-right {
+    width: 100%;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .card {
+    min-width: 100%;
+    margin-top: 2rem;
+  }
+
+  .card-github {
+    margin-left: 0;
+  }
 }
 </style>
