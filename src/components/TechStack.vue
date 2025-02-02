@@ -159,6 +159,9 @@ const handleScroll = debounce(() => {
             } else if (scrollPosition >= halfSectionHeight + partSize && scrollPosition < halfSectionHeight + partSize * 2) {
                 triggerHover(Experience.clicknext);
                 // console.log("part 3")
+            } else if (scrollPosition >= halfSectionHeight && scrollPosition < halfSectionHeight + partSize) {
+                triggerHover(Experience.clicknext);
+                // console.log("Part 4");
             } else { 
                 triggerHover(Experience.reset);
                 // console.log("else")
