@@ -30,6 +30,13 @@ watch(() => props.activeSection, (newSection) => {
     }
 });
 
+function isMobile() {
+  return (
+    typeof window.orientation !== "undefined" ||
+    navigator.userAgent.indexOf("IEMobile") !== -1
+  );
+}
+
 // Matrix Effect
 const randomText1 = ref("n8laig5ym1gemy1m1et2i6uld5wbjsw59cdoukul1jvzmfg3vmg1z6r7nd29xblm0sfyqxxr24uvj4ugkofnic578si5685h8ggu5ocl7wns3esq7u0ujpxewc2oqyejjtd17b2xtsdr24uvj4ugkofnic578si5685h8ggu5ocl7wns3esq7u0ujpxewc2oqyejjtd17b2xtsderu24jxpdpmvne24hd3rd4rs");
 const randomText2 = ref("18d1aki40j4qmnum1csyq6kun2erxpxwfo1o5hkdaibg0v8ukxn69yzf6pffyaldroi14sufpi2iswtwxo6qiz5zgwgfzkf1833pyzyzy0ti9psnr0wyi2vns97gifhonivjno5ysdhsq3mrym7e169du86y5sj2bvphrfm3rtpw1w9ja30ary1je5gckho4bv0qmbdjgys8ysd88mtyjxphde6cw4bze03r45s");
@@ -125,9 +132,7 @@ onUnmounted(() => {
     <div class="keep-calm">
         <div id="keep-calm-1" class="parallax-1"></div>
         <div id="keep-calm-2" class="parallax-2" @mouseenter="mouseEnter()" @mouseleave="mouseLeave()">
-            <div v-if="typeKeepCalm.isTyping || typeKeepCalm.isAlreadyTyped" 
-                :class="{typewriter: typeKeepCalm.isTyping}" class="keep-calm-text">
-                <!-- <h2>Keep Calm and Code On.</h2> -->
+            <div v-if="isMobile() || typeKeepCalm.isTyping || typeKeepCalm.isAlreadyTyped" :class="{typewriter: typeKeepCalm.isTyping && !isMobile()}" class="keep-calm-text"> 
                 <h2>Programming is learned by writing programs.</h2>
             </div>
             <div class="matrix-effect">

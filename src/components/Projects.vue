@@ -89,6 +89,7 @@ const onMouseLeave = () => {
   justify-content: center;
   align-items: center;
   width: 75%;
+  height: 100%;
   margin: auto;
   padding: 2rem 0;
 }
@@ -112,8 +113,8 @@ const onMouseLeave = () => {
   left: 0px;
   height: 100%;
   width: 50%;
-  min-height: 420px;
-  min-width: 300px;
+  min-height: 35rem;
+  min-width: 21rem;
   padding: 1rem;
   border-radius: 12px;
   transition: 0.4s ease-out;
@@ -222,6 +223,7 @@ const onMouseLeave = () => {
 
   .card {
     min-width: 100%;
+    min-height: 15rem;
     margin-top: 2rem;
   }
 
