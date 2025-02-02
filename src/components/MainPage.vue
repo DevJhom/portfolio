@@ -93,10 +93,10 @@ onUnmounted(() => {
     <div class="spotlight"></div>
     <div class="my-container">
         <NavBar :active-section="activeSection"/>
-        <h5 class="logo animate-on-hover">
+        <h4 class="logo animate-on-hover">
             <img src="/letter-j.png" alt="DevJhom Logo" class="logo-img" height="35" width="35">
             <a href="#home"> DevJhom </a>
-        </h5>
+        </h4>
         <div class="my-resume" @click="downloadResume()">
             Download Resume
         </div>
@@ -208,6 +208,7 @@ section {
 }
 
 .text-animation {
+    font-size: clamp(1.25rem, 2vw + 0.5rem, 2rem);
     background: linear-gradient(to right, $light-gray 0, white 10%, $light-gray 20%);
     background-size: 200% auto;
     background-clip: text;
