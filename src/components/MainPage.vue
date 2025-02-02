@@ -121,31 +121,31 @@ onUnmounted(() => {
         <!-- ABOUT ME -->
         <div id="about-me">
             <section>
-                <!-- <AboutMe :active-section="activeSection"/> -->
+                <AboutMe :active-section="activeSection"/>
             </section>
         </div>
         <!-- KEEP CALM -->
         <div id="keep-calm">
             <section>
-                <!-- <KeepCalm :active-section="activeSection"/> -->
+                <KeepCalm :active-section="activeSection"/>
             </section>
         </div>
         <!-- TECH STACK -->
         <div id="tech-stack">
             <section>
-                <!-- <TechStack :active-section="activeSection"/> -->
+                <TechStack :active-section="activeSection"/>
             </section>
         </div>
         <!-- PROJECTS -->
         <div id="projects">
             <section>
-                <!-- <Projects :active-section="activeSection"/> -->
+                <Projects :active-section="activeSection"/>
             </section>
         </div>
         <!-- CONTACT -->
         <div id="contact">
             <section>
-                <!-- <Contact/> -->
+                <Contact/>
             </section>
         </div>
     </div>
@@ -159,7 +159,7 @@ onUnmounted(() => {
 section {
     position: relative;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;

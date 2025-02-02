@@ -220,4 +220,10 @@ onUnmounted(() => {
 .description-text p {
     color: $light-black;
 }
+
+@media (max-width: 768px) { 
+    .parallax-3 .description-text {
+        width: 90%;
+    }
+}
 </style>

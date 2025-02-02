@@ -612,4 +612,19 @@ ul.tl li .item-detail {
 .reduced-opacity {
     opacity: 0.2;
 }
+
+@media (max-width: 768px) { 
+    .tech-stack {
+        flex-direction: column;
+    }
+
+    .tech-stack-left {
+        width: 100%;
+    }
+
+    .tech-stack-right {
+        width: 100%;
+        padding: 0;
+    }
+}
 </style>

@@ -74,7 +74,7 @@ window.addEventListener("DOMContentLoaded", () => {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: 100vh;
     width: 100%;
     z-index: $middle-layer;
 }

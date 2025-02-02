@@ -106,6 +106,7 @@ const sectionIsActive = computed(() => {
     border-radius: 12px;
     padding: 2rem;
     transition: transform 0.3s ease;
+    min-height: 200px;
 }
 
 .grid-item:hover {
