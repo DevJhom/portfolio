@@ -226,6 +226,10 @@ onUnmounted(() => {
     color: $light-black;
 }
 
+.description-text p span {
+    font-size: clamp(0.8rem, 1vw + 0.2rem, 1.2rem); 
+}
+
 @media (max-width: 768px) { 
     .parallax-3 .description-text {
         width: 90%;

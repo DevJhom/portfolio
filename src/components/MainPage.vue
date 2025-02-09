@@ -242,7 +242,7 @@ section {
     background-size: contain;
     height: 100vh;
     z-index: $bottom-layer;
-    cursor: none;
+    // cursor: none;
 }
 
 #contact {
