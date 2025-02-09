@@ -113,8 +113,8 @@ const onMouseLeave = () => {
   left: 0px;
   height: 100%;
   width: 50%;
-  min-height: 35rem;
-  min-width: 21rem;
+  min-height: 30rem;
+  min-width: 18rem;
   padding: 1rem;
   border-radius: 12px;
   transition: 0.4s ease-out;

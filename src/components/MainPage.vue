@@ -38,7 +38,7 @@ setTimeout(() => {
 // Spotlight effect
 window.addEventListener("DOMContentLoaded", () => {
     const spotlight = document.querySelector('.spotlight') as HTMLElement;
-    let spotlightSize: string = 'transparent 50px, #0c0c0c 200px)';
+    let spotlightSize: string = 'transparent 50px, #0c0c0c 120px)';
 
     window.addEventListener('mousemove', (e: MouseEvent) => updateSpotlight(e));
 
@@ -242,7 +242,7 @@ section {
     background-size: contain;
     height: 100vh;
     z-index: $bottom-layer;
-    // cursor: none;
+    cursor: crosshair;
 }
 
 #contact {
@@ -262,7 +262,7 @@ section {
     background-image: radial-gradient(
         circle at 15% 5%,
         transparent 50px,
-        #0c0c0c 200px
+        #0c0c0c 120px
     );
 }
 
