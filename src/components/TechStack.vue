@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { reactive, onMounted, onUnmounted } from 'vue';
+import { reactive, computed, onMounted, onUnmounted } from 'vue';
 import debounce from 'lodash.debounce';
+import { isMobile } from '@/helpers/helpers';
 
 const props = defineProps<{
     activeSection: string
@@ -170,6 +171,8 @@ const handleScroll = debounce(() => {
     }
 }, 10, { leading: true, trailing: false });
 
+const isDesktop = computed(() => !isMobile());
+
 onMounted(() => {
     window.addEventListener('scroll', handleScroll);
 });
@@ -180,7 +183,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <Transition name="fade">
+    <Transition :name="isDesktop ? 'fade' : ''">
         <div v-if="activeSection == 'tech-stack'" class="tech-stack">
             <div class="tech-stack-left">
                 <h4 class="animate-on-hover">
@@ -611,6 +614,10 @@ ul.tl li .item-detail {
 
 .reduced-opacity {
     opacity: 0.2;
+}
+
+div {
+  font-size: clamp(0.8rem, 1vw + 0.2rem, 1.2rem); 
 }
 
 @media (max-width: 768px) { 

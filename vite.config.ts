@@ -10,6 +10,7 @@ export default defineConfig({
       '@': '/src/',
       '@components': '/src/components',
       '@scss': '/src/scss',
+      '@helpers': '/src/helpers'
     }
   },
   css: {
