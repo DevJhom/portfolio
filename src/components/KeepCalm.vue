@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, reactive, watch, onMounted, onUnmounted } from 'vue';
 import type { Ref } from 'vue';
+import { isMobile } from '@/helpers/helpers';
 
 const props = defineProps<{
     activeSection: string
@@ -29,13 +30,6 @@ watch(() => props.activeSection, (newSection) => {
         dynamicBackgroundColor.value = '#0c0c0c';
     }
 });
-
-function isMobile() {
-  return (
-    typeof window.orientation !== "undefined" ||
-    navigator.userAgent.indexOf("IEMobile") !== -1
-  );
-}
 
 // Matrix Effect
 const randomText1 = ref("n8laig5ym1gemy1m1et2i6uld5wbjsw59cdoukul1jvzmfg3vmg1z6r7nd29xblm0sfyqxxr24uvj4ugkofnic578si5685h8ggu5ocl7wns3esq7u0ujpxewc2oqyejjtd17b2xtsdr24uvj4ugkofnic578si5685h8ggu5ocl7wns3esq7u0ujpxewc2oqyejjtd17b2xtsderu24jxpdpmvne24hd3rd4rs");

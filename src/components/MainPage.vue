@@ -203,6 +203,10 @@ section {
     transition: transform 0.3s ease;
 }
 
+.introduction-text, .introduction-text h2 {
+    font-weight: bold;
+}
+
 .introduction-text:hover {
     transform: scale(1.1);
 }

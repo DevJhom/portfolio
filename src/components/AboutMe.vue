@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useMediaQuery } from '@vueuse/core';
+import { computed, ref } from 'vue';
+import { isMobile } from '@/helpers/helpers';
 import RightArrow from '@/assets/Icons/RightArrow.vue';
 
 const props = defineProps<{
@@ -11,8 +11,17 @@ const sectionIsActive = computed(() => {
     return props.activeSection == "about-me";
 });
 
-const sm = useMediaQuery('(max-width: 768px)');
-const isDesktop = computed(() => !sm.value); 
+const isDesktop = computed(() => !isMobile());
+
+const isHoverOnLogo = ref(false);
+
+const onMouseEnter = () => {
+    isHoverOnLogo.value = true;
+}
+
+const onMouseLeave = () => {
+    isHoverOnLogo.value = false;
+}
 </script>
 
 <template>
@@ -34,7 +43,7 @@ const isDesktop = computed(() => !sm.value);
                 <div class="location-card-bottom">
                     <div class="street-view-map"></div>
                     <small class="location-card-bottom-title">
-                        I'm currently based in Bangkok, Thailand.
+                        I'm currently based in Bangkok, Thailand. 
                     </small>
                     <small class="location-description-bottom">
                         I currently specialize in Web Application Development. <br><br>My main tech stack includes C#, Javascript and Typescript.
@@ -56,22 +65,9 @@ const isDesktop = computed(() => !sm.value);
             </div>
         </Transition>
 
-        <div class="grid-item social-media-card">
-            <img src="/letter-j.png" alt="DevJhom Logo">
-            <h4 class="mt-1">DevJhom</h4>
-            <!-- <div class="social-media"> -->
-                <!-- Facebook -->
-                <!-- <svg viewBox="0 0 128 128">
-                    <rect fill="#3d5a98" x="4.83" y="4.83" width="118.35" height="118.35" rx="6.53" ry="6.53"></rect><path fill="#fff" d="M86.48 123.17V77.34h15.38l2.3-17.86H86.48v-11.4c0-5.17 1.44-8.7 8.85-8.7h9.46v-16A126.56 126.56 0 0091 22.7c-13.62 0-23 8.3-23 23.61v13.17H52.62v17.86H68v45.83z"></path>
-                </svg> -->
-            <!-- </div> -->
-            <!-- <div class="add-social-media">
-                Add Friend
-            </div> -->
-            <!-- LinkedIn -->
-            <!-- <svg viewBox="0 0 128 128">
-                <path fill="#0076b2" d="M116 3H12a8.91 8.91 0 00-9 8.8v104.42a8.91 8.91 0 009 8.78h104a8.93 8.93 0 009-8.81V11.77A8.93 8.93 0 00116 3z"></path><path fill="#fff" d="M21.06 48.73h18.11V107H21.06zm9.06-29a10.5 10.5 0 11-10.5 10.49 10.5 10.5 0 0110.5-10.49M50.53 48.73h17.36v8h.24c2.42-4.58 8.32-9.41 17.13-9.41C103.6 47.28 107 59.35 107 75v32H88.89V78.65c0-6.75-.12-15.44-9.41-15.44s-10.87 7.36-10.87 15V107H50.53z"></path>
-            </svg> -->
+        <div class="grid-item social-media-card" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+            <h3 v-if="isHoverOnLogo" class="mt-1">DevJhom</h3>
+            <img v-else src="/letter-j.png" alt="DevJhom Logo">
         </div>
 
         <Transition :name="isDesktop ? 'slide-fade-right' : ''">
@@ -103,7 +99,7 @@ const isDesktop = computed(() => !sm.value);
     gap: 1.5rem;
     width: 75%;
     max-height: 100%;
-    padding: 2rem 0;
+    padding: 1rem 0;
 }
 
 .grid-item {
@@ -329,7 +325,7 @@ CARDS
 
 .social-media-card:hover {
     border: 0;
-    transform: scale(1.04);
+    color: $blue;
 }
 
 .social-media-card img {
@@ -386,6 +382,10 @@ CARDS
     height: 20px;
     background: rgba(255, 255, 255, 0.2);
     animation: animate 20s linear infinite;
+}
+
+.passion-card:hover .animate-box {
+    background-color: $blue;
 }
 
 #animate-box-1 {
