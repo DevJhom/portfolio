@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import RightArrow from '@/assets/Icons/RightArrow.vue';
 import { computed } from 'vue';
+import { useMediaQuery } from '@vueuse/core';
+import RightArrow from '@/assets/Icons/RightArrow.vue';
 
 const props = defineProps<{
     activeSection: string
@@ -9,12 +10,15 @@ const props = defineProps<{
 const sectionIsActive = computed(() => {
     return props.activeSection == "about-me";
 });
+
+const sm = useMediaQuery('(max-width: 768px)');
+const isDesktop = computed(() => !sm.value); 
 </script>
 
 <template>
     <div class="grid-container">
-        <Transition name="slide-fade-left">
-            <div v-show="sectionIsActive" class="grid-item location-card">
+        <Transition :name="isDesktop ? 'slide-fade-left' : ''">
+            <div v-show="sectionIsActive || !isDesktop" class="grid-item location-card">
                 <div class="location-card-top">
                     <small class="d-flex align-items-center">
                         <span class="flex-grow-1">Where am I from?</span>
@@ -39,13 +43,13 @@ const sectionIsActive = computed(() => {
             </div>
         </Transition>
 
-        <Transition name="slide-fade-top">
-            <div v-show="sectionIsActive" class="grid-item description-card">
+        <Transition :name="isDesktop ? 'slide-fade-top' : ''">
+            <div v-show="sectionIsActive || !isDesktop" class="grid-item description-card">
             </div>
         </Transition>
 
-        <Transition name="slide-fade-right">
-            <div v-show="sectionIsActive" class="grid-item experience-card">
+        <Transition :name="isDesktop ? 'slide-fade-right' : ''">
+            <div v-show="sectionIsActive || !isDesktop" class="grid-item experience-card">
                 <span>
                     <h3> 3+ </h3> years experience <br> in Web Application Development.
                 </span>
@@ -54,7 +58,7 @@ const sectionIsActive = computed(() => {
 
         <div class="grid-item social-media-card">
             <img src="/letter-j.png" alt="DevJhom Logo">
-            <h5 class="mt-1">DevJhom</h5>
+            <h4 class="mt-1">DevJhom</h4>
             <!-- <div class="social-media"> -->
                 <!-- Facebook -->
                 <!-- <svg viewBox="0 0 128 128">
@@ -70,23 +74,23 @@ const sectionIsActive = computed(() => {
             </svg> -->
         </div>
 
-        <Transition name="slide-fade-right">
-            <div v-show="sectionIsActive" class="grid-item passion-card">
+        <Transition :name="isDesktop ? 'slide-fade-right' : ''">
+            <div v-show="sectionIsActive || !isDesktop" class="grid-item passion-card">
                 <div class="animate-box" id="animate-box-1"></div>
                 <div class="animate-box" id="animate-box-2"></div>
                 <div class="animate-box" id="animate-box-3"></div>
                 <div class="animate-box" id="animate-box-4"></div>
                 <div class="animate-box" id="animate-box-5"></div>
 
-                <h5>Coding with Passion</h5>
+                <h4>Coding with Passion</h4>
                 <span class="text-light-gray">
                     I'm passionate about coding and problem-solving, approaching each project with a creative mindset, a strong dedication and a commitment to writing clean, maintainable codes.
                 </span>
             </div>
         </Transition>
 
-        <Transition name="slide-fade-left">
-            <div v-show="sectionIsActive" class="grid-item style-card"></div>
+        <Transition :name="isDesktop ? 'slide-fade-left' : ''">
+            <div v-show="sectionIsActive || !isDesktop" class="grid-item style-card"></div>
         </Transition>
     </div>
 </template>
@@ -96,12 +100,15 @@ const sectionIsActive = computed(() => {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(6, 1fr);
-    gap: 2rem;
+    gap: 1.5rem;
     width: 75%;
-    height: 90%;
+    max-height: 100%;
+    padding: 2rem 0;
 }
 
 .grid-item {
+    max-width: 100%;
+    max-height: 100%;
     border: 1px solid $gray;
     border-radius: 12px;
     padding: 2rem;
@@ -142,17 +149,6 @@ const sectionIsActive = computed(() => {
 .grid-item:nth-child(6) {
     grid-column: 1 / span 2;
     grid-row: 5 / span 2;
-}
-
-@media (max-width: 768px) {
-    .grid-container {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-    }
-    .grid-item {
-        grid-column: 1 / span 1 !important;
-        grid-row: auto !important;
-    }
 }
 
 /* 
@@ -274,25 +270,32 @@ CARDS
     height: auto;
 }
 
-.location-card:has(.location-card-bottom:hover) .street-view-map {
+.location-card:has(.location-card-bottom:hover) .street-view-map, 
+.location-card:has(.location-card-top:hover) .street-view-map {
     display: none;
 }
 
 .street-view-map {
     border: 1px solid gray;
     width: 100%;
-    height: 100%;
+    aspect-ratio: 1;
     background: url('/street-map.svg') no-repeat center;
     background-size: cover;
 }
 
 // 2. description-card
 .description-card {
-    background-color: $light-black;
+    background-image: url("/my-picture.jpg");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 10px;
+}
+
+.description-card:hover {
+    background-color: $blue;
 }
 
 // 3. experience-card
@@ -431,5 +434,24 @@ CARDS
     // background-image: url("/sourcecodes-css.png");
     // background-size: auto 100%;
     // background-repeat: no-repeat;
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+    .grid-item {
+        grid-column: 1 / span 1 !important;
+        grid-row: auto !important;
+    }
+
+    .location-card-top {
+        height: 15%;
+    }
+
+    .location-card-bottom {
+        height: 85%;
+    }
 }
 </style>

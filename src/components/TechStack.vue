@@ -183,9 +183,9 @@ onUnmounted(() => {
     <Transition name="fade">
         <div v-if="activeSection == 'tech-stack'" class="tech-stack">
             <div class="tech-stack-left">
-                <h5 class="animate-on-hover">
+                <h4 class="animate-on-hover">
                     My Work Experience
-                </h5>
+                </h4>
 
                 <div class="history-tl-container">
                     <ul class="tl">
