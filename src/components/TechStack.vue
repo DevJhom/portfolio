@@ -315,7 +315,7 @@ onUnmounted(() => {
                         </svg>
                     </div>
                 </div>
-                <h6 class="d-flex justify-content-center mt-4 animate-on-hover">
+                <div class="d-flex justify-content-center mt-4 animate-on-hover">
                     <template v-if="hoverOnExp.hoverStart">
                         <template v-if="hoverOnExp.clicknext">
                             Technologies I'm currently using.
@@ -327,7 +327,7 @@ onUnmounted(() => {
                     <template v-else>
                         Technologies I'm familiar with.
                     </template>
-                </h6>
+                </div>
             </div>
             <div class="mini-nav">
                 <div :class="{active: hoverOnExp.internship}" @mouseenter="triggerHover(Experience.internship)" @mouseleave="triggerHover(Experience.reset)"></div>
@@ -392,7 +392,7 @@ onUnmounted(() => {
 
 // Tech Stack Left
 .history-tl-container {
-    padding: 2rem 0;
+    padding-top: 2rem;
 }
 
 .history-tl-container ul.tl li {

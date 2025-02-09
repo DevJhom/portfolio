@@ -54,7 +54,7 @@ window.addEventListener("DOMContentLoaded", () => {
         </div>
         <small class="copyright">Copyright &copy; 2025 DevJhom</small>
         <div class="social-media">
-            <a href="https://www.facebook.com" target="_blank">
+            <a href="https://www.facebook.com/sai.jhom.wan/" target="_blank">
                 <FacebookIcon/>
             </a>
             <a href="https://www.linkedin.com/in/sai-swan-wan-744945205/" target="_blank">
