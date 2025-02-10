@@ -2,11 +2,12 @@
 import { computed, ref } from 'vue';
 import { isMobile } from '@/helpers/helpers';
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { Autoplay, EffectFlip, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
+import 'swiper/css/effect-flip';
 
 const props = defineProps<{
     activeSection: string
@@ -16,7 +17,6 @@ const sectionIsActive = computed(() => {
     return props.activeSection == "about-me";
 });
 
-const modules = [Navigation, Pagination, Autoplay];
 const isDesktop = computed(() => !isMobile());
 const isHoverOnLogo = ref(false);
 
@@ -26,6 +26,22 @@ const onMouseEnter = () => {
 
 const onMouseLeave = () => {
     isHoverOnLogo.value = false;
+}
+
+const modules_location = [Navigation, Pagination, Autoplay];
+const modules_business_card = [EffectFlip];
+const businessCard = ref(null);
+
+const onSwiper = (swiper: any) => {
+    businessCard.value = swiper
+}
+
+const onHoverBusinessCard = () => {
+    businessCard.value?.slidePrev();
+}
+
+const onLeaveBusinessCard = () => {
+    businessCard.value?.slidePrev(); 
 }
 </script>
 
@@ -58,7 +74,7 @@ const onMouseLeave = () => {
                     :navigation="true"
                     :pagination="true"
                     :loop="true"
-                    :modules="modules" 
+                    :modules="modules_location" 
                     :autoplay="{
                         delay: 2500,
                         disableOnInteraction: true,
@@ -136,7 +152,27 @@ const onMouseLeave = () => {
         </Transition>
 
         <Transition :name="isDesktop ? 'slide-fade-left' : ''">
-            <div v-show="sectionIsActive || !isDesktop" class="grid-item style-card"></div>
+            <div v-show="sectionIsActive || !isDesktop" class="grid-item style-card">
+                <Swiper 
+                @swiper="onSwiper"
+                :effect="'flip'"
+                :flip-effect="{ slideShadows: true }"
+                :speed="500"
+                :loop="true"
+                :navigation="false"
+                :pagination="false"
+                :modules="modules_business_card" 
+                @mouseenter="onHoverBusinessCard"
+                @mouseleave="onLeaveBusinessCard"
+                >
+                    <SwiperSlide>
+                        Business Card (Front)
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        Business Card (Back)
+                    </SwiperSlide>
+                </Swiper>
+            </div>
         </Transition>
     </div>
 </template>
