@@ -154,16 +154,16 @@ const onLeaveBusinessCard = () => {
         <Transition :name="isDesktop ? 'slide-fade-left' : ''">
             <div v-show="sectionIsActive || !isDesktop" class="grid-item style-card">
                 <Swiper 
-                @swiper="onSwiper"
-                :effect="'flip'"
-                :flip-effect="{ slideShadows: true }"
-                :speed="500"
-                :loop="true"
-                :navigation="false"
-                :pagination="false"
-                :modules="modules_business_card" 
-                @mouseenter="onHoverBusinessCard"
-                @mouseleave="onLeaveBusinessCard"
+                    @swiper="onSwiper"
+                    :effect="'flip'"
+                    :flip-effect="{ slideShadows: true }"
+                    :speed="500"
+                    :loop="true"
+                    :navigation="false"
+                    :pagination="false"
+                    :modules="modules_business_card" 
+                    @mouseenter="onHoverBusinessCard"
+                    @mouseleave="onLeaveBusinessCard"
                 >
                     <SwiperSlide>
                         <div class="business-card-front">
@@ -222,6 +222,11 @@ const onLeaveBusinessCard = () => {
 .grid-item:hover {
     border: 2px solid $blue;
     transform: scale(1.04);
+}
+
+.grid-item:nth-child(1):hover { //adding border causes svg to shake
+    border: 1px solid $gray;
+    outline: 2px solid $blue;
 }
 
 .grid-item:nth-child(1) {
@@ -581,9 +586,7 @@ CARDS
 // 6. style-card
 .style-card {
     background-color: $light-black;
-    // background-image: url("/sourcecodes-css.png");
-    // background-size: auto 100%;
-    // background-repeat: no-repeat;
+    overflow: hidden;
 }
 
 .business-card-front {
@@ -619,14 +622,6 @@ CARDS
     .grid-item {
         grid-column: 1 / span 1 !important;
         grid-row: auto !important;
-    }
-
-    .location-card-top {
-        height: 15%;
-    }
-
-    .location-card-bottom {
-        height: 85%;
     }
 }
 </style>
