@@ -104,10 +104,10 @@ onUnmounted(() => {
         <div id="home">
             <section>
                 <h1 class="introduction-text">
-                    Hello! I'm Jhom.
+                    Hello, I'm Jhom
                 </h1>
                 <div :class="{typewriter: isTyping}" class="introduction-text">
-                    <h2>I'm a <span class="text-animation">Software Developer.</span></h2>
+                    <h2>I'm a <span class="text-animation">Software Developer</span></h2>
                 </div>
                 <Transition name="fade">
                     <small v-if="hideScrollToExplore" class="scroll-to-explore animate-on-hover">

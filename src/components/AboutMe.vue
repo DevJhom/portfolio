@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { isMobile } from '@/helpers/helpers';
-import RightArrow from '@/assets/Icons/RightArrow.vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/autoplay';
 
 const props = defineProps<{
     activeSection: string
@@ -11,8 +16,8 @@ const sectionIsActive = computed(() => {
     return props.activeSection == "about-me";
 });
 
+const modules = [Navigation, Pagination, Autoplay];
 const isDesktop = computed(() => !isMobile());
-
 const isHoverOnLogo = ref(false);
 
 const onMouseEnter = () => {
@@ -28,7 +33,7 @@ const onMouseLeave = () => {
     <div class="grid-container">
         <Transition :name="isDesktop ? 'slide-fade-left' : ''">
             <div v-show="sectionIsActive || !isDesktop" class="grid-item location-card">
-                <div class="location-card-top">
+                <!-- <div class="location-card-top">
                     <small class="d-flex align-items-center">
                         <span class="flex-grow-1">Where am I from?</span>
                         <RightArrow />
@@ -48,7 +53,52 @@ const onMouseLeave = () => {
                     <small class="location-description-bottom">
                         I currently specialize in Web Application Development. <br><br>My main tech stack includes C#, Javascript and Typescript.
                     </small>
-                </div>
+                </div> -->
+                <Swiper 
+                    :navigation="true"
+                    :pagination="true"
+                    :loop="true"
+                    :modules="modules" 
+                    :autoplay="{
+                        delay: 2500,
+                        disableOnInteraction: true,
+                    }"
+                >
+                    <SwiperSlide>
+                        <div class="location-card-top">
+                            <small>
+                                Where am I from?
+                            </small>
+                            <small class="text-light-gray">
+                                Hi there! 👋 <br><br>
+                                I'm Sai Swan Wan, a software developer from Myanmar (Burma).
+                            </small>
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div class="location-card-bottom">
+                            <small>
+                                Where am I now?
+                            </small>
+                            <small class="text-light-gray">
+                                I'm currently based in Bangkok, Thailand. <br><br>
+                                I mainly specialize in Web Application Development.
+                            </small>
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div class="location-card-next">
+                            <small>
+                                Where am I going next?
+                            </small>
+                            <div class="street-view-map"></div>
+                            <small class="text-light-gray">
+                                I'm comfortable working both remotely and on-site. <br><br>
+                                I'm adventurous and flexible in relocating to explore new opportunities.
+                            </small>
+                        </div>
+                    </SwiperSlide>
+                </Swiper>
             </div>
         </Transition>
 
@@ -169,6 +219,48 @@ CARDS
     flex-direction: column;
     height: 100%;
     overflow: hidden;
+}
+
+.location-card-top, .location-card-bottom, .location-card-next {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    padding: 1rem;
+    color: $white;
+}
+
+.location-card-top {
+    background: url('/myanmar.svg') no-repeat center;
+    background-size: contain;
+}
+
+.location-card-bottom {
+    background: url('/thailand.svg') no-repeat center;
+    background-size: contain;
+    background-color: $light-black;
+}
+
+.location-card-next {
+    background-color: $gray;
+}
+
+.street-view-map {
+    width: 100%;
+    aspect-ratio: 1.68 / 1;
+    background: url('/street-map.svg') no-repeat center;
+    background-size: cover;
+    border: 1px solid gray;
+}
+
+/*
+// 1. location-card
+.location-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
     cursor: crosshair;
 }
 
@@ -278,6 +370,7 @@ CARDS
     background: url('/street-map.svg') no-repeat center;
     background-size: cover;
 }
+*/
 
 // 2. description-card
 .description-card {
