@@ -63,6 +63,34 @@ html::-webkit-scrollbar-thumb:hover {
   color: $black;
 }
 
+.text-vs-yellow {
+  color: #D7BA7D;
+}
+
+.text-vs-orange {
+  color: #CE9178;
+}
+
+.text-vs-blue {
+  color: #9CDCFE;
+}
+
+.text-vs-dark-blue {
+  color: #569CD6;
+}
+
+.text-vs-green {
+  color: #B5CEA8;
+}
+
+.text-vs-dark-green {
+  color: #4EC9B0;
+}
+
+.text-vs-purple {
+  color: #C586C0;
+}
+
 h1 {
   font-size: clamp(1.5rem, 2vw + 1rem, 3rem); 
 }
