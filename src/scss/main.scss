@@ -127,4 +127,9 @@ h6 {
 
 .swiper-button-next::after {
   font-size: 1.5rem;
+  color: $light-gray;
+}
+
+.swiper-pagination .swiper-pagination-bullet {
+  background-color: $light-gray;
 }
