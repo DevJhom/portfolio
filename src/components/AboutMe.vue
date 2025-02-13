@@ -18,19 +18,9 @@ const sectionIsActive = computed(() => {
 });
 
 const isDesktop = computed(() => !isMobile());
-const isHoverOnLogo = ref(false);
-
-const onMouseEnter = () => {
-    isHoverOnLogo.value = true;
-}
-
-const onMouseLeave = () => {
-    isHoverOnLogo.value = false;
-}
-
+const businessCard = ref(null);
 const modules_location = [Navigation, Pagination, Autoplay];
 const modules_business_card = [EffectFlip];
-const businessCard = ref(null);
 
 const onSwiper = (swiper: any) => {
     businessCard.value = swiper
@@ -40,9 +30,6 @@ const onHoverBusinessCard = () => {
     businessCard.value?.slidePrev();
 }
 
-const onLeaveBusinessCard = () => {
-    businessCard.value?.slidePrev(); 
-}
 </script>
 
 <template>
@@ -76,7 +63,7 @@ const onLeaveBusinessCard = () => {
                     :loop="true"
                     :modules="modules_location" 
                     :autoplay="{
-                        delay: 2500,
+                        delay: 5000,
                         disableOnInteraction: true,
                     }"
                 >
@@ -107,7 +94,6 @@ const onLeaveBusinessCard = () => {
                             <small>
                                 Where am I going next?
                             </small>
-                            <div class="street-view-map"></div>
                             <small class="text-light-gray">
                                 I'm comfortable working both remotely and on-site. <br><br>
                                 I'm adventurous and flexible in relocating to explore new opportunities.
@@ -131,9 +117,8 @@ const onLeaveBusinessCard = () => {
             </div>
         </Transition>
 
-        <div class="grid-item social-media-card" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
-            <h3 v-if="isHoverOnLogo" class="mt-1">DevJhom</h3>
-            <img v-else src="/letter-j.png" alt="DevJhom Logo">
+        <div class="grid-item social-media-card">
+            <img src="/letter-j.png" alt="DevJhom Logo">
         </div>
 
         <Transition :name="isDesktop ? 'slide-fade-right' : ''">
@@ -163,7 +148,6 @@ const onLeaveBusinessCard = () => {
                     :pagination="false"
                     :modules="modules_business_card" 
                     @mouseenter="onHoverBusinessCard"
-                    @mouseleave="onLeaveBusinessCard"
                 >
                     <SwiperSlide>
                         <div class="business-card-front">
@@ -305,15 +289,8 @@ CARDS
 }
 
 .location-card-next {
-    background-color: $gray;
-}
-
-.street-view-map {
-    width: 100%;
-    aspect-ratio: 1.68 / 1;
     background: url('/street-map.svg') no-repeat center;
-    background-size: cover;
-    border: 1px solid gray;
+    background-size: contain;
 }
 
 /*
@@ -480,31 +457,11 @@ CARDS
 
 .social-media-card:hover {
     border: 0;
-    color: $blue;
 }
 
 .social-media-card img {
     height: 70%;
     aspect-ratio: 1;
-}
-
-.social-media {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-.add-social-media {
-    display : flex;
-    justify-content: center;
-    align-items : center;
-    height: 20%;
-    width: 100%;
-    border-radius: 0 0 12px 12px;
-    font-size: 1.2rem;
-    background-color: $facebook-blue;
-    cursor: pointer;
 }
 
 // 5. passion-card
@@ -585,7 +542,6 @@ CARDS
 
 // 6. style-card
 .style-card {
-    background-color: $light-black;
     overflow: hidden;
 }
 
