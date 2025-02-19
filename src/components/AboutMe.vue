@@ -18,7 +18,7 @@ const sectionIsActive = computed(() => {
 });
 
 const isDesktop = computed(() => !isMobile());
-const businessCard = ref(null);
+const businessCard = ref<typeof Swiper | null>(null);
 const modules_location = [Navigation, Pagination, Autoplay];
 const modules_business_card = [EffectFlip];
 
