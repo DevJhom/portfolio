@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/dev-jhom/',
+  base: '/devjhom-site/',
   plugins: [vue()],
   resolve: {
     alias: {
