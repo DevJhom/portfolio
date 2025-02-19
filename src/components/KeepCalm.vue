@@ -221,7 +221,7 @@ onUnmounted(() => {
 }
 
 .description-text p span {
-    font-size: clamp(0.8rem, 1vw + 0.3rem, 1.2rem); 
+    font-size: clamp(1rem, 1vw + 0.3rem, 1.2rem); 
 }
 
 @media (max-width: 768px) { 

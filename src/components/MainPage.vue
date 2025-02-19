@@ -93,10 +93,10 @@ onUnmounted(() => {
     <div class="spotlight"></div>
     <div class="my-container">
         <NavBar :active-section="activeSection"/>
-        <h4 class="logo animate-on-hover">
+        <div class="logo animate-on-hover">
             <img src="/letter-j.png" alt="DevJhom Logo" class="logo-img" height="35" width="35">
             <a href="#home"> DevJhom </a>
-        </h4>
+        </div>
         <div class="my-resume" @click="downloadResume()">
             Download Resume
         </div>
