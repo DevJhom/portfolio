@@ -45,7 +45,6 @@ const hoverOnExp = reactive<{ [key: string]: boolean }>({
 });
 
 const hasUsed = reactive<{ [key: string]: boolean }>({
-
     vue: false,
     react: false,
     typescript: false,
