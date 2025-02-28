@@ -141,6 +141,8 @@ const triggerHover = (experience: Experience) => {
 }
 
 const handleScroll = debounce(() => {
+    if (!isDesktop.value) return;
+
     if (props.activeSection == 'tech-stack') {
         const techStackElement = document.getElementById('tech-stack');
         if (techStackElement) {
