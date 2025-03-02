@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive, computed, onMounted, onUnmounted } from 'vue';
-import debounce from 'lodash.debounce';
 import { isMobile } from '@/helpers/helpers';
+import debounce from 'lodash.debounce';
 
 const props = defineProps<{
     activeSection: string
@@ -624,6 +624,7 @@ div {
 @media (max-width: 768px) { 
     .tech-stack {
         flex-direction: column;
+        padding: 2rem 0;
     }
 
     .tech-stack-left {

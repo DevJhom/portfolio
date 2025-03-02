@@ -36,27 +36,6 @@ const onHoverBusinessCard = () => {
     <div class="grid-container">
         <Transition :name="isDesktop ? 'slide-fade-left' : ''">
             <div v-show="sectionIsActive || !isDesktop" class="grid-item location-card">
-                <!-- <div class="location-card-top">
-                    <small class="d-flex align-items-center">
-                        <span class="flex-grow-1">Where am I from?</span>
-                        <RightArrow />
-                    </small>
-                    <br>
-                    <small class="location-description-top">
-                        Hi there! 👋<br><br>
-                        I'm Sai Swan Wan, a software developer from Myanmar (Burma). <br><br>
-                        My passion is in coding and I find deep satisfaction in tackling challenging problems.
-                    </small>
-                </div>
-                <div class="location-card-bottom">
-                    <div class="street-view-map"></div>
-                    <small class="location-card-bottom-title">
-                        I'm currently based in Bangkok, Thailand. 
-                    </small>
-                    <small class="location-description-bottom">
-                        I currently specialize in Web Application Development. <br><br>My main tech stack includes C#, Javascript and Typescript.
-                    </small>
-                </div> -->
                 <Swiper 
                     :navigation="true"
                     :pagination="true"
@@ -90,7 +69,7 @@ const onHoverBusinessCard = () => {
                             <h4> Career Path </h4>
                             <small class="text-light-gray mt-4">
                                 I'm comfortable working both remotely and on-site. <br><br>
-                                I'm flexible, adventurous and always ready to embrace new challenges to grow my career.
+                                I'm flexible, adventurous and always ready to embrace new career challenges.
                             </small>
                         </div>
                     </SwiperSlide>
@@ -289,124 +268,6 @@ CARDS
     background: url('/street-map.svg') no-repeat center;
     background-size: cover;
 }
-
-/*
-// 1. location-card
-.location-card {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    overflow: hidden;
-    cursor: crosshair;
-}
-
-.location-card-top {
-    position: relative;
-    height: 25%;
-    padding: 1rem;
-    color: $light-gray;
-    transition: all 0.5s ease;
-}
-
-.location-card-bottom {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    height: 75%;
-    padding: 1rem;
-    transition: all 0.5s ease;
-    color: $light-gray;
-    background-color: $light-black;
-    z-index: $top-layer;
-}
-
-// 1. location-card - on hover
-.location-card-top:hover {
-    background: url('/myanmar.svg') no-repeat center;
-    background-size: contain;
-    height: 100%;
-    color: $white;
-}
-
-.location-card-bottom:hover {
-    height: 100%;
-    color: $white;
-}
-
-.location-card-bottom::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 0%;
-    height: 0%;
-    background: url('/thailand.svg') no-repeat center;
-    background-size: contain;
-    transition: all 0.5s ease; 
-    z-index: $middle-layer;
-}
-
-.location-card-bottom:hover::after {
-    width: 100%;
-    height: 100%;
-}
-
-.location-card:has(.location-card-top:hover) .location-card-bottom {
-    height: 0;
-    opacity: 0;
-    padding: 0;
-}
-
-.location-card:has(.location-card-bottom:hover) .location-card-top {
-    padding: 0;
-    height: 0;
-    opacity: 0;
-}
-
-// 1. location-card - description
-.location-description-top, .location-description-bottom {
-    position: relative;
-    display: none;
-    margin-top: 10%;
-    z-index: $top-layer;
-    color: $light-gray;
-}
-
-.location-card-bottom-title {
-    position: relative;
-    display: flex;
-    align-items: end;
-    margin-top: 10%;
-    z-index: $top-layer;
-}
-
-.location-card:has(.location-card-top:hover) .location-description-top {
-    display: block;
-}
-
-.location-card:has(.location-card-bottom:hover) .location-description-bottom {
-    display: block;
-}
-
-.location-card:has(.location-card-bottom:hover) .location-card-bottom-title {
-    align-items: start;
-    height: auto;
-}
-
-.location-card:has(.location-card-bottom:hover) .street-view-map, 
-.location-card:has(.location-card-top:hover) .street-view-map {
-    display: none;
-}
-
-.street-view-map {
-    border: 1px solid gray;
-    width: 100%;
-    aspect-ratio: 1;
-    background: url('/street-map.svg') no-repeat center;
-    background-size: cover;
-}
-*/
 
 // 2. description-card
 .description-card {

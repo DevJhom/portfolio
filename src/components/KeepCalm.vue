@@ -181,6 +181,7 @@ onUnmounted(() => {
 
 .parallax-1 {
     background-image: url('/world.svg');
+    background-size: cover;
 }
 
 .parallax-2 {
