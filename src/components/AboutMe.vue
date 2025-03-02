@@ -69,10 +69,8 @@ const onHoverBusinessCard = () => {
                 >
                     <SwiperSlide>
                         <div class="location-card-top">
-                            <small>
-                                Where am I from?
-                            </small>
-                            <small class="text-light-gray">
+                            <h4> About Me </h4>
+                            <small class="text-light-gray mt-4">
                                 Hi there! 👋 <br><br>
                                 I'm Sai Swan Wan, a software developer from Myanmar (Burma).
                             </small>
@@ -80,23 +78,19 @@ const onHoverBusinessCard = () => {
                     </SwiperSlide>
                     <SwiperSlide>
                         <div class="location-card-bottom">
-                            <small>
-                                Where am I now?
-                            </small>
-                            <small class="text-light-gray">
-                                I'm currently based in Bangkok, Thailand. <br><br>
+                            <h4> Currently, </h4>
+                            <small class="text-light-gray mt-4">
+                                I'm based in Bangkok, Thailand. <br><br>
                                 I mainly specialize in Web Application Development.
                             </small>
                         </div>
                     </SwiperSlide>
                     <SwiperSlide>
                         <div class="location-card-next">
-                            <small>
-                                Where am I going next?
-                            </small>
-                            <small class="text-light-gray">
+                            <h4> Career Path </h4>
+                            <small class="text-light-gray mt-4">
                                 I'm comfortable working both remotely and on-site. <br><br>
-                                I'm adventurous and flexible in relocating to explore new opportunities.
+                                I'm flexible, adventurous and always ready to embrace new challenges to grow my career.
                             </small>
                         </div>
                     </SwiperSlide>
@@ -241,6 +235,9 @@ const onHoverBusinessCard = () => {
 .grid-item:nth-child(6) {
     grid-column: 1 / span 2;
     grid-row: 5 / span 2;
+    box-shadow: 1px 1px 12px 0px rgba(199,199,199,0.75);
+    -webkit-box-shadow: 1px 1px 12px 0px rgba(199,199,199,0.75);
+    -moz-box-shadow: 1px 1px 12px 0px rgba(199,199,199,0.75);
 }
 
 /* 
@@ -271,7 +268,7 @@ CARDS
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     height: 100%;
     padding: 1rem;
     color: $white;
@@ -290,7 +287,7 @@ CARDS
 
 .location-card-next {
     background: url('/street-map.svg') no-repeat center;
-    background-size: contain;
+    background-size: cover;
 }
 
 /*

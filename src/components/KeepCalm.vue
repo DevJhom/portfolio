@@ -2,6 +2,8 @@
 import { ref, reactive, watch, onMounted, onUnmounted } from 'vue';
 import type { Ref } from 'vue';
 import { isMobile } from '@/helpers/helpers';
+import Play from '@/assets/Icons/Play.vue';
+import Stop from '@/assets/Icons/Stop.vue';
 
 const props = defineProps<{
     activeSection: string
@@ -75,16 +77,19 @@ const updateRandomTexts = () => {
     randomText7.value = matrixEffect(randomText7.value);
 }
 
-let intervalId = setInterval(updateRandomTexts, 500);
+let intervalId = setInterval(updateRandomTexts, 3000);
+const isRunning = ref(false);
 
-const mouseEnter = () => {
+const startProgram = () => {
     clearInterval(intervalId); 
     intervalId = setInterval(updateRandomTexts, 150);
+    isRunning.value = true;
 }
 
-const mouseLeave = () => {
+const endProgram = () => {
     clearInterval(intervalId); 
-    intervalId = setInterval(updateRandomTexts, 500);
+    intervalId = setInterval(updateRandomTexts, 3000);
+    isRunning.value = false;
 }
 
 // Scroll Text Reveal Effect
@@ -125,9 +130,13 @@ onUnmounted(() => {
 <template>
     <div class="keep-calm">
         <div id="keep-calm-1" class="parallax-1"></div>
-        <div id="keep-calm-2" class="parallax-2" @mouseenter="mouseEnter()" @mouseleave="mouseLeave()">
+        <div id="keep-calm-2" class="parallax-2">
             <div v-if="isMobile() || typeKeepCalm.isTyping || typeKeepCalm.isAlreadyTyped" :class="{typewriter: typeKeepCalm.isTyping && !isMobile()}" class="keep-calm-text"> 
                 <h2>Programming is learned by writing programs.</h2>
+                <div class="text-end mt-2">
+                    <div v-if="!isRunning" @click="startProgram()">Start <Play/></div>
+                    <div v-else @click="endProgram()">Stop <Stop/></div>
+                </div>
             </div>
             <div class="matrix-effect">
                 {{ randomText1 }}
