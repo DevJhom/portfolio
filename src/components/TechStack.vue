@@ -185,7 +185,7 @@ onUnmounted(() => {
 
 <template>
     <Transition :name="isDesktop ? 'fade' : ''">
-        <div v-if="activeSection == 'tech-stack'" class="tech-stack">
+        <div v-if="activeSection == 'tech-stack' || isMobile()" class="tech-stack">
             <div class="tech-stack-left">
                 <h4 class="animate-on-hover">
                     My Work Experience
@@ -333,7 +333,7 @@ onUnmounted(() => {
                     </template>
                 </div>
             </div>
-            <div class="mini-nav">
+            <div v-if="!isMobile()" class="mini-nav">
                 <div :class="{active: hoverOnExp.internship}" @mouseenter="triggerHover(Experience.internship)" @mouseleave="triggerHover(Experience.reset)"></div>
                 <div :class="{active: hoverOnExp.omnistar}" @mouseenter="triggerHover(Experience.omnistar)" @mouseleave="triggerHover(Experience.reset)"></div>
                 <div :class="{active: hoverOnExp.clicknext}" @mouseenter="triggerHover(Experience.internship)" @mouseleave="triggerHover(Experience.reset)"></div>

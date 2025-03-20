@@ -436,7 +436,11 @@ CARDS
     .grid-item {
         grid-column: 1 / span 1 !important;
         grid-row: auto !important;
-        min-height: 300px;
+        min-height: 340px;
+    }
+
+    .description-card {
+        background-position: -100px 0;
     }
 }
 </style>
