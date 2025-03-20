@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { isMobile } from '@/helpers/helpers';
 import GithubIcon from '@/assets/Icons/GithubIcon.vue';
 import OpenWindow from '@/assets/Icons/OpenWindow.vue';
 
 const props = defineProps<{
   activeSection: string
 }>();
+
+const isDesktop = computed(() => !isMobile());
 
 const fretwizardUrl = "https://devjhom.github.io/fret-wizard/";
 const githubUrl = "https://github.com/DevJhom";
@@ -22,7 +25,7 @@ const onMouseLeave = () => {
 </script>
 
 <template>
-  <Transition name="fade">
+  <Transition :name="isDesktop ? 'fade' : ''">
     <div v-if="props.activeSection == 'projects'" class="projects">
       <div class="projects-left">
         <h2>
