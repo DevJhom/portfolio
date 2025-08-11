@@ -38,7 +38,7 @@ setTimeout(() => {
 // Spotlight effect
 window.addEventListener("DOMContentLoaded", () => {
     const spotlight = document.querySelector('.spotlight') as HTMLElement;
-    let spotlightSize: string = 'transparent 50px, #0c0c0c 120px)';
+    let spotlightSize: string = 'transparent 50px, #0c0c0cE5 120px)';
 
     window.addEventListener('mousemove', (e: MouseEvent) => updateSpotlight(e));
 
