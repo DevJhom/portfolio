@@ -253,18 +253,21 @@ CARDS
     color: $white;
 }
 
-.location-card-top {
+.location-card-top:hover {
     background: url('/myanmar.svg') no-repeat center;
-    background-size: contain;
+    background-size: 50%;
+    background-position: 75% 25%;
 }
 
-.location-card-bottom {
+.location-card-bottom:hover {
     background: url('/thailand.svg') no-repeat center;
     background-size: contain;
+    background-size: 50%;
+    background-position: 75% 25%;
     background-color: $light-black;
 }
 
-.location-card-next {
+.location-card-next:hover {
     background: url('/street-map.svg') no-repeat center;
     background-size: cover;
 }
