@@ -317,6 +317,7 @@ CARDS
 }
 
 .social-media-card:hover {
+    background-color: $white;
     border: 0;
 }
 
@@ -407,6 +408,8 @@ CARDS
 }
 
 .business-card-front {
+    background: url('/street-map.svg') no-repeat center;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -416,6 +419,8 @@ CARDS
 }
 
 .business-card-back {
+    background: url('/street-map.svg') no-repeat center;
+    background-size: cover;
     position: relative;
     display: flex;
     flex-direction: column;
