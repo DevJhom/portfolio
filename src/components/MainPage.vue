@@ -186,16 +186,22 @@ section {
     right: 2rem;
     margin-top: 2rem;
     padding: 0.5rem 1rem;
-    background-color: $black;
     border: 1px solid $blue;
     border-radius: 24px;
     z-index: $top-layer;
+	background-size: 300% 100%;
+	background-image: linear-gradient(to right, hsl(217, 100%, 62%), hsl(260, 100%, 62%), $blue);
+	box-shadow: 0 1px 15px 0 $blue;
+	-moz-transition: all .5s ease-in-out;
+	-o-transition: all .5s ease-in-out;
+	-webkit-transition: all .5s ease-in-out;
+	transition: all .5s ease-in-out;
     cursor: pointer;
 }
 
 .my-resume:hover {
-    background-color: $blue;
     color: $white;
+    background-position: 100% 0;
 }
 
 .introduction-text {
