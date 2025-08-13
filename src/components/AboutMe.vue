@@ -419,8 +419,7 @@ CARDS
 }
 
 .business-card-back {
-    background: url('/street-map.svg') no-repeat center;
-    background-size: cover;
+    background-image: $pattern-1;
     position: relative;
     display: flex;
     flex-direction: column;

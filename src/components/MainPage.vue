@@ -8,6 +8,7 @@ import Contact from '@components/Contact.vue';
 import KeepCalm from '@components/KeepCalm.vue';
 
 import DownArrow from '@/assets/Icons/DownArrow.vue';
+import Download from '@/assets/Icons/Download.vue';
 
 const sections = ref([
     { id: 'home', label: 'Home' },
@@ -98,6 +99,7 @@ onUnmounted(() => {
             <a href="#home"> DevJhom </a>
         </div>
         <div class="my-resume" @click="downloadResume()">
+            <Download/>
             Download Resume
         </div>
         <!-- HOME -->
