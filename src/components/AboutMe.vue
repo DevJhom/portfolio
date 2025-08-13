@@ -317,7 +317,7 @@ CARDS
 }
 
 .social-media-card:hover {
-    background-color: $white;
+    background-color: $blue;
     border: 0;
 }
 
