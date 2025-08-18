@@ -51,7 +51,7 @@ const onHoverBusinessCard = () => {
                             <h4> About Me </h4>
                             <small class="text-light-gray mt-4">
                                 Hi there! 👋 <br><br>
-                                I'm Sai Swan Wan, a software developer from Myanmar (Burma).
+                                I'm Sai Swan Wan, a Software Developer from Myanmar (Burma).
                             </small>
                         </div>
                     </SwiperSlide>
@@ -128,7 +128,7 @@ const onHoverBusinessCard = () => {
                                 &lt;&#47;&#62;
                             </h3>
                             <span>
-                                Sai Swan Wan
+                                Mr. Sai Swan Wan
                             </span>
                             <span>
                                 Software Developer
@@ -267,7 +267,7 @@ CARDS
     background-color: $light-black;
 }
 
-.location-card-next:hover {
+.location-card-next {
     background: url('/street-map.svg') no-repeat center;
     background-size: cover;
 }
