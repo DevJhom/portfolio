@@ -91,7 +91,7 @@ const onHoverBusinessCard = () => {
         </Transition>
 
         <div class="grid-item social-media-card">
-            <img src="/letter-j.png" alt="DevJhom Logo">
+            <div class="my-logo"></div>
         </div>
 
         <Transition :name="isDesktop ? 'slide-fade-right' : ''">
@@ -274,7 +274,7 @@ CARDS
 
 // 2. description-card
 .description-card {
-    background-image: url("/my-picture.jpg");
+    background-image: url("/demo-picture.jpg");
     background-size: auto 100%;
     background-repeat: no-repeat;
     display: flex;
@@ -316,14 +316,17 @@ CARDS
     border: 0;
 }
 
-.social-media-card:hover {
-    background-color: $blue;
-    border: 0;
+.social-media-card .my-logo {
+    width: 75%;
+    height: 75%;
+    background-image: url("letter-j.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-.social-media-card img {
-    height: 70%;
-    aspect-ratio: 1;
+.social-media-card .my-logo:hover {
+    background-image: url("my-picture.jpg");
 }
 
 // 5. passion-card

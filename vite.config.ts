@@ -20,6 +20,7 @@ export default defineConfig({
           @import "/src/scss/colors.scss";
           @import "/src/scss/layers.scss";
           @import "/src/scss/animate.scss";
+          @import "/src/scss/backgrounds.scss";
         `
       }
     }
