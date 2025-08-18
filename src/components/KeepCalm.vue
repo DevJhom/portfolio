@@ -162,6 +162,11 @@ onUnmounted(() => {
                     </span>
                 </p>
             </div>
+            <div class="animate-box" id="animate-box-1"></div>
+            <div class="animate-box" id="animate-box-2"></div>
+            <div class="animate-box" id="animate-box-3"></div>
+            <div class="animate-box" id="animate-box-4"></div>
+            <div class="animate-box" id="animate-box-5"></div>
         </div>
     </div>
 </template>
@@ -213,11 +218,13 @@ onUnmounted(() => {
 }
 
 .parallax-3 {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     transition: background-color 1s ease;
+    overflow: hidden;
 }
 
 .parallax-3 .description-text {
@@ -232,6 +239,69 @@ onUnmounted(() => {
 
 .description-text p span {
     font-size: clamp(1rem, 1vw + 0.3rem, 1.2rem); 
+}
+
+.parallax-3 .animate-box {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    animation: animate 20s linear infinite;
+}
+
+#animate-box-1 {
+    left: 80%;
+    width: 100px;
+    height: 100px;
+    bottom: -100px;
+    animation-delay: 0s;
+}
+
+#animate-box-2 {
+    left: 40%;
+    width: 130px;
+    height: 130px;
+    bottom: -130px;
+    animation-delay: 3s;
+}
+
+#animate-box-3 {
+    left: 20%;
+    width: 60px;
+    height: 60px;
+    bottom: -60px;
+    animation-delay: 8s;
+}
+
+#animate-box-4 {
+    left: 60%;
+    width: 80px;
+    height: 80px;
+    bottom: -80px;
+    animation-delay: 14s;
+}
+
+#animate-box-5 {
+    left: 15%;
+    width: 20px;
+    height: 20px;
+    bottom: -20px;
+    animation-delay: 16s;
+}
+
+@keyframes animate {
+    0%{
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+    100%{
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
 }
 
 @media (max-width: 768px) { 
