@@ -319,14 +319,14 @@ CARDS
 .social-media-card .my-logo {
     width: 75%;
     height: 75%;
-    background-image: url("letter-j.png");
+    background-image: url("/letter-j.png");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 .social-media-card .my-logo:hover {
-    background-image: url("my-picture.jpg");
+    background-image: url("/my-picture.jpg");
 }
 
 // 5. passion-card
