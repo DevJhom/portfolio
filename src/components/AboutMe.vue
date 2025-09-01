@@ -51,7 +51,7 @@ const onHoverBusinessCard = () => {
                             <h4> About Me </h4>
                             <small class="text-light-gray mt-4">
                                 Hi there! 👋 <br><br>
-                                I'm Sai Swan Wan, a Software Developer from Myanmar (Burma).
+                                I'm <span class="text-white">DevJhom</span>, a Software Developer from <span class="text-white">Myanmar</span> (Burma).
                             </small>
                         </div>
                     </SwiperSlide>
@@ -59,8 +59,8 @@ const onHoverBusinessCard = () => {
                         <div class="location-card-bottom">
                             <h4> Currently, </h4>
                             <small class="text-light-gray mt-4">
-                                I'm based in Bangkok, Thailand. <br><br>
-                                I mainly specialize in Web Application Development.
+                                I'm based in <span class="text-white">Bangkok</span>, Thailand. <br><br>
+                                I mainly specialize in <span class="text-white">Web Application Development.</span>
                             </small>
                         </div>
                     </SwiperSlide>
@@ -68,8 +68,8 @@ const onHoverBusinessCard = () => {
                         <div class="location-card-next">
                             <h4> Career Path </h4>
                             <small class="text-light-gray mt-4">
-                                I'm comfortable working both remotely and on-site. <br><br>
-                                I'm flexible, adventurous and always ready to embrace new career challenges.
+                                I'm comfortable working both <span class="text-white">remotely and on-site</span>. <br><br>
+                                I'm flexible, adventurous and always ready to embrace <span class="text-white">new career challenges</span>.
                             </small>
                         </div>
                     </SwiperSlide>
@@ -128,7 +128,7 @@ const onHoverBusinessCard = () => {
                                 &lt;&#47;&#62;
                             </h3>
                             <span>
-                                Mr. Sai Swan Wan
+                                DevJhom
                             </span>
                             <span>
                                 Software Developer
@@ -138,14 +138,14 @@ const onHoverBusinessCard = () => {
                     <SwiperSlide>
                         <div class="business-card-back">
                             <small class="text-vs-purple file-name">
-                                business-card.css
+                                business-card.info
                             </small>
-                            <small><span class="text-vs-yellow">.contact-info </span><span class="text-vs-yellow">&#123;</span></small>
-                            <small class="ms-4"><span class="text-vs-blue">name:</span><span class="text-vs-orange"> Sai Swan Wan</span></small>
-                            <small class="ms-4"><span class="text-vs-blue">title:</span><span class="text-vs-orange"> Software Developer</span></small>
+                            <small><span class="text-vs-yellow">.contact </span><span class="text-vs-yellow">&#123;</span></small>
+                            <small class="ms-4"><span class="text-vs-blue">name:</span><span class="text-vs-orange"> Mr. Sai Swan Wan</span></small>
+                            <small class="ms-4"><span class="text-vs-blue">position:</span><span class="text-vs-orange"> Software Developer</span></small>
                             <small class="ms-4"><span class="text-vs-blue">phone:</span><span class="text-vs-green"> +66 98 931 8198</span></small>
                             <small class="ms-4"><span class="text-vs-blue">email:</span><span class="text-vs-green"> jhomwan238@gmail.com</span></small>
-                            <small class="ms-4"><span class="text-vs-blue">website:</span><span class="text-vs-green"> https://www.devjhom.com</span> </small>
+                            <small class="ms-4"><span class="text-vs-blue">website:</span><span class="text-vs-green"> https://devjhom.site</span> </small>
                             <small class="text-vs-yellow">&#125;</small>
                         </div>
                     </SwiperSlide>
