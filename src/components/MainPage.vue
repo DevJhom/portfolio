@@ -252,6 +252,7 @@ section {
     background-size: contain;
     height: 100vh;
     z-index: $bottom-layer;
+    background-attachment: fixed;
     cursor: crosshair;
 }
 
