@@ -288,7 +288,7 @@ section {
     top: 0;
     right: 0;
     height: 100%;
-    width: 30%;
+    width: 40%;
     cursor: initial;
 }
 
@@ -297,7 +297,7 @@ section {
     bottom: 0;
     right: 0;
     height: 20%;
-    width: 70%;
+    width: 60%;
     cursor: initial;
 }
 

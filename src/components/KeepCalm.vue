@@ -133,7 +133,7 @@ onUnmounted(() => {
         <div id="keep-calm-2" class="parallax-2">
             <div v-if="isMobile() || typeKeepCalm.isTyping || typeKeepCalm.isAlreadyTyped" :class="{typewriter: typeKeepCalm.isTyping && !isMobile()}" class="keep-calm-text"> 
                 <h2>Programming is learned by writing programs.</h2>
-                <div class="text-end mt-2">
+                <div class="text-end mt-2 start-stop">
                     <div v-if="!isRunning" @click="startProgram()">Start <Play/></div>
                     <div v-else @click="endProgram()">Stop <Stop/></div>
                 </div>
@@ -216,6 +216,10 @@ onUnmounted(() => {
     width: 100vw;
     z-index: $middle-layer;
     color: $gray;
+}
+
+.parallax-2 .start-stop {
+    cursor: pointer;
 }
 
 .parallax-3 {
