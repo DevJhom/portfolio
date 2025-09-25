@@ -253,15 +253,29 @@ CARDS
     color: $white;
 }
 
-.location-card-top:hover {
-    background: url('/myanmar.svg') no-repeat center;
+.location-card-top, .location-card-bottom {
+    background-image: none;
+    background-color: transparent;
+    background-size: 80%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat; 
+
+    transition: 
+        background-color 0.3s ease, 
+        background-position 0.3s ease, 
+        background-size 0.3s ease;
+}
+
+// .location-card-top:hover 
+.grid-item:nth-child(1):hover .location-card-top { 
+    background-image: url('/myanmar.svg');
     background-size: 50%;
     background-position: 75% 25%;
 }
 
-.location-card-bottom:hover {
-    background: url('/thailand.svg') no-repeat center;
-    background-size: contain;
+// .location-card-bottom:hover {
+.grid-item:nth-child(1):hover .location-card-bottom { 
+    background-image: url('/thailand.svg'); 
     background-size: 50%;
     background-position: 75% 25%;
     background-color: $light-black;
