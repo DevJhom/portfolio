@@ -457,10 +457,19 @@ CARDS
         grid-template-columns: 1fr;
         grid-template-rows: auto;
     }
+
     .grid-item {
         grid-column: 1 / span 1 !important;
         grid-row: auto !important;
-        min-height: 340px;
+        min-height: 380px;
+    }
+
+    .grid-item:nth-child(3) {
+        min-height: 180px;
+    }
+
+    .grid-item:nth-child(4) {
+        min-height: 180px;
     }
 
     .description-card {

@@ -96,11 +96,11 @@ onUnmounted(() => {
         <NavBar :active-section="activeSection"/>
         <div class="logo animate-on-hover">
             <img src="/letter-j.png" alt="DevJhom Logo" class="logo-img" height="35" width="35">
-            <h4 class="ms-1"><a href="#home">DevJhom</a></h4>
+            <h4 class="logo-text ms-1"><a href="#home">DevJhom</a></h4>
         </div>
         <div class="my-resume" @click="downloadResume()">
-            <Download/>
-            Download Resume
+            <Download/> 
+            <h4 class="ms-1">Download Resume</h4>
         </div>
         <!-- HOME -->
         <div id="home">
@@ -183,12 +183,16 @@ section {
     border-radius: 10px;
 }
 
-.logo h4 {
+.logo-text {
     margin: 0;
+    background-color: $black;
 }
 
 .my-resume {
     position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     right: 2rem;
     margin-top: 2rem;
     padding: 0.5rem 1rem;
