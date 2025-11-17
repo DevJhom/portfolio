@@ -26,7 +26,7 @@ const onMouseLeave = () => {
 
 <template>
   <Transition :name="isDesktop ? 'fade' : ''">
-    <div v-if="props.activeSection == 'projects'" class="projects">
+    <div v-if="props.activeSection == 'projects' || !isDesktop" class="projects">
       <div class="projects-left">
         <h2>
           My Personal Projects

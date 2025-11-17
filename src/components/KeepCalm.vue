@@ -318,6 +318,10 @@ onUnmounted(() => {
 }
 
 @media (max-width: 768px) { 
+    .parallax-1 {
+        background-size: 150%;
+    }
+
     .parallax-3 .description-text {
         width: 90%;
     }
