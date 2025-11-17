@@ -333,7 +333,7 @@ onUnmounted(() => {
                     </template>
                 </div>
             </div>
-            <div v-if="!isMobile()" class="mini-nav">
+            <div v-if="isDesktop" class="mini-nav">
                 <div :class="{active: hoverOnExp.internship}" @mouseenter="triggerHover(Experience.internship)" @mouseleave="triggerHover(Experience.reset)"></div>
                 <div :class="{active: hoverOnExp.omnistar}" @mouseenter="triggerHover(Experience.omnistar)" @mouseleave="triggerHover(Experience.reset)"></div>
                 <div :class="{active: hoverOnExp.clicknext}" @mouseenter="triggerHover(Experience.internship)" @mouseleave="triggerHover(Experience.reset)"></div>

@@ -9,8 +9,7 @@ const props = defineProps<{
     activeSection: string
 }>();
 
-// Typing "Keep Calm and Code On."
-const typeKeepCalm = reactive({
+const typingMessage = reactive({
     isTyping: false,
     isAlreadyTyped: false
 });
@@ -18,11 +17,11 @@ const typeKeepCalm = reactive({
 const dynamicBackgroundColor = ref('#0c0c0c');
 
 watch(() => props.activeSection, (newSection) => {
-    if (newSection == 'keep-calm-2' && !typeKeepCalm.isAlreadyTyped) {
-        typeKeepCalm.isTyping = true;
+    if (newSection == 'keep-calm-2' && !typingMessage.isAlreadyTyped) {
+        typingMessage.isTyping = true;
         setTimeout(() => {
-            typeKeepCalm.isTyping = false;
-            typeKeepCalm.isAlreadyTyped = true;
+            typingMessage.isTyping = false;
+            typingMessage.isAlreadyTyped = true;
         }, 2000)
     }
 
@@ -37,9 +36,9 @@ watch(() => props.activeSection, (newSection) => {
 const randomText1 = ref("n8laig5ym1gemy1m1et2i6uld5wbjsw59cdoukul1jvzmfg3vmg1z6r7nd29xblm0sfyqxxr24uvj4ugkofnic578si5685h8ggu5ocl7wns3esq7u0ujpxewc2oqyejjtd17b2xtsdr24uvj4ugkofnic578si5685h8ggu5ocl7wns3esq7u0ujpxewc2oqyejjtd17b2xtsderu24jxpdpmvne24hd3rd4rs");
 const randomText2 = ref("18d1aki40j4qmnum1csyq6kun2erxpxwfo1o5hkdaibg0v8ukxn69yzf6pffyaldroi14sufpi2iswtwxo6qiz5zgwgfzkf1833pyzyzy0ti9psnr0wyi2vns97gifhonivjno5ysdhsq3mrym7e169du86y5sj2bvphrfm3rtpw1w9ja30ary1je5gckho4bv0qmbdjgys8ysd88mtyjxphde6cw4bze03r45s");
 const randomText3 = ref("3q5774z41cl2sdga6p80zdpshooxaqaouspo5qnljsbg0w5hk9nv5yzcjm1uy1rvi9kxgoso6g7ikp4zxo1q4zt7gpvfqa32d1pciq38ynvgb0j7rqqt6cemyb67k0xsn9iq0yxekdw4v3mnkiz1aqjbr9tzb1jxpmuhmi53zjp318uj9fgqceqlhtgcrsm2h9tmshgai2o453d69edbj3c006cd1bz8odeoq5b");
-const randomText4  = ref("x83oepul5l1k4bhs17kjvt1dh5qinagu4choqpo1lovvtj83hiqgez3rr17jid81d777ekt9u319wtk9e9twjmhfda1edxogs1vtwa5s6wcv73tugk0gy5aajcia2739fedtufoj6jzsswpv1vjg1nx7ls975t866u1l42t0podmt02p02mpgwofm53mkc6mg1ea73mnabayzqiyjtg6qt94hfrgzv5t2ea1uwr");
-const randomText5  = ref("n8oaiumym1gjqnuly7q2v6vy35hbis479c9ookmh1p0zp1uhdm21m67eni29nb26d5fgqih4278b3bpg9ofs4lm7esvi5w1hdgeswoclvqruf8sq5u03wvxeww4cqdq0jti27hbgtndyt4tve4oreofnl1278sbn1bgba0v9gj8a7w063e4ycui8dpxfcc2vvye1jfdccy2eisd8fi2hjxcd9mvne2i5z3xdh2s");
-const randomText6  = ref("n8oakuayo1yj2nulyoqgv6vyg5h9at4d9fxookmu1w0931utdo23b6xeei29zbe9d5fgui829w81yb1g8ovs4lmw2ssi5w1jdol5wo4lyq6u18gl53snezhkqw49qa42j1i28hbgtnsrt4t26j3reofsl1a3u9bd1bgi70vtw6f07tnn3e4ycdi8dtgecc2vvue1p4dcxy2mi1lowadhjqci9ev3e2i5zcx7h4s");
+const randomText4 = ref("x83oepul5l1k4bhs17kjvt1dh5qinagu4choqpo1lovvtj83hiqgez3rr17jid81d777ekt9u319wtk9e9twjmhfda1edxogs1vtwa5s6wcv73tugk0gy5aajcia2739fedtufoj6jzsswpv1vjg1nx7ls975t866u1l42t0podmt02p02mpgwofm53mkc6mg1ea73mnabayzqiyjtg6qt94hfrgzv5t2ea1uwr");
+const randomText5 = ref("n8oaiumym1gjqnuly7q2v6vy35hbis479c9ookmh1p0zp1uhdm21m67eni29nb26d5fgqih4278b3bpg9ofs4lm7esvi5w1hdgeswoclvqruf8sq5u03wvxeww4cqdq0jti27hbgtndyt4tve4oreofnl1278sbn1bgba0v9gj8a7w063e4ycui8dpxfcc2vvye1jfdccy2eisd8fi2hjxcd9mvne2i5z3xdh2s");
+const randomText6 = ref("n8oakuayo1yj2nulyoqgv6vyg5h9at4d9fxookmu1w0931utdo23b6xeei29zbe9d5fgui829w81yb1g8ovs4lmw2ssi5w1jdol5wo4lyq6u18gl53snezhkqw49qa42j1i28hbgtnsrt4t26j3reofsl1a3u9bd1bgi70vtw6f07tnn3e4ycdi8dtgecc2vvue1p4dcxy2mi1lowadhjqci9ev3e2i5zcx7h4s");
 const randomText7 = ref("s8pi2t0ul5ghofg6jogtw2hypa2tatxdzlc1gkkujwssvpeu7f2tpnncbo3i7smcvbddu0wk9w9fn14asjkb990u2r1iuwawdzywu6a85voy0i0q14ssg1f4qwr9iz42yc8ue4979lwvt1t29j65lxtgv4yvuwbmw6egc3vh94wmby2xrf4dcdxmvt8e00ccg3igp4duzmgxi1yawfdm9fc8re60e0qjhoxw4i1");
 
 const getRandomLetter = () => {
@@ -77,18 +76,47 @@ const updateRandomTexts = () => {
     randomText7.value = matrixEffect(randomText7.value);
 }
 
+const getNextMessage = () => {
+    currentMessage = loopMessages[loopIndex];
+    //loopIndex = (loopIndex + 1) % loopMessages.length; //for infinite loop
+    loopIndex++;
+
+    if (loopIndex <= loopMessages.length) {
+        displayedText.value = currentMessage;
+    } else {
+        endProgram();
+    }
+}
+
+let loopIntervalId = 0;
 let intervalId = setInterval(updateRandomTexts, 3000);
 const isRunning = ref(false);
+
+const defaultMessage = "Programming is learned by writing programs.";
+const displayedText = ref(defaultMessage);
+const loopMessages = ["Plan...", "Code...", "Build...", "Test...", "Deploy...", "Repeat."];
+let currentMessage = null;
+let loopIndex = 0;
 
 const startProgram = () => {
     clearInterval(intervalId); 
     intervalId = setInterval(updateRandomTexts, 150);
+    loopIntervalId = setInterval(getNextMessage, 1200);
+
     isRunning.value = true;
 }
 
 const endProgram = () => {
     clearInterval(intervalId); 
     intervalId = setInterval(updateRandomTexts, 3000);
+
+    clearInterval(loopIntervalId); 
+    loopIntervalId = 0;
+
+    displayedText.value = defaultMessage;
+    loopIndex = 0;
+    currentMessage = null;
+
     isRunning.value = false;
 }
 
@@ -131,8 +159,8 @@ onUnmounted(() => {
     <div class="keep-calm">
         <div id="keep-calm-1" class="parallax-1"></div>
         <div id="keep-calm-2" class="parallax-2">
-            <div v-if="isMobile() || typeKeepCalm.isTyping || typeKeepCalm.isAlreadyTyped" :class="{typewriter: typeKeepCalm.isTyping && !isMobile()}" class="keep-calm-text"> 
-                <h2>Programming is learned by writing programs.</h2>
+            <div v-if="isMobile() || typingMessage.isTyping || typingMessage.isAlreadyTyped" :class="{typewriter: typingMessage.isTyping && !isMobile()}" class="keep-calm-text"> 
+                <h2>{{ displayedText }}</h2>
                 <div class="text-end mt-2 start-stop">
                     <div v-if="!isRunning" @click="startProgram()">Start <Play/></div>
                     <div v-else @click="endProgram()">Stop <Stop/></div>
@@ -204,6 +232,7 @@ onUnmounted(() => {
     flex-direction: column;
     justify-content: center;
     padding: 0 1rem;
+    min-width: 60%;
 }
 
 .parallax-2 .keep-calm-text {
@@ -320,6 +349,10 @@ onUnmounted(() => {
 @media (max-width: 768px) { 
     .parallax-1 {
         background-size: 150%;
+    }
+
+    .parallax-2 .keep-calm-text {
+        min-width: 100%;
     }
 
     .parallax-3 .description-text {
