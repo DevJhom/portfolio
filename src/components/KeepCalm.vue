@@ -101,7 +101,7 @@ let loopIndex = 0;
 const startProgram = () => {
     clearInterval(intervalId); 
     intervalId = setInterval(updateRandomTexts, 150);
-    loopIntervalId = setInterval(getNextMessage, 1200);
+    loopIntervalId = setInterval(getNextMessage, 1000);
 
     isRunning.value = true;
 }
