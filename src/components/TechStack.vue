@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { reactive, computed, onMounted, onUnmounted } from 'vue';
+import { reactive, computed } from 'vue';
 import { isMobile } from '@/helpers/helpers';
 //import debounce from 'lodash.debounce';
 
-const props = defineProps<{
+defineProps<{
     activeSection: string
 }>();
 
