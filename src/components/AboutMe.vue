@@ -124,15 +124,18 @@ const onHoverBusinessCard = () => {
                 >
                     <SwiperSlide>
                         <div class="business-card-front">
-                            <h3 class="text-vs-dark-blue">
+                            <h3 class="text-vs-green">
                                 &lt;&#47;&#62;
                             </h3>
                             <span>
                                 DevJhom
                             </span>
-                            <span>
-                                Software Developer
-                            </span>
+                            <small class="text-vs-dark-blue">
+                                <b>Software Developer</b>
+                            </small>
+                            <small class="swipe">
+                                <i>Swipe >>></i>
+                            </small>
                         </div>
                     </SwiperSlide>
                     <SwiperSlide>
@@ -143,7 +146,7 @@ const onHoverBusinessCard = () => {
                             <small><span class="text-vs-yellow">.contact </span><span class="text-vs-yellow">&#123;</span></small>
                             <small class="ms-4"><span class="text-vs-blue">name:</span><span class="text-vs-orange"> Mr. Sai Swan Wan</span></small>
                             <small class="ms-4"><span class="text-vs-blue">position:</span><span class="text-vs-orange"> Software Developer</span></small>
-                            <small class="ms-4"><span class="text-vs-blue">phone:</span><span class="text-vs-green"> +66 98 931 8198</span></small>
+                            <small class="ms-4"><span class="text-vs-blue">mobile:</span><span class="text-vs-green"> +66 98 931 8198</span></small>
                             <small class="ms-4"><span class="text-vs-blue">email:</span><span class="text-vs-green"> jhomwan238@gmail.com</span></small>
                             <small class="ms-4"><span class="text-vs-blue">website:</span><span class="text-vs-green"> https://devjhom.site</span> </small>
                             <small class="text-vs-yellow">&#125;</small>
@@ -433,6 +436,13 @@ CARDS
     justify-content: center;
     width: 100%;
     height: 100%;
+}
+
+.business-card-front .swipe {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 1rem;
+    color: $gray;
 }
 
 .business-card-back {

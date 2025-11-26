@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { reactive, computed, onMounted, onUnmounted } from 'vue';
 import { isMobile } from '@/helpers/helpers';
-import debounce from 'lodash.debounce';
+//import debounce from 'lodash.debounce';
 
 const props = defineProps<{
     activeSection: string
 }>();
+
+const isDesktop = computed(() => !isMobile());
 
 enum Experience {
     internship,
@@ -140,6 +142,7 @@ const triggerHover = (experience: Experience) => {
     }
 }
 
+/*
 const handleScroll = debounce(() => {
     if (!isDesktop.value) return;
 
@@ -154,33 +157,27 @@ const handleScroll = debounce(() => {
 
             if (scrollPosition >= halfSectionHeight + partSize * 3 && scrollPosition <= sectionHeight) {
                 triggerHover(Experience.internship);
-                // console.log("part 1")
             } else if (scrollPosition >= halfSectionHeight + partSize * 2 && scrollPosition < halfSectionHeight + partSize * 3) {
                 triggerHover(Experience.omnistar);
-                // console.log("part 2")
             } else if (scrollPosition >= halfSectionHeight + partSize && scrollPosition < halfSectionHeight + partSize * 2) {
                 triggerHover(Experience.clicknext);
-                // console.log("part 3")
             } else if (scrollPosition >= halfSectionHeight && scrollPosition < halfSectionHeight + partSize) {
                 triggerHover(Experience.clicknext);
-                // console.log("Part 4");
             } else { 
                 triggerHover(Experience.reset);
-                // console.log("else")
             }
         }
     }
 }, 10, { leading: true, trailing: false });
+*/
 
-const isDesktop = computed(() => !isMobile());
+// onMounted(() => {
+//     window.addEventListener('scroll', handleScroll);
+// });
 
-onMounted(() => {
-    window.addEventListener('scroll', handleScroll);
-});
-
-onUnmounted(() => {
-    window.removeEventListener('scroll', handleScroll);
-})
+// onUnmounted(() => {
+//     window.removeEventListener('scroll', handleScroll);
+// })
 </script>
 
 <template>
@@ -338,6 +335,11 @@ onUnmounted(() => {
                 <div :class="{active: hoverOnExp.omnistar}" @mouseenter="triggerHover(Experience.omnistar)" @mouseleave="triggerHover(Experience.reset)"></div>
                 <div :class="{active: hoverOnExp.clicknext}" @mouseenter="triggerHover(Experience.internship)" @mouseleave="triggerHover(Experience.reset)"></div>
             </div>
+            <div class="auto-hover">
+                <div class="hover-area-1" @mouseenter="triggerHover(Experience.internship)" @mouseleave="triggerHover(Experience.reset)"></div>
+                <div class="hover-area-2" @mouseenter="triggerHover(Experience.omnistar)" @mouseleave="triggerHover(Experience.reset)"></div>
+                <div class="hover-area-3" @mouseenter="triggerHover(Experience.clicknext)" @mouseleave="triggerHover(Experience.reset)"></div>
+            </div>
         </div>
     </Transition>
 </template>
@@ -356,6 +358,7 @@ onUnmounted(() => {
 .tech-stack-left {
     width: 40%;
     height: 100%;
+    z-index: $top-layer;
 }
 
 .tech-stack-right {
@@ -371,7 +374,7 @@ onUnmounted(() => {
     position: absolute;
     left: 0;
     height: 30%;
-    width: 0.5%;
+    width: 1%;
     display: flex;
     flex-direction: column;
 }
@@ -442,6 +445,7 @@ ul.tl li .item-detail {
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(6, 1fr);
     gap: 1rem;
+    z-index: $top-layer;
 }
 
 .tech-stack-grid-item {
@@ -615,6 +619,27 @@ ul.tl li .item-detail {
 
 .reduced-opacity {
     opacity: 0.2;
+}
+
+.auto-hover {
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: $bottom-layer;
+}
+
+.hover-area-1, .hover-area-2, .hover-area-3 {
+    position: absolute;
+    min-height: 33.33%;
+    min-width: 100%;
+}
+
+.hover-area-2 {
+    top: 33.33%
+}
+
+.hover-area-3 {
+    top: 66.66%
 }
 
 div {
