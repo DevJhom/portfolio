@@ -374,7 +374,7 @@ const handleScroll = debounce(() => {
     position: absolute;
     left: 0;
     height: 30%;
-    width: 1%;
+    width: 0.5%;
     display: flex;
     flex-direction: column;
 }
@@ -407,7 +407,7 @@ const handleScroll = debounce(() => {
     list-style: none;
     margin: auto;
     min-height: 150px;
-    border-left: 1px dashed gray;
+    border-left: 1px dashed $gray2;
     padding-left: 30px;
 }
 
@@ -425,18 +425,18 @@ const handleScroll = debounce(() => {
     background: $light-gray;
     height: 35px;
     width: 35px;
-    transition: all 250ms ease-in;
+    transition: all $transition-fast;
 }
 
 .history-tl-container ul.tl li:hover::before,
 .history-tl-container ul.tl li.my-hover::before {
     border-color: $light-black;
     background-color: $blue;
-    transition: all 250ms ease-in;
+    transition: all $transition-fast;
 }
 
 ul.tl li .item-detail {
-    color: gray;
+    color: $light-gray;
 }
 
 // Tech Stack Right
@@ -449,13 +449,13 @@ ul.tl li .item-detail {
 }
 
 .tech-stack-grid-item {
-    border: 1px solid gray;
-    border-radius: 12px;
+    border: 1px solid $gray2;
+    border-radius: $radius-md;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: transform 0.3s ease;
+    transition: transform $transition-fast;
     aspect-ratio: 1 / 1.1;
 }
 
@@ -608,7 +608,7 @@ ul.tl li .item-detail {
     color: $white;
     background: linear-gradient($black, $black) padding-box,
                 linear-gradient(45deg, $white, #4285F4, #0F9D58) border-box;
-    border-radius: 12px;
+    border-radius: $radius-md;
     border: 2px solid transparent;
 }
 
@@ -642,11 +642,27 @@ ul.tl li .item-detail {
     top: 66.66%
 }
 
-div {
-  font-size: clamp(0.8rem, 1vw + 0.2rem, 1.2rem); 
+.tech-stack-left,
+.tech-stack-right {
+  font-size: clamp(0.8rem, 1vw + 0.2rem, 1.2rem);
 }
 
-@media (max-width: 768px) { 
+@media (max-width: 1024px) {
+    .tech-stack {
+        width: 90%;
+    }
+
+    .tech-stack-left {
+        width: 50%;
+    }
+
+    .tech-stack-right {
+        width: 50%;
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 768px) {
     .tech-stack {
         flex-direction: column;
         padding: 2rem 0;

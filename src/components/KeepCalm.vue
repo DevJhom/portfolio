@@ -14,7 +14,9 @@ const typingMessage = reactive({
     isAlreadyTyped: false
 });
 
-const dynamicBackgroundColor = ref('#0c0c0c');
+const cssBlack = getComputedStyle(document.documentElement).getPropertyValue('--color-black').trim();
+const cssBlue = getComputedStyle(document.documentElement).getPropertyValue('--color-blue').trim();
+const dynamicBackgroundColor = ref(cssBlack);
 
 watch(() => props.activeSection, (newSection) => {
     if (newSection == 'keep-calm-2' && !typingMessage.isAlreadyTyped) {
@@ -26,9 +28,9 @@ watch(() => props.activeSection, (newSection) => {
     }
 
     if (newSection == 'keep-calm-3') {
-        dynamicBackgroundColor.value = '#1F51FF';
+        dynamicBackgroundColor.value = cssBlue;
     } else {
-        dynamicBackgroundColor.value = '#0c0c0c';
+        dynamicBackgroundColor.value = cssBlack;
     }
 });
 
@@ -257,13 +259,12 @@ onUnmounted(() => {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: background-color 1s ease;
+    transition: background-color $transition-slow;
     overflow: hidden;
 }
 
 .parallax-3 .description-text {
     width: 35%;
-    font-size: 1.25rem;
     text-align: center;
 }
 
@@ -282,7 +283,7 @@ onUnmounted(() => {
     width: 20px;
     height: 20px;
     background: rgba(255, 255, 255, 0.2);
-    animation: animate 20s linear infinite;
+    animation: floating-boxes 20s linear infinite;
 }
 
 #animate-box-1 {
@@ -333,20 +334,13 @@ onUnmounted(() => {
     animation-delay: 16s;
 }
 
-@keyframes animate {
-    0%{
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-        border-radius: 0;
-    }
-    100%{
-        transform: translateY(-1000px) rotate(720deg);
-        opacity: 0;
-        border-radius: 50%;
+@media (max-width: 1024px) {
+    .parallax-3 .description-text {
+        width: 60%;
     }
 }
 
-@media (max-width: 768px) { 
+@media (max-width: 768px) {
     .parallax-1 {
         background-size: 150%;
     }

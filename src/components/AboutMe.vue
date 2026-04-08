@@ -173,9 +173,9 @@ const onHoverBusinessCard = () => {
     max-width: 100%;
     max-height: 100%;
     border: 1px solid $gray;
-    border-radius: 12px;
+    border-radius: $radius-md;
     padding: 2rem;
-    transition: transform 0.3s ease;
+    transition: transform $transition-fast;
     min-height: 200px;
 }
 
@@ -263,10 +263,10 @@ CARDS
     background-position: 50% 50%;
     background-repeat: no-repeat; 
 
-    transition: 
-        background-color 0.3s ease, 
-        background-position 0.3s ease, 
-        background-size 0.3s ease;
+    transition:
+        background-color $transition-fast,
+        background-position $transition-fast,
+        background-size $transition-fast;
 }
 
 // .location-card-top:hover 
@@ -319,11 +319,6 @@ CARDS
     animation: background-gradient 4s infinite linear;
 }
 
-@keyframes background-gradient {
-    0% { background-position: 0; }
-    100% { background-position: -200%; }
-}
-
 // 4. social-media-card
 .social-media-card {
     display: flex;
@@ -347,19 +342,6 @@ CARDS
 }
 
 // 5. passion-card
-@keyframes animate {
-    0%{
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-        border-radius: 0;
-    }
-    100%{
-        transform: translateY(-1000px) rotate(720deg);
-        opacity: 0;
-        border-radius: 50%;
-    }
-}
-
 .passion-card {
     position: relative;
     width: 100%;
@@ -375,7 +357,7 @@ CARDS
     width: 20px;
     height: 20px;
     background: rgba(255, 255, 255, 0.2);
-    animation: animate 20s linear infinite;
+    animation: floating-boxes 20s linear infinite;
 }
 
 .passion-card:hover .animate-box {
@@ -460,6 +442,28 @@ CARDS
     position: absolute;
     top: 0.5rem;
     right: 1rem;
+}
+
+@media (max-width: 1024px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+        width: 90%;
+    }
+
+    .grid-item {
+        grid-column: auto !important;
+        grid-row: auto !important;
+        min-height: 300px;
+    }
+
+    .grid-item:nth-child(3) {
+        min-height: 180px;
+    }
+
+    .grid-item:nth-child(4) {
+        min-height: 180px;
+    }
 }
 
 @media (max-width: 768px) {

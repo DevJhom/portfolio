@@ -180,7 +180,7 @@ section {
 }
 
 .logo-img {
-    border-radius: 10px;
+    border-radius: $radius-md;
 }
 
 .logo-text {
@@ -197,15 +197,12 @@ section {
     margin-top: 2rem;
     padding: 0.5rem 1rem;
     border: 1px solid $blue;
-    border-radius: 24px;
+    border-radius: calc($radius-md * 2);
     z-index: $top-layer;
 	background-size: 300% 100%;
 	background-image: linear-gradient(to right, hsl(217, 100%, 62%), hsl(260, 100%, 62%), $blue);
 	box-shadow: 0 1px 15px 0 $blue;
-	-moz-transition: all .5s ease-in-out;
-	-o-transition: all .5s ease-in-out;
-	-webkit-transition: all .5s ease-in-out;
-	transition: all .5s ease-in-out;
+	transition: all $transition-medium;
     cursor: pointer;
 }
 
@@ -216,7 +213,7 @@ section {
 
 .introduction-text {
     padding: 0 2rem;
-    transition: transform 0.3s ease;
+    transition: transform $transition-fast;
 }
 
 .introduction-text, .introduction-text h2 {
@@ -237,11 +234,6 @@ section {
     
     animation-fill-mode: forwards;
     animation: background-gradient 4s infinite linear;
-}
-
-@keyframes background-gradient {
-    0% { background-position: 0; }
-    100% { background-position: -200%; }
 }
 
 .scroll-to-explore {

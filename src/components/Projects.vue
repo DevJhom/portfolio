@@ -119,8 +119,8 @@ const onMouseLeave = () => {
   min-height: 30rem;
   min-width: 18rem;
   padding: 1rem;
-  border-radius: 12px;
-  transition: 0.4s ease-out;
+  border-radius: $radius-md;
+  transition: $transition-fast;
 }
 
 .card.expand {
@@ -157,7 +157,7 @@ const onMouseLeave = () => {
 }
 
 .card img {
-  border-radius: 6px;
+  border-radius: $radius-sm;
   cursor: pointer;
 }
 
@@ -169,7 +169,7 @@ const onMouseLeave = () => {
 .card .card-badge {
   color: $white;
   background-color: $fretwizard-yellow;
-  border-radius: 6px;
+  border-radius: $radius-sm;
   padding: 0 0.25rem;
   margin-right: 0.25rem;
 }
@@ -201,15 +201,35 @@ const onMouseLeave = () => {
   width: 0px;
   height: 100%;
   background-color: $light-gray;
-  transition: 0.6s ease-out;
+  transition: $transition-medium;
 }
 
 .card:hover .filledbar {
   width: 100%;
-  transition: 0.4s ease-out;
+  transition: $transition-fast;
 }
 
-@media (max-width: 768px) { 
+@media (max-width: 1024px) {
+  .projects {
+    width: 90%;
+  }
+
+  .projects-left {
+    width: 40%;
+  }
+
+  .projects-right {
+    width: 60%;
+    padding: 0 2%;
+  }
+
+  .card {
+    min-height: 22rem;
+    min-width: 14rem;
+  }
+}
+
+@media (max-width: 768px) {
   .projects {
     flex-direction: column;
   }

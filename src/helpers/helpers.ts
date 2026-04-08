@@ -1,6 +1,3 @@
 export function isMobile() {
-  return (
-    typeof window.orientation !== "undefined" ||
-    navigator.userAgent.indexOf("IEMobile") !== -1
-  );
+  return window.matchMedia("(max-width: 768px)").matches;
 }

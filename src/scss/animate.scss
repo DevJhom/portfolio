@@ -1,5 +1,5 @@
 .animate-on-hover {
-  transition: transform 0.3s ease;
+  transition: transform $transition-fast;
 }
 
 .animate-on-hover:hover {
@@ -10,7 +10,7 @@
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(50px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition: opacity $transition-medium, transform $transition-medium;
 }
 
 .animate-on-scroll.visible {
@@ -23,7 +23,7 @@
 // fade
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s ease;
+  transition: opacity $transition-medium;
 }
 
 .fade-enter-from,
@@ -35,13 +35,13 @@
 .slide-fade-left-enter-active, .slide-fade-right-enter-active,
 .slide-fade-top-enter-active, .slide-fade-bottom-enter-active
 {
-  transition: all 1s ease;
+  transition: all $transition-slow;
 }
 
 .slide-fade-left-leave-active, .slide-fade-right-leave-active,
 .slide-fade-top-leave-active, .slide-fade-bottom-leave-active
 {
-  transition: all 1s ease;
+  transition: all $transition-slow;
 }
 
 // slide-fade-left
@@ -103,4 +103,24 @@
     from { border-color: transparent }
     50% { border-color: $blue; }
     to { border-color: transparent }
+}
+
+/* Shared keyframes — used by MainPage, AboutMe, TechStack */
+@keyframes background-gradient {
+    0% { background-position: 0; }
+    100% { background-position: -200%; }
+}
+
+/* Shared keyframes — used by AboutMe (passion-card), KeepCalm (parallax-3) */
+@keyframes floating-boxes {
+    0%{
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+    100%{
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
 }

@@ -100,7 +100,7 @@ window.addEventListener("DOMContentLoaded", () => {
 }
 
 button {
-    border-radius: 0 6px 6px 0;
+    border-radius: 0 $radius-sm $radius-sm 0;
     min-width: 90px;
 }
 </style>
