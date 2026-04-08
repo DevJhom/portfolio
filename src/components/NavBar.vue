@@ -48,13 +48,13 @@ const setActive = (sectionId: string) => {
     z-index: $top-layer;
     background-color: $black;
     transform: translateX(-50%);
-    border-radius: 6px 6px 0 0;
+    border-radius: $radius-sm $radius-sm 0 0;
 }
 
 .nav-item a {
     font-weight: bold;
     color: $light-gray;
-    border-radius: 6px 6px 0 0;
+    border-radius: $radius-sm $radius-sm 0 0;
 }
 
 .nav-item a:hover {
@@ -63,7 +63,7 @@ const setActive = (sectionId: string) => {
 
 .nav-item a.active {
     background-color: $gray;
-    border-radius: 6px 6px 0 0;
+    border-radius: $radius-sm $radius-sm 0 0;
 }
 
 .nav-item a.active:hover {

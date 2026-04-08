@@ -41,10 +41,10 @@ setTimeout(() => {
     padding: 5px;
     box-sizing: border-box;
     background:
-        radial-gradient(farthest-side, #fff 98%, #0000) 0 0/20px 20px no-repeat,
-        conic-gradient(from 90deg at 10px 10px, #0000 90deg, #fff 0) content-box,
-        conic-gradient(from -90deg at 40px 40px, #0000 90deg, #fff 0) content-box,
-        #000;
+        radial-gradient(farthest-side, $white 98%, transparent) 0 0/20px 20px no-repeat,
+        conic-gradient(from 90deg at 10px 10px, transparent 90deg, $white 0) content-box,
+        conic-gradient(from -90deg at 40px 40px, transparent 90deg, $white 0) content-box,
+        $black;
     filter: blur(4px) contrast(10);
     animation: loading-animation 2s infinite;
 }
