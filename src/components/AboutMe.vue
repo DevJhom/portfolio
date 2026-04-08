@@ -329,16 +329,45 @@ CARDS
 }
 
 .social-media-card .my-logo {
+    position: relative;
     width: 75%;
     height: 75%;
-    background-image: url("/letter-j.png");
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.social-media-card .my-logo::before,
+.social-media-card .my-logo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    transition: transform 0.6s ease, opacity 0.6s ease;
 }
 
-.social-media-card .my-logo:hover {
+// Logo (default)
+.social-media-card .my-logo::before {
+    background-image: url("/letter-j.png");
+    z-index: 1;
+}
+
+// Photo (revealed on hover)
+.social-media-card .my-logo::after {
     background-image: url("/my-picture.jpg");
+    clip-path: circle(0% at 50% 50%);
+    transition: clip-path 0.6s ease;
+    z-index: 2;
+}
+
+.social-media-card .my-logo:hover::before {
+    transform: scale(0.8);
+    opacity: 0;
+}
+
+.social-media-card .my-logo:hover::after {
+    clip-path: circle(75% at 50% 50%);
 }
 
 // 5. passion-card
