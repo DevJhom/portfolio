@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { isMobile } from '@/helpers/helpers';
+import FacebookIcon from '@/assets/Icons/FacebookIcon.vue';
+import GithubIcon from '@/assets/Icons/GithubIcon.vue';
+import LinkedInIcon from '@/assets/Icons/LinkedInIcon.vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay, EffectFlip, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
@@ -79,6 +82,17 @@ const onHoverBusinessCard = () => {
 
         <Transition :name="isDesktop ? 'slide-fade-top' : ''">
             <div v-show="sectionIsActive || !isDesktop" class="grid-item description-card">
+                <div class="social-links">
+                    <a href="https://github.com/DevJhom" target="_blank" class="social-link social-link--github">
+                        <GithubIcon :width="22" :height="22"/>
+                    </a>
+                    <a href="https://www.linkedin.com/in/sai-swan-wan-744945205/" target="_blank" class="social-link social-link--linkedin">
+                        <LinkedInIcon :width="22" :height="22"/>
+                    </a>
+                    <a href="https://www.facebook.com/sai.jhom.wan/" target="_blank" class="social-link social-link--facebook">
+                        <FacebookIcon :width="22" :height="22"/>
+                    </a>
+                </div>
             </div>
         </Transition>
 
@@ -296,12 +310,43 @@ CARDS
     background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: flex-end;
     padding: 10px;
 }
 
 .description-card:hover {
     background-color: $blue;
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-right: 0.5rem;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: opacity $transition-fast, transform $transition-fast;
+}
+
+.description-card:hover .social-links {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform $transition-fast;
+}
+
+.social-link :deep(svg) {
+    margin: 0 !important;
+}
+
+.social-link:hover {
+    transform: scale(1.15);
 }
 
 // 3. experience-card
@@ -517,6 +562,10 @@ CARDS
 
     .description-card {
         background-position: -100px 0;
+    }
+
+    .social-links {
+        display: none;
     }
 }
 </style>
