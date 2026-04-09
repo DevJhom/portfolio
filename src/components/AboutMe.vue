@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { isMobile } from '@/helpers/helpers';
+import { useIsMobile } from '@/helpers/helpers';
+
+const isMobile = useIsMobile();
 import FacebookIcon from '@/assets/Icons/FacebookIcon.vue';
 import GithubIcon from '@/assets/Icons/GithubIcon.vue';
 import LinkedInIcon from '@/assets/Icons/LinkedInIcon.vue';
@@ -20,7 +22,7 @@ const sectionIsActive = computed(() => {
     return props.activeSection == "about-me";
 });
 
-const isDesktop = computed(() => !isMobile());
+const isDesktop = computed(() => !isMobile.value);
 const businessCard = ref<typeof Swiper | null>(null);
 const modules_location = [Navigation, Pagination, Autoplay];
 const modules_business_card = [EffectFlip];

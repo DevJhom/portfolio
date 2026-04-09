@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { reactive, computed } from 'vue';
-import { isMobile } from '@/helpers/helpers';
+import { useIsMobile } from '@/helpers/helpers';
 //import debounce from 'lodash.debounce';
 
 defineProps<{
     activeSection: string
 }>();
 
-const isDesktop = computed(() => !isMobile());
+const isMobile = useIsMobile();
+const isDesktop = computed(() => !isMobile.value);
 
 enum Experience {
     internship,
@@ -182,7 +183,7 @@ const handleScroll = debounce(() => {
 
 <template>
     <Transition :name="isDesktop ? 'fade' : ''">
-        <div v-if="activeSection == 'tech-stack' || isMobile()" class="tech-stack">
+        <div v-if="activeSection == 'tech-stack' || isMobile" class="tech-stack">
             <div class="tech-stack-left">
                 <h4 class="animate-on-hover">
                     My Work Experience
