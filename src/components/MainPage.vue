@@ -23,7 +23,7 @@ const sections = ref([
 ]);
 
 const activeSection = ref('home');
-const hideScrollToExplore = computed(() => activeSection.value == 'home');
+const showScrollToExplore = computed(() => activeSection.value == 'home');
 
 // Typing "I'm a Software Developer."
 const isTyping = ref(false);
@@ -112,7 +112,7 @@ onUnmounted(() => {
                     <h2>I'm a <span class="text-animation">Software Developer</span></h2>
                 </div>
                 <Transition name="fade">
-                    <small v-if="hideScrollToExplore" class="scroll-to-explore animate-on-hover">
+                    <small v-if="showScrollToExplore" class="scroll-to-explore animate-on-hover">
                         <a href="#about-me"> Scroll to Explore <DownArrow/></a>
                     </small>
                 </Transition>
