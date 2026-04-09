@@ -5,6 +5,7 @@ import LinkedInIcon from '@/assets/Icons/LinkedInIcon.vue';
 import { ref } from 'vue';
 
 const copySuccess = ref<boolean>(false);
+const currentYear = new Date().getFullYear();
 
 const copyToClipboard = async (text: string) => {
     try {
@@ -52,7 +53,7 @@ window.addEventListener("DOMContentLoaded", () => {
             </div>
             </div>
         </div>
-        <small class="copyright">Copyright &copy; 2025 DevJhom</small>
+        <small class="copyright">Copyright &copy; {{ currentYear }} DevJhom</small>
         <div class="social-media">
             <a href="https://www.facebook.com/sai.jhom.wan/" target="_blank">
                 <FacebookIcon/>
