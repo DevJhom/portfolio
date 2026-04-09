@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref, reactive, watch, onMounted, onUnmounted } from 'vue';
 import type { Ref } from 'vue';
-import { isMobile } from '@/helpers/helpers';
+import { useIsMobile } from '@/helpers/helpers';
+
+const isMobile = useIsMobile();
 import Play from '@/assets/Icons/Play.vue';
 import Stop from '@/assets/Icons/Stop.vue';
 
@@ -164,7 +166,7 @@ onUnmounted(() => {
     <div class="keep-calm">
         <div id="keep-calm-1" class="parallax-1"></div>
         <div id="keep-calm-2" class="parallax-2">
-            <div v-if="isMobile() || typingMessage.isTyping || typingMessage.isAlreadyTyped" :class="{typewriter: typingMessage.isTyping && !isMobile()}" class="keep-calm-text"> 
+            <div v-if="isMobile || typingMessage.isTyping || typingMessage.isAlreadyTyped" :class="{typewriter: typingMessage.isTyping && !isMobile}" class="keep-calm-text">
                 <h2>{{ displayedText }}</h2>
                 <div class="text-end mt-2 start-stop">
                     <div v-if="!isRunning" @click="startProgram()">Start <Play/></div>
