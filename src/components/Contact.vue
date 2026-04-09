@@ -2,7 +2,7 @@
 import FacebookIcon from '@/assets/Icons/FacebookIcon.vue';
 import GithubIcon from '@/assets/Icons/GithubIcon.vue';
 import LinkedInIcon from '@/assets/Icons/LinkedInIcon.vue';
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 
 const copySuccess = ref<boolean>(false);
 const currentYear = new Date().getFullYear();
@@ -23,18 +23,22 @@ const copyToClipboard = async (text: string) => {
 };
 
 // Spotlight effect
-window.addEventListener("DOMContentLoaded", () => {
+const spotlightSize = 'transparent 150px, #0c0c0c 250px)';
+const scrolledViewHeight = 700; //adjust according to number of sections
+
+function updateSpotlight(e: MouseEvent): void {
     const spotlight = document.querySelector('.contact-spotlight') as HTMLElement;
-    let spotlightSize: string = 'transparent 150px, #0c0c0c 250px)';
-    const scrolledViewHeight = 700; //adjust according to number of sections
-
-    window.addEventListener('mousemove', (e: MouseEvent) => updateSpotlight(e));
-
-    function updateSpotlight(e: MouseEvent): void {
-        if (spotlight) {
-            spotlight.style.backgroundImage = `radial-gradient(circle at ${e.pageX / window.innerWidth * 100}% ${(e.pageY / window.innerHeight * 100) - scrolledViewHeight}%, ${spotlightSize}`;
-        }
+    if (spotlight) {
+        spotlight.style.backgroundImage = `radial-gradient(circle at ${e.pageX / window.innerWidth * 100}% ${(e.pageY / window.innerHeight * 100) - scrolledViewHeight}%, ${spotlightSize}`;
     }
+}
+
+onMounted(() => {
+    window.addEventListener('mousemove', updateSpotlight);
+});
+
+onUnmounted(() => {
+    window.removeEventListener('mousemove', updateSpotlight);
 });
 </script>
 
