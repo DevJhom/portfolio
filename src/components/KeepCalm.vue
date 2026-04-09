@@ -91,7 +91,7 @@ const getNextMessage = () => {
 }
 
 let loopIntervalId = 0;
-let intervalId = setInterval(updateRandomTexts, 3000);
+let intervalId = 0;
 const isRunning = ref(false);
 
 const defaultMessage = "Programming is learned by writing programs.";
@@ -148,11 +148,14 @@ const handleScroll = () => {
 }
 
 onMounted(() => {
+    intervalId = window.setInterval(updateRandomTexts, 3000);
     characters.value = paragraph.value.split('');
     window.addEventListener('scroll', handleScroll);
 });
 
 onUnmounted(() => {
+    clearInterval(intervalId);
+    clearInterval(loopIntervalId);
     window.removeEventListener('scroll', handleScroll);
 })
 </script>

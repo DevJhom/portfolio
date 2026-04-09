@@ -27,32 +27,22 @@ const showScrollToExplore = computed(() => activeSection.value == 'home');
 
 // Typing "I'm a Software Developer."
 const isTyping = ref(false);
-
-setTimeout(() => {
-    isTyping.value = true;
-}, 1000)
-
-setTimeout(() => {
-    isTyping.value = false;
-}, 3000)
+let typingTimeout1: number;
+let typingTimeout2: number;
 
 // Spotlight effect
-window.addEventListener("DOMContentLoaded", () => {
+const spotlightSize = 'transparent 50px, #0c0c0cE5 120px)';
+
+function updateSpotlight(e: MouseEvent): void {
     const spotlight = document.querySelector('.spotlight') as HTMLElement;
-    let spotlightSize: string = 'transparent 50px, #0c0c0cE5 120px)';
-
-    window.addEventListener('mousemove', (e: MouseEvent) => updateSpotlight(e));
-
-    function updateSpotlight(e: MouseEvent): void {
-        if (spotlight) {
-            spotlight.style.backgroundImage = `radial-gradient(circle at ${e.pageX / window.innerWidth * 100}% ${e.pageY / window.innerHeight * 100}%, ${spotlightSize}`;
-        }
+    if (spotlight) {
+        spotlight.style.backgroundImage = `radial-gradient(circle at ${e.pageX / window.innerWidth * 100}% ${e.pageY / window.innerHeight * 100}%, ${spotlightSize}`;
     }
-});
+}
 
 const downloadResume = () => {
     const link = document.createElement("a");
-    link.href = "./Resume_Sai_Swan_Wan.pdf"; 
+    link.href = "./Resume_Sai_Swan_Wan.pdf";
     link.download = "Resume_Sai_Swan_Wan.pdf";
     link.click();
 }
@@ -60,6 +50,19 @@ const downloadResume = () => {
 let observer: IntersectionObserver;
 
 onMounted(() => {
+    // Typewriter timers
+    typingTimeout1 = window.setTimeout(() => {
+        isTyping.value = true;
+    }, 1000);
+
+    typingTimeout2 = window.setTimeout(() => {
+        isTyping.value = false;
+    }, 3000);
+
+    // Spotlight listener
+    window.addEventListener('mousemove', updateSpotlight);
+
+    // Intersection observer
     const options = {
         root: null,
         rootMargin: '0px',
@@ -81,6 +84,10 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
+    clearTimeout(typingTimeout1);
+    clearTimeout(typingTimeout2);
+    window.removeEventListener('mousemove', updateSpotlight);
+
     if (observer) {
         sections.value.forEach(section => {
             const element = document.getElementById(section.id);
@@ -177,6 +184,18 @@ section {
     display: flex;
     align-items: center;
     cursor: pointer;
+    padding: 0.4rem 0.6rem;
+    border-radius: $radius-md;
+    border: 1px solid transparent;
+    transition: background-color $transition-fast, border-color $transition-fast, box-shadow $transition-fast;
+}
+
+.logo:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 .logo-img {
@@ -185,7 +204,7 @@ section {
 
 .logo-text {
     margin: 0;
-    background-color: $black;
+    background-color: transparent;
 }
 
 .my-resume {
