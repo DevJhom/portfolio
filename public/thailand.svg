@@ -323,4 +323,17 @@
      class="water"
      title="Lake Songkhla"
      id="TH-LKSG" />
+  <!-- Bangkok location indicator -->
+  <defs>
+    <radialGradient id="bangkokGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4a90d9" stop-opacity="0.8" />
+      <stop offset="40%" stop-color="#4a90d9" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#4a90d9" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <g id="bangkok-indicator">
+    <circle cx="220" cy="470" r="40" fill="url(#bangkokGlow)">
+      <animate attributeName="opacity" values="0.8;0.35;0.8" dur="2s" repeatCount="indefinite" />
+    </circle>
+  </g>
 </svg>
