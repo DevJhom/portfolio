@@ -53,29 +53,75 @@ const onHoverBusinessCard = () => {
                 >
                     <SwiperSlide>
                         <div class="location-card-top">
-                            <h4> About Me </h4>
-                            <small class="text-light-gray mt-4">
-                                Hi there! 👋 <br><br>
-                                I'm <span class="text-white">DevJhom</span>, a Software Developer from <span class="text-white">Myanmar</span> (Burma).
-                            </small>
+                            <div class="terminal-header">
+                                <span class="terminal-dot dot-red"></span>
+                                <span class="terminal-dot dot-yellow"></span>
+                                <span class="terminal-dot dot-green"></span>
+                            </div>
+                            <div class="terminal-body">
+                                <div class="terminal-line">
+                                    <span class="terminal-prompt">$</span>
+                                    <span>whoami</span>
+                                </div>
+                                <div class="terminal-output">
+                                    Hi there!👋
+                                    <br> I'm <span class="t-white">DevJhom</span>.
+                                </div>
+                                <br><br>
+                                <div class="terminal-line">
+                                    <span class="terminal-prompt">$</span>
+                                    <span>ls</span>
+                                </div>
+                                <div class="terminal-output">
+                                    A <span class="t-white">Software Developer</span>
+                                    <br> from Myanmar(Burma).
+                                </div>
+                            </div>
                         </div>
                     </SwiperSlide>
                     <SwiperSlide>
                         <div class="location-card-bottom">
-                            <h4> Currently, </h4>
-                            <small class="text-light-gray mt-4">
-                                I'm based in <span class="text-white">Bangkok</span>, Thailand. <br><br>
-                                I mainly specialize in <span class="text-white">Web Application Development.</span>
-                            </small>
+                            <div class="terminal-header">
+                                <span class="terminal-dot dot-red"></span>
+                                <span class="terminal-dot dot-yellow"></span>
+                                <span class="terminal-dot dot-green"></span>
+                            </div>
+                            <div class="terminal-body">
+                                <div class="terminal-line">
+                                    <span class="terminal-prompt">$</span>
+                                    <span>locate</span>
+                                </div>
+                                <div class="terminal-output">
+                                    I'm based in <span class="t-white">Bangkok</span>, Thailand.
+                                </div>
+                                <br><br>
+                                <div class="terminal-line">
+                                    <span class="terminal-prompt">$</span>
+                                    <span>ps</span>
+                                </div>
+                                <div class="terminal-output">
+                                    Specializing in 
+                                    <br><span class="t-white">Web Application Development</span>.
+                                </div>
+                            </div>
                         </div>
                     </SwiperSlide>
                     <SwiperSlide>
                         <div class="location-card-next">
-                            <h4> Career Path </h4>
-                            <small class="text-light-gray mt-4">
-                                I'm comfortable working both <span class="text-white">remotely and on-site</span>. <br><br>
-                                I'm flexible, adventurous and always ready to embrace <span class="text-white">new career challenges</span>.
-                            </small>
+                            <div class="terminal-header">
+                                <span class="terminal-dot dot-red"></span>
+                                <span class="terminal-dot dot-yellow"></span>
+                                <span class="terminal-dot dot-green"></span>
+                            </div>
+                            <div class="terminal-body">
+                                <div class="terminal-line">
+                                    <span class="terminal-prompt">$</span>
+                                    <span>stats</span>
+                                </div>
+                                <div class="terminal-output">
+                                    <span class="t-white">to be added later</span>
+                                </div>
+                            </div>
                         </div>
                     </SwiperSlide>
                 </Swiper>
@@ -260,16 +306,16 @@ CARDS
     flex-direction: column;
     height: 100%;
     overflow: hidden;
+    background-color: $light-black;
 }
 
 .location-card-top, .location-card-bottom, .location-card-next {
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     height: 100%;
-    padding: 1rem;
     color: $white;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .location-card-top, .location-card-bottom {
@@ -277,7 +323,7 @@ CARDS
     background-color: transparent;
     background-size: 80%;
     background-position: 50% 50%;
-    background-repeat: no-repeat; 
+    background-repeat: no-repeat;
 
     transition:
         background-color $transition-fast,
@@ -285,24 +331,77 @@ CARDS
         background-size $transition-fast;
 }
 
-// .location-card-top:hover 
-.grid-item:nth-child(1):hover .location-card-top { 
+// .location-card-top:hover
+.grid-item:nth-child(1):hover .location-card-top {
     background-image: url('/myanmar.svg');
     background-size: 50%;
     background-position: 75% 25%;
 }
 
 // .location-card-bottom:hover {
-.grid-item:nth-child(1):hover .location-card-bottom { 
-    background-image: url('/thailand.svg'); 
+.grid-item:nth-child(1):hover .location-card-bottom {
+    background-image: url('/thailand.svg');
     background-size: 50%;
     background-position: 75% 25%;
-    background-color: $light-black;
 }
 
 .location-card-next {
     background: url('/street-map.svg') no-repeat center;
     background-size: cover;
+}
+
+// Terminal styles
+.terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    flex-shrink: 0;
+}
+
+.terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot-red    { background-color: #ff5f57; }
+.dot-yellow { background-color: #ffbd2e; }
+.dot-green  { background-color: #28c840; }
+
+.terminal-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    padding: 1rem;
+}
+
+.terminal-line {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.terminal-prompt {
+    color: $blue;
+    font-weight: bold;
+}
+
+.terminal-output {
+    font-size: 0.78rem;
+    color: $light-gray;
+    line-height: 1.6;
+    padding-left: 0.25rem;
+
+    .t-white {
+        color: $white;
+        font-weight: 600;
+    }
 }
 
 // 2. description-card
