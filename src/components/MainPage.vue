@@ -102,8 +102,11 @@ onUnmounted(() => {
     <div class="my-container">
         <NavBar :active-section="activeSection"/>
         <div class="logo animate-on-hover">
-            <img src="/letter-j.png" alt="DevJhom Logo" class="logo-img" height="35" width="35">
-            <h4 class="logo-text ms-1"><a href="#home">DevJhom</a></h4>
+            <a href="#home" class="logo-link">
+                <img src="/letter-j.png" alt="DevJhom Logo" class="logo-img" height="35" width="35">
+                <h4 class="logo-text ms-1">DevJhom</h4>
+            </a>
+            <span class="logo-dot"></span>
         </div>
         <div class="my-resume" @click="downloadResume()">
             <Download/> 
@@ -112,15 +115,22 @@ onUnmounted(() => {
         <!-- HOME -->
         <div id="home">
             <section>
-                <h1 class="introduction-text">
-                    Hello, I'm Jhom
-                </h1>
-                <div :class="{typewriter: isTyping}" class="introduction-text">
-                    <h2>I'm a <span class="text-animation">Software Developer</span></h2>
+                <div class="hero-content">
+                    <div class="hero-status">
+                        <span class="hero-status-dot"></span>
+                        <span class="hero-status-text">Available for new opportunities · Bangkok, TH</span>
+                        <span class="hero-status-line"></span>
+                    </div>
+                    <h1 class="introduction-text">
+                        Hello, I'm Jhom
+                    </h1>
+                    <div :class="{typewriter: isTyping}" class="introduction-text">
+                        <h2>I'm a <span class="text-animation">Software Developer</span></h2>
+                    </div>
                 </div>
                 <Transition name="fade">
                     <small v-if="showScrollToExplore" class="scroll-to-explore animate-on-hover">
-                        <a href="#about-me"> Scroll to Explore <DownArrow/></a>
+                        <a href="#about-me"><DownArrow/></a>
                     </small>
                 </Transition>
                 <div class="cursor-area-1"></div>
@@ -186,16 +196,23 @@ section {
     cursor: pointer;
     padding: 0.4rem 0.6rem;
     border-radius: $radius-md;
-    border: 1px solid transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     transition: background-color $transition-fast, border-color $transition-fast, box-shadow $transition-fast;
 }
 
 .logo:hover {
-    background-color: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background-color: rgba(255, 255, 255, 0.13);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
 }
 
 .logo-img {
@@ -205,6 +222,20 @@ section {
 .logo-text {
     margin: 0;
     background-color: transparent;
+}
+
+.logo-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #22c55e;
+    margin-left: 0.6rem;
+    animation: blink 2s ease-in-out infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
 }
 
 .my-resume {
@@ -230,8 +261,39 @@ section {
     background-position: 100% 0;
 }
 
-.introduction-text {
+.hero-content {
     padding: 0 2rem;
+}
+
+.hero-status {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.hero-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #22c55e;
+    flex-shrink: 0;
+}
+
+.hero-status-text {
+    color: $light-gray;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    font-family: monospace;
+}
+
+.hero-status-line {
+    flex: 1;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.introduction-text {
     transition: transform $transition-fast;
 }
 
