@@ -18,7 +18,7 @@ export const sourceLines: Token[][] = [
     [['    '], ['</', 'punc'], ['div', 'tag'], ['>', 'punc']],
     [['    '], ['<', 'punc'], ['div', 'tag'], [' class', 'attr'], ['=', 'punc'], ['"my-resume"', 'str'], [' @click', 'attr'], ['=', 'punc'], ['"downloadResume()"', 'str'], ['>', 'punc']],
     [['        '], ['<', 'punc'], ['Download', 'tag'], ['/>', 'punc']],
-    [['        '], ['<', 'punc'], ['h4', 'tag'], [' class', 'attr'], ['=', 'punc'], ['"ms-1"', 'str'], ['>', 'punc'], ['Download Resume'], ['</', 'punc'], ['h4', 'tag'], ['>', 'punc']],
+    [['        '], ['<', 'punc'], ['h4', 'tag'], ['>', 'punc'], ['Download Resume'], ['</', 'punc'], ['h4', 'tag'], ['>', 'punc']],
     [['    '], ['</', 'punc'], ['div', 'tag'], ['>', 'punc']],
     [['    '], ['<!-- HOME -->', 'cmt']],
     [['    '], ['<', 'punc'], ['div', 'tag'], [' id', 'attr'], ['=', 'punc'], ['"home"', 'str'], ['>', 'punc']],

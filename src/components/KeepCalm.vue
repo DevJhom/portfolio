@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { ref, reactive, watch, onMounted, onUnmounted } from 'vue';
+import { ref, reactive, computed, watch, onMounted, onUnmounted } from 'vue';
 import type { Ref } from 'vue';
-import { useIsMobile } from '@/helpers/helpers';
+import { useIsMobile, useBangkokClock } from '@/helpers/helpers';
 
 const isMobile = useIsMobile();
+const isDesktop = computed(() => !isMobile.value);
+const bangkokTime = useBangkokClock();
 import Play from '@/assets/Icons/Play.vue';
 import Stop from '@/assets/Icons/Stop.vue';
 
@@ -164,7 +166,19 @@ onUnmounted(() => {
 
 <template>
     <div class="keep-calm">
-        <div id="keep-calm-1" class="parallax-1"></div>
+        <div id="keep-calm-1" class="parallax-1">
+            <Transition :name="isDesktop ? 'fade' : ''">
+                <div v-if="activeSection == 'keep-calm-1' || isMobile" class="map-label">
+                    <span class="map-label-line"></span>
+                    <div class="map-label-text">
+                        <span class="map-label-time">{{ bangkokTime }}</span>
+                        <span class="map-label-status">
+                            <span class="map-label-dot"></span>Online
+                        </span>
+                    </div>
+                </div>
+            </Transition>
+        </div>
         <div id="keep-calm-2" class="parallax-2">
             <div v-if="isMobile || typingMessage.isTyping || typingMessage.isAlreadyTyped" :class="{typewriter: typingMessage.isTyping && !isMobile}" class="keep-calm-text">
                 <h2>{{ displayedText }}</h2>
@@ -223,6 +237,65 @@ onUnmounted(() => {
 .parallax-1 {
     background-image: url('/world.svg');
     background-size: cover;
+    position: relative;
+
+    // On-screen size of one world.svg user unit (the file has no viewBox, so user space
+    // is its intrinsic 1009.6727 x 665.96301 box).
+    --u: max(calc(100vw / 1009.6727), calc(100vh / 665.96301));
+    // Vertical nudge off the computed anchor; tune this, not the 89.618 below.
+    --nudge-y: 2%;
+}
+
+// Pinned to the Bangkok dot in world.svg (<circle cx="757" cy="422.6">). The map is
+// centred, so the dot's offset is constant in user units:
+// 757 - 1009.6727/2 = 252.164 across, 422.6 - 665.96301/2 = 89.618 down.
+.map-label {
+    position: fixed;
+    left: calc(50% + 252.164 * var(--u));
+    top: calc(50% + 89.618 * var(--u) - var(--nudge-y));
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    // Clear the r=8 glow so the leader line starts just outside it.
+    margin-left: calc(14 * var(--u));
+    z-index: $top-layer;
+    pointer-events: none;
+}
+
+.map-label-line {
+    width: clamp(2rem, calc(70 * var(--u)), 7rem);
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.map-label-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: $light-gray;
+    white-space: nowrap;
+}
+
+.map-label-status {
+    display: flex;
+    align-items: center;
+}
+
+.map-label-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #22c55e;
+    margin-right: 0.4rem;
+    flex-shrink: 0;
+    animation: map-label-blink 2s ease-in-out infinite;
+}
+
+@keyframes map-label-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
 }
 
 .parallax-2 {
@@ -348,6 +421,14 @@ onUnmounted(() => {
 @media (max-width: 768px) {
     .parallax-1 {
         background-size: 150%;
+        --u: calc(150vw / 1009.6727);
+    }
+
+    // iOS Safari ignores background-attachment: fixed and paints the map into this panel,
+    // so the anchor resolves against .parallax-1 (itself 100vw x 100vh). Absolute also
+    // stops the always-rendered mobile label from floating over every other section.
+    .map-label {
+        position: absolute;
     }
 
     .parallax-2 .keep-calm-text {

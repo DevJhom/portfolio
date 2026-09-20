@@ -111,7 +111,7 @@ onUnmounted(() => {
         </div>
         <div class="my-resume" @click="downloadResume()">
             <Download/> 
-            <h4 class="ms-1">Download Resume</h4>
+            <h4>Download Resume</h4>
         </div>
         <!-- HOME -->
         <div id="home">
@@ -248,6 +248,10 @@ section {
     right: 2rem;
     margin-top: 2rem;
     padding: 0.5rem 1rem;
+    // Locked to the expanded content's width so hiding the label on hover doesn't resize
+    // the button; retune if the label text or its font-size changes.
+    width: 11.5rem;
+    gap: 0.25rem;
     border: 1px solid $blue;
     border-radius: calc($radius-md * 2);
     z-index: $top-layer;
@@ -260,11 +264,21 @@ section {
 
 .my-resume h4 {
     font-size: clamp(0.75rem, 0.4vw + 0.55rem, 0.9rem);
+    max-width: 12rem;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: max-width $transition-medium, opacity $transition-fast;
 }
 
 .my-resume:hover {
     color: $white;
     background-position: 100% 0;
+    gap: 0;
+}
+
+.my-resume:hover h4 {
+    max-width: 0;
+    opacity: 0;
 }
 
 .hero-content {
@@ -336,9 +350,6 @@ section {
 }
 
 //Spotlight Effect
-// Leave #home position: static. It has no position, so this z-index is inert — giving it
-// one would make it a stacking context tying with .spotlight at $bottom-layer, and it would
-// win on document order and paint over the spotlight, killing the darkening effect.
 #home {
     height: 100vh;
     z-index: $bottom-layer;
