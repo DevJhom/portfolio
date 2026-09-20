@@ -6,6 +6,7 @@ import TechStack from '@components/TechStack.vue';
 import Projects from '@components/Projects.vue';
 import Contact from '@components/Contact.vue';
 import KeepCalm from '@components/KeepCalm.vue';
+import SourceCodeBackdrop from '@components/SourceCodeBackdrop.vue';
 
 import DownArrow from '@/assets/Icons/DownArrow.vue';
 import Download from '@/assets/Icons/Download.vue';
@@ -114,11 +115,12 @@ onUnmounted(() => {
         </div>
         <!-- HOME -->
         <div id="home">
+            <SourceCodeBackdrop/>
             <section>
                 <div class="hero-content">
                     <div class="hero-status">
                         <span class="hero-status-dot"></span>
-                        <span class="hero-status-text">Available for new opportunities · Bangkok, TH</span>
+                        <span class="hero-status-text">Currently Online · Bangkok, TH</span>
                         <span class="hero-status-line"></span>
                     </div>
                     <h1 class="introduction-text">
@@ -256,6 +258,10 @@ section {
     cursor: pointer;
 }
 
+.my-resume h4 {
+    font-size: clamp(0.75rem, 0.4vw + 0.55rem, 0.9rem);
+}
+
 .my-resume:hover {
     color: $white;
     background-position: 100% 0;
@@ -330,12 +336,12 @@ section {
 }
 
 //Spotlight Effect
+// Leave #home position: static. It has no position, so this z-index is inert — giving it
+// one would make it a stacking context tying with .spotlight at $bottom-layer, and it would
+// win on document order and paint over the spotlight, killing the darkening effect.
 #home {
-    background: url('/sourcecodes.png') no-repeat center;
-    background-size: contain;
     height: 100vh;
     z-index: $bottom-layer;
-    background-attachment: fixed;
     cursor: crosshair;
 }
 

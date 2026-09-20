@@ -97,6 +97,14 @@ h1, h2, h3, h4, h5, h6 {
   color: #C586C0;
 }
 
+.text-vs-comment {
+  color: #6A9955;
+}
+
+.text-vs-gray {
+  color: #808080;
+}
+
 h1 {
   font-size: clamp(1.5rem, 2vw + 1rem, 3rem); 
 }

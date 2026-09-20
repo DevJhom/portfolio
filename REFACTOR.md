@@ -177,7 +177,7 @@ from a path without a trailing slash. Use the build-aware base instead:
 link.href = `${import.meta.env.BASE_URL}Resume_Sai_Swan_Wan.pdf`;
 ```
 
-The hardcoded `/letter-j.png`, `/world.svg`, `/sourcecodes.png` etc. elsewhere are fine —
+The hardcoded `/letter-j.png`, `/world.svg` etc. elsewhere are fine —
 those go through Vite's base rewriting. `downloadResume` is the one that bypasses it.
 
 ### 2.4 Timers created outside a lifecycle hook, never cleared
