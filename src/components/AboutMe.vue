@@ -629,7 +629,7 @@ CARDS
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: center;
     padding: 1rem;
     width: 100%;
     height: 100%;
