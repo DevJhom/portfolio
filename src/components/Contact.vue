@@ -112,6 +112,7 @@ onUnmounted(() => {
 
             <div class="contact-right col-md-6">
                 <form @submit.prevent="submitForm">
+                    <h3 class="mb-3">Message Me</h3>
                     <div class="row g-3 mb-3">
                         <div class="col-sm-6">
                             <input v-model="form.firstName" type="text" class="form-control" placeholder="First Name" aria-label="First name" required>
