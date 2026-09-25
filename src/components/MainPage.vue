@@ -110,13 +110,13 @@ onUnmounted(() => {
                         <span class="logo-face logo-photo" aria-hidden="true"></span>
                     </span>
                 </span>
-                <h4 class="logo-text ms-1">DevJhom</h4>
+                <h4 class="logo-text">DevJhom</h4>
             </a>
             <span class="logo-dot"></span>
         </div>
         <div class="my-resume" @click="downloadResume()">
             <Download/> 
-            <h4>Download Resume</h4>
+            <h4>Resume</h4>
         </div>
         <!-- HOME -->
         <div id="home">
@@ -302,7 +302,7 @@ section {
 }
 
 .logo-text {
-    margin: 0;
+    margin: 0 0 0 0.6rem;
     background-color: transparent;
 }
 
@@ -330,8 +330,8 @@ section {
     padding: 0.5rem 1rem;
     // Locked to the expanded content's width so hiding the label on hover doesn't resize
     // the button; retune if the label text or its font-size changes.
-    width: 11.5rem;
-    gap: 0.25rem;
+    width: 7.25rem;
+    gap: 0.5rem;
     border: 1px solid $blue;
     border-radius: calc($radius-md * 2);
     z-index: $top-layer;
