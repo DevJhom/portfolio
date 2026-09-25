@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useIsMobile } from '@/helpers/helpers';
+import { useTranslation } from '@/i18n';
 
 const isMobile = useIsMobile();
+const { t } = useTranslation();
 import FacebookIcon from '@/assets/Icons/FacebookIcon.vue';
 import GithubIcon from '@/assets/Icons/GithubIcon.vue';
 import LinkedInIcon from '@/assets/Icons/LinkedInIcon.vue';
@@ -72,19 +74,19 @@ const setPassionBoxSpeed = (rate: number) => {
                                     <span class="terminal-prompt">$</span>
                                     <span>whoami</span>
                                 </div>
-                                <div class="terminal-output">
-                                    Hi there!👋
-                                    <br> I'm <span class="t-white">DevJhom</span>.
-                                </div>
+                                <i18n-t keypath="about.whoami" tag="div" class="terminal-output">
+                                    <template #br><br></template>
+                                    <template #name><span class="t-white">DevJhom</span></template>
+                                </i18n-t>
                                 <br><br>
                                 <div class="terminal-line">
                                     <span class="terminal-prompt">$</span>
                                     <span>ls</span>
                                 </div>
-                                <div class="terminal-output">
-                                    A <span class="t-white">Software Developer</span>
-                                    <br> from Myanmar(Burma).
-                                </div>
+                                <i18n-t keypath="about.from" tag="div" class="terminal-output">
+                                    <template #br><br></template>
+                                    <template #role><span class="t-white">Software Developer</span></template>
+                                </i18n-t>
                             </div>
                         </div>
                     </SwiperSlide>
@@ -100,18 +102,18 @@ const setPassionBoxSpeed = (rate: number) => {
                                     <span class="terminal-prompt">$</span>
                                     <span>locate</span>
                                 </div>
-                                <div class="terminal-output">
-                                    I'm based in <span class="t-white">Bangkok</span>, Thailand.
-                                </div>
+                                <i18n-t keypath="about.based" tag="div" class="terminal-output">
+                                    <template #city><span class="t-white">{{ t('about.city') }}</span></template>
+                                </i18n-t>
                                 <br><br>
                                 <div class="terminal-line">
                                     <span class="terminal-prompt">$</span>
                                     <span>ps</span>
                                 </div>
-                                <div class="terminal-output">
-                                    Specializing in 
-                                    <br><span class="t-white">Web Application Development</span>.
-                                </div>
+                                <i18n-t keypath="about.specializing" tag="div" class="terminal-output">
+                                    <template #br><br></template>
+                                    <template #field><span class="t-white">Web Application Development</span></template>
+                                </i18n-t>
                             </div>
                         </div>
                     </SwiperSlide>
@@ -128,7 +130,7 @@ const setPassionBoxSpeed = (rate: number) => {
                                     <span>stats</span>
                                 </div>
                                 <div class="terminal-output">
-                                    <span class="t-white">to be added later</span>
+                                    <span class="t-white">{{ t('about.toBeAdded') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -155,9 +157,10 @@ const setPassionBoxSpeed = (rate: number) => {
 
         <Transition :name="isDesktop ? 'slide-fade-right' : ''">
             <div v-show="sectionIsActive || !isDesktop" class="grid-item experience-card">
-                <span>
-                    <h3> 3+ </h3> years experience <br> in Web Application Development.
-                </span>
+                <i18n-t keypath="about.experience" tag="span">
+                    <template #years><h3> 3+ </h3></template>
+                    <template #br><br></template>
+                </i18n-t>
             </div>
         </Transition>
 
@@ -179,9 +182,9 @@ const setPassionBoxSpeed = (rate: number) => {
                 <div class="animate-box" id="animate-box-4"></div>
                 <div class="animate-box" id="animate-box-5"></div>
 
-                <h4 class="mb-3">Coding with Passion</h4>
+                <h4 class="mb-3">{{ t('about.passionTitle') }}</h4>
                 <span class="text-light-gray">
-                    I'm passionate about coding and problem-solving, approaching each project with a creative mindset, a strong dedication and a commitment to writing clean, maintainable codes.
+                    {{ t('about.passionText') }}
                 </span>
             </div>
         </Transition>
@@ -211,7 +214,7 @@ const setPassionBoxSpeed = (rate: number) => {
                                 <b>Software Developer</b>
                             </small>
                             <small class="swipe">
-                                <i>Swipe >>></i>
+                                <i>{{ t('about.swipe') }}</i>
                             </small>
                         </div>
                     </SwiperSlide>
@@ -330,7 +333,7 @@ CARDS
     flex-direction: column;
     height: 100%;
     color: $white;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Courier New', Courier, var(--font-mono);
 }
 
 .location-card-top, .location-card-bottom {

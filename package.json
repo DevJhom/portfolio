@@ -12,8 +12,9 @@
   "dependencies": {
     "bootstrap": "^5.3.3",
     "lodash.debounce": "^4.0.8",
-    "swiper": "^11.2.2",
-    "vue": "^3.5.13"
+    "swiper": "^14.2.0",
+    "vue": "^3.5.13",
+    "vue-i18n": "^11.4.12"
   },
   "devDependencies": {
     "@types/lodash.debounce": "^4.0.9",
