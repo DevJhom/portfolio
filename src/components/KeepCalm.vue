@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref, reactive, computed, watch, onMounted, onUnmounted } from 'vue';
-import type { Ref } from 'vue';
+import { ref, reactive, computed, watch, nextTick, onMounted, onUnmounted } from 'vue';
 import { useIsMobile, useBangkokClock } from '@/helpers/helpers';
+import { messages, useTranslation } from '@/i18n';
 
 const isMobile = useIsMobile();
 const isDesktop = computed(() => !isMobile.value);
 const bangkokTime = useBangkokClock();
+const { t, locale } = useTranslation();
 import Play from '@/assets/Icons/Play.vue';
 import Stop from '@/assets/Icons/Stop.vue';
 
@@ -127,8 +128,18 @@ const endProgram = () => {
 }
 
 // Scroll Text Reveal Effect
-const paragraph: Ref<string> = ref("I am a passionate developer who thrives on blending creativity with technology to craft innovative solutions. Whether it’s writing clean, efficient code or tackling complex problems, I enjoy transforming ideas into impactful digital experiences. With a strong foundation in full-stack development, I aim to deliver work that is both functional and engaging.");
-const characters: Ref<string[]> = ref([]);
+// English splits by grapheme (letter by letter). 
+// Thai and Burmese split by word: a per-character split would put vowel/tone marks 
+// and stacked consonants in their own spans, away from the letter they attach to, and they render broken.
+const storySegments = computed(() => {
+    const segmenter = new Intl.Segmenter(locale.value, {
+        granularity: locale.value == 'en' ? 'grapheme' : 'word',
+    });
+
+    return messages[locale.value].keepCalm.story.map(sentence =>
+        Array.from(segmenter.segment(sentence), ({ segment }) => segment)
+    );
+});
 
 const handleScroll = () => {
     const spanElements = document.querySelectorAll<HTMLSpanElement>('span.scroll-reveal');
@@ -151,9 +162,11 @@ const handleScroll = () => {
     })
 }
 
+// A language switch re-renders the spans; recolour them for the current scroll position.
+watch(locale, () => nextTick(handleScroll));
+
 onMounted(() => {
     intervalId = window.setInterval(updateRandomTexts, 3000);
-    characters.value = paragraph.value.split('');
     window.addEventListener('scroll', handleScroll);
 });
 
@@ -173,7 +186,7 @@ onUnmounted(() => {
                     <div class="map-label-text">
                         <span class="map-label-time">{{ bangkokTime }}</span>
                         <span class="map-label-status">
-                            <span class="map-label-dot"></span>Online
+                            <span class="map-label-dot"></span>{{ t('keepCalm.online') }}
                         </span>
                     </div>
                 </div>
@@ -206,9 +219,10 @@ onUnmounted(() => {
         <div id="keep-calm-3" class="parallax-3" :style="{ backgroundColor: dynamicBackgroundColor }">
             <div class="description-text">
                 <p>
-                    <span v-for="(char, index) in characters" :key="index" class="scroll-reveal">
-                        {{ char }}<br v-if="char == '.'"><br v-if="char == '.'">
-                    </span>
+                    <template v-for="(sentence, i) in storySegments" :key="`${locale}-${i}`">
+                        <span v-for="(segment, j) in sentence" :key="j" class="scroll-reveal">{{ segment }}</span>
+                        <br><br>
+                    </template>
                 </p>
             </div>
             <div class="animate-box" id="animate-box-1"></div>
@@ -272,7 +286,7 @@ onUnmounted(() => {
     display: flex;
     flex-direction: column;
     gap: 0.15rem;
-    font-family: monospace;
+    font-family: var(--font-mono);
     font-size: 0.8rem;
     color: $light-gray;
     white-space: nowrap;

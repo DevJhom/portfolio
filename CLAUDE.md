@@ -37,12 +37,37 @@ Nothing else coordinates the page.
 
 Adding a section means touching three places: the `sections` array in `MainPage.vue`,
 a `<div id="..."><section>…</section></div>` wrapper in its template, and an `<li>` in
-`NavBar.vue`.
+`NavBar.vue` (plus its nav label in all three `src/i18n/locales/*.ts`).
 
 `KeepCalm.vue` is the exception to the one-id-per-section rule: it is a 300vh parallax
 block whose three internal ids (`keep-calm-1/2/3`) are what `MainPage` registers, and
 it watches `activeSection` to trigger its typewriter and background-colour swap. That
 is why `NavBar` highlights "About Me" for any id containing `keep-calm`.
+
+### i18n: English / Thai / Burmese
+
+`vue-i18n` (Composition API) is set up in `src/i18n/index.ts`; `LanguageSwitcher.vue` sits
+top-right next to Resume. Strings live in `src/i18n/locales/{en,th,my}.ts`. `en.ts` is the
+source of truth and `th`/`my` are typed `MessageSchema`, so a missing or extra key fails
+the build. The Thai/Burmese text is a draft awaiting native review.
+
+- **Only UI copy and prose are translated.** Brand names, job titles, tech names and
+  code-styled text (terminal commands, the business card, the Keep Calm quote) stay
+  hard-coded English in templates.
+- In components use `const { t, locale } = useTranslation()` from `@/i18n`, not vue-i18n's
+  `useI18n` — its `t` only accepts real keys (`MessageKey`), so a typo fails vue-tsc.
+- Sentences containing a styled or kept-English part use `<i18n-t keypath="…" tag="…">`
+  with named slots (`{role}`, `{city}`; `{br}` is a line break) so each language can
+  reorder them. `keypath` is **not** type-checked. Arrays (`keepCalm.story`) are read from
+  `messages[locale]` directly.
+- `setLocale()` updates `<html lang>` and `localStorage`. Per-language CSS hooks off
+  `:lang(th)` / `:lang(my)`, which also works inside scoped styles. `main.scss` raises
+  line heights for both scripts, and `--font-mono` puts Noto Sans Thai/Myanmar (loaded in
+  `index.html`) in the fallback chain — use `var(--font-mono)`, not a bare `monospace`
+  stack, or Thai/Burmese falls back to whatever the OS has.
+- Never split Thai/Burmese text per character: vowel/tone marks and stacked consonants
+  detach into their own elements and render broken. Use `Intl.Segmenter` with
+  `granularity: 'word'`, as `KeepCalm.vue` does.
 
 ### Desktop-vs-mobile rendering convention
 

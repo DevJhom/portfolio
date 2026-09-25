@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { reactive, computed } from 'vue';
 import { useIsMobile } from '@/helpers/helpers';
+import { useTranslation } from '@/i18n';
 //import debounce from 'lodash.debounce';
 
 defineProps<{
@@ -9,6 +10,7 @@ defineProps<{
 
 const isMobile = useIsMobile();
 const isDesktop = computed(() => !isMobile.value);
+const { t } = useTranslation();
 
 enum Experience {
     internship,
@@ -186,30 +188,30 @@ const handleScroll = debounce(() => {
         <div v-if="activeSection == 'tech-stack' || isMobile" class="tech-stack">
             <div class="tech-stack-left">
                 <h4 class="animate-on-hover">
-                    My Work Experience
+                    {{ t('techStack.title') }}
                 </h4>
 
                 <div class="history-tl-container">
                     <ul class="tl">
                         <li class="tl-item" @mouseenter="triggerHover(Experience.internship)" @mouseleave="triggerHover(Experience.reset)">
-                            <div class="item-title">Frontend Developer <span :class="{'text-light-gray': !hoverOnExp.internship}">(Internship)</span></div>
+                            <div class="item-title">Frontend Developer <span :class="{'text-light-gray': !hoverOnExp.internship}">{{ t('techStack.internship') }}</span></div>
                             <div class="item-detail">@ Innovative Village Co., Ltd.</div>
                             <small v-show="hoverOnExp.internship" class="item-detail">
-                                I used Wordpress, HTML, CSS, Javascript, MySQL and Google Cloud.
+                                {{ t('techStack.internshipDetail') }}
                             </small>
                         </li>
                         <li class="tl-item" @mouseenter="triggerHover(Experience.omnistar)" @mouseleave="triggerHover(Experience.reset)">
                             <div class="item-title">System Analyst <span :class="{'text-light-gray': !hoverOnExp.omnistar}"> (2021-2022)</span></div>
                             <div class="item-detail">@ Omni Star Co., Ltd.</div>
                             <small v-show="hoverOnExp.omnistar" class="item-detail">
-                                I worked on the infrastructure side, configuring SQL databases and managing deployments.
+                                {{ t('techStack.omnistarDetail') }}
                             </small>
                         </li>
                         <li class="tl-item" @mouseenter="triggerHover(Experience.clicknext)" @mouseleave="triggerHover(Experience.reset)">
-                            <div class="item-title">Full Stack Developer <span :class="{'text-light-gray': !hoverOnExp.clicknext}"> (2022-present)</span></div>
+                            <div class="item-title">Full Stack Developer <span :class="{'text-light-gray': !hoverOnExp.clicknext}"> (2022-{{ t('techStack.present') }})</span></div>
                             <div class="item-detail">@ ClickNext Co., Ltd.</div>
                             <small v-show="hoverOnExp.clicknext" class="item-detail">
-                                My current tech stack includes Vue, Typescript, SCSS, C# and Microsoft SQL Server, as well as Git and Vim as development tools.
+                                {{ t('techStack.clicknextDetail') }}
                             </small>
                         </li>
                     </ul>
@@ -320,14 +322,14 @@ const handleScroll = debounce(() => {
                 <div class="d-flex justify-content-center mt-4 animate-on-hover">
                     <template v-if="hoverOnExp.hoverStart">
                         <template v-if="hoverOnExp.clicknext">
-                            Technologies I'm currently using.
+                            {{ t('techStack.currentlyUsing') }}
                         </template>
                         <template v-else>
-                            Technologies I've used and familiar with.
+                            {{ t('techStack.usedAndFamiliar') }}
                         </template>
                     </template>
                     <template v-else>
-                        Technologies I'm familiar with.
+                        {{ t('techStack.familiar') }}
                     </template>
                 </div>
             </div>
