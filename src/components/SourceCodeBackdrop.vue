@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
 import { useIsMobile } from '@/helpers/helpers';
 import { sourceLines, type Kind, type Token } from '@components/sourceCode';
 
 const isMobile = useIsMobile();
-const backdrop = ref<HTMLElement | null>(null);
 
 const KIND_CLASS: Record<Kind, string> = {
     tag: 'text-vs-dark-blue',
@@ -17,42 +15,20 @@ const KIND_CLASS: Record<Kind, string> = {
 const kindClass = (kind?: Kind) => kind ? KIND_CLASS[kind] : '';
 const lineLength = (line: Token[]) => line.reduce((total, [text]) => total + text.length, 0);
 const maxChars = Math.max(...sourceLines.map(lineLength));
-
-// Mimics the old background-attachment: fixed — the block stays pinned to the viewport
-// while its bottom edge wipes upward as #home scrolls away. overflow cannot clip a fixed
-// element, so the clip lives on the element itself.
-let frame = 0;
-
-function updateWipe(): void {
-    frame = 0;
-    backdrop.value?.style.setProperty('--wipe', `${window.scrollY}px`);
-}
-
-function onScroll(): void {
-    if (!frame) frame = requestAnimationFrame(updateWipe);
-}
-
-onMounted(() => {
-    updateWipe();
-    window.addEventListener('scroll', onScroll, { passive: true });
-});
-
-onUnmounted(() => {
-    window.removeEventListener('scroll', onScroll);
-    if (frame) cancelAnimationFrame(frame);
-});
 </script>
 
 <template>
-    <div v-if="!isMobile" ref="backdrop" class="code-backdrop" aria-hidden="true">
-        <div class="code-block" :style="{ '--max-chars': maxChars }">
-            <div
-                v-for="(line, i) in sourceLines"
-                :key="i"
-                class="code-line"
-                :style="{ '--line': i, '--chars': lineLength(line) }"
-            >
-                <span v-for="([text, kind], j) in line" :key="j" :class="kindClass(kind)">{{ text }}</span>
+    <div v-if="!isMobile" class="code-backdrop-clip" aria-hidden="true">
+        <div class="code-backdrop">
+            <div class="code-block" :style="{ '--max-chars': maxChars }">
+                <div
+                    v-for="(line, i) in sourceLines"
+                    :key="i"
+                    class="code-line"
+                    :style="{ '--line': i, '--chars': lineLength(line) }"
+                >
+                    <span v-for="([text, kind], j) in line" :key="j" :class="kindClass(kind)">{{ text }}</span>
+                </div>
             </div>
         </div>
     </div>
@@ -61,6 +37,14 @@ onUnmounted(() => {
 <style scoped lang="scss">
 // No z-index: the backdrop must paint below .spotlight ($bottom-layer) so the cursor
 // still reveals it, and below #home section ($middle-layer) so the hero text stays lit.
+// Unlike overflow, clip-path also clips the fixed .code-backdrop inside it.
+.code-backdrop-clip {
+    position: absolute;
+    inset: 0;
+    clip-path: inset(0);
+    pointer-events: none;
+}
+
 .code-backdrop {
     position: fixed;
     inset: 0;
@@ -73,9 +57,7 @@ onUnmounted(() => {
     // the vw term keeps the longest line inside narrow windows.
     font-size: min(1.15vw, 1.5vh);
     line-height: 1.25;
-    pointer-events: none;
     user-select: none;
-    clip-path: inset(0 0 var(--wipe, 0px) 0);
 }
 
 // Explicit width so centring does not drift while the lines animate from zero width.
