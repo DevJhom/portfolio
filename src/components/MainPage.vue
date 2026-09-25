@@ -453,9 +453,10 @@ section {
 }
 
 //Spotlight Effect
+// No z-index: it would lift SourceCodeBackdrop above .spotlight.
 #home {
+    position: relative;
     height: 100vh;
-    z-index: $bottom-layer;
     cursor: crosshair;
 }
 

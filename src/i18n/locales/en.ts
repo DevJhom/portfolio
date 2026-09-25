@@ -24,7 +24,7 @@ const en = {
         toBeAdded: 'to be added later',
         experience: '{years} years experience{br}in Web Application Development.',
         passionTitle: 'Coding with Passion',
-        passionText: "I'm passionate about coding and problem-solving, approaching each project with a creative mindset, a strong dedication and a commitment to writing clean, maintainable codes.",
+        passionText: "I'm passionate about coding and problem-solving. I approach each project with creativity, strong dedication and commitment to writing clean and maintainable codes.",
         swipe: 'Swipe >>>',
     },
     keepCalm: {
@@ -71,7 +71,7 @@ const en = {
             sent: 'Sent!',
             tryAgain: 'Try again',
             thanks: "Thanks! I'll get back to you soon.",
-            error: 'Something went wrong. Please try again or copy my email.',
+            error: 'Something went wrong. Please try again.',
         },
     },
 };
