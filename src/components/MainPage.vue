@@ -104,7 +104,12 @@ onUnmounted(() => {
         <NavBar :active-section="activeSection"/>
         <div class="logo animate-on-hover">
             <a href="#home" class="logo-link">
-                <img src="/letter-j.png" alt="DevJhom Logo" class="logo-img" height="35" width="35">
+                <span class="logo-flip">
+                    <span class="logo-flip-inner">
+                        <img src="/letter-j.png" alt="DevJhom Logo" class="logo-face logo-img" height="35" width="35">
+                        <span class="logo-face logo-photo" aria-hidden="true"></span>
+                    </span>
+                </span>
                 <h4 class="logo-text ms-1">DevJhom</h4>
             </a>
             <span class="logo-dot"></span>
@@ -217,8 +222,83 @@ section {
     text-decoration: none;
 }
 
-.logo-img {
+// Flip between the J and the my-picture.jpg on hover
+.logo-flip {
+    display: block;
+    width: 35px;
+    height: 35px;
+    perspective: 400px;
+}
+
+.logo-flip-inner {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.logo-face {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
     border-radius: $radius-md;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.logo-photo {
+    overflow: hidden;
+    transform: rotateY(180deg);
+    background: url('/my-picture.jpg') 46% 34% / auto 170% no-repeat;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35), 0 0 12px $blue;
+}
+
+// Light glint that sweeps across the photo once it has turned face-up.
+.logo-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.6) 50%, transparent 65%) 150% 0 / 250% 100% no-repeat;
+}
+
+.logo:hover .logo-flip-inner {
+    transform: rotateY(180deg);
+}
+
+.logo:hover .logo-photo::after {
+    background-position: -50% 0;
+    transition: background-position 0.6s ease 0.35s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .logo-flip-inner,
+    .logo:hover .logo-flip-inner {
+        transform: none;
+        transition: none;
+    }
+
+    .logo-face {
+        backface-visibility: visible;
+        -webkit-backface-visibility: visible;
+        transition: opacity $transition-fast;
+    }
+
+    .logo-photo {
+        transform: none;
+        opacity: 0;
+    }
+
+    .logo:hover .logo-photo {
+        opacity: 1;
+    }
+
+    .logo:hover .logo-photo::after {
+        transition: none;
+    }
 }
 
 .logo-text {

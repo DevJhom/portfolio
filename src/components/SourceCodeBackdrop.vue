@@ -69,7 +69,7 @@ onUnmounted(() => {
     justify-content: flex-start;
     padding-left: 5vw;
     color: #D4D4D4;
-    // Stands in for background-size: contain — the vh term keeps all 44 lines on screen,
+    // Stands in for background-size: contain — the vh term keeps all 49 lines on screen,
     // the vw term keeps the longest line inside narrow windows.
     font-size: min(1.15vw, 1.5vh);
     line-height: 1.25;
