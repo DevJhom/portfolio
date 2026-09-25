@@ -96,7 +96,7 @@ onUnmounted(() => {
     <div class="contact-spotlight"></div>
     <div class="contact">
         <div class="contact-content row g-5">
-            <div class="contact-left col-md-6 align-self-start">
+            <div class="contact-left col-md-6">
                 <h2>"Let's Get In Touch!"</h2>
                 <p class="text-secondary mt-3">Reach out to me directly via email, or drop me a message using the form.</p>
                 <div class="input-group mt-3">
@@ -178,7 +178,16 @@ onUnmounted(() => {
     align-items: center;
 }
 
+// Glass card, same style as the .logo card in MainPage.vue
 .contact-right form {
+    padding: 1.5rem;
+    border-radius: $radius-md;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+
     .form-control {
         background-color: $light-black;
         border-color: $gray;
@@ -221,12 +230,6 @@ onUnmounted(() => {
 .copy-btn {
     border-radius: 0 $radius-sm $radius-sm 0;
     min-width: 90px;
-}
-
-@media (min-width: 768px) {
-    .contact-right {
-        border-left: 1px solid $gray;
-    }
 }
 
 @media (max-width: 768px) {

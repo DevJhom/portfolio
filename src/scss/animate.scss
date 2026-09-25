@@ -1,3 +1,5 @@
+@use "colors" as *;
+
 .animate-on-hover {
   transition: transform $transition-fast;
 }

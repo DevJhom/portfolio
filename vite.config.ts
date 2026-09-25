@@ -17,10 +17,10 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `
-          @import "/src/scss/colors.scss";
-          @import "/src/scss/layers.scss";
-          @import "/src/scss/animate.scss";
-          @import "/src/scss/backgrounds.scss";
+          @use "/src/scss/colors.scss" as *;
+          @use "/src/scss/layers.scss" as *;
+          @use "/src/scss/animate.scss" as *;
+          @use "/src/scss/backgrounds.scss" as *;
         `
       }
     }
