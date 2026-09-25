@@ -240,12 +240,15 @@ const setPassionBoxSpeed = (rate: number) => {
 
 <style scoped lang="scss">
 .grid-container {
+    --grid-h: clamp(600px, 80vh, 900px);
+    --grid-ratio: 1.6; // 16:10
+
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(6, 1fr);
     gap: 1.5rem;
-    width: 75%;
-    max-height: 100%;
+    height: var(--grid-h);
+    width: min(92%, calc(var(--grid-h) * var(--grid-ratio)));
     padding: 1rem 0;
 }
 
@@ -256,7 +259,8 @@ const setPassionBoxSpeed = (rate: number) => {
     border-radius: $radius-md;
     padding: 2rem;
     transition: transform $transition-fast;
-    min-height: 200px;
+    min-height: 0;
+    min-width: 0;
 }
 
 .grid-item:hover {
@@ -642,6 +646,7 @@ CARDS
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: auto;
         width: 90%;
+        height: auto; // the stacked layout grows with its content
     }
 
     .grid-item {

@@ -95,8 +95,9 @@ const onMouseLeave = () => {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 75%;
+  width: min(75%, 90rem);
   height: 100%;
+  max-height: 900px;
   margin: auto;
   padding: 2rem 0;
 }
@@ -236,6 +237,7 @@ const onMouseLeave = () => {
 @media (max-width: 768px) {
   .projects {
     flex-direction: column;
+    max-height: none;
   }
 
   .projects-left {
