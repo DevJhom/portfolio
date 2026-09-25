@@ -35,6 +35,15 @@ const onHoverBusinessCard = () => {
     businessCard.value?.slidePrev();
 }
 
+// updatePlaybackRate keeps each box's current position; swapping animation-duration in CSS would make them jump
+const passionCard = ref<HTMLElement | null>(null);
+
+const setPassionBoxSpeed = (rate: number) => {
+    passionCard.value?.querySelectorAll('.animate-box').forEach(box => {
+        box.getAnimations().forEach(animation => animation.updatePlaybackRate(rate));
+    });
+}
+
 </script>
 
 <template>
@@ -157,14 +166,20 @@ const onHoverBusinessCard = () => {
         </div>
 
         <Transition :name="isDesktop ? 'slide-fade-right' : ''">
-            <div v-show="sectionIsActive || !isDesktop" class="grid-item passion-card">
+            <div
+                v-show="sectionIsActive || !isDesktop"
+                ref="passionCard"
+                class="grid-item passion-card"
+                @mouseenter="setPassionBoxSpeed(6)"
+                @mouseleave="setPassionBoxSpeed(1)"
+            >
                 <div class="animate-box" id="animate-box-1"></div>
                 <div class="animate-box" id="animate-box-2"></div>
                 <div class="animate-box" id="animate-box-3"></div>
                 <div class="animate-box" id="animate-box-4"></div>
                 <div class="animate-box" id="animate-box-5"></div>
 
-                <h4>Coding with Passion</h4>
+                <h4 class="mb-3">Coding with Passion</h4>
                 <span class="text-light-gray">
                     I'm passionate about coding and problem-solving, approaching each project with a creative mindset, a strong dedication and a commitment to writing clean, maintainable codes.
                 </span>
@@ -206,8 +221,8 @@ const onHoverBusinessCard = () => {
                                 business-card.info
                             </small>
                             <small><span class="text-vs-yellow">.contact </span><span class="text-vs-yellow">&#123;</span></small>
-                            <small class="ms-4"><span class="text-vs-blue">name:</span><span class="text-vs-orange"> Mr. Sai Swan Wan</span></small>
-                            <small class="ms-4"><span class="text-vs-blue">position:</span><span class="text-vs-orange"> Software Developer</span></small>
+                            <small class="ms-4"><span class="text-vs-blue">name:</span><span class="text-vs-orange"> DevJhom</span></small>
+                            <small class="ms-4"><span class="text-vs-blue">role:</span><span class="text-vs-orange"> Software Developer</span></small>
                             <small class="ms-4"><span class="text-vs-blue">mobile:</span><span class="text-vs-green"> +66 98 931 8198</span></small>
                             <small class="ms-4"><span class="text-vs-blue">email:</span><span class="text-vs-green"> jhomwan238@gmail.com</span></small>
                             <small class="ms-4"><span class="text-vs-blue">website:</span><span class="text-vs-green"> https://devjhom.site</span> </small>
@@ -332,18 +347,18 @@ CARDS
 }
 
 // .location-card-top:hover
-.grid-item:nth-child(1):hover .location-card-top {
-    background-image: url('/myanmar.svg');
-    background-size: 50%;
-    background-position: 75% 25%;
-}
+// .grid-item:nth-child(1):hover .location-card-top {
+//     background-image: url('/myanmar.svg');
+//     background-size: 50%;
+//     background-position: 75% 25%;
+// }
 
 // .location-card-bottom:hover {
-.grid-item:nth-child(1):hover .location-card-bottom {
-    background-image: url('/thailand.svg');
-    background-size: 50%;
-    background-position: 75% 25%;
-}
+// .grid-item:nth-child(1):hover .location-card-bottom {
+//     background-image: url('/thailand.svg');
+//     background-size: 50%;
+//     background-position: 75% 25%;
+// }
 
 .location-card-next {
     background: url('/street-map.svg') no-repeat center;
