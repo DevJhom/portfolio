@@ -508,7 +508,7 @@ section {
     position: relative;
 }
 
-// Phones: tighter gutters and an icon-only Resume so logo, switcher and Resume share one row.
+// Phones: tighter gutters, and an icon-only Resume pinned bottom-left.
 @media (max-width: 768px) {
     .logo {
         margin-left: 1rem;
@@ -516,11 +516,27 @@ section {
 
     .top-actions {
         right: 1rem;
-        gap: 0.5rem;
+        height: calc(35px + 0.8rem + 2px);
+    }
+
+    .scroll-to-explore {
+        position: fixed;
+        right: 1rem;
+        bottom: 1rem;
+        height: calc(20px + 1rem + 2px);
+        display: flex;
+        align-items: center;
+    }
+
+    .scroll-to-explore a {
+        display: flex;
     }
 
     .my-resume,
     .my-resume:lang(my) {
+        position: fixed;
+        left: 1rem;
+        bottom: 1rem;
         width: auto;
         padding: 0.5rem 0.6rem;
         gap: 0;
@@ -528,14 +544,6 @@ section {
 
     .my-resume h4 {
         display: none;
-    }
-}
-
-// Narrowest phones: the row no longer fits beside the logo, so the switcher drops under Resume.
-@media (max-width: 420px) {
-    .top-actions {
-        flex-direction: column-reverse;
-        align-items: flex-end;
     }
 }
 </style>

@@ -441,15 +441,21 @@ onUnmounted(() => {
 
 @media (max-width: 768px) {
     .parallax-1 {
+        background-attachment: scroll;
         background-size: 150%;
         --u: calc(150vw / 1009.6727);
     }
 
-    // iOS Safari ignores background-attachment: fixed and paints the map into this panel,
-    // so the anchor resolves against .parallax-1 (itself 100vw x 100vh). Absolute also
-    // stops the always-rendered mobile label from floating over every other section.
+    // Absolute also stops the always-rendered mobile label from floating over every other section.
     .map-label {
         position: absolute;
+        flex-direction: row-reverse;
+        transform: translateX(-100%);
+        margin-left: calc(-14 * var(--u));
+    }
+
+    .map-label-text {
+        align-items: flex-end;
     }
 
     .parallax-2 .keep-calm-text {

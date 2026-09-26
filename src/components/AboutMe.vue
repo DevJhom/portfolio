@@ -81,12 +81,17 @@ const setPassionBoxSpeed = (rate: number) => {
                                 <br><br>
                                 <div class="terminal-line">
                                     <span class="terminal-prompt">$</span>
-                                    <span>ls</span>
+                                    <span>cd ~</span>
                                 </div>
                                 <i18n-t keypath="about.from" tag="div" class="terminal-output">
                                     <template #br><br></template>
-                                    <template #role><span class="t-white">Software Developer</span></template>
+                                    <template #role>Software Developer</template>
+                                    <template #country><span class="t-white fw-bold">{{ t('about.country') }}</span></template>
                                 </i18n-t>
+                            </div>
+                            <div class="location-map">
+                                <div class="location-map-shell"><span class="shell-user">devjhom@ubuntu</span>:<span class="text-vs-dark-blue">~</span>$ find</div>
+                                <img src="/asean-myanmar.svg" alt="Map of Southeast Asia with Myanmar highlighted">
                             </div>
                         </div>
                     </SwiperSlide>
@@ -100,20 +105,24 @@ const setPassionBoxSpeed = (rate: number) => {
                             <div class="terminal-body">
                                 <div class="terminal-line">
                                     <span class="terminal-prompt">$</span>
-                                    <span>locate</span>
-                                </div>
-                                <i18n-t keypath="about.based" tag="div" class="terminal-output">
-                                    <template #city><span class="t-white">{{ t('about.city') }}</span></template>
-                                </i18n-t>
-                                <br><br>
-                                <div class="terminal-line">
-                                    <span class="terminal-prompt">$</span>
-                                    <span>ps</span>
+                                    <span>jobs</span>
                                 </div>
                                 <i18n-t keypath="about.specializing" tag="div" class="terminal-output">
                                     <template #br><br></template>
                                     <template #field><span class="t-white">Web Application Development</span></template>
                                 </i18n-t>
+                                <br><br>
+                                <div class="terminal-line">
+                                    <span class="terminal-prompt">$</span>
+                                    <span>locate</span>
+                                </div>
+                                <i18n-t keypath="about.based" tag="div" class="terminal-output">
+                                    <template #city><span class="t-white fw-bold">{{ t('about.city') }}</span></template>
+                                </i18n-t>
+                            </div>
+                            <div class="location-map">
+                                <div class="location-map-shell"><span class="shell-user">devjhom@ubuntu</span>:<span class="text-vs-dark-blue">~</span>$ find</div>
+                                <img src="/asean-thailand.svg" alt="Map of Southeast Asia with Thailand highlighted">
                             </div>
                         </div>
                     </SwiperSlide>
@@ -367,6 +376,70 @@ CARDS
 //     background-position: 75% 25%;
 // }
 
+.location-map {
+    position: relative;
+    flex-shrink: 0;
+    width: calc(100% - 2rem);
+    aspect-ratio: 196.8 / 121.6;
+    margin: 0 1rem 2rem;
+    overflow: hidden;
+    border-radius: max(calc(#{$radius-md} - 1rem), #{$radius-sm});
+    background-color: #000;
+
+    $feather: linear-gradient(to right, transparent, #000 8%, #000 90%, transparent),
+              linear-gradient(to bottom, transparent, #000 5%, #000 95%, transparent);
+    -webkit-mask-image: $feather;
+    -webkit-mask-composite: source-in;
+    mask-image: $feather;
+    mask-composite: intersect;
+
+    img {
+        position: absolute;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.location-map-shell {
+    display: none;
+    position: absolute;
+    inset: 0;
+    padding: 12% 12% 12% 8%;
+    font-size: 0.78rem;
+    color: $white;
+    text-align: left;
+}
+
+@media (hover: hover) {
+    .location-map-shell {
+        display: block;
+        transition: opacity $transition-medium;
+    }
+
+    .location-map img {
+        opacity: 0;
+        transform: translateY(0.5rem);
+        transition: opacity $transition-medium, transform $transition-medium;
+    }
+
+    .location-card:hover {
+        .location-map-shell {
+            opacity: 0;
+        }
+
+        .location-map img {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+.location-card :deep(.swiper-button-prev) {
+    display: none;
+}
+
 .location-card-next {
     background: url('/street-map.svg') no-repeat center;
     background-size: cover;
@@ -398,7 +471,7 @@ CARDS
     flex-direction: column;
     justify-content: center;
     flex: 1;
-    padding: 1rem;
+    padding: 1rem 2rem;
 }
 
 .terminal-line {
@@ -414,6 +487,9 @@ CARDS
     font-weight: bold;
 }
 
+.shell-user {
+    color: #8AE234;
+}
 .terminal-output {
     font-size: 0.78rem;
     color: $light-gray;

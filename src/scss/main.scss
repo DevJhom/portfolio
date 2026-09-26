@@ -158,25 +158,15 @@ h6 {
 
 .swiper-button-prev,
 .swiper-button-next {
-  --swiper-navigation-size: 24px;
+  --swiper-navigation-size: 18px;
   --swiper-navigation-sides-offset: 8px;
 
-  padding: 6px;
-  border-radius: 50%;
-  // Same frosted glass as the .logo pill in MainPage.vue
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background-color: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   color: rgba(240, 240, 240, 0.7);
-  transition: background-color $transition-fast, border-color $transition-fast, color $transition-fast;
+  transition: color $transition-fast;
 }
 
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
-  background-color: rgba(255, 255, 255, 0.13);
-  border-color: rgba(255, 255, 255, 0.25);
   color: $white;
 }
 
