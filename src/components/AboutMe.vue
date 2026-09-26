@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useIsMobile } from '@/helpers/helpers';
+import { useTranslation } from '@/i18n';
 
 const isMobile = useIsMobile();
+const { t } = useTranslation();
 import FacebookIcon from '@/assets/Icons/FacebookIcon.vue';
 import GithubIcon from '@/assets/Icons/GithubIcon.vue';
 import LinkedInIcon from '@/assets/Icons/LinkedInIcon.vue';
@@ -72,19 +74,24 @@ const setPassionBoxSpeed = (rate: number) => {
                                     <span class="terminal-prompt">$</span>
                                     <span>whoami</span>
                                 </div>
-                                <div class="terminal-output">
-                                    Hi there!👋
-                                    <br> I'm <span class="t-white">DevJhom</span>.
-                                </div>
+                                <i18n-t keypath="about.whoami" tag="div" class="terminal-output">
+                                    <template #br><br></template>
+                                    <template #name><span class="t-white">DevJhom</span></template>
+                                </i18n-t>
                                 <br><br>
                                 <div class="terminal-line">
                                     <span class="terminal-prompt">$</span>
-                                    <span>ls</span>
+                                    <span>cd ~</span>
                                 </div>
-                                <div class="terminal-output">
-                                    A <span class="t-white">Software Developer</span>
-                                    <br> from Myanmar(Burma).
-                                </div>
+                                <i18n-t keypath="about.from" tag="div" class="terminal-output">
+                                    <template #br><br></template>
+                                    <template #role>Software Developer</template>
+                                    <template #country><span class="t-white fw-bold">{{ t('about.country') }}</span></template>
+                                </i18n-t>
+                            </div>
+                            <div class="location-map">
+                                <div class="location-map-shell"><span class="shell-user">devjhom@ubuntu</span>:<span class="text-vs-dark-blue">~</span>$ find</div>
+                                <img src="/asean-myanmar.svg" alt="Map of Southeast Asia with Myanmar highlighted">
                             </div>
                         </div>
                     </SwiperSlide>
@@ -98,20 +105,24 @@ const setPassionBoxSpeed = (rate: number) => {
                             <div class="terminal-body">
                                 <div class="terminal-line">
                                     <span class="terminal-prompt">$</span>
-                                    <span>locate</span>
+                                    <span>jobs</span>
                                 </div>
-                                <div class="terminal-output">
-                                    I'm based in <span class="t-white">Bangkok</span>, Thailand.
-                                </div>
+                                <i18n-t keypath="about.specializing" tag="div" class="terminal-output">
+                                    <template #br><br></template>
+                                    <template #field><span class="t-white">Web Application Development</span></template>
+                                </i18n-t>
                                 <br><br>
                                 <div class="terminal-line">
                                     <span class="terminal-prompt">$</span>
-                                    <span>ps</span>
+                                    <span>locate</span>
                                 </div>
-                                <div class="terminal-output">
-                                    Specializing in 
-                                    <br><span class="t-white">Web Application Development</span>.
-                                </div>
+                                <i18n-t keypath="about.based" tag="div" class="terminal-output">
+                                    <template #city><span class="t-white fw-bold">{{ t('about.city') }}</span></template>
+                                </i18n-t>
+                            </div>
+                            <div class="location-map">
+                                <div class="location-map-shell"><span class="shell-user">devjhom@ubuntu</span>:<span class="text-vs-dark-blue">~</span>$ find</div>
+                                <img src="/asean-thailand.svg" alt="Map of Southeast Asia with Thailand highlighted">
                             </div>
                         </div>
                     </SwiperSlide>
@@ -128,7 +139,7 @@ const setPassionBoxSpeed = (rate: number) => {
                                     <span>stats</span>
                                 </div>
                                 <div class="terminal-output">
-                                    <span class="t-white">to be added later</span>
+                                    <span class="t-white">{{ t('about.toBeAdded') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -155,9 +166,10 @@ const setPassionBoxSpeed = (rate: number) => {
 
         <Transition :name="isDesktop ? 'slide-fade-right' : ''">
             <div v-show="sectionIsActive || !isDesktop" class="grid-item experience-card">
-                <span>
-                    <h3> 3+ </h3> years experience <br> in Web Application Development.
-                </span>
+                <i18n-t keypath="about.experience" tag="span">
+                    <template #years><h3> 3+ </h3></template>
+                    <template #br><br></template>
+                </i18n-t>
             </div>
         </Transition>
 
@@ -179,9 +191,9 @@ const setPassionBoxSpeed = (rate: number) => {
                 <div class="animate-box" id="animate-box-4"></div>
                 <div class="animate-box" id="animate-box-5"></div>
 
-                <h4 class="mb-3">Coding with Passion</h4>
+                <h4 class="mb-3">{{ t('about.passionTitle') }}</h4>
                 <span class="text-light-gray">
-                    I'm passionate about coding and problem-solving, approaching each project with a creative mindset, a strong dedication and a commitment to writing clean, maintainable codes.
+                    {{ t('about.passionText') }}
                 </span>
             </div>
         </Transition>
@@ -211,7 +223,7 @@ const setPassionBoxSpeed = (rate: number) => {
                                 <b>Software Developer</b>
                             </small>
                             <small class="swipe">
-                                <i>Swipe >>></i>
+                                <i>{{ t('about.swipe') }}</i>
                             </small>
                         </div>
                     </SwiperSlide>
@@ -237,12 +249,15 @@ const setPassionBoxSpeed = (rate: number) => {
 
 <style scoped lang="scss">
 .grid-container {
+    --grid-h: clamp(600px, 80vh, 900px);
+    --grid-ratio: 1.6; // 16:10
+
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(6, 1fr);
     gap: 1.5rem;
-    width: 75%;
-    max-height: 100%;
+    height: var(--grid-h);
+    width: min(92%, calc(var(--grid-h) * var(--grid-ratio)));
     padding: 1rem 0;
 }
 
@@ -253,7 +268,8 @@ const setPassionBoxSpeed = (rate: number) => {
     border-radius: $radius-md;
     padding: 2rem;
     transition: transform $transition-fast;
-    min-height: 200px;
+    min-height: 0;
+    min-width: 0;
 }
 
 .grid-item:hover {
@@ -330,7 +346,7 @@ CARDS
     flex-direction: column;
     height: 100%;
     color: $white;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Courier New', Courier, var(--font-mono);
 }
 
 .location-card-top, .location-card-bottom {
@@ -359,6 +375,70 @@ CARDS
 //     background-size: 50%;
 //     background-position: 75% 25%;
 // }
+
+.location-map {
+    position: relative;
+    flex-shrink: 0;
+    width: calc(100% - 2rem);
+    aspect-ratio: 196.8 / 121.6;
+    margin: 0 1rem 2rem;
+    overflow: hidden;
+    border-radius: max(calc(#{$radius-md} - 1rem), #{$radius-sm});
+    background-color: #000;
+
+    $feather: linear-gradient(to right, transparent, #000 8%, #000 90%, transparent),
+              linear-gradient(to bottom, transparent, #000 5%, #000 95%, transparent);
+    -webkit-mask-image: $feather;
+    -webkit-mask-composite: source-in;
+    mask-image: $feather;
+    mask-composite: intersect;
+
+    img {
+        position: absolute;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.location-map-shell {
+    display: none;
+    position: absolute;
+    inset: 0;
+    padding: 12% 12% 12% 8%;
+    font-size: 0.78rem;
+    color: $white;
+    text-align: left;
+}
+
+@media (hover: hover) {
+    .location-map-shell {
+        display: block;
+        transition: opacity $transition-medium;
+    }
+
+    .location-map img {
+        opacity: 0;
+        transform: translateY(0.5rem);
+        transition: opacity $transition-medium, transform $transition-medium;
+    }
+
+    .location-card:hover {
+        .location-map-shell {
+            opacity: 0;
+        }
+
+        .location-map img {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+.location-card :deep(.swiper-button-prev) {
+    display: none;
+}
 
 .location-card-next {
     background: url('/street-map.svg') no-repeat center;
@@ -391,7 +471,7 @@ CARDS
     flex-direction: column;
     justify-content: center;
     flex: 1;
-    padding: 1rem;
+    padding: 1rem 2rem;
 }
 
 .terminal-line {
@@ -407,6 +487,9 @@ CARDS
     font-weight: bold;
 }
 
+.shell-user {
+    color: #8AE234;
+}
 .terminal-output {
     font-size: 0.78rem;
     color: $light-gray;
@@ -622,7 +705,7 @@ CARDS
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: center;
     padding: 1rem;
     width: 100%;
     height: 100%;
@@ -639,6 +722,7 @@ CARDS
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: auto;
         width: 90%;
+        height: auto; // the stacked layout grows with its content
     }
 
     .grid-item {

@@ -7,9 +7,13 @@ import Projects from '@components/Projects.vue';
 import Contact from '@components/Contact.vue';
 import KeepCalm from '@components/KeepCalm.vue';
 import SourceCodeBackdrop from '@components/SourceCodeBackdrop.vue';
+import LanguageSwitcher from '@components/LanguageSwitcher.vue';
+import { useTranslation } from '@/i18n';
 
 import DownArrow from '@/assets/Icons/DownArrow.vue';
 import Download from '@/assets/Icons/Download.vue';
+
+const { t } = useTranslation();
 
 const sections = ref([
     { id: 'home', label: 'Home' },
@@ -114,9 +118,12 @@ onUnmounted(() => {
             </a>
             <span class="logo-dot"></span>
         </div>
-        <div class="my-resume" @click="downloadResume()">
-            <Download/> 
-            <h4>Resume</h4>
+        <div class="top-actions">
+            <LanguageSwitcher/>
+            <div class="my-resume" @click="downloadResume()">
+                <Download/>
+                <h4>{{ t('header.resume') }}</h4>
+            </div>
         </div>
         <!-- HOME -->
         <div id="home">
@@ -125,14 +132,16 @@ onUnmounted(() => {
                 <div class="hero-content">
                     <div class="hero-status">
                         <span class="hero-status-dot"></span>
-                        <span class="hero-status-text">Currently Online · Bangkok, TH</span>
+                        <span class="hero-status-text">{{ t('hero.status') }}</span>
                         <span class="hero-status-line"></span>
                     </div>
                     <h1 class="introduction-text">
-                        Hello, I'm Jhom
+                        {{ t('hero.greeting') }}
                     </h1>
                     <div :class="{typewriter: isTyping}" class="introduction-text">
-                        <h2>I'm a <span class="text-animation">Software Developer</span></h2>
+                        <i18n-t keypath="hero.role" tag="h2">
+                            <template #role><span class="text-animation">Software Developer</span></template>
+                        </i18n-t>
                     </div>
                 </div>
                 <Transition name="fade">
@@ -320,26 +329,40 @@ section {
     50% { opacity: 0.2; }
 }
 
-.my-resume {
+// Language switcher + Resume, pinned top-right
+.top-actions {
     position: fixed;
+    right: 2rem;
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: $top-layer;
+}
+
+.my-resume {
     display: flex;
     justify-content: center;
     align-items: center;
-    right: 2rem;
-    margin-top: 2rem;
     padding: 0.5rem 1rem;
     // Locked to the expanded content's width so hiding the label on hover doesn't resize
-    // the button; retune if the label text or its font-size changes.
+    // the button; retune if the label text or its font-size changes. The Thai label fits
+    // this width; Burmese gets its own below.
     width: 7.25rem;
     gap: 0.5rem;
     border: 1px solid $blue;
     border-radius: calc($radius-md * 2);
-    z-index: $top-layer;
 	background-size: 300% 100%;
 	background-image: linear-gradient(to right, hsl(217, 100%, 62%), hsl(260, 100%, 62%), $blue);
 	box-shadow: 0 1px 15px 0 $blue;
 	transition: all $transition-medium;
     cursor: pointer;
+}
+
+// Estimated from Noto Sans Myanmar metrics — check it in the browser and retune if the
+// label clips or has too much slack.
+.my-resume:lang(my) {
+    width: 9.5rem;
 }
 
 .my-resume h4 {
@@ -384,7 +407,7 @@ section {
     color: $light-gray;
     font-size: 0.8rem;
     white-space: nowrap;
-    font-family: monospace;
+    font-family: var(--font-mono);
 }
 
 .hero-status-line {
@@ -430,9 +453,10 @@ section {
 }
 
 //Spotlight Effect
+// No z-index: it would lift SourceCodeBackdrop above .spotlight.
 #home {
+    position: relative;
     height: 100vh;
-    z-index: $bottom-layer;
     cursor: crosshair;
 }
 
@@ -482,5 +506,44 @@ section {
     justify-content: center;
     width: 100%;
     position: relative;
+}
+
+// Phones: tighter gutters, and an icon-only Resume pinned bottom-left.
+@media (max-width: 768px) {
+    .logo {
+        margin-left: 1rem;
+    }
+
+    .top-actions {
+        right: 1rem;
+        height: calc(35px + 0.8rem + 2px);
+    }
+
+    .scroll-to-explore {
+        position: fixed;
+        right: 1rem;
+        bottom: 1rem;
+        height: calc(20px + 1rem + 2px);
+        display: flex;
+        align-items: center;
+    }
+
+    .scroll-to-explore a {
+        display: flex;
+    }
+
+    .my-resume,
+    .my-resume:lang(my) {
+        position: fixed;
+        left: 1rem;
+        bottom: 1rem;
+        width: auto;
+        padding: 0.5rem 0.6rem;
+        gap: 0;
+    }
+
+    .my-resume h4 {
+        display: none;
+    }
 }
 </style>

@@ -3,6 +3,9 @@ import FacebookIcon from '@/assets/Icons/FacebookIcon.vue';
 import GithubIcon from '@/assets/Icons/GithubIcon.vue';
 import LinkedInIcon from '@/assets/Icons/LinkedInIcon.vue';
 import { ref, reactive, onMounted, onUnmounted } from 'vue';
+import { useTranslation } from '@/i18n';
+
+const { t } = useTranslation();
 
 const copySuccess = ref<boolean>(false);
 const currentYear = new Date().getFullYear();
@@ -97,14 +100,14 @@ onUnmounted(() => {
     <div class="contact">
         <div class="contact-content row g-5">
             <div class="contact-left col-md-6">
-                <h2>"Let's Get In Touch!"</h2>
-                <p class="text-secondary mt-3">Reach out to me directly via email, or drop me a message using the form.</p>
+                <h2>{{ t('contact.title') }}</h2>
+                <p class="text-secondary mt-3">{{ t('contact.intro') }}</p>
                 <div class="input-group mt-3">
                     <input type="text" class="form-control" placeholder="jhomwan238@gmail.com" aria-label="jhomwan238@gmail.com" readonly>
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary copy-btn" type="button" @click="copyToClipboard('jhomwan238@gmail.com')">
-                            <div v-if="copySuccess">Copied!</div>
-                            <div v-else>Copy</div>
+                            <div v-if="copySuccess">{{ t('contact.copied') }}</div>
+                            <div v-else>{{ t('contact.copy') }}</div>
                         </button>
                     </div>
                 </div>
@@ -112,27 +115,27 @@ onUnmounted(() => {
 
             <div class="contact-right col-md-6">
                 <form @submit.prevent="submitForm">
-                    <h3 class="mb-3">Message Me</h3>
+                    <h3 class="mb-3">{{ t('contact.form.title') }}</h3>
                     <div class="row g-3 mb-3">
                         <div class="col-sm-6">
-                            <input v-model="form.firstName" type="text" class="form-control" placeholder="First Name" aria-label="First name" required>
+                            <input v-model="form.firstName" type="text" class="form-control" :placeholder="t('contact.form.firstName')" :aria-label="t('contact.form.firstName')" required>
                         </div>
                         <div class="col-sm-6">
-                            <input v-model="form.lastName" type="text" class="form-control" placeholder="Last Name" aria-label="Last name" required>
+                            <input v-model="form.lastName" type="text" class="form-control" :placeholder="t('contact.form.lastName')" :aria-label="t('contact.form.lastName')" required>
                         </div>
                     </div>
-                    <input v-model="form.email" type="email" class="form-control mb-3" placeholder="Your Email" aria-label="Your Email" required>
-                    <textarea v-model="form.message" class="form-control mb-3" rows="5" placeholder="Message" aria-label="Message" required></textarea>
+                    <input v-model="form.email" type="email" class="form-control mb-3" :placeholder="t('contact.form.email')" :aria-label="t('contact.form.email')" required>
+                    <textarea v-model="form.message" class="form-control mb-3" rows="5" :placeholder="t('contact.form.message')" :aria-label="t('contact.form.message')" required></textarea>
                     <input v-model="form.botcheck" type="checkbox" name="botcheck" class="d-none" tabindex="-1" autocomplete="off">
 
                     <div class="d-flex align-items-center justify-content-end gap-3">
-                        <small v-if="status === 'sent'" class="text-secondary">Thanks! I'll get back to you soon.</small>
-                        <small v-if="status === 'error'" class="text-danger">Something went wrong. Please try again or copy my email.</small>
+                        <small v-if="status === 'sent'" class="text-secondary">{{ t('contact.form.thanks') }}</small>
+                        <small v-if="status === 'error'" class="text-danger">{{ t('contact.form.error') }}</small>
                         <button class="btn btn-outline-light send-btn" type="submit" :disabled="status === 'sending'">
-                            <span v-if="status === 'sending'">Sending...</span>
-                            <span v-else-if="status === 'sent'">Sent!</span>
-                            <span v-else-if="status === 'error'">Try again</span>
-                            <span v-else>Send</span>
+                            <span v-if="status === 'sending'">{{ t('contact.form.sending') }}</span>
+                            <span v-else-if="status === 'sent'">{{ t('contact.form.sent') }}</span>
+                            <span v-else-if="status === 'error'">{{ t('contact.form.tryAgain') }}</span>
+                            <span v-else>{{ t('contact.form.send') }}</span>
                         </button>
                     </div>
                 </form>

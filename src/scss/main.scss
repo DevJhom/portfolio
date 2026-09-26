@@ -1,6 +1,9 @@
 :root {
   --color-black: #{$black};
   --color-blue: #{$blue};
+  // Fallback is per glyph: Latin stays Consolas, Thai/Burmese pick up the Noto fonts loaded
+  // in index.html. Use this anywhere a monospace stack is needed.
+  --font-mono: Consolas, "Courier New", "Noto Sans Thai", "Noto Sans Myanmar", monospace;
   line-height: 1.5;
   font-weight: 400;
   font-synthesis: none;
@@ -9,8 +12,26 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+// Thai and especially Burmese stack marks above and below the letter; Bootstrap's 1.5 body /
+// 1.2 heading line heights clip or crowd them. <html lang> is set by src/i18n.
+html:lang(th) {
+  --bs-body-line-height: 1.7;
+}
+
+html:lang(th) :is(h1, h2, h3, h4, h5, h6) {
+  line-height: 1.4;
+}
+
+html:lang(my) {
+  --bs-body-line-height: 1.9;
+}
+
+html:lang(my) :is(h1, h2, h3, h4, h5, h6) {
+  line-height: 1.6;
+}
+
 body {
-  font-family: Consolas, "Courier New", monospace;
+  font-family: var(--font-mono);
   margin: 0;
   display: flex;
   place-items: center;
@@ -135,13 +156,18 @@ h6 {
   width: 100%;
 }
 
-.swiper-button-prev::after {
-  display: none;
+.swiper-button-prev,
+.swiper-button-next {
+  --swiper-navigation-size: 18px;
+  --swiper-navigation-sides-offset: 8px;
+
+  color: rgba(240, 240, 240, 0.7);
+  transition: color $transition-fast;
 }
 
-.swiper-button-next::after {
-  font-size: 1.5rem;
-  color: $light-gray;
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  color: $white;
 }
 
 .swiper-pagination .swiper-pagination-bullet {

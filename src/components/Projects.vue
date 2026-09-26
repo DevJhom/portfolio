@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useIsMobile } from '@/helpers/helpers';
+import { useTranslation } from '@/i18n';
 
 const isMobile = useIsMobile();
+const { t } = useTranslation();
 import GithubIcon from '@/assets/Icons/GithubIcon.vue';
 import OpenWindow from '@/assets/Icons/OpenWindow.vue';
 
@@ -31,9 +33,9 @@ const onMouseLeave = () => {
     <div v-if="props.activeSection == 'projects' || isMobile" class="projects">
       <div class="projects-left">
         <h2>
-          My Personal Projects
+          {{ t('projects.title') }}
         </h2>
-        <div class="text-light-gray">These are some of my favorite personal projects.</div>
+        <div class="text-light-gray">{{ t('projects.subtitle') }}</div>
       </div>
       <div class="projects-right">
         <!-- FRETWIZARD -->
@@ -43,12 +45,12 @@ const onMouseLeave = () => {
               <img src="/fretwizard.png" alt="FretWizard" width="100%" height="100%">
             </a>
             <div class="d-flex mt-3">
-              <small class="card-badge">Tools</small>
-              <small class="card-badge">Guitar</small>
+              <small class="card-badge">{{ t('projects.tools') }}</small>
+              <small class="card-badge">{{ t('projects.guitar') }}</small>
             </div>
             <h4 class="title text-black">FretWizard</h4>
             <small class="text-light-gray">
-              FretWizard is an interactive fretboard for visualizing different scales, chords, and patterns across the guitar neck.
+              {{ t('projects.fretwizard') }}
             </small>
             <a v-if="isHover" :href="fretwizardUrl" target="_blank">
               <OpenWindow class="open-window"/>
@@ -68,7 +70,7 @@ const onMouseLeave = () => {
               <h4 class="title text-white">DevJhom</h4>
             </a>
             <small class="text-light-gray text-center w-75">
-              Please visit my GitHub for more projects.
+              {{ t('projects.github') }}
             </small>
             <a :href="githubUrl" target="_blank">
               <OpenWindow class="open-window" color="#7e7e7e"/>
@@ -93,8 +95,9 @@ const onMouseLeave = () => {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 75%;
+  width: min(75%, 90rem);
   height: 100%;
+  max-height: 900px;
   margin: auto;
   padding: 2rem 0;
 }
@@ -234,6 +237,7 @@ const onMouseLeave = () => {
 @media (max-width: 768px) {
   .projects {
     flex-direction: column;
+    max-height: none;
   }
 
   .projects-left {

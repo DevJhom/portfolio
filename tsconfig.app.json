@@ -2,6 +2,8 @@
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    // ES2022.Intl adds Intl.Segmenter (KeepCalm's scroll reveal splits Thai/Burmese by word).
+    "lib": ["ES2020", "ES2022.Intl", "DOM", "DOM.Iterable"],
 
     /* Linting */
     "strict": true,
