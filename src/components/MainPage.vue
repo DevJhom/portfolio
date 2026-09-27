@@ -378,7 +378,7 @@ section {
     background-position: 100% 0;
 }
 
-// Collapse to the icon on hover; desktop only, since a tap counts as hover on phones
+// Desktop only: a tap counts as hover on phones
 @media (min-width: 769px) {
     .my-resume:hover {
         gap: 0;

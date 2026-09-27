@@ -180,17 +180,21 @@ onUnmounted(() => {
 <template>
     <div class="keep-calm">
         <div id="keep-calm-1" class="parallax-1">
-            <Transition :name="isDesktop ? 'fade' : ''">
-                <div v-if="activeSection == 'keep-calm-1' || isMobile" class="map-label">
-                    <span class="map-label-line"></span>
-                    <div class="map-label-text">
-                        <span class="map-label-time">{{ bangkokTime }}</span>
-                        <span class="map-label-status">
-                            <span class="map-label-dot"></span>{{ t('keepCalm.online') }}
-                        </span>
-                    </div>
+            <div class="map-clip">
+                <div class="map-layer">
+                    <Transition :name="isDesktop ? 'fade' : ''">
+                        <div v-if="activeSection == 'keep-calm-1' || isMobile" class="map-label">
+                            <span class="map-label-line"></span>
+                            <div class="map-label-text">
+                                <span class="map-label-time">{{ bangkokTime }}</span>
+                                <span class="map-label-status">
+                                    <span class="map-label-dot"></span>{{ t('keepCalm.online') }}
+                                </span>
+                            </div>
+                        </div>
+                    </Transition>
                 </div>
-            </Transition>
+            </div>
         </div>
         <div id="keep-calm-2" class="parallax-2">
             <div v-if="isMobile || typingMessage.isTyping || typingMessage.isAlreadyTyped" :class="{typewriter: typingMessage.isTyping && !isMobile}" class="keep-calm-text">
@@ -258,6 +262,11 @@ onUnmounted(() => {
     --u: max(calc(100vw / 1009.6727), calc(100vh / 665.96301));
     // Vertical nudge off the computed anchor; tune this, not the 89.618 below.
     --nudge-y: 2%;
+}
+
+// Only used on phones (see the mobile block)
+.map-clip, .map-layer {
+    display: contents;
 }
 
 // Pinned to the Bangkok dot in world.svg (<circle cx="757" cy="422.6">). The map is
@@ -440,13 +449,33 @@ onUnmounted(() => {
 }
 
 @media (max-width: 768px) {
+    // Mobile browsers ignore background-attachment: fixed, so a viewport-pinned layer draws
+    // the map instead. Unlike overflow, clip-path also clips a fixed descendant.
     .parallax-1 {
-        background-attachment: scroll;
-        background-size: 150%;
+        background-image: none;
         --u: calc(150vw / 1009.6727);
     }
 
-    // Absolute also stops the always-rendered mobile label from floating over every other section.
+    .map-clip {
+        display: block;
+        position: absolute;
+        inset: 0;
+        clip-path: inset(0);
+        pointer-events: none;
+    }
+
+    // lvh ignores the address bar showing/hiding, so the layer doesn't jump mid-scroll.
+    .map-layer {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        height: 100lvh;
+        background: url('/world.svg') no-repeat center / 150%;
+    }
+
     .map-label {
         position: absolute;
         flex-direction: row-reverse;

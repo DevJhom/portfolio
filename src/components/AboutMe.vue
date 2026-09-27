@@ -25,11 +25,10 @@ const sectionIsActive = computed(() => {
 });
 
 const isDesktop = computed(() => !isMobile.value);
-// touch screens can't hover, so tapping the card toggles the reveal instead
 const mapRevealed = ref(false);
 
 const toggleMap = (e: MouseEvent) => {
-    // the slide controls live inside the card; tapping them shouldn't also flip the map
+    // the slide controls live inside the card
     if ((e.target as Element).closest('.swiper-pagination, .swiper-button-next, .swiper-button-prev')) return;
     mapRevealed.value = !mapRevealed.value;
 }
@@ -488,7 +487,7 @@ CARDS
     flex-direction: column;
     justify-content: center;
     flex: 1;
-    padding: 1rem 2rem;
+    padding: 1rem;
 }
 
 .terminal-line {
@@ -769,13 +768,12 @@ CARDS
         min-height: 380px;
     }
 
-    // 1 of 4 columns x 4 of 6 rows in the 16:10 desktop grid works out to ~3:5 at any --grid-h
+    // the desktop cell's ratio
     .location-card {
         height: auto;
         aspect-ratio: 3 / 5;
     }
 
-    // match the other cards' body text size
     .terminal-line, .terminal-output, .location-map-shell {
         font-size: 1rem;
     }
@@ -786,7 +784,7 @@ CARDS
         aspect-ratio: 8 / 5;
     }
 
-    // the global h3 clamp bottoms out at 1rem on phones, the same as body text; keep the laptop size
+    // the global h3 clamp bottoms out at body-text size on phones
     .experience-card h3 {
         font-size: 1.5rem;
     }
