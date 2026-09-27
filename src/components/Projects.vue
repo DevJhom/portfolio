@@ -19,8 +19,9 @@ const githubUrl = "https://github.com/DevJhom";
 
 const isHover = ref(false);
 
+// a tap counts as hover on phones, which would collapse the GitHub card
 const onMouseEnter = () => {
-  isHover.value = true;
+  if (isDesktop.value) isHover.value = true;
 }
 
 const onMouseLeave = () => {
@@ -250,9 +251,12 @@ const onMouseLeave = () => {
     padding: 0;
   }
 
+  // desktop cards are portrait, between ~3:5 and ~7:8 depending on viewport width; 3:4 sits in that range
   .card {
     min-width: 100%;
     min-height: 15rem;
+    height: auto;
+    aspect-ratio: 3 / 4;
     margin-top: 2rem;
   }
 

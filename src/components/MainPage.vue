@@ -376,12 +376,18 @@ section {
 .my-resume:hover {
     color: $white;
     background-position: 100% 0;
-    gap: 0;
 }
 
-.my-resume:hover h4 {
-    max-width: 0;
-    opacity: 0;
+// Collapse to the icon on hover; desktop only, since a tap counts as hover on phones
+@media (min-width: 769px) {
+    .my-resume:hover {
+        gap: 0;
+    }
+
+    .my-resume:hover h4 {
+        max-width: 0;
+        opacity: 0;
+    }
 }
 
 .hero-content {
@@ -508,7 +514,7 @@ section {
     position: relative;
 }
 
-// Phones: tighter gutters, and an icon-only Resume pinned bottom-left.
+// Phones: tighter gutters, and Resume pinned bottom-left.
 @media (max-width: 768px) {
     .logo {
         margin-left: 1rem;
@@ -538,12 +544,6 @@ section {
         left: 1rem;
         bottom: 1rem;
         width: auto;
-        padding: 0.5rem 0.6rem;
-        gap: 0;
-    }
-
-    .my-resume h4 {
-        display: none;
     }
 }
 </style>
