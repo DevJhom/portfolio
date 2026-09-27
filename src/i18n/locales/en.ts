@@ -32,9 +32,9 @@ const en = {
         online: 'Online',
         // Revealed piece by piece on scroll; each sentence is followed by a blank line.
         story: [
-            'I am a passionate developer who thrives on blending creativity with technology to craft innovative solutions.',
-            'Whether it’s writing clean, efficient code or tackling complex problems, I enjoy transforming ideas into impactful digital experiences.',
-            'With a strong foundation in full-stack development, I aim to deliver work that is both functional and engaging.',
+            'I’m a developer who loves turning an idea into something people can actually use.',
+            'I spend most of my days planning, writing code, and working through problems until the picture comes together.',
+            'Whether it’s Frontend or Backend, my goal stays the same: software that works well and feels good to use.',
         ],
     },
     techStack: {

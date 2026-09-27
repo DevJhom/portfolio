@@ -93,7 +93,7 @@ const setPassionBoxSpeed = (rate: number) => {
                                 <i18n-t keypath="about.from" tag="div" class="terminal-output">
                                     <template #br><br></template>
                                     <template #role>Software Developer</template>
-                                    <template #country><span class="t-white fw-bold">{{ t('about.country') }}</span></template>
+                                    <template #country><span class="t-white">{{ t('about.country') }}</span></template>
                                 </i18n-t>
                             </div>
                             <div class="location-map">
@@ -124,7 +124,7 @@ const setPassionBoxSpeed = (rate: number) => {
                                     <span>locate</span>
                                 </div>
                                 <i18n-t keypath="about.based" tag="div" class="terminal-output">
-                                    <template #city><span class="t-white fw-bold">{{ t('about.city') }}</span></template>
+                                    <template #city><span class="t-white">{{ t('about.city') }}</span></template>
                                 </i18n-t>
                             </div>
                             <div class="location-map">
@@ -514,7 +514,6 @@ CARDS
 
     .t-white {
         color: $white;
-        font-weight: 600;
     }
 }
 
