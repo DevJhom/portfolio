@@ -16,8 +16,8 @@ const maxChars = Math.max(...sourceLines.map(lineLength));
 
 <template>
     <div class="code-backdrop-clip" aria-hidden="true">
-        <div class="code-backdrop">
-            <div class="code-block" :style="{ '--max-chars': maxChars }">
+        <div class="code-backdrop" :style="{ '--max-chars': maxChars, '--lines': sourceLines.length }">
+            <div class="code-block">
                 <div
                     v-for="(line, i) in sourceLines"
                     :key="i"
@@ -88,6 +88,16 @@ const maxChars = Math.max(...sourceLines.map(lineLength));
 @keyframes show-caret {
     from { border-right-color: $blue; }
     to { border-right-color: transparent; }
+}
+
+// Phones: size like background-size: cover instead so the code stays legible, scaled to 80%
+// of it — the vh term fills 80% of the screen height, the vw term 80% of the width (0.55em is
+// Consolas' ch, the narrowest in --font-mono, so wider fallbacks reach at least that). Long
+// lines run off the right edge.
+@media (max-width: 768px) {
+    .code-backdrop {
+        font-size: max(calc(80vh / (var(--lines) * 1.25)), calc(80vw / (var(--max-chars) * 0.55)));
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {

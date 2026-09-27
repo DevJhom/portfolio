@@ -25,8 +25,14 @@ const sectionIsActive = computed(() => {
 });
 
 const isDesktop = computed(() => !isMobile.value);
-// touch screens can't hover, so tapping the map box toggles the reveal instead
+// touch screens can't hover, so tapping the card toggles the reveal instead
 const mapRevealed = ref(false);
+
+const toggleMap = (e: MouseEvent) => {
+    // the slide controls live inside the card; tapping them shouldn't also flip the map
+    if ((e.target as Element).closest('.swiper-pagination, .swiper-button-next, .swiper-button-prev')) return;
+    mapRevealed.value = !mapRevealed.value;
+}
 const businessCard = ref<typeof Swiper | null>(null);
 const modules_location = [Navigation, Pagination, Autoplay];
 const modules_business_card = [EffectFlip];
@@ -53,7 +59,7 @@ const setPassionBoxSpeed = (rate: number) => {
 <template>
     <div class="grid-container">
         <Transition :name="isDesktop ? 'slide-fade-left' : ''">
-            <div v-show="sectionIsActive || !isDesktop" class="grid-item location-card" :class="{ 'map-revealed': mapRevealed }">
+            <div v-show="sectionIsActive || !isDesktop" class="grid-item location-card" :class="{ 'map-revealed': mapRevealed }" @click="toggleMap">
                 <Swiper 
                     :navigation="true"
                     :pagination="true"
@@ -91,7 +97,7 @@ const setPassionBoxSpeed = (rate: number) => {
                                     <template #country><span class="t-white fw-bold">{{ t('about.country') }}</span></template>
                                 </i18n-t>
                             </div>
-                            <div class="location-map" @click="mapRevealed = !mapRevealed">
+                            <div class="location-map">
                                 <div class="location-map-shell"><span class="shell-user">devjhom@ubuntu</span>:<span class="text-vs-dark-blue">~</span>$ find</div>
                                 <img src="/asean-myanmar.svg" alt="Map of Southeast Asia with Myanmar highlighted">
                             </div>
@@ -122,7 +128,7 @@ const setPassionBoxSpeed = (rate: number) => {
                                     <template #city><span class="t-white fw-bold">{{ t('about.city') }}</span></template>
                                 </i18n-t>
                             </div>
-                            <div class="location-map" @click="mapRevealed = !mapRevealed">
+                            <div class="location-map">
                                 <div class="location-map-shell"><span class="shell-user">devjhom@ubuntu</span>:<span class="text-vs-dark-blue">~</span>$ find</div>
                                 <img src="/asean-thailand.svg" alt="Map of Southeast Asia with Thailand highlighted">
                             </div>
@@ -438,7 +444,7 @@ CARDS
 }
 
 @media (hover: none) {
-    .location-map {
+    .location-card {
         cursor: pointer;
     }
 
@@ -774,14 +780,15 @@ CARDS
         font-size: 1rem;
     }
 
-    .description-card, .experience-card, .style-card {
+    .description-card, .experience-card, .social-media-card, .style-card {
         height: auto;
         min-height: 180px;
         aspect-ratio: 8 / 5;
     }
 
-    .grid-item:nth-child(4) {
-        min-height: 180px;
+    // the global h3 clamp bottoms out at 1rem on phones, the same as body text; keep the laptop size
+    .experience-card h3 {
+        font-size: 1.5rem;
     }
 
     .social-links {
