@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { useIsMobile } from '@/helpers/helpers';
 import { sourceLines, type Kind, type Token } from '@components/sourceCode';
-
-const isMobile = useIsMobile();
 
 const KIND_CLASS: Record<Kind, string> = {
     tag: 'text-vs-dark-blue',
@@ -18,7 +15,7 @@ const maxChars = Math.max(...sourceLines.map(lineLength));
 </script>
 
 <template>
-    <div v-if="!isMobile" class="code-backdrop-clip" aria-hidden="true">
+    <div class="code-backdrop-clip" aria-hidden="true">
         <div class="code-backdrop">
             <div class="code-block" :style="{ '--max-chars': maxChars }">
                 <div

@@ -25,6 +25,8 @@ const sectionIsActive = computed(() => {
 });
 
 const isDesktop = computed(() => !isMobile.value);
+// touch screens can't hover, so tapping the map box toggles the reveal instead
+const mapRevealed = ref(false);
 const businessCard = ref<typeof Swiper | null>(null);
 const modules_location = [Navigation, Pagination, Autoplay];
 const modules_business_card = [EffectFlip];
@@ -51,7 +53,7 @@ const setPassionBoxSpeed = (rate: number) => {
 <template>
     <div class="grid-container">
         <Transition :name="isDesktop ? 'slide-fade-left' : ''">
-            <div v-show="sectionIsActive || !isDesktop" class="grid-item location-card">
+            <div v-show="sectionIsActive || !isDesktop" class="grid-item location-card" :class="{ 'map-revealed': mapRevealed }">
                 <Swiper 
                     :navigation="true"
                     :pagination="true"
@@ -89,7 +91,7 @@ const setPassionBoxSpeed = (rate: number) => {
                                     <template #country><span class="t-white fw-bold">{{ t('about.country') }}</span></template>
                                 </i18n-t>
                             </div>
-                            <div class="location-map">
+                            <div class="location-map" @click="mapRevealed = !mapRevealed">
                                 <div class="location-map-shell"><span class="shell-user">devjhom@ubuntu</span>:<span class="text-vs-dark-blue">~</span>$ find</div>
                                 <img src="/asean-myanmar.svg" alt="Map of Southeast Asia with Myanmar highlighted">
                             </div>
@@ -120,7 +122,7 @@ const setPassionBoxSpeed = (rate: number) => {
                                     <template #city><span class="t-white fw-bold">{{ t('about.city') }}</span></template>
                                 </i18n-t>
                             </div>
-                            <div class="location-map">
+                            <div class="location-map" @click="mapRevealed = !mapRevealed">
                                 <div class="location-map-shell"><span class="shell-user">devjhom@ubuntu</span>:<span class="text-vs-dark-blue">~</span>$ find</div>
                                 <img src="/asean-thailand.svg" alt="Map of Southeast Asia with Thailand highlighted">
                             </div>
@@ -403,36 +405,45 @@ CARDS
 }
 
 .location-map-shell {
-    display: none;
     position: absolute;
     inset: 0;
     padding: 12% 12% 12% 8%;
     font-size: 0.78rem;
     color: $white;
     text-align: left;
+    transition: opacity $transition-medium;
 }
 
-@media (hover: hover) {
+.location-map img {
+    opacity: 0;
+    transform: translateY(0.5rem);
+    transition: opacity $transition-medium, transform $transition-medium;
+}
+
+@mixin reveal-map {
     .location-map-shell {
-        display: block;
-        transition: opacity $transition-medium;
+        opacity: 0;
     }
 
     .location-map img {
-        opacity: 0;
-        transform: translateY(0.5rem);
-        transition: opacity $transition-medium, transform $transition-medium;
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (hover: hover) {
+    .location-card:hover {
+        @include reveal-map;
+    }
+}
+
+@media (hover: none) {
+    .location-map {
+        cursor: pointer;
     }
 
-    .location-card:hover {
-        .location-map-shell {
-            opacity: 0;
-        }
-
-        .location-map img {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .location-card.map-revealed {
+        @include reveal-map;
     }
 }
 
@@ -752,16 +763,25 @@ CARDS
         min-height: 380px;
     }
 
-    .grid-item:nth-child(3) {
+    // 1 of 4 columns x 4 of 6 rows in the 16:10 desktop grid works out to ~3:5 at any --grid-h
+    .location-card {
+        height: auto;
+        aspect-ratio: 3 / 5;
+    }
+
+    // match the other cards' body text size
+    .terminal-line, .terminal-output, .location-map-shell {
+        font-size: 1rem;
+    }
+
+    .description-card, .experience-card, .style-card {
+        height: auto;
         min-height: 180px;
+        aspect-ratio: 8 / 5;
     }
 
     .grid-item:nth-child(4) {
         min-height: 180px;
-    }
-
-    .description-card {
-        background-position: -100px 0;
     }
 
     .social-links {
