@@ -362,6 +362,7 @@ onUnmounted(() => {
 }
 
 .parallax-3 {
+    height: 150vh;
     position: relative;
     display: flex;
     flex-direction: column;

@@ -76,7 +76,7 @@ const submitForm = async () => {
 
 // Spotlight effect
 const spotlightSize = 'transparent 150px, #0c0c0c 250px)';
-const scrolledViewHeight = 700; //adjust according to number of sections
+const scrolledViewHeight = 750; //adjust according to number of sections
 
 function updateSpotlight(e: MouseEvent): void {
     const spotlight = document.querySelector('.contact-spotlight') as HTMLElement;
