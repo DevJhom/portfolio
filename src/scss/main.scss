@@ -1,9 +1,10 @@
 :root {
   --color-black: #{$black};
   --color-blue: #{$blue};
-  // Fallback is per glyph: Latin stays Consolas, Thai/Burmese pick up the Noto fonts loaded
-  // in index.html. Use this anywhere a monospace stack is needed.
-  --font-mono: Consolas, "Courier New", "Noto Sans Thai", "Noto Sans Myanmar", monospace;
+  // Fallback is per glyph: Latin uses Consolas where installed (Windows) and the Courier Prime
+  // web font everywhere else (Mac, iOS, Android). Thai/Burmese pick up the Noto fonts. All web
+  // fonts are loaded in index.html. Use this anywhere a monospace stack is needed.
+  --font-mono: Consolas, "Courier Prime", "Noto Sans Thai", "Noto Sans Myanmar", monospace;
   line-height: 1.5;
   font-weight: 400;
   font-synthesis: none;

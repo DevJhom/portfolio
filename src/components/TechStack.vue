@@ -487,6 +487,7 @@ ul.tl li .item-detail {
     align-items: center;
     transition: transform $transition-fast;
     aspect-ratio: 1 / 1.1;
+    font-size: 0.8em;
 }
 
 .tech-stack-grid-item:hover {

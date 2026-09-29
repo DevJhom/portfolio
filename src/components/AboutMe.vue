@@ -97,7 +97,10 @@ const setPassionBoxSpeed = (rate: number) => {
                                 </i18n-t>
                             </div>
                             <div class="location-map">
-                                <div class="location-map-shell"><span class="shell-user">devjhom@ubuntu</span>:<span class="text-vs-dark-blue">~</span>$ find</div>
+                                <div class="location-map-shell">
+                                    <div><span class="shell-user">devjhom@ubuntu</span>:<span class="text-vs-dark-blue">~</span>$ find</div>
+                                    <div class="shell-loading" aria-hidden="true">[<span class="shell-progress"></span>]</div>
+                                </div>
                                 <img src="/asean-myanmar.svg" alt="Map of Southeast Asia with Myanmar highlighted">
                             </div>
                         </div>
@@ -128,7 +131,10 @@ const setPassionBoxSpeed = (rate: number) => {
                                 </i18n-t>
                             </div>
                             <div class="location-map">
-                                <div class="location-map-shell"><span class="shell-user">devjhom@ubuntu</span>:<span class="text-vs-dark-blue">~</span>$ find</div>
+                                <div class="location-map-shell">
+                                    <div><span class="shell-user">devjhom@ubuntu</span>:<span class="text-vs-dark-blue">~</span>$ find</div>
+                                    <div class="shell-loading" aria-hidden="true">[<span class="shell-progress"></span>]</div>
+                                </div>
                                 <img src="/asean-thailand.svg" alt="Map of Southeast Asia with Thailand highlighted">
                             </div>
                         </div>
@@ -353,7 +359,7 @@ CARDS
     flex-direction: column;
     height: 100%;
     color: $white;
-    font-family: 'Courier New', Courier, var(--font-mono);
+    font-family: "Courier Prime", var(--font-mono);
 }
 
 .location-card-top, .location-card-bottom {
@@ -419,20 +425,61 @@ CARDS
     transition: opacity $transition-medium;
 }
 
+// wget-style [====>     ] shown under `find` before the map appears
+$map-load-time: 0.5s;
+$map-load-steps: 10;
+
+.shell-loading {
+    visibility: hidden;
+    color: $light-gray;
+}
+
+.shell-progress {
+    display: inline-block;
+    width: #{$map-load-steps}ch;
+    vertical-align: bottom;
+
+    // flex-end keeps the ">" at the growing edge; string length must equal $map-load-steps
+    &::before {
+        content: '=========>';
+        display: flex;
+        justify-content: flex-end;
+        width: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        color: #8AE234;
+    }
+}
+
+@keyframes map-load-progress {
+    to { width: #{$map-load-steps}ch; }
+}
+
 .location-map img {
     opacity: 0;
     transform: translateY(0.5rem);
     transition: opacity $transition-medium, transform $transition-medium;
 }
 
+// Delays apply on hover-in only, so the console returns immediately on hover-out
 @mixin reveal-map {
+    .shell-loading {
+        visibility: visible;
+    }
+
+    .shell-progress::before {
+        animation: map-load-progress $map-load-time steps($map-load-steps) forwards;
+    }
+
     .location-map-shell {
         opacity: 0;
+        transition-delay: $map-load-time;
     }
 
     .location-map img {
         opacity: 1;
         transform: translateY(0);
+        transition-delay: $map-load-time;
     }
 }
 

@@ -337,9 +337,9 @@ onUnmounted(() => {
     padding: 0 1rem;
     // Capped so the box stops tracking the viewport on wide screens. The h2 is monospace,
     // nowrap and always English (the quote is never translated), so its widest line - the
-    // 43-char default message at the 2rem end of main.scss's h2 clamp - needs ~52rem;
-    // 54rem leaves slack for the Courier New fallback. It matters because .typewriter
-    // animates the h2 width 0 -> 100%, so the caret always lands at the box's right edge:
+    // 43-char default message at the 2rem end of main.scss's h2 clamp - needs ~52rem
+    // in Courier Prime (0.6em per char; Consolas is narrower); 54rem leaves slack. It matters
+    // because .typewriter animates the h2 width 0 -> 100%, so the caret always lands at the box's right edge:
     // a box wider than the text leaves it stranded far past the last character.
     // Still a min-width, so the box grows rather than clipping if the text ever outruns it.
     min-width: min(60%, 54rem);
