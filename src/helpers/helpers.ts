@@ -19,7 +19,11 @@ export function useIsMobile() {
   return isMobile;
 }
 
-const bangkokParts = new Intl.DateTimeFormat('en-GB', {
+// Start of the current role (ClickNext); drives the timeline dates and the About Me experience count.
+export const CAREER_START_YEAR = 2023;
+export const yearsOfExperience = new Date().getFullYear() - CAREER_START_YEAR;
+
+const bangkokParts =new Intl.DateTimeFormat('en-GB', {
   timeZone: 'Asia/Bangkok',
   year: 'numeric',
   month: '2-digit',

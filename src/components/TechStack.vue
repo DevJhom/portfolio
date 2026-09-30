@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive, computed } from 'vue';
-import { useIsMobile } from '@/helpers/helpers';
+import { useIsMobile, CAREER_START_YEAR } from '@/helpers/helpers';
 import { useTranslation } from '@/i18n';
 import FigmaLogo from '@/assets/Logos/FigmaLogo.vue';
 import VueLogo from '@/assets/Logos/VueLogo.vue';
@@ -251,7 +251,7 @@ const handleScroll = debounce(() => {
                             </small>
                         </li>
                         <li class="tl-item" @mouseenter="triggerHover(Experience.clicknext)" @mouseleave="triggerHover(Experience.reset)">
-                            <div class="item-title">Full Stack Developer <span :class="{'text-light-gray': !hoverOnExp.clicknext}"> (2022-{{ t('techStack.present') }})</span></div>
+                            <div class="item-title">Full Stack Developer <span :class="{'text-light-gray': !hoverOnExp.clicknext}"> ({{ CAREER_START_YEAR }}-{{ t('techStack.present') }})</span></div>
                             <div class="item-detail">@ ClickNext Co., Ltd.</div>
                             <small v-show="hoverOnExp.clicknext" class="item-detail">
                                 {{ t('techStack.clicknextDetail') }}

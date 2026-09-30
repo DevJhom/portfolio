@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { useIsMobile } from '@/helpers/helpers';
+import { useIsMobile, yearsOfExperience } from '@/helpers/helpers';
 import { useTranslation } from '@/i18n';
 
 const isMobile = useIsMobile();
@@ -180,7 +180,7 @@ const setPassionBoxSpeed = (rate: number) => {
         <Transition :name="isDesktop ? 'slide-fade-right' : ''">
             <div v-show="sectionIsActive || !isDesktop" class="grid-item experience-card">
                 <i18n-t keypath="about.experience" tag="span">
-                    <template #years><h3> 3+ </h3></template>
+                    <template #years><h3> {{ yearsOfExperience }}+ </h3></template>
                     <template #br><br></template>
                 </i18n-t>
             </div>
