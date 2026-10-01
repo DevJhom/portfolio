@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { reactive, computed } from 'vue';
+import { ref, reactive, computed, defineAsyncComponent } from 'vue';
 import { useIsMobile, CAREER_START_YEAR } from '@/helpers/helpers';
 import { useTranslation } from '@/i18n';
+import type { JobId } from '@/constellation/jobs';
 import FigmaLogo from '@/assets/Logos/FigmaLogo.vue';
 import VueLogo from '@/assets/Logos/VueLogo.vue';
 import ReactLogo from '@/assets/Logos/ReactLogo.vue';
@@ -22,6 +23,9 @@ import GoogleCloudLogo from '@/assets/Logos/GoogleCloudLogo.vue';
 import NeovimLogo from '@/assets/Logos/NeovimLogo.vue';
 import ClaudeLogo from '@/assets/Logos/ClaudeLogo.vue';
 //import debounce from 'lodash.debounce';
+
+// Lazy: three.js is ~500 kB, so it loads in its own chunk instead of delaying first paint.
+const TechConstellation = defineAsyncComponent(() => import('@components/TechConstellation.vue'));
 
 defineProps<{
     activeSection: string
@@ -72,8 +76,33 @@ const hoverOnExp = reactive<{ [key: string]: boolean }>({
     hoverStart: false,
     internship: false,
     omnistar: false,
-    hoverClicknext: false,
+    clicknext: false,
 });
+
+// The 3D constellation follows the same timeline hover state as the 2D grid.
+const activeJob = computed<JobId | null>(() => {
+    if (hoverOnExp.internship) return 'internship';
+    if (hoverOnExp.omnistar) return 'omnistar';
+    if (hoverOnExp.clicknext) return 'clicknext';
+    return null;
+});
+
+// 3D by default; "Collapse" plays the constellation's collapse animation, then swaps in the grid.
+const view = ref<'3d' | '2d'>('3d');
+const constellation = ref<{ collapse(): Promise<void> } | null>(null);
+const isSwitching = ref(false);
+
+const toggleView = async () => {
+    if (isSwitching.value) return;
+    if (view.value === '2d') {
+        view.value = '3d';
+        return;
+    }
+    isSwitching.value = true;
+    await constellation.value?.collapse();
+    view.value = '2d';
+    isSwitching.value = false;
+}
 
 const hasUsed = reactive<{ [key: string]: boolean }>({
     vue: false,
@@ -261,7 +290,11 @@ const handleScroll = debounce(() => {
                 </div>
             </div>
             <div class="tech-stack-right">
-                <div class="tech-stack-grid">
+                <Transition name="fade" mode="out-in">
+                <div v-if="view === '3d'" class="constellation-wrap">
+                    <TechConstellation ref="constellation" :active-job="activeJob"/>
+                </div>
+                <div v-else class="tech-stack-grid">
                     <!-- Row 1: frontend -->
                     <div class="tech-stack-grid-item grid-18" :class="{'used-figma': hasUsed.figma, 'reduced-opacity': hoverOnExp.hoverStart && !hasUsed.figma }" @mouseenter="mouseEnterOnLogo('figma')" @mouseleave="mouseLeaveOnLogo('figma')">
                         <span v-if="isHover.figma">Figma</span>
@@ -342,6 +375,7 @@ const handleScroll = debounce(() => {
                         <ClaudeLogo v-else />
                     </div>
                 </div>
+                </Transition>
                 <div class="d-flex justify-content-center mt-4 animate-on-hover">
                     <template v-if="hoverOnExp.hoverStart">
                         <template v-if="hoverOnExp.clicknext">
@@ -355,11 +389,16 @@ const handleScroll = debounce(() => {
                         {{ t('techStack.familiar') }}
                     </template>
                 </div>
+                <div class="view-toggle">
+                    <button type="button" class="view-toggle-button" :disabled="isSwitching" @click="toggleView()">
+                        {{ view === '3d' ? t('techStack.collapse') : t('techStack.expand') }}
+                    </button>
+                </div>
             </div>
             <div v-if="isDesktop" class="mini-nav">
                 <div :class="{active: hoverOnExp.internship}" @mouseenter="triggerHover(Experience.internship)" @mouseleave="triggerHover(Experience.reset)"></div>
                 <div :class="{active: hoverOnExp.omnistar}" @mouseenter="triggerHover(Experience.omnistar)" @mouseleave="triggerHover(Experience.reset)"></div>
-                <div :class="{active: hoverOnExp.clicknext}" @mouseenter="triggerHover(Experience.internship)" @mouseleave="triggerHover(Experience.reset)"></div>
+                <div :class="{active: hoverOnExp.clicknext}" @mouseenter="triggerHover(Experience.clicknext)" @mouseleave="triggerHover(Experience.reset)"></div>
             </div>
             <div class="auto-hover">
                 <div class="hover-area-1" @mouseenter="triggerHover(Experience.internship)" @mouseleave="triggerHover(Experience.reset)"></div>
@@ -398,6 +437,48 @@ const handleScroll = debounce(() => {
     // Shift right by half of it so the gap to the timeline matches the gap to the screen edge.
     position: relative;
     left: 6.25vw;
+}
+
+// 3D / 2D toggle, styled like the glass logo pill in MainPage.vue
+.view-toggle {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.75rem;
+    z-index: $top-layer;
+}
+
+.view-toggle-button {
+    padding: 0.3rem 0.9rem;
+    border-radius: $radius-md;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: $white;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: border-color $transition-fast, box-shadow $transition-fast;
+}
+
+.view-toggle-button:hover:not(:disabled) {
+    border-color: $blue;
+    box-shadow: 0 0 12px rgba(31, 81, 255, 0.5);
+}
+
+.view-toggle-button:disabled {
+    cursor: wait;
+    opacity: 0.6;
+}
+
+// z-index lifts the canvas above .auto-hover ($bottom-layer) so it gets pointer events, but
+// keeps it below the fixed logo, language switcher and Resume button ($top-layer) in MainPage.vue.
+.constellation-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    max-height: 70vh;
+    z-index: $middle-layer;
 }
 
 .mini-nav {

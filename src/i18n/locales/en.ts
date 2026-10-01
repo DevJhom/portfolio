@@ -47,6 +47,10 @@ const en = {
         currentlyUsing: "Technologies I'm currently using.",
         usedAndFamiliar: "Technologies I've used and am familiar with.",
         familiar: "Technologies I'm familiar with.",
+        // 3D tech constellation (TechConstellation.vue)
+        collapse: 'Collapse',
+        expand: 'Expand',
+        webglUnavailable: '3D view is not available in this browser.',
     },
     projects: {
         title: 'My Personal Projects',

@@ -48,6 +48,9 @@ const th: MessageSchema = {
         currentlyUsing: 'เทคโนโลยีที่ผมใช้อยู่ในปัจจุบัน',
         usedAndFamiliar: 'เทคโนโลยีที่ผมเคยใช้และคุ้นเคย',
         familiar: 'เทคโนโลยีที่ผมคุ้นเคย',
+        collapse: 'ย่อ',
+        expand: 'ขยาย',
+        webglUnavailable: 'เบราว์เซอร์นี้ไม่รองรับมุมมอง 3D',
     },
     projects: {
         title: 'โปรเจกต์ส่วนตัว',

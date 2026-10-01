@@ -13,11 +13,13 @@
     "bootstrap": "^5.3.3",
     "lodash.debounce": "^4.0.8",
     "swiper": "^14.2.0",
+    "three": "^0.186.1",
     "vue": "^3.5.13",
     "vue-i18n": "^11.4.12"
   },
   "devDependencies": {
     "@types/lodash.debounce": "^4.0.9",
+    "@types/three": "^0.186.0",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "^0.7.0",
     "gh-pages": "^6.3.0",

@@ -48,6 +48,9 @@ const my: MessageSchema = {
         currentlyUsing: 'လက်ရှိ အသုံးပြုနေတဲ့ နည်းပညာများ',
         usedAndFamiliar: 'အသုံးပြုဖူးပြီး ကျွမ်းဝင်တဲ့ နည်းပညာများ',
         familiar: 'ကျွမ်းဝင်တဲ့ နည်းပညာများ',
+        collapse: 'ချုံ့ရန်',
+        expand: 'ချဲ့ရန်',
+        webglUnavailable: 'ဒီ browser မှာ 3D မြင်ကွင်းကို မပံ့ပိုးပါ',
     },
     projects: {
         title: 'ကိုယ်ပိုင် ပရောဂျက်များ',

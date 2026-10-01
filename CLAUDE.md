@@ -123,6 +123,22 @@ defines `@/*`, `@components/*`, `@assets/*`, `@scss/*`, `@helpers/*`. Two traps:
 ones. Images, SVG backgrounds and the résumé PDF live in `public/` and are referenced by
 absolute root path (`src="/letter-j.png"`, `background: url('/world.svg')`).
 
+### 3D tech constellation
+
+The right side of `TechStack.vue` defaults to a three.js scene (`TechConstellation.vue`,
+loaded with `defineAsyncComponent` so three.js stays out of the main chunk). The
+"Collapse" / "Expand" button swaps it for the original 2D grid. The scene code in
+`src/constellation/` has no Vue dependency: `mount(el)` returns `setActiveJob`, `collapse`
+and `dispose`, and the component disposes it in `onUnmounted`.
+
+- The highlighted job comes from the same `hoverOnExp` state as the grid (the `activeJob`
+  computed), so the timeline, `.auto-hover` areas and mini-nav drive both views.
+- `constellation/jobs.ts` repeats the job → tech mapping in `mouseOnExp()`, and
+  `constellation/logos.ts` is the `<svg>` markup of `src/assets/Logos/*.vue`. Keep them
+  in sync when a tech or logo changes.
+- Use `scene.background` for the clear colour, not `renderer.setClearColor`: through the
+  EffectComposer the latter is sRGB-encoded twice and `#0c0c0c` renders as `#3d3d3d`.
+
 ## Gotchas
 
 - **Spotlight offset.** `MainPage.vue` and `Contact.vue` each paint a radial-gradient
