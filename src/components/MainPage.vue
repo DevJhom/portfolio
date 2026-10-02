@@ -340,8 +340,8 @@ section {
     align-items: center;
     padding: 0.5rem 1rem;
     // Locked to the expanded content's width so hiding the label on hover doesn't resize
-    // the button; retune if the label text or its font-size changes. The Thai label fits
-    // this width; Burmese gets its own below.
+    // the button; retune if the label text or its font-size changes. Fits both "Resume"
+    // (English and Burmese) and the Thai label.
     width: 7.25rem;
     gap: 0.5rem;
     border: 1px solid $blue;
@@ -351,12 +351,6 @@ section {
 	box-shadow: 0 1px 15px 0 $blue;
 	transition: all $transition-medium;
     cursor: pointer;
-}
-
-// Estimated from Noto Sans Myanmar metrics — check it in the browser and retune if the
-// label clips or has too much slack.
-.my-resume:lang(my) {
-    width: 9.5rem;
 }
 
 .my-resume h4 {
@@ -518,7 +512,7 @@ section {
     position: relative;
 }
 
-// Phones: tighter gutters, and Resume pinned bottom-left.
+// Phones: tighter gutters; Resume stays beside the language switcher, sized to its label.
 @media (max-width: 768px) {
     .logo {
         margin-left: 1rem;
@@ -527,6 +521,7 @@ section {
     .top-actions {
         right: 1rem;
         height: calc(35px + 0.8rem + 2px);
+        gap: 0.5rem;
     }
 
     .scroll-to-explore {
@@ -542,12 +537,10 @@ section {
         display: flex;
     }
 
-    .my-resume,
-    .my-resume:lang(my) {
-        position: fixed;
-        left: 1rem;
-        bottom: 1rem;
+    // The label never hides on phones (no hover), so the fixed desktop width isn't needed.
+    .my-resume {
         width: auto;
+        padding: 0.5rem 0.8rem;
     }
 }
 </style>

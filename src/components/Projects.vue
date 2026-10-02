@@ -74,7 +74,7 @@ const onMouseLeave = () => {
               {{ t('projects.github') }}
             </small>
             <a :href="githubUrl" target="_blank">
-              <OpenWindow class="open-window" color="#7e7e7e"/>
+              <OpenWindow class="open-window" color="#8a8a8a"/>
             </a>
           </div>
         </div>

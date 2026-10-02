@@ -104,6 +104,7 @@ const setPassionBoxSpeed = (rate: number) => {
                                     <div class="shell-loading" aria-hidden="true">[<span class="shell-progress"></span>]</div>
                                 </div>
                                 <img src="/asean-myanmar.svg" alt="Map of Southeast Asia with Myanmar highlighted">
+                                <span class="location-map-coords">21.914°N, 95.956°E</span>
                             </div>
                         </div>
                     </SwiperSlide>
@@ -138,6 +139,7 @@ const setPassionBoxSpeed = (rate: number) => {
                                     <div class="shell-loading" aria-hidden="true">[<span class="shell-progress"></span>]</div>
                                 </div>
                                 <img src="/asean-thailand.svg" alt="Map of Southeast Asia with Thailand highlighted">
+                                <span class="location-map-coords">13.756°N, 100.502°E</span>
                             </div>
                         </div>
                     </SwiperSlide>
@@ -440,6 +442,18 @@ $map-load-steps: 10;
     transition: opacity $transition-medium, transform $transition-medium;
 }
 
+// inset clears the feathered mask edges of .location-map
+.location-map-coords {
+    position: absolute;
+    top: 10%;
+    right: 12%;
+    font-size: 0.55rem;
+    color: $light-gray;
+    font-variant-numeric: tabular-nums;
+    opacity: 0;
+    transition: opacity $transition-medium;
+}
+
 // Delays apply on hover-in only, so the console returns immediately on hover-out
 @mixin reveal-map {
     .shell-loading {
@@ -458,6 +472,11 @@ $map-load-steps: 10;
     .location-map img {
         opacity: 1;
         transform: translateY(0);
+        transition-delay: $map-load-time;
+    }
+
+    .location-map-coords {
+        opacity: 1;
         transition-delay: $map-load-time;
     }
 }
