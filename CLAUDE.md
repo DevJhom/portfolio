@@ -128,7 +128,7 @@ loaded with `defineAsyncComponent` so three.js stays out of the main chunk). The
 and `dispose`, and the component disposes it in `onUnmounted`.
 
 - The highlighted job comes from the same `hoverOnExp` state as the grid (the `activeJob`
-  computed), so the timeline, `.auto-hover` areas and mini-nav drive both views.
+  computed), so both views follow it.
 - `constellation/jobs.ts` repeats the job → tech mapping in `mouseOnExp()`, and
   `constellation/logos.ts` is the `<svg>` markup of `src/assets/Logos/*.vue`. Keep them
   in sync when a tech or logo changes.
@@ -148,6 +148,15 @@ and `dispose`, and the component disposes it in `onUnmounted`.
 - **Every effect registers a raw `window` listener** (`mousemove` spotlights, `scroll`
   text reveal) plus `setInterval`/`setTimeout` timers. All of them are torn down in
   `onUnmounted` — keep that up when adding effects.
+- **Work-experience scrollspy.** The active job in `TechStack.vue` is set by scroll: an
+  `IntersectionObserver` whose `rootMargin` is a 1px line watches targets tagged with `data-exp`
+  naming their `Experience`, and is rebuilt when the 768px breakpoint flips.
+  - Desktop: the line is at `POINTER_VH` (40vh, marked by `.scroll-pointer`) over the three
+    `.mini-nav` segments. Resizing or moving `.mini-nav` changes when each job lights up.
+  - Phones: `.tech-stack-left` is `display: contents` so the heading, a sticky tech panel
+    (`MOBILE_PANEL_VH`, bound into the CSS with `v-bind()`) and the timeline can be reordered; the
+    line sits 5vh below the panel over the timeline `<li>`s. Job details are always shown there so
+    `<li>` heights don't change mid-scroll, and the `<li>` hover handlers are desktop-only.
 - `TechStack.vue` reaches into the DOM with `querySelectorAll` to toggle a `.my-hover`
   class on the timeline `<li>`s; it depends on those three list items existing in order.
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive, computed, defineAsyncComponent } from 'vue';
+import { ref, reactive, computed, watch, onUnmounted, defineAsyncComponent } from 'vue';
 import { useIsMobile, CAREER_START_YEAR } from '@/helpers/helpers';
 import { useTranslation } from '@/i18n';
 import type { JobId } from '@/constellation/jobs';
@@ -216,6 +216,50 @@ const triggerHover = (experience: Experience) => {
     }
 }
 
+// Scrollspy: rootMargin shrinks the viewport to a 1px line, so a target intersects only while that
+// line crosses it. Desktop watches the .mini-nav segments at POINTER_VH: 40vh = 50vh - (.mini-nav
+// height 30vh) / 3, the middle of the first segment when the section is flush with the viewport.
+// Phones watch the timeline <li>s just below the sticky tech panel.
+const POINTER_VH = 40;
+const MOBILE_PANEL_VH = 55;
+const MOBILE_POINTER_VH = MOBILE_PANEL_VH + 5;
+
+const miniNav = ref<HTMLElement | null>(null);
+const timeline = ref<HTMLElement | null>(null);
+let currentArea: Element | null = null;
+let scrollSpy: IntersectionObserver | null = null;
+
+const onScrollSpy = (entries: IntersectionObserverEntry[]) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            currentArea = entry.target;
+            triggerHover(Experience[(entry.target as HTMLElement).dataset.exp as keyof typeof Experience]);
+        }
+        // Targets are adjacent, so "leave 1" can arrive after "enter 2" in the same batch.
+        else if (entry.target === currentArea) {
+            currentArea = null;
+            triggerHover(Experience.reset);
+        }
+    });
+}
+
+// Re-targets on remount (the section's v-if) and when the viewport crosses the mobile breakpoint;
+// clears the job left lit from the last visit.
+watch(() => isMobile.value ? timeline.value : miniNav.value, (el) => {
+    scrollSpy?.disconnect();
+    currentArea = null;
+    if (!el) return;
+    triggerHover(Experience.reset);
+    const line = isMobile.value ? MOBILE_POINTER_VH : POINTER_VH;
+    const spy = new IntersectionObserver(onScrollSpy, { root: null, rootMargin: `-${line}% 0px -${100 - line}% 0px`, threshold: 0 });
+    Array.from(el.children).forEach(target => spy.observe(target));
+    scrollSpy = spy;
+}, { flush: 'post' });
+
+onUnmounted(() => {
+    scrollSpy?.disconnect();
+});
+
 </script>
 
 <template>
@@ -227,25 +271,25 @@ const triggerHover = (experience: Experience) => {
                 </h2>
 
                 <div class="history-tl-container">
-                    <ul class="tl">
-                        <li class="tl-item" @mouseenter="triggerHover(Experience.internship)" @mouseleave="triggerHover(Experience.reset)">
+                    <ul ref="timeline" class="tl">
+                        <li class="tl-item" data-exp="internship" @mouseenter="isDesktop && triggerHover(Experience.internship)" @mouseleave="isDesktop && triggerHover(Experience.reset)">
                             <div class="item-title">Frontend Developer <span :class="{'text-light-gray': !hoverOnExp.internship}">{{ t('techStack.internship') }}</span></div>
                             <div class="item-detail">@ Innovative Village Co., Ltd.</div>
-                            <small v-show="hoverOnExp.internship" class="item-detail">
+                            <small v-show="hoverOnExp.internship || isMobile" class="item-detail">
                                 {{ t('techStack.internshipDetail') }}
                             </small>
                         </li>
-                        <li class="tl-item" @mouseenter="triggerHover(Experience.omnistar)" @mouseleave="triggerHover(Experience.reset)">
+                        <li class="tl-item" data-exp="omnistar" @mouseenter="isDesktop && triggerHover(Experience.omnistar)" @mouseleave="isDesktop && triggerHover(Experience.reset)">
                             <div class="item-title">System Analyst <span :class="{'text-light-gray': !hoverOnExp.omnistar}"> (2021-2022)</span></div>
                             <div class="item-detail">@ Omni Star Co., Ltd.</div>
-                            <small v-show="hoverOnExp.omnistar" class="item-detail">
+                            <small v-show="hoverOnExp.omnistar || isMobile" class="item-detail">
                                 {{ t('techStack.omnistarDetail') }}
                             </small>
                         </li>
-                        <li class="tl-item" @mouseenter="triggerHover(Experience.clicknext)" @mouseleave="triggerHover(Experience.reset)">
+                        <li class="tl-item" data-exp="clicknext" @mouseenter="isDesktop && triggerHover(Experience.clicknext)" @mouseleave="isDesktop && triggerHover(Experience.reset)">
                             <div class="item-title">Full Stack Developer <span :class="{'text-light-gray': !hoverOnExp.clicknext}"> ({{ CAREER_START_YEAR }}-{{ t('techStack.present') }})</span></div>
                             <div class="item-detail">@ ClickNext Co., Ltd.</div>
-                            <small v-show="hoverOnExp.clicknext" class="item-detail">
+                            <small v-show="hoverOnExp.clicknext || isMobile" class="item-detail">
                                 {{ t('techStack.clicknextDetail') }}
                             </small>
                         </li>
@@ -339,7 +383,7 @@ const triggerHover = (experience: Experience) => {
                     </div>
                 </div>
                 </Transition>
-                <div class="d-flex justify-content-center mt-4 animate-on-hover">
+                <div class="tech-caption d-flex animate-on-hover">
                     <template v-if="hoverOnExp.hoverStart">
                         <template v-if="hoverOnExp.clicknext">
                             {{ t('techStack.currentlyUsing') }}
@@ -358,15 +402,16 @@ const triggerHover = (experience: Experience) => {
                     </button>
                 </div>
             </div>
-            <div v-if="isDesktop" class="mini-nav">
-                <div :class="{active: hoverOnExp.internship}" @mouseenter="triggerHover(Experience.internship)" @mouseleave="triggerHover(Experience.reset)"></div>
-                <div :class="{active: hoverOnExp.omnistar}" @mouseenter="triggerHover(Experience.omnistar)" @mouseleave="triggerHover(Experience.reset)"></div>
-                <div :class="{active: hoverOnExp.clicknext}" @mouseenter="triggerHover(Experience.clicknext)" @mouseleave="triggerHover(Experience.reset)"></div>
+            <div v-if="isDesktop" ref="miniNav" class="mini-nav">
+                <div :class="{active: hoverOnExp.internship}" data-exp="internship"></div>
+                <div :class="{active: hoverOnExp.omnistar}" data-exp="omnistar"></div>
+                <div :class="{active: hoverOnExp.clicknext}" data-exp="clicknext"></div>
             </div>
-            <div class="auto-hover">
-                <div class="hover-area-1" @mouseenter="triggerHover(Experience.internship)" @mouseleave="triggerHover(Experience.reset)"></div>
-                <div class="hover-area-2" @mouseenter="triggerHover(Experience.omnistar)" @mouseleave="triggerHover(Experience.reset)"></div>
-                <div class="hover-area-3" @mouseenter="triggerHover(Experience.clicknext)" @mouseleave="triggerHover(Experience.reset)"></div>
+            <div v-if="isDesktop" class="scroll-pointer" :class="{ engaged: hoverOnExp.hoverStart }" :style="{ top: `${POINTER_VH}vh` }" aria-hidden="true">
+                <span class="scroll-pointer-caret"></span>
+                <span class="scroll-pointer-tail">
+                    <span v-if="activeJob" :key="activeJob" class="scroll-pointer-spark"></span>
+                </span>
             </div>
         </div>
     </Transition>
@@ -384,7 +429,7 @@ const triggerHover = (experience: Experience) => {
 }
 
 .tech-stack-left {
-    width: 40%;
+    width: 50%;
     height: 100%;
     z-index: $top-layer;
 }
@@ -395,7 +440,7 @@ const triggerHover = (experience: Experience) => {
 }
 
 .tech-stack-right {
-    width: 60%;
+    width: 50%;
     height: 100%;
     padding: 0 4rem;
     display: flex;
@@ -434,13 +479,18 @@ const triggerHover = (experience: Experience) => {
     box-shadow: 0 0 12px rgba(31, 81, 255, 0.5);
 }
 
+.tech-caption {
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
 .view-toggle-button:disabled {
     cursor: wait;
     opacity: 0.6;
 }
 
-// z-index lifts the canvas above .auto-hover ($bottom-layer) so it gets pointer events, but
-// keeps it below the fixed logo, language switcher and Resume button ($top-layer) in MainPage.vue.
+// z-index keeps the canvas below the fixed logo, language switcher and Resume button ($top-layer)
+// in MainPage.vue.
 .constellation-wrap {
     position: relative;
     width: 100%;
@@ -507,7 +557,6 @@ const triggerHover = (experience: Experience) => {
     transition: all $transition-fast;
 }
 
-.history-tl-container ul.tl li:hover::before,
 .history-tl-container ul.tl li.my-hover::before {
     border-color: $light-black;
     background-color: $blue;
@@ -806,25 +855,87 @@ ul.tl li .item-detail {
     opacity: 0.2;
 }
 
-.auto-hover {
+// Marks the scrollspy trigger line; whichever .mini-nav segment sits under it is the active job.
+.scroll-pointer {
+    position: fixed;
+    left: calc(0.5vw + 4px); // just right of .mini-nav; top is bound inline from POINTER_VH
+    transform: translateY(-50%); // keeps the tail on the trigger line
+    height: 8px;
+    display: flex;
+    align-items: center;
+    filter: drop-shadow(0 0 0 rgba(31, 81, 255, 0));
+    transition: filter $transition-fast;
+    pointer-events: none;
+    z-index: $top-layer;
+}
+
+.scroll-pointer-caret {
+    width: 5px;
+    height: 8px;
+    background-color: $gray2;
+    clip-path: polygon(100% 0, 0 50%, 100% 100%);
+    transition: background-color $transition-fast, transform $transition-fast;
+}
+
+.scroll-pointer-tail {
+    position: relative;
+    width: 24px;
+    height: 2px;
+    overflow: hidden;
+    background-color: $gray2;
+    -webkit-mask-image: linear-gradient(to right, #000 30%, transparent);
+    mask-image: linear-gradient(to right, #000 30%, transparent);
+    transform: scaleX(0.34);
+    transform-origin: left center;
+    transition: background-color $transition-fast, transform $transition-fast;
+}
+
+.scroll-pointer.engaged {
+    filter: drop-shadow(0 0 4px rgba(31, 81, 255, 0.8));
+}
+
+.scroll-pointer.engaged .scroll-pointer-caret {
+    background-color: $blue;
+    transform: translateX(-3px);
+}
+
+.scroll-pointer.engaged .scroll-pointer-tail {
+    background-color: $blue;
+    transform: translateX(-3px) scaleX(1);
+}
+
+.scroll-pointer-spark {
     position: absolute;
-    min-width: 100%;
-    min-height: 100%;
-    z-index: $bottom-layer;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background-color: $white;
+    opacity: 0;
+    animation: pointer-spark 0.5s ease-out;
 }
 
-.hover-area-1, .hover-area-2, .hover-area-3 {
-    position: absolute;
-    min-height: 33.33%;
-    min-width: 100%;
+@keyframes pointer-spark {
+    from {
+        transform: translateX(-6px);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(24px);
+        opacity: 0;
+    }
 }
 
-.hover-area-2 {
-    top: 33.33%
-}
+@media (prefers-reduced-motion: reduce) {
+    .scroll-pointer,
+    .scroll-pointer-caret,
+    .scroll-pointer-tail {
+        transition: none;
+    }
 
-.hover-area-3 {
-    top: 66.66%
+    .scroll-pointer-spark {
+        display: none;
+    }
 }
 
 .tech-stack-left,
@@ -837,12 +948,7 @@ ul.tl li .item-detail {
         width: 90%;
     }
 
-    .tech-stack-left {
-        width: 50%;
-    }
-
     .tech-stack-right {
-        width: 50%;
         padding: 0 1rem;
         left: 2.5vw; // half of the 5vw side margin at width 90%
     }
@@ -854,14 +960,55 @@ ul.tl li .item-detail {
         padding: 2rem 0;
     }
 
+    // Heading, then the tech panel pinned under the fixed header, then the timeline scrolling
+    // beneath it; display: contents makes the heading and timeline siblings of the panel for order.
     .tech-stack-left {
+        display: contents;
+    }
+
+    .history-tl-container {
+        order: 2;
         width: 100%;
     }
 
     .tech-stack-right {
-        width: 100%;
-        padding: 0;
+        order: 1;
+        position: sticky;
+        top: 0;
         left: 0;
+        width: 100vw; // full-bleed past the 5vw gutters so the timeline never shows beside it
+        height: calc(v-bind(MOBILE_PANEL_VH) * 1vh);
+        @supports (height: 1dvh) {
+            height: calc(v-bind(MOBILE_PANEL_VH) * 1dvh); // tracks the URL bar, as the scrollspy's line does
+        }
+        padding: 5rem 5vw 0.75rem; // 5rem clears the fixed logo / Resume header
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: minmax(0, 1fr) auto;
+        align-items: center;
+        column-gap: 1rem;
+        background-color: $black;
+        z-index: $middle-layer;
+    }
+
+    .constellation-wrap,
+    .tech-stack-grid {
+        grid-column: 1 / -1;
+    }
+
+    .constellation-wrap {
+        height: 100%;
+        aspect-ratio: auto;
+        max-height: none;
+    }
+
+    .tech-caption {
+        justify-content: flex-start;
+        margin-top: 0.5rem;
+    }
+
+    .view-toggle {
+        margin-top: 0.5rem;
     }
 }
 </style>
