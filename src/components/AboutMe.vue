@@ -9,12 +9,13 @@ import FacebookIcon from '@/assets/Icons/FacebookIcon.vue';
 import GithubIcon from '@/assets/Icons/GithubIcon.vue';
 import LinkedInIcon from '@/assets/Icons/LinkedInIcon.vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Autoplay, EffectFlip, Navigation, Pagination } from 'swiper/modules';
+import { A11y, Autoplay, EffectFlip, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import 'swiper/css/effect-flip';
+import 'swiper/css/a11y';
 
 const props = defineProps<{
     activeSection: string
@@ -33,7 +34,8 @@ const toggleMap = (e: MouseEvent) => {
     mapRevealed.value = !mapRevealed.value;
 }
 const businessCard = ref<typeof Swiper | null>(null);
-const modules_location = [Navigation, Pagination, Autoplay];
+// A11y makes the arrows focusable and Enter-operable; it changes nothing visually.
+const modules_location = [Navigation, Pagination, Autoplay, A11y];
 const modules_business_card = [EffectFlip];
 
 const onSwiper = (swiper: any) => {
@@ -92,7 +94,7 @@ const setPassionBoxSpeed = (rate: number) => {
                                 </div>
                                 <i18n-t keypath="about.from" tag="div" class="terminal-output">
                                     <template #br><br></template>
-                                    <template #role>Software Developer</template>
+                                    <template #role>Full Stack Developer</template>
                                     <template #country><span class="t-white">{{ t('about.country') }}</span></template>
                                 </i18n-t>
                             </div>
@@ -212,7 +214,15 @@ const setPassionBoxSpeed = (rate: number) => {
         </Transition>
 
         <Transition :name="isDesktop ? 'slide-fade-left' : ''">
-            <div v-show="sectionIsActive || !isDesktop" class="grid-item style-card">
+            <div
+                v-show="sectionIsActive || !isDesktop"
+                class="grid-item style-card"
+                tabindex="0"
+                role="button"
+                :aria-label="t('about.flipCard')"
+                @keydown.enter.prevent="onHoverBusinessCard"
+                @keydown.space.prevent="onHoverBusinessCard"
+            >
                 <Swiper 
                     @swiper="onSwiper"
                     :effect="'flip'"
@@ -233,7 +243,7 @@ const setPassionBoxSpeed = (rate: number) => {
                                 DevJhom
                             </span>
                             <small class="text-vs-dark-blue">
-                                <b>Software Developer</b>
+                                <b>Full Stack Developer</b>
                             </small>
                             <small class="swipe">
                                 <i>{{ t('about.swipe') }}</i>
@@ -247,7 +257,7 @@ const setPassionBoxSpeed = (rate: number) => {
                             </small>
                             <small><span class="text-vs-yellow">.contact </span><span class="text-vs-yellow">&#123;</span></small>
                             <small class="ms-4"><span class="text-vs-blue">name:</span><span class="text-vs-orange"> DevJhom</span></small>
-                            <small class="ms-4"><span class="text-vs-blue">role:</span><span class="text-vs-orange"> Software Developer</span></small>
+                            <small class="ms-4"><span class="text-vs-blue">role:</span><span class="text-vs-orange"> Full Stack Developer</span></small>
                             <small class="ms-4"><span class="text-vs-blue">mobile:</span><span class="text-vs-green"> +66 98 931 8198</span></small>
                             <small class="ms-4"><span class="text-vs-blue">email:</span><span class="text-vs-green"> jhomwan238@gmail.com</span></small>
                             <small class="ms-4"><span class="text-vs-blue">website:</span><span class="text-vs-green"> https://devjhom.site</span> </small>
@@ -285,14 +295,10 @@ const setPassionBoxSpeed = (rate: number) => {
     min-width: 0;
 }
 
+// outline, not a thicker border: a border change resizes the card and shakes its content
 .grid-item:hover {
-    border: 2px solid $blue;
-    transform: scale(1.04);
-}
-
-.grid-item:nth-child(1):hover { //adding border causes svg to shake
-    border: 1px solid $gray;
     outline: 2px solid $blue;
+    transform: scale(1.04);
 }
 
 .grid-item:nth-child(1) {
@@ -361,33 +367,6 @@ CARDS
     color: $white;
     font-family: "Courier Prime", var(--font-mono);
 }
-
-.location-card-top, .location-card-bottom {
-    background-image: none;
-    background-color: transparent;
-    background-size: 80%;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-
-    transition:
-        background-color $transition-fast,
-        background-position $transition-fast,
-        background-size $transition-fast;
-}
-
-// .location-card-top:hover
-// .grid-item:nth-child(1):hover .location-card-top {
-//     background-image: url('/myanmar.svg');
-//     background-size: 50%;
-//     background-position: 75% 25%;
-// }
-
-// .location-card-bottom:hover {
-// .grid-item:nth-child(1):hover .location-card-bottom {
-//     background-image: url('/thailand.svg');
-//     background-size: 50%;
-//     background-position: 75% 25%;
-// }
 
 .location-map {
     position: relative;
@@ -585,14 +564,6 @@ $map-load-steps: 10;
     flex-direction: column;
     gap: 0.75rem;
     padding-right: 0.5rem;
-    opacity: 0;
-    transform: translateX(10px);
-    transition: opacity $transition-fast, transform $transition-fast;
-}
-
-.description-card:hover .social-links {
-    opacity: 1;
-    transform: translateX(0);
 }
 
 .social-link {
@@ -613,8 +584,6 @@ $map-load-steps: 10;
 // 3. experience-card
 .experience-card {
     padding: 1rem;
-    // background-color: $light-black;
-
     background: linear-gradient(to right, $light-gray 0, white 10%, $light-gray 20%);
     background-size: 200% auto;
     background-clip: text;
@@ -623,6 +592,11 @@ $map-load-steps: 10;
     
     animation-fill-mode: forwards;
     animation: background-gradient 4s infinite linear;
+}
+
+// Bootstrap headings are weight 500
+.experience-card h3 {
+    font-weight: bold;
 }
 
 // 4. social-media-card
@@ -833,10 +807,6 @@ $map-load-steps: 10;
     // the global h3 clamp bottoms out at body-text size on phones
     .experience-card h3 {
         font-size: 1.5rem;
-    }
-
-    .social-links {
-        display: none;
     }
 }
 </style>

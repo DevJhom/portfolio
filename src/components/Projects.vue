@@ -78,19 +78,12 @@ const onMouseLeave = () => {
             </a>
           </div>
         </div>
-        <!-- <div class="card">
-          <div class="bar">
-            <div class="emptybar"></div>
-            <div class="filledbar"></div>
-          </div>
-        </div> -->
       </div>
     </div>
   </Transition>
 </template>
 
 <style scoped lang="scss">
-// Tech Stack
 .projects {
   display: flex;
   flex-direction: row;
@@ -185,34 +178,6 @@ const onMouseLeave = () => {
   right: 1rem;
   bottom: 1rem;
   cursor: pointer;
-}
-
-.bar {
-  position: absolute;
-  top: 70px;
-  height: 5px;
-  width: 100%;
-  margin-left: -1px;
-}
-
-.emptybar {
-  background-color: $gray;
-  width: 100%;
-  height: 100%;
-}
-
-.filledbar {
-  position: absolute;
-  top: 0px;
-  width: 0px;
-  height: 100%;
-  background-color: $light-gray;
-  transition: $transition-medium;
-}
-
-.card:hover .filledbar {
-  width: 100%;
-  transition: $transition-fast;
 }
 
 @media (max-width: 1024px) {

@@ -27,6 +27,7 @@ const en = {
         passionTitle: 'Coding with Passion',
         passionText: "I'm passionate about coding and problem-solving. I approach each project with creativity, strong dedication and commitment to writing clean and maintainable code.",
         swipe: 'Swipe >>>',
+        flipCard: 'Flip business card',
     },
     keepCalm: {
         online: 'Online',
@@ -43,13 +44,14 @@ const en = {
         present: 'present',
         internshipDetail: 'I started with Figma, HTML, CSS, Javascript, React and a few services from Google Cloud.',
         omnistarDetail: 'I mainly worked on the infrastructure side, configuring several databases and administrative tools.',
-        clicknextDetail: 'My current tech stack includes Vue, Typescript, Vite, C#, and several database and cache storages. I have also been integrating my workflow with utility tools such as Vim and artificial intelligence (AI).',
+        clicknextDetail: 'My current tech stack includes Vue, Typescript, Vite, C#, and several database and cache storages. I have also been integrating my workflow with artificial intelligence (AI).',
         currentlyUsing: "Technologies I'm currently using.",
         usedAndFamiliar: "Technologies I've used and am familiar with.",
         familiar: "Technologies I'm familiar with.",
         // 3D tech constellation (TechConstellation.vue)
-        collapse: 'Collapse',
-        expand: 'Expand',
+        // The toggle names the view it switches to.
+        gridView: 'Grid view',
+        view3d: '3D view',
         webglUnavailable: '3D view is not available in this browser.',
     },
     projects: {

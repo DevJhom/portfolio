@@ -30,7 +30,7 @@ const sections = ref([
 const activeSection = ref('home');
 const showScrollToExplore = computed(() => activeSection.value == 'home');
 
-// Typing "I'm a Software Developer."
+// Typing "I'm a Full Stack Developer."
 const isTyping = ref(false);
 let typingTimeout1: number;
 let typingTimeout2: number;
@@ -43,13 +43,6 @@ function updateSpotlight(e: MouseEvent): void {
     if (spotlight) {
         spotlight.style.backgroundImage = `radial-gradient(circle at ${e.pageX / window.innerWidth * 100}% ${e.pageY / window.innerHeight * 100}%, ${spotlightSize}`;
     }
-}
-
-const downloadResume = () => {
-    const link = document.createElement("a");
-    link.href = "./Resume_Sai_Swan_Wan.pdf";
-    link.download = "Resume_Sai_Swan_Wan.pdf";
-    link.click();
 }
 
 let observer: IntersectionObserver;
@@ -120,10 +113,10 @@ onUnmounted(() => {
         </div>
         <div class="top-actions">
             <LanguageSwitcher/>
-            <div class="my-resume" @click="downloadResume()">
+            <a class="my-resume" href="./Resume_Sai_Swan_Wan.pdf" download="Resume_Sai_Swan_Wan.pdf">
                 <Download/>
                 <h4>{{ t('header.resume') }}</h4>
-            </div>
+            </a>
         </div>
         <!-- HOME -->
         <div id="home">
@@ -140,9 +133,10 @@ onUnmounted(() => {
                     </h1>
                     <div :class="{typewriter: isTyping}" class="introduction-text">
                         <i18n-t keypath="hero.role" tag="h2">
-                            <template #role><span class="text-animation">Software Developer</span></template>
+                            <template #role><span class="text-animation">Full Stack Developer</span></template>
                         </i18n-t>
                     </div>
+                    <p class="hero-stack">Vue · TypeScript · C#</p>
                 </div>
                 <Transition name="fade">
                     <small v-if="showScrollToExplore" class="scroll-to-explore animate-on-hover">
@@ -420,6 +414,16 @@ section {
     flex: 1;
     height: 1px;
     background-color: rgba(255, 255, 255, 0.15);
+}
+
+// Solid backing so the spotlight-revealed source code doesn't show through the line.
+.hero-stack {
+    width: fit-content;
+    margin: 0.75rem 0 0;
+    background-color: $black;
+    color: $light-gray;
+    font-size: clamp(0.85rem, 0.5vw + 0.65rem, 1.05rem);
+    font-family: var(--font-mono);
 }
 
 .introduction-text {

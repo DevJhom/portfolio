@@ -101,20 +101,16 @@ the shared `@keyframes` are available in any `<style scoped lang="scss">` with n
   Bootstrap): resets, `text-vs-*` VS Code-palette helpers, responsive `clamp()` heading
   sizes, scrollbar styling, and Swiper overrides. Everything else is `scoped`.
 
-Bootstrap's CSS and JS are imported globally in `main.ts`, and Bootstrap utility classes
-(`d-flex`, `ms-1`, `mt-3`, `nav-pills`, `form-control`, …) are used freely in templates.
+Only Bootstrap's CSS is imported (globally, in `main.ts`; no Bootstrap JS components are
+used), and its utility classes (`d-flex`, `ms-1`, `mt-3`, `nav-pills`, `form-control`, …)
+are used freely in templates.
 
-### Path aliases (the two sets disagree)
+### Path aliases
 
-`vite.config.ts` defines `@`, `@components`, `@scss`, `@helpers`; `tsconfig.app.json`
-defines `@/*`, `@components/*`, `@assets/*`, `@scss/*`, `@helpers/*`. Two traps:
-
-- `@assets/*` exists only in tsconfig — it type-checks but Vite cannot resolve it.
-  Import icons as `@/assets/Icons/Foo.vue`, which is what all existing code does.
-- The tsconfig `@helpers/*` target is `["/src/helpers/*"]` (leading slash, wrong).
-  Import the composable as `@/helpers/helpers`.
-
-`@components/*` is the one alias that works both ways and is used for section imports.
+`vite.config.ts` and `tsconfig.app.json` define the same three: `@` (→ `src/`),
+`@components`, `@scss`. Import icons as `@/assets/Icons/Foo.vue` and the composable as
+`@/helpers/helpers`. Add any new alias to both files, or it type-checks but Vite can't
+resolve it (or the reverse).
 
 ### Icons and static assets
 
@@ -127,7 +123,7 @@ absolute root path (`src="/letter-j.png"`, `background: url('/world.svg')`).
 
 The right side of `TechStack.vue` defaults to a three.js scene (`TechConstellation.vue`,
 loaded with `defineAsyncComponent` so three.js stays out of the main chunk). The
-"Collapse" / "Expand" button swaps it for the original 2D grid. The scene code in
+"Grid view" / "3D view" button swaps it for the original 2D grid. The scene code in
 `src/constellation/` has no Vue dependency: `mount(el)` returns `setActiveJob`, `collapse`
 and `dispose`, and the component disposes it in `onUnmounted`.
 

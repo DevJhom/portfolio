@@ -22,7 +22,6 @@ import DockerLogo from '@/assets/Logos/DockerLogo.vue';
 import GoogleCloudLogo from '@/assets/Logos/GoogleCloudLogo.vue';
 import NeovimLogo from '@/assets/Logos/NeovimLogo.vue';
 import ClaudeLogo from '@/assets/Logos/ClaudeLogo.vue';
-//import debounce from 'lodash.debounce';
 
 // Lazy: three.js is ~500 kB, so it loads in its own chunk instead of delaying first paint.
 const TechConstellation = defineAsyncComponent(() => import('@components/TechConstellation.vue'));
@@ -87,7 +86,7 @@ const activeJob = computed<JobId | null>(() => {
     return null;
 });
 
-// 3D by default; "Collapse" plays the constellation's collapse animation, then swaps in the grid.
+// 3D by default; "Grid view" plays the constellation's collapse animation, then swaps in the grid.
 const view = ref<'3d' | '2d'>('3d');
 const constellation = ref<{ collapse(): Promise<void> } | null>(null);
 const isSwitching = ref(false);
@@ -217,51 +216,15 @@ const triggerHover = (experience: Experience) => {
     }
 }
 
-/*
-const handleScroll = debounce(() => {
-    if (!isDesktop.value) return;
-
-    if (props.activeSection == 'tech-stack') {
-        const techStackElement = document.getElementById('tech-stack');
-        if (techStackElement) {
-            const rect = techStackElement.getBoundingClientRect();
-            const sectionHeight = rect.height;
-            const halfSectionHeight = sectionHeight / 2; 
-            const partSize = (sectionHeight - halfSectionHeight) / 4; 
-            const scrollPosition = rect.top + innerHeight;
-
-            if (scrollPosition >= halfSectionHeight + partSize * 3 && scrollPosition <= sectionHeight) {
-                triggerHover(Experience.internship);
-            } else if (scrollPosition >= halfSectionHeight + partSize * 2 && scrollPosition < halfSectionHeight + partSize * 3) {
-                triggerHover(Experience.omnistar);
-            } else if (scrollPosition >= halfSectionHeight + partSize && scrollPosition < halfSectionHeight + partSize * 2) {
-                triggerHover(Experience.clicknext);
-            } else if (scrollPosition >= halfSectionHeight && scrollPosition < halfSectionHeight + partSize) {
-                triggerHover(Experience.clicknext);
-            } else { 
-                triggerHover(Experience.reset);
-            }
-        }
-    }
-}, 10, { leading: true, trailing: false });
-*/
-
-// onMounted(() => {
-//     window.addEventListener('scroll', handleScroll);
-// });
-
-// onUnmounted(() => {
-//     window.removeEventListener('scroll', handleScroll);
-// })
 </script>
 
 <template>
     <Transition :name="isDesktop ? 'fade' : ''">
         <div v-if="activeSection == 'tech-stack' || isMobile" class="tech-stack">
             <div class="tech-stack-left">
-                <h4 class="animate-on-hover">
+                <h2>
                     {{ t('techStack.title') }}
-                </h4>
+                </h2>
 
                 <div class="history-tl-container">
                     <ul class="tl">
@@ -391,7 +354,7 @@ const handleScroll = debounce(() => {
                 </div>
                 <div class="view-toggle">
                     <button type="button" class="view-toggle-button" :disabled="isSwitching" @click="toggleView()">
-                        {{ view === '3d' ? t('techStack.collapse') : t('techStack.expand') }}
+                        {{ view === '3d' ? t('techStack.gridView') : t('techStack.view3d') }}
                     </button>
                 </div>
             </div>
@@ -424,6 +387,11 @@ const handleScroll = debounce(() => {
     width: 40%;
     height: 100%;
     z-index: $top-layer;
+}
+
+// Between the global h3 and h2 sizes: the full h2 is too large beside the timeline.
+.tech-stack-left h2 {
+    font-size: clamp(1.1rem, 1.5vw + 0.5rem, 1.6rem);
 }
 
 .tech-stack-right {
@@ -596,12 +564,6 @@ ul.tl li .item-detail {
     grid-row-start: 1;
 }
 
-.grid-21 {
-    grid-column: span 2 / span 2;
-    grid-row: span 2 / span 2;
-    grid-column-start: 9;
-    grid-row-start: 1;
-}
 
 .grid-18 {
     grid-column: span 2 / span 2;

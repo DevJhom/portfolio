@@ -11,7 +11,6 @@ const props = defineProps({
 const activeSection = computed(() => props.activeSection);
 
 const setActive = (sectionId: string) => {
-    // activeSection.value = sectionId;
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' }); // Smooth scrolling
 };
 </script>

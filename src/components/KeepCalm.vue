@@ -85,7 +85,6 @@ const updateRandomTexts = () => {
 
 const getNextMessage = () => {
     currentMessage = loopMessages[loopIndex];
-    //loopIndex = (loopIndex + 1) % loopMessages.length; //for infinite loop
     loopIndex++;
 
     if (loopIndex <= loopMessages.length) {
@@ -200,8 +199,8 @@ onUnmounted(() => {
             <div v-if="isMobile || typingMessage.isTyping || typingMessage.isAlreadyTyped" :class="{typewriter: typingMessage.isTyping && !isMobile}" class="keep-calm-text">
                 <h2>{{ displayedText }}</h2>
                 <div class="text-end mt-2 start-stop">
-                    <div v-if="!isRunning" @click="startProgram()">Start <Play/></div>
-                    <div v-else @click="endProgram()">Stop <Stop/></div>
+                    <button v-if="!isRunning" type="button" @click="startProgram()">Start <Play/></button>
+                    <button v-else type="button" @click="endProgram()">Stop <Stop/></button>
                 </div>
             </div>
             <div class="matrix-effect">
@@ -357,7 +356,12 @@ onUnmounted(() => {
     color: $gray;
 }
 
-.parallax-2 .start-stop {
+.parallax-2 .start-stop button {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
     cursor: pointer;
 }
 

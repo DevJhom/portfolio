@@ -29,6 +29,7 @@ const th: MessageSchema = {
         passionTitle: 'สร้างและพัฒนาด้วย Passion',
         passionText: 'ผมมีความหลงใหลในการเขียนโค้ดและการแก้ปัญหา โดยเข้าหาทุกโปรเจกต์ด้วยความคิดสร้างสรรค์ ความทุ่มเท และความใส่ใจในการเขียนโค้ดที่สะอาดและดูแลรักษาง่าย',
         swipe: 'ปัด >>>',
+        flipCard: 'พลิกนามบัตร',
     },
     keepCalm: {
         online: 'ออนไลน์',
@@ -44,12 +45,12 @@ const th: MessageSchema = {
         present: 'ปัจจุบัน',
         internshipDetail: 'ผมเริ่มต้นด้วย Figma, HTML, CSS, Javascript, React และ service บางส่วนจาก Google Cloud',
         omnistarDetail: 'ผมทำงานด้าน infrastructure เป็นหลัก โดยใช้งาน database และเครื่องมือ administrative หลายตัว',
-        clicknextDetail: 'Tech stack ปัจจุบันของผมคือ Vue, Typescript, Vite, C# และ database กับ cache เช่น MongoDB, SQL Server, Redis และปัจจุบันผมมีการเริ่มนำเครื่องมือช่วยพัฒนาเช่น Vim และ AI มาประยุกต์ใช้กับการทำงาน',
+        clicknextDetail: 'Tech stack ปัจจุบันของผมคือ Vue, Typescript, Vite, C# และ database กับ cache เช่น MongoDB, SQL Server, Redis และปัจจุบันผมเริ่มนำ AI มาประยุกต์ใช้กับการทำงาน',
         currentlyUsing: 'เทคโนโลยีที่ผมใช้อยู่ในปัจจุบัน',
         usedAndFamiliar: 'เทคโนโลยีที่ผมเคยใช้และคุ้นเคย',
         familiar: 'เทคโนโลยีที่ผมคุ้นเคย',
-        collapse: 'ย่อ',
-        expand: 'ขยาย',
+        gridView: 'มุมมองตาราง',
+        view3d: 'มุมมอง 3D',
         webglUnavailable: 'เบราว์เซอร์นี้ไม่รองรับมุมมอง 3D',
     },
     projects: {

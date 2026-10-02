@@ -73,10 +73,9 @@ export async function mount(container: HTMLElement, options: ConstellationOption
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.enablePan = false;
-    // The canvas sits in a scrolling page: the wheel must keep scrolling it, and on touch
-    // screens a swipe across the canvas must too, so phones get auto-rotate and taps only.
+    // The canvas sits in a scrolling page, so the wheel must keep scrolling it. Touch screens
+    // rotate too: see the touch-action note below for how that coexists with page scrolling.
     controls.enableZoom = false;
-    controls.enableRotate = !coarsePointer;
     controls.minDistance = 6;
     controls.maxDistance = MAX_DISTANCE;
     controls.autoRotate = !reducedMotion;
@@ -163,7 +162,10 @@ export async function mount(container: HTMLElement, options: ConstellationOption
     }
 
     const canvas = renderer.domElement;
-    // OrbitControls sets touch-action: none, which would swallow vertical page scrolls.
+    // OrbitControls sets touch-action: none, which would swallow vertical page scrolls. pan-y
+    // hands vertical swipes back to the browser (it sends pointercancel, which OrbitControls
+    // treats as pointerup) and leaves horizontal drags to OrbitControls, so a sideways swipe
+    // spins the constellation and an up/down swipe still scrolls the page.
     if (coarsePointer) canvas.style.touchAction = 'pan-y';
     canvas.addEventListener('pointermove', onPointerMove);
     canvas.addEventListener('pointerleave', onPointerLeave);

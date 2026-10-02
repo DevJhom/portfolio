@@ -29,6 +29,7 @@ const my: MessageSchema = {
         passionTitle: 'Passion ဖြင့် ကုဒ်ရေးခြင်း',
         passionText: 'ကျွန်တော်ဟာ ကုဒ်ရေးခြင်းနဲ့ problem-solving မှာ ဝါသနာပါပါတယ်။ ပရောဂျက်တိုင်းကို ကျွန်တော် ဆွဲဆောင်မှုရှိတဲ့ creativity, ပြင်းပြတဲ့ dedication နဲ့ ရိုးရှင်းပြီး ထိန်းသိမ်းရလွယ်ကူတဲ့ ကုဒ်တွေကို ရေးသားပါတယ်။',
         swipe: 'Swipe >>>',
+        flipCard: 'လိပ်စာကတ်ကို လှန်ရန်',
     },
     keepCalm: {
         online: 'အွန်လိုင်း',
@@ -48,8 +49,8 @@ const my: MessageSchema = {
         currentlyUsing: 'လက်ရှိ အသုံးပြုနေတဲ့ နည်းပညာများ',
         usedAndFamiliar: 'အသုံးပြုဖူးပြီး ကျွမ်းဝင်တဲ့ နည်းပညာများ',
         familiar: 'ကျွမ်းဝင်တဲ့ နည်းပညာများ',
-        collapse: 'ချုံ့ရန်',
-        expand: 'ချဲ့ရန်',
+        gridView: 'Grid မြင်ကွင်း',
+        view3d: '3D မြင်ကွင်း',
         webglUnavailable: 'ဒီ browser မှာ 3D မြင်ကွင်းကို မပံ့ပိုးပါ',
     },
     projects: {

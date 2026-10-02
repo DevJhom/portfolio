@@ -78,6 +78,14 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0; 
 }
 
+// Keyboard focus ring. :focus-visible matches only keyboard focus on links and buttons, so
+// mouse and touch users see nothing new. Form fields match it on click too and already turn
+// their border blue on focus, so they keep that instead.
+:focus-visible:not(input, textarea, select) {
+  outline: 2px solid $blue;
+  outline-offset: 2px;
+}
+
 //GLOBAL classes
 .text-light-gray {
   color: $light-gray;
@@ -109,10 +117,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .text-vs-green {
   color: #B5CEA8;
-}
-
-.text-vs-dark-green {
-  color: #4EC9B0;
 }
 
 .text-vs-purple {
