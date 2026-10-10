@@ -53,7 +53,7 @@ const my: MessageSchema = {
     },
     projects: {
         title: 'ကိုယ်ပိုင် ပရောဂျက်များ',
-        subtitle: 'ကျွန်တော် အကြိုက်ဆုံး ကိုယ်ပိုင် ပရောဂျက်တချို့ပါ။',
+        subtitle: 'ကျွန်တော် လက်ရှိ လုပ်ဆောင်နေတဲ့ ပရောဂျက်တချို့ပါ။',
         tools: 'ကိရိယာများ',
         guitar: 'ဂီတာ',
         fretwizard: 'FretWizard ဟာ ဂီတာအတွက် chord, scale နဲ့ pattern အမျိုးမျိုးတွေကို မြင်သာအောင် ပြပေးတဲ့ interactive tool တစ်ခုဖြစ်ပါတယ်။',

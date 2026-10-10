@@ -100,7 +100,7 @@ onUnmounted(() => {
         <div class="contact-content row g-5">
             <div class="contact-left col-md-6">
                 <h2>{{ t('contact.title') }}</h2>
-                <p class="text-secondary mt-3">{{ t('contact.intro') }}</p>
+                <p class="text-light-gray mt-3">{{ t('contact.intro') }}</p>
                 <div class="input-group mt-3">
                     <input type="text" class="form-control" placeholder="jhomwan238@gmail.com" aria-label="jhomwan238@gmail.com" readonly>
                     <div class="input-group-append">
@@ -128,7 +128,7 @@ onUnmounted(() => {
                     <input v-model="form.botcheck" type="checkbox" name="botcheck" class="d-none" tabindex="-1" autocomplete="off">
 
                     <div class="d-flex align-items-center justify-content-end gap-3">
-                        <small v-if="status === 'sent'" class="text-secondary">{{ t('contact.form.thanks') }}</small>
+                        <small v-if="status === 'sent'" class="text-light-gray">{{ t('contact.form.thanks') }}</small>
                         <small v-if="status === 'error'" class="text-danger">{{ t('contact.form.error') }}</small>
                         <button class="btn btn-outline-light send-btn" type="submit" :disabled="status === 'sending'">
                             <span v-if="status === 'sending'">{{ t('contact.form.sending') }}</span>

@@ -140,38 +140,62 @@ const storySegments = computed(() => {
     );
 });
 
+const story = ref<HTMLElement | null>(null);
+let revealSpans: HTMLSpanElement[] = [];
+let revealedCount = 0;
+let revealFrame = 0;
+
+const collectRevealSpans = () => {
+    revealSpans = Array.from(story.value?.querySelectorAll<HTMLSpanElement>('span.scroll-reveal') ?? []);
+    revealedCount = 0;
+}
+
+// A span lights up once it has scrolled up past its share of the viewport. Spans are in reading
+// order, so the lit ones are always a prefix: binary-search where it ends instead of measuring
+// every span, and only recolour the spans that changed.
+const updateReveal = () => {
+    revealFrame = 0;
+    const total = revealSpans.length;
+
+    const isRevealed = (index: number) => {
+        const scrollProgress = (window.innerHeight - revealSpans[index].getBoundingClientRect().top) / window.innerHeight;
+        return scrollProgress >= (index + 1) / total;
+    };
+
+    let low = 0;
+    let high = total;
+    while (low < high) {
+        const mid = (low + high) >> 1;
+        if (isRevealed(mid)) low = mid + 1;
+        else high = mid;
+    }
+
+    for (let i = revealedCount; i < low; i++) revealSpans[i].style.color = 'white';
+    for (let i = low; i < revealedCount; i++) revealSpans[i].style.color = '';
+    revealedCount = low;
+}
+
+// At most one update per frame, however many scroll events arrive.
 const handleScroll = () => {
-    const spanElements = document.querySelectorAll<HTMLSpanElement>('span.scroll-reveal');
-
-    spanElements.forEach((spanElement, index) => {
-        const rect = spanElement.getBoundingClientRect();
-
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-            const scrollProgress = (window.innerHeight - rect.top) / window.innerHeight;
-            const wordThreshold = (index + 1) / spanElements.length;
-
-            if (scrollProgress >= wordThreshold) {
-                spanElement.style.color = 'white';
-            } else {
-                spanElement.style.color = '';
-            }
-        } else {
-            spanElement.style.color = '';
-        }
-    })
+    if (!revealFrame) revealFrame = requestAnimationFrame(updateReveal);
 }
 
 // A language switch re-renders the spans; recolour them for the current scroll position.
-watch(locale, () => nextTick(handleScroll));
+watch(locale, () => nextTick(() => {
+    collectRevealSpans();
+    updateReveal();
+}));
 
 onMounted(() => {
     intervalId = window.setInterval(updateRandomTexts, 3000);
-    window.addEventListener('scroll', handleScroll);
+    collectRevealSpans();
+    window.addEventListener('scroll', handleScroll, { passive: true });
 });
 
 onUnmounted(() => {
     clearInterval(intervalId);
     clearInterval(loopIntervalId);
+    cancelAnimationFrame(revealFrame);
     window.removeEventListener('scroll', handleScroll);
 })
 </script>
@@ -221,7 +245,7 @@ onUnmounted(() => {
         </div>
         <div id="keep-calm-3" class="parallax-3" :style="{ backgroundColor: dynamicBackgroundColor }">
             <div class="description-text">
-                <p>
+                <p ref="story">
                     <template v-for="(sentence, i) in storySegments" :key="`${locale}-${i}`">
                         <span v-for="(segment, j) in sentence" :key="j" class="scroll-reveal">{{ segment }}</span>
                         <br><br>

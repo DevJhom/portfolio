@@ -53,7 +53,7 @@ const th: MessageSchema = {
     },
     projects: {
         title: 'โปรเจกต์ส่วนตัว',
-        subtitle: 'โปรเจกต์ส่วนตัวของผมบางส่วนที่ผมชื่นชอบ',
+        subtitle: 'โปรเจกต์บางส่วนที่ผมกำลังทำอยู่ตอนนี้',
         tools: 'เครื่องมือ',
         guitar: 'กีตาร์',
         fretwizard: 'FretWizard เป็นเครื่องมือ interactive สำหรับดู คอร์ด สเกล และ pattern ต่างๆ บนกีตาร์',

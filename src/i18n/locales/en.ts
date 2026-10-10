@@ -54,7 +54,7 @@ const en = {
     },
     projects: {
         title: 'My Personal Projects',
-        subtitle: 'These are some of my favorite personal projects.',
+        subtitle: "There are some projects I'm currently working on.",
         tools: 'Tools',
         guitar: 'Guitar',
         fretwizard: 'FretWizard is an interactive fretboard for visualizing different scales, chords, and patterns across the guitar neck.',
