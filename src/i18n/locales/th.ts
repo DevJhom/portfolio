@@ -18,7 +18,7 @@ const th: MessageSchema = {
         role: 'ผมเป็น {role}',
     },
     about: {
-        intro: 'ผมเป็น {role} ผมใส่ใจ คุณภาพและดีไซน์',
+        intro: 'ผมเป็น {role} ที่ใส่ใจใน คุณภาพและดีไซน์',
         from: 'ผมมาจาก {country}',
         country: 'ประเทศเมียนมา',
         based: 'ปัจจุบันผมอาศัยอยู่ที่ {city}',

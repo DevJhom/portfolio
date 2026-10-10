@@ -35,7 +35,6 @@ const isTyping = ref(false);
 let typingTimeout1: number;
 let typingTimeout2: number;
 
-// Spotlight effect
 const spotlightSize = 'transparent 50px, #0c0c0cE5 120px)';
 
 function updateSpotlight(e: MouseEvent): void {
@@ -48,7 +47,6 @@ function updateSpotlight(e: MouseEvent): void {
 let observer: IntersectionObserver;
 
 onMounted(() => {
-    // Typewriter timers
     typingTimeout1 = window.setTimeout(() => {
         isTyping.value = true;
     }, 1000);
@@ -57,10 +55,8 @@ onMounted(() => {
         isTyping.value = false;
     }, 3000);
 
-    // Spotlight listener
     window.addEventListener('mousemove', updateSpotlight);
 
-    // Intersection observer
     const options = {
         root: null,
         rootMargin: '0px',
@@ -456,7 +452,6 @@ section {
     color: $blue;
 }
 
-//Spotlight Effect
 // No z-index: it would lift SourceCodeBackdrop above .spotlight.
 #home {
     position: relative;

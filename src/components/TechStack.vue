@@ -227,17 +227,23 @@ const MOBILE_POINTER_VH = MOBILE_PANEL_VH + 5;
 const miniNav = ref<HTMLElement | null>(null);
 const timeline = ref<HTMLElement | null>(null);
 let currentArea: Element | null = null;
+// The job under the trigger line. Unlike hoverOnExp it ignores mouse hover, so the pointer only
+// lights up while the line is actually inside .mini-nav.
+const spyJob = ref<JobId | null>(null);
+const pointerEngaged = computed(() => spyJob.value !== null && spyJob.value === activeJob.value);
 let scrollSpy: IntersectionObserver | null = null;
 
 const onScrollSpy = (entries: IntersectionObserverEntry[]) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             currentArea = entry.target;
+            spyJob.value = (entry.target as HTMLElement).dataset.exp as JobId;
             triggerHover(Experience[(entry.target as HTMLElement).dataset.exp as keyof typeof Experience]);
         }
         // Targets are adjacent, so "leave 1" can arrive after "enter 2" in the same batch.
         else if (entry.target === currentArea) {
             currentArea = null;
+            spyJob.value = null;
             triggerHover(Experience.reset);
         }
     });
@@ -248,6 +254,7 @@ const onScrollSpy = (entries: IntersectionObserverEntry[]) => {
 watch(() => isMobile.value ? timeline.value : miniNav.value, (el) => {
     scrollSpy?.disconnect();
     currentArea = null;
+    spyJob.value = null;
     if (!el) return;
     triggerHover(Experience.reset);
     const line = isMobile.value ? MOBILE_POINTER_VH : POINTER_VH;
@@ -407,10 +414,10 @@ onUnmounted(() => {
                 <div :class="{active: hoverOnExp.omnistar}" data-exp="omnistar"></div>
                 <div :class="{active: hoverOnExp.clicknext}" data-exp="clicknext"></div>
             </div>
-            <div v-if="isDesktop" class="scroll-pointer" :class="{ engaged: hoverOnExp.hoverStart }" :style="{ top: `${POINTER_VH}vh` }" aria-hidden="true">
+            <div v-if="isDesktop" class="scroll-pointer" :class="{ engaged: pointerEngaged }" :style="{ top: `${POINTER_VH}vh` }" aria-hidden="true">
                 <span class="scroll-pointer-caret"></span>
                 <span class="scroll-pointer-tail">
-                    <span v-if="activeJob" :key="activeJob" class="scroll-pointer-spark"></span>
+                    <span v-if="pointerEngaged" :key="spyJob!" class="scroll-pointer-spark"></span>
                 </span>
             </div>
         </div>
@@ -418,7 +425,6 @@ onUnmounted(() => {
 </template>
 
 <style scoped lang="scss">
-// Tech Stack
 .tech-stack {
     display: flex;
     flex-direction: row;
@@ -585,7 +591,7 @@ ul.tl li .item-detail {
     align-items: center;
     transition: transform $transition-fast;
     aspect-ratio: 1 / 1.1;
-    font-size: 0.8em;
+    font-size: 0.65em;
 }
 
 .tech-stack-grid-item:hover {

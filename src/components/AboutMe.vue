@@ -755,7 +755,7 @@ $photo-height: 60%;
 }
 
 .social-media-card .my-logo:hover {
-    outline: 2px solid $blue;
+    outline: 4px solid $blue;
 }
 
 // 5. passion-card
@@ -841,7 +841,7 @@ $photo-height: 60%;
     position: absolute;
     bottom: 0.5rem;
     right: 1rem;
-    color: $gray;
+    color: $light-gray;
 }
 
 .business-card-back {
@@ -850,9 +850,23 @@ $photo-height: 60%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 1rem;
+    padding: 1rem 1rem 1rem 2.5rem; // left side holds the line-number gutter
     width: 100%;
     height: 100%;
+    counter-reset: line;
+}
+
+// VS Code-style line numbers. Absolute with only `left` set, so each number keeps its line's
+// vertical position but ignores the line's ms-4 indent.
+.business-card-back small:not(.file-name)::before {
+    counter-increment: line;
+    content: counter(line);
+    position: absolute;
+    left: 0.5rem;
+    width: 1.25rem;
+    text-align: right;
+    color: $light-gray;
+    user-select: none;
 }
 
 .business-card-back .file-name {

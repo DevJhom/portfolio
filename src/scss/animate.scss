@@ -11,7 +11,6 @@
 
 /* Transition */
 
-// fade
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity $transition-medium;
@@ -22,7 +21,6 @@
   opacity: 0;
 }
 
-// slide-fade (left, right, top)
 .slide-fade-left-enter-active, .slide-fade-right-enter-active,
 .slide-fade-top-enter-active
 {
@@ -35,7 +33,6 @@
   transition: all $transition-slow;
 }
 
-// slide-fade-left
 .slide-fade-left-enter-from {
   transform: translateX(-40px); 
   opacity: 0;
@@ -45,7 +42,6 @@
   transform: translateX(-80px); 
 }
 
-// slide-fade-right
 .slide-fade-right-enter-from {
   transform: translateX(40px); 
   opacity: 0;
@@ -55,7 +51,6 @@
   transform: translateX(80px); 
 }
 
-// slide-fade-top
 .slide-fade-top-enter-from {
   transform: translateY(-40px); 
   opacity: 0;

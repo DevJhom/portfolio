@@ -74,7 +74,6 @@ const submitForm = async () => {
     }, 4000);
 };
 
-// Spotlight effect
 const spotlightSize = 'transparent 150px, #0c0c0c 250px)';
 const scrolledViewHeight = 750; //adjust according to number of sections
 
