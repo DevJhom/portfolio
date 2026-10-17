@@ -106,6 +106,7 @@ export async function mount(container: HTMLElement, options: ConstellationOption
 
     // State
     let hovered: TechNode | null = null;
+    let dragging = false;
 
     function setActiveJob(id: JobId | null): void {
         const used = new Set(jobs.find(job => job.id === id)?.techs ?? []);
@@ -136,10 +137,25 @@ export async function mount(container: HTMLElement, options: ConstellationOption
     function setHovered(node: TechNode | null): void {
         if (node === hovered) return;
         hovered = node;
-        canvas.style.cursor = node ? 'pointer' : '';
+        updateCursor();
         // Pause auto-rotate while reading a label, so it doesn't slide out from under the cursor.
         controls.autoRotate = !reducedMotion && !node;
         if (!node) options.onHover?.(null);
+    }
+
+    // Grab over empty space hints that the cluster can be rotated; a logo shows its label instead.
+    function updateCursor(): void {
+        canvas.style.cursor = dragging ? 'grabbing' : hovered ? 'pointer' : 'grab';
+    }
+
+    function onDragStart(): void {
+        dragging = true;
+        updateCursor();
+    }
+
+    function onDragEnd(): void {
+        dragging = false;
+        updateCursor();
     }
 
     function onPointerMove(event: PointerEvent): void {
@@ -174,6 +190,9 @@ export async function mount(container: HTMLElement, options: ConstellationOption
     canvas.addEventListener('pointerleave', onPointerLeave);
     canvas.addEventListener('pointerdown', onPointerDown);
     canvas.addEventListener('pointerup', onPointerUp);
+    controls.addEventListener('start', onDragStart);
+    controls.addEventListener('end', onDragEnd);
+    updateCursor();
 
     // Sizing
     function resize(): void {
@@ -274,6 +293,8 @@ export async function mount(container: HTMLElement, options: ConstellationOption
         canvas.removeEventListener('pointerleave', onPointerLeave);
         canvas.removeEventListener('pointerdown', onPointerDown);
         canvas.removeEventListener('pointerup', onPointerUp);
+        controls.removeEventListener('start', onDragStart);
+        controls.removeEventListener('end', onDragEnd);
         controls.dispose();
 
         disposeNodes(nodes);

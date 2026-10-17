@@ -9,11 +9,11 @@ import FacebookIcon from '@/assets/Icons/FacebookIcon.vue';
 import GithubIcon from '@/assets/Icons/GithubIcon.vue';
 import LinkedInIcon from '@/assets/Icons/LinkedInIcon.vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import { A11y, Autoplay, EffectFlip, Navigation, Pagination } from 'swiper/modules';
+import { A11y, EffectFlip, Navigation, Pagination } from 'swiper/modules';
+import type { Swiper as SwiperInstance } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import 'swiper/css/autoplay';
 import 'swiper/css/effect-flip';
 import 'swiper/css/a11y';
 
@@ -32,17 +32,19 @@ const mapSlides = [
     { id: 'thailand', command: 'locate', src: '/asean-thailand.svg', alt: 'Map of Southeast Asia with Thailand highlighted', coords: '13.756°N, 100.502°E' },
 ];
 
-const businessCard = ref<typeof Swiper | null>(null);
+const businessCard = ref<SwiperInstance | null>(null);
 // A11y makes the arrows focusable and Enter-operable; it changes nothing visually.
-const modules_location = [Navigation, Pagination, Autoplay, A11y];
+const modules_location = [Navigation, Pagination, A11y];
 const modules_business_card = [EffectFlip];
 
-const onSwiper = (swiper: any) => {
+const onSwiper = (swiper: SwiperInstance) => {
     businessCard.value = swiper
 }
 
+// Two slides, so toggle by index rather than loop: Swiper's loop mode is unreliable with only two.
 const onHoverBusinessCard = () => {
-    businessCard.value?.slidePrev();
+    const card = businessCard.value;
+    card?.slideTo(card.activeIndex === 0 ? 1 : 0);
 }
 
 // updatePlaybackRate keeps each box's current position; swapping animation-duration in CSS would make them jump
@@ -181,10 +183,6 @@ onUnmounted(() => clearTimeout(litTimer));
                     :pagination="true"
                     :loop="true"
                     :modules="modules_location" 
-                    :autoplay="{
-                        delay: 5000,
-                        disableOnInteraction: true,
-                    }"
                 >
                     <SwiperSlide>
                         <div class="profile-slide">
@@ -313,7 +311,6 @@ onUnmounted(() => clearTimeout(litTimer));
                     :effect="'flip'"
                     :flip-effect="{ slideShadows: true }"
                     :speed="500"
-                    :loop="true"
                     :navigation="false"
                     :pagination="false"
                     :modules="modules_business_card" 
