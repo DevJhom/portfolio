@@ -17,9 +17,10 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { jobs, type JobId } from './jobs';
 import { techs, type Tech } from './techs';
 import { floatOffset } from './layout';
-import { constellationEdges, createLinkSet, disposeLinkSet, nearestEdges, updateLinkSet, type LinkSet } from './links';
+import { createLinkSet, disposeLinkSet, updateLinkSet, type LinkSet } from './links';
 import { applyNodeState, createNodes, disposeNodes, type TechNode } from './nodes';
 import { createPostFx } from './postfx';
+import { relations } from './relations';
 import { createGlowTexture } from './textures';
 
 const BACKGROUND = '#0c0c0c';
@@ -85,15 +86,17 @@ export async function mount(container: HTMLElement, options: ConstellationOption
 
     // Nodes
     const glowTexture = createGlowTexture();
-    const nodes = await createNodes(techs, glowTexture);
+    const nodes = await createNodes(techs, relations, glowTexture);
     for (const node of nodes) scene.add(node.group);
     const nodeById = new Map(nodes.map(node => [node.tech.id, node]));
 
     // Links: a faint always-on web, plus one constellation per job that fades in on demand.
-    const ambient = createLinkSet(nearestEdges(nodes, 2), 0.18, new Color('#7e7e7e'));
+    const edges = relations.map(([a, b]): [TechNode, TechNode] => [nodeById.get(a)!, nodeById.get(b)!]);
+    const ambient = createLinkSet(edges, 0.18, new Color('#7e7e7e'));
     const jobLinks = new Map<JobId, LinkSet>(jobs.map(job => {
-        const members = job.techs.map(id => nodeById.get(id)!);
-        return [job.id, createLinkSet(constellationEdges(members, 2), 1, undefined, 1.8)];
+        const used = new Set(job.techs);
+        const members = edges.filter(([a, b]) => used.has(a.tech.id) && used.has(b.tech.id));
+        return [job.id, createLinkSet(members, 1, undefined, 1.8)];
     }));
     const linkSets = [ambient, ...jobLinks.values()];
     for (const set of linkSets) scene.add(set.lines);

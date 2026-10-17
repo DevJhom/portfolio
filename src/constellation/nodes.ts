@@ -1,7 +1,7 @@
 import { AdditiveBlending, Color, Group, Sprite, SpriteMaterial, Texture, Vector3 } from 'three';
 import { logos } from './logos';
-import type { Tech } from './techs';
-import { fibonacciSphere } from './layout';
+import type { Tech, TechId } from './techs';
+import { arrangeForLinks, fibonacciSphere } from './layout';
 import { createLogoTexture } from './textures';
 
 export const CLUSTER_RADIUS = 4;
@@ -24,8 +24,12 @@ export interface TechNode {
     hover: number;
 }
 
-export async function createNodes(techs: Tech[], glowTexture: Texture): Promise<TechNode[]> {
-    const positions = fibonacciSphere(techs.length, CLUSTER_RADIUS);
+export async function createNodes(techs: Tech[], links: [TechId, TechId][], glowTexture: Texture): Promise<TechNode[]> {
+    const index = new Map(techs.map((tech, i) => [tech.id, i]));
+    const positions = arrangeForLinks(
+        fibonacciSphere(techs.length, CLUSTER_RADIUS),
+        links.map(([a, b]) => [index.get(a)!, index.get(b)!]),
+    );
     const textures = await Promise.all(techs.map(tech => createLogoTexture(logos[tech.id], tech.color)));
 
     return techs.map((tech, i) => {

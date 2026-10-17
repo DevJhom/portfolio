@@ -129,6 +129,10 @@ and `dispose`, and the component disposes it in `onUnmounted`.
 
 - The highlighted job comes from the same `hoverOnExp` state as the grid (the `activeJob`
   computed), so both views follow it.
+- Every line in the scene is a pair from `constellation/relations.ts` (a real relationship
+  between two techs, not proximity); a job's constellation is the pairs with both ends in that
+  job. Node placement is derived from it too (`arrangeForLinks` in `layout.ts`), so linked techs
+  sit near each other. Add a relation when adding a tech, or it floats unconnected.
 - `constellation/jobs.ts` repeats the job → tech mapping in `mouseOnExp()`, and
   `constellation/logos.ts` is the `<svg>` markup of `src/assets/Logos/*.vue`. Keep them
   in sync when a tech or logo changes.

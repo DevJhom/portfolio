@@ -9,6 +9,7 @@ const bangkokTime = useBangkokClock();
 const { t, locale } = useTranslation();
 import Play from '@/assets/Icons/Play.vue';
 import Stop from '@/assets/Icons/Stop.vue';
+import WarpStarfield from '@/components/WarpStarfield.vue';
 
 const props = defineProps<{
     activeSection: string
@@ -252,12 +253,7 @@ onUnmounted(() => {
                     </template>
                 </p>
             </div>
-            <div class="animate-box" id="animate-box-1"></div>
-            <div class="animate-box" id="animate-box-2"></div>
-            <div class="animate-box" id="animate-box-3"></div>
-            <div class="animate-box" id="animate-box-4"></div>
-            <div class="animate-box" id="animate-box-5"></div>
-            <div class="animate-box" id="animate-box-6"></div>
+            <WarpStarfield />
         </div>
     </div>
 </template>
@@ -401,6 +397,8 @@ onUnmounted(() => {
 }
 
 .parallax-3 .description-text {
+    position: relative;
+    z-index: $middle-layer;
     width: 35%;
     text-align: center;
 }
@@ -411,64 +409,6 @@ onUnmounted(() => {
 
 .description-text p span {
     font-size: clamp(1rem, 1vw + 0.3rem, 1.2rem); 
-}
-
-.parallax-3 .animate-box {
-    position: absolute;
-    display: block;
-    list-style: none;
-    width: 20px;
-    height: 20px;
-    background: rgba(255, 255, 255, 0.2);
-    animation: floating-boxes 20s linear infinite;
-}
-
-#animate-box-1 {
-    left: 80%;
-    width: 100px;
-    height: 100px;
-    bottom: -100px;
-    animation-delay: 0s;
-}
-
-#animate-box-2 {
-    left: 60%;
-    width: 80px;
-    height: 80px;
-    bottom: -80px;
-    animation-delay: 3s;
-}
-
-#animate-box-3 {
-    left: 15%;
-    width: 30px;
-    height: 30px;
-    bottom: -30px;
-    animation-delay: 6s;
-}
-
-#animate-box-4 {
-    left: 40%;
-    width: 130px;
-    height: 130px;
-    bottom: -130px;
-    animation-delay: 10s;
-}
-
-#animate-box-5 {
-    left: 20%;
-    width: 60px;
-    height: 60px;
-    bottom: -60px;
-    animation-delay: 12s;
-}
-
-#animate-box-6 {
-    left: 30%;
-    width: 50px;
-    height: 50px;
-    bottom: -50px;
-    animation-delay: 16s;
 }
 
 @media (max-width: 1024px) {

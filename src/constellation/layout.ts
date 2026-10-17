@@ -15,6 +15,57 @@ export function fibonacciSphere(count: number, radius: number): Vector3[] {
     return points;
 }
 
+// Reorders `points` so linked indices sit close together; seeded, so the layout is stable.
+export function arrangeForLinks(points: Vector3[], links: [number, number][], restarts = 20): Vector3[] {
+    const count = points.length;
+    const cost = (slot: number[]) =>
+        links.reduce((sum, [a, b]) => sum + points[slot[a]].distanceToSquared(points[slot[b]]), 0);
+
+    let best = points.map((_, i) => i);
+    let bestCost = cost(best);
+
+    for (let seed = 1; seed <= restarts; seed++) {
+        const random = seededRandom(seed);
+        const slot = points.map((_, i) => i);
+        for (let i = count - 1; i > 0; i--) {
+            const j = Math.floor(random() * (i + 1));
+            [slot[i], slot[j]] = [slot[j], slot[i]];
+        }
+
+        let current = cost(slot);
+        let improved = true;
+        while (improved) {
+            improved = false;
+            for (let i = 0; i < count; i++) {
+                for (let j = i + 1; j < count; j++) {
+                    [slot[i], slot[j]] = [slot[j], slot[i]];
+                    const next = cost(slot);
+                    if (next < current - 1e-9) {
+                        current = next;
+                        improved = true;
+                    } else {
+                        [slot[i], slot[j]] = [slot[j], slot[i]];
+                    }
+                }
+            }
+        }
+
+        if (current < bestCost) {
+            bestCost = current;
+            best = slot;
+        }
+    }
+
+    return best.map(i => points[i]);
+}
+
+function seededRandom(seed: number): () => number {
+    return () => {
+        seed = (seed * 1664525 + 1013904223) >>> 0;
+        return seed / 2 ** 32;
+    };
+}
+
 // Small per-node drift so the cluster breathes instead of sitting rigid.
 export function floatOffset(phase: number, time: number, target: Vector3): Vector3 {
     return target.set(

@@ -132,7 +132,9 @@ onUnmounted(() => {
                             <template #role><span class="text-animation">Full Stack Developer</span></template>
                         </i18n-t>
                     </div>
-                    <p class="hero-stack">Vue · TypeScript · C#</p>
+                    <p class="hero-stack">
+                        <span class="hero-stack-item">Vue</span> · <span class="hero-stack-item">TypeScript</span> · <span class="hero-stack-item">C#</span>
+                    </p>
                 </div>
                 <Transition name="fade">
                     <small v-if="showScrollToExplore" class="scroll-to-explore animate-on-hover">
@@ -414,6 +416,14 @@ section {
     color: $light-gray;
     font-size: clamp(0.85rem, 0.5vw + 0.65rem, 1.05rem);
     font-family: var(--font-mono);
+}
+
+.hero-stack-item {
+    transition: color $transition-fast;
+}
+
+.hero-stack-item:hover {
+    color: $white;
 }
 
 .introduction-text {
