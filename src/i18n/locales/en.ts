@@ -8,6 +8,8 @@ const en = {
     },
     header: {
         resume: 'Resume',
+        cv: 'CV',
+        download: 'Download Resume or CV',
         language: 'Language',
     },
     hero: {

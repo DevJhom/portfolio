@@ -10,6 +10,8 @@ const th: MessageSchema = {
     },
     header: {
         resume: 'เรซูเม่',
+        cv: 'CV',
+        download: 'ดาวน์โหลดเรซูเม่หรือ CV',
         language: 'ภาษา',
     },
     hero: {

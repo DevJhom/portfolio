@@ -8,10 +8,10 @@ import Contact from '@components/Contact.vue';
 import KeepCalm from '@components/KeepCalm.vue';
 import SourceCodeBackdrop from '@components/SourceCodeBackdrop.vue';
 import LanguageSwitcher from '@components/LanguageSwitcher.vue';
+import ResumeMenu from '@components/ResumeMenu.vue';
 import { useTranslation } from '@/i18n';
 
 import DownArrow from '@/assets/Icons/DownArrow.vue';
-import Download from '@/assets/Icons/Download.vue';
 
 const { t } = useTranslation();
 
@@ -109,10 +109,7 @@ onUnmounted(() => {
         </div>
         <div class="top-actions">
             <LanguageSwitcher/>
-            <a class="my-resume" href="./Resume_Sai_Swan_Wan.pdf" download="Resume_Sai_Swan_Wan.pdf">
-                <Download/>
-                <h4>{{ t('header.resume') }}</h4>
-            </a>
+            <ResumeMenu/>
         </div>
         <!-- HOME -->
         <div id="home">
@@ -332,50 +329,6 @@ section {
     z-index: $top-layer;
 }
 
-.my-resume {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    // Locked to the expanded content's width so hiding the label on hover doesn't resize
-    // the button; retune if the label text or its font-size changes. Fits both "Resume"
-    // (English and Burmese) and the Thai label.
-    width: 7.25rem;
-    gap: 0.5rem;
-    border: 1px solid $blue;
-    border-radius: calc($radius-md * 2);
-	background-size: 300% 100%;
-	background-image: linear-gradient(to right, hsl(217, 100%, 62%), hsl(260, 100%, 62%), $blue);
-	box-shadow: 0 1px 15px 0 $blue;
-	transition: all $transition-medium;
-    cursor: pointer;
-}
-
-.my-resume h4 {
-    font-size: clamp(0.75rem, 0.4vw + 0.55rem, 0.9rem);
-    max-width: 12rem;
-    overflow: hidden;
-    white-space: nowrap;
-    transition: max-width $transition-medium, opacity $transition-fast;
-}
-
-.my-resume:hover {
-    color: $white;
-    background-position: 100% 0;
-}
-
-// Desktop only: a tap counts as hover on phones
-@media (min-width: 769px) {
-    .my-resume:hover {
-        gap: 0;
-    }
-
-    .my-resume:hover h4 {
-        max-width: 0;
-        opacity: 0;
-    }
-}
-
 .hero-content {
     padding: 0 2rem;
 }
@@ -540,12 +493,6 @@ section {
 
     .scroll-to-explore a {
         display: flex;
-    }
-
-    // The label never hides on phones (no hover), so the fixed desktop width isn't needed.
-    .my-resume {
-        width: auto;
-        padding: 0.5rem 0.8rem;
     }
 }
 </style>

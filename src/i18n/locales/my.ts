@@ -10,6 +10,8 @@ const my: MessageSchema = {
     },
     header: {
         resume: 'Resume',
+        cv: 'CV',
+        download: 'Resume သို့မဟုတ် CV ကို ဒေါင်းလုဒ်ရယူရန်',
         language: 'ဘာသာစကား',
     },
     hero: {
